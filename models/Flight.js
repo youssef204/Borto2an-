@@ -52,7 +52,7 @@ const FlightSchema = new Schema({
     type : String,
     required : true
 },
-hasTranist: {
+hasTransit: {
     type : Boolean,
     required : true
 },
