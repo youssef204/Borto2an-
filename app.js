@@ -30,8 +30,6 @@ app.use(cors());
 const flight_routes = require("./routes/api/flight");
 app.use("/api/flights/", flight_routes);
 
-false;
-
 // Starting server
 app.listen(PORT, () => {
   console.log(`Listening to requests on http://localhost:${PORT}`);
