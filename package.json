@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/advanced-computer-lab/Borto2an-/issues"
   },
-  "homepage": "https://github.com/advanced-computer-lab/Borto2an-#readme",
+  "homepage": "htps://github.com/advanced-computer-lab/Borto2an-#readme",
   "dependencies": {
     "concurrently": "^6.3.0",
     "cors": "^2.8.5",

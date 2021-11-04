@@ -29,8 +29,8 @@ app.use(cors());
 
 
 // importing routers
-// const routes = require("./routes/api");
-// app.use('/api', routes);
+ const routes = require("./routes/flight");
+ app.use('/api/flight', routes);
 
 
 
