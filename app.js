@@ -32,6 +32,9 @@ app.use(cors());
 // const routes = require("./routes/api");
 // app.use('/api', routes);
 
+const createFlightRoute = require("./routes/createFlight");
+app.use('/api', createFlightRoute);
+
 
 
 
