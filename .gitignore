@@ -105,3 +105,7 @@ dist
 
 #idea settings 
 .idea
+
+#peter dev
+test
+.eslintrc.json
