@@ -17,20 +17,13 @@ class CreateFlight extends React.Component {
             airplaneType:'',
             duration:'',
             airline:'',
-            hasTransit:''
+            hasTransit: false
         }
     }
 
-    onChange = e =>{
+    onChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
     };
-
-    handleChange = (e) => {
-      this.setState({
-        [e.target.name]: e.target.value,
-      });
-      console.log(e.target.value);
-    }
 
     onSubmit = e => {
     e.preventDefault();
@@ -66,9 +59,8 @@ class CreateFlight extends React.Component {
             airplaneType:'',
             duration:'',
             airline:'',
-            hasTransit:''
+            hasTransit: false
         })
-        this.props.history.push('/');
       })
       .catch(err => {
         console.log(err);
@@ -85,7 +77,7 @@ class CreateFlight extends React.Component {
                 <div>
                   <input
                     type='text'
-                    placeholder='from'
+                    placeholder='From..'
                     name='from'
                     value={this.state.from}
                     onChange={this.onChange}
@@ -95,7 +87,7 @@ class CreateFlight extends React.Component {
                 <div>
                   <input
                     type='text'
-                    placeholder='to'
+                    placeholder='To..'
                     name='to'
                     value={this.state.to}
                     onChange={this.onChange}
@@ -105,7 +97,7 @@ class CreateFlight extends React.Component {
                 <div>
                   <input
                     type='number'
-                    placeholder='flightNumber'
+                    placeholder='Flight Number'
                     name='flightNumber'
                     value={this.state.flightNumber}
                     onChange={this.onChange}
@@ -115,7 +107,7 @@ class CreateFlight extends React.Component {
                 <div>
                   <input
                     type='date'
-                    placeholder='flightDate'
+                    placeholder='Flight Date'
                     name='flightDate'
                     value={this.state.flightDate}
                     onChange={this.onChange}
@@ -125,7 +117,7 @@ class CreateFlight extends React.Component {
                 <div>
                   <input
                     type='text'
-                    placeholder='departureTime'
+                    placeholder='Departure Time'
                     name='departureTime'
                     value={this.state.departureTime}
                     onChange={this.onChange}
@@ -134,7 +126,7 @@ class CreateFlight extends React.Component {
                 <div>
                   <input
                     type='text'
-                    placeholder='arrivalTime'
+                    placeholder='Arrival Time'
                     name='arrivalTime'
                     value={this.state.arrivalTime}
                     onChange={this.onChange}
@@ -144,7 +136,7 @@ class CreateFlight extends React.Component {
                 <div>
                   <input
                     type='number'
-                    placeholder='seatsAvailable'
+                    placeholder='Seats Available'
                     name='seatsAvailable'
                     value={this.state.seatsAvailable}
                     onChange={this.onChange}
@@ -153,7 +145,7 @@ class CreateFlight extends React.Component {
                 <div>
                   <input
                     type='text'
-                    placeholder='cabin'
+                    placeholder='Cabin'
                     name='cabin'
                     value={this.state.cabin}
                     onChange={this.onChange}
@@ -162,7 +154,7 @@ class CreateFlight extends React.Component {
                 <div>
                   <input
                     type='number'
-                    placeholder='totalSeats'
+                    placeholder='Total Seats'
                     name='totalSeats'
                     value={this.state.totalSeats}
                     onChange={this.onChange}
@@ -171,7 +163,7 @@ class CreateFlight extends React.Component {
                 <div>
                   <input
                     type='text'
-                    placeholder='airplaneType'
+                    placeholder='Airplane Type'
                     name='airplaneType'
                     value={this.state.airplaneType}
                     onChange={this.onChange}
@@ -180,7 +172,7 @@ class CreateFlight extends React.Component {
                 <div>
                   <input
                     type='number'
-                    placeholder='duration'
+                    placeholder='Duration'
                     name='duration'
                     value={this.state.duration}
                     onChange={this.onChange}
@@ -189,22 +181,21 @@ class CreateFlight extends React.Component {
                 <div>
                   <input
                     type='text'
-                    placeholder='airline'
+                    placeholder='Airline'
                     name='airline'
                     value={this.state.airline}
                     onChange={this.onChange}
                   />
                 </div>
                 <div>
-                    Has Transit
+                    Please check if this flight has a transit 
                   <input
                     type='checkbox'
-                    checked={this.state.check}
                     onChange={(e) => {
-                                this.handleChange({
+                                this.onChange({
                                   target: {
                                     name: "hasTransit",
-                                    value: e.target.checked
+                                    value: e.target.checked?true:false
                                   },
                           });}} />
                 </div>
