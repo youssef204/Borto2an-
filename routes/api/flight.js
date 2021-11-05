@@ -1,9 +1,8 @@
 // routes
-const express = require("express");
+const express = require('express');
 const flight_router = express.Router();
-const Flight = require("../../models/Flight");
+const Flight = require('../../models/Flight');
 
-//update flight
 flight_router.put("/", (req, res) => {
   //console.log("in update");
   const id = req.body._id;
@@ -34,6 +33,10 @@ flight_router.delete("/:id", async (req, res) => {
     console.log(e);
     res.status(404).json({ msg: `${req.params.id} is not a correct id` });
   }
+});
+
+flight_router.post('/',(req, res) => {
+    Flight.create(req.body);
 });
 
 module.exports = flight_router;
