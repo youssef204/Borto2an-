@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/advanced-computer-lab/Borto2an-/issues"
   },
-  "homepage": "https://github.com/advanced-computer-lab/Borto2an-#readme",
+  "homepage": "htps://github.com/advanced-computer-lab/Borto2an-#readme",
   "dependencies": {
     "concurrently": "^6.3.0",
     "cors": "^2.8.5",
@@ -29,6 +29,8 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "eslint": "^8.1.0",
+    "eslint-plugin-react": "^7.26.1",
     "nodemon": "^2.0.14"
   }
 }
