@@ -11,8 +11,8 @@ flight_router.get('/', function (req, res, next) {
    
    // var flight = req.db.get('Flight'),
      //   query = req.query;
-    flight.find(req.query)
-    .then(flights => res.json(flights))
+    Flights.find(req.query)
+    .then(flight => res.json(flight))
     .catch(err => res.status(404).json({noFlightsFound : "No flights are found"}))
 });
 
