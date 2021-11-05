@@ -8,10 +8,8 @@ function App() {
 
     <Router>
         <div>
-	  <Routes>
           <Route exact path='/' component={Flight } />
           <Route exact path='/All_Flights' component={AllFlights} />
-	  </Routes>
         </div>
       </Router> 
   );

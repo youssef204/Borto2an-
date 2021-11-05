@@ -13,7 +13,7 @@ class AllFlights extends Component {
     }
     componentDidMount() {
         axios
-            .get('http://localhost:8000/api/flight/showAllflights')
+            .get('http://localhost:8000/api/flights/showAllflights')
             .then(res => {
                 console.log(res.data);
                 this.setState(

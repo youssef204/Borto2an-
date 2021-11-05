@@ -1,9 +1,8 @@
 // routes
-const express = require("express");
+const express = require('express');
 const flight_router = express.Router();
-const Flights = require("../../models/Flight");
+const Flight = require('../../models/Flight');
 
-//update flight
 flight_router.put("/", (req, res) => {
   //console.log("in update");
   const id = req.body._id;
@@ -12,6 +11,14 @@ flight_router.put("/", (req, res) => {
     console.log("done");
     res.send("done");
   });
+});
+
+flight_router.get('/showAllflights', (req, res) => {
+  Flight.find()
+    .then(flight => {
+      res.json(flight)
+    })
+    .catch(err => res.status(404).json({ msg: "No flights are found" }));
 });
 
 module.exports = flight_router;
