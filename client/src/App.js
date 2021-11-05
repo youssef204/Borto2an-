@@ -1,18 +1,21 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
 import CreateFlight from './components/createFlight';
+import Flight from "./components/Flight";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React, { Component } from 'react';
+import AllFlights from "./components/allFlights";
 
-class App extends React.Component {
-  render() {
-    return (
-	<Router>
+function App() {
+  return(
 
-		<Route exact path='/create_flight' component={CreateFlight} />
-      		
-	</Router>
-    );
+    <Router>
+        <div>
+          <Route exact path='/' component={Flight } />
+          <Route exact path='/All_Flights' component={AllFlights} />
+          <Route exact path='/create_flight' component={CreateFlight} />
+        </div>
+      </Router> 
+  );
+
   }
-}
 
 export default App;
