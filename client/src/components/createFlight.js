@@ -44,7 +44,7 @@ class CreateFlight extends React.Component {
       hasTransit: this.state.hasTransit
     }; 
     axios
-      .post('http://localhost:8000/api/flights/create', data)
+      .post('http://localhost:8000/api/flights', data)
       .then(res => {
         this.setState({
             from:'',
