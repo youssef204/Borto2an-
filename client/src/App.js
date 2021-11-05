@@ -1,7 +1,7 @@
 import Flight from "./components/Flight";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import React, { Component } from 'react';
-import AllFlights from "./components/AllFlights";
+import AllFlights from "./components/allFlights";
 
 function App() {
   return(
