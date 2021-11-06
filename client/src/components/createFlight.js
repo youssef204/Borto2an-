@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import {Route, Redirect} from "react-router-dom";
 
 class CreateFlight extends React.Component {
     constructor(){
@@ -61,10 +62,13 @@ class CreateFlight extends React.Component {
             airline:'',
             hasTransit: false
         })
+        console.log(this.state)
+        this.props.history.push("/")
       })
       .catch(err => {
         console.log(err);
       })
+      
   };
 
     render() { 

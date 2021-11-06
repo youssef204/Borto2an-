@@ -21,8 +21,10 @@ flight_router.get('/showAllflights', (req, res) => {
     .catch(err => res.status(404).json({ msg: "No flights are found" }));
 });
 
-flight_router.post('/flights/create',(req, res) => {
-    Flight.create(req.body);
+flight_router.post('/create',(req, res) => {
+    Flight.create(req.body)
+    .then((result)=>{res.send(result);})
+    .catch((err)=>{console.log(err); res.status(404).send(err);});
 });
 
 module.exports = flight_router;
