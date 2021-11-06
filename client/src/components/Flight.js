@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Flight({ flightNumber , from  , to , airline , flightDate }) {
+function Flight({ flightNumber, from, to, airline, flightDate }) {
   return (
 
     <tr style={{ background: "#dddddd" }}>
