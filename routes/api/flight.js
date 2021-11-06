@@ -1,9 +1,8 @@
 // routes
 const express = require('express');
 const flight_router = express.Router();
-<<<<<<< HEAD
-const Flights = require("../../models/Flight");
-var qs = require('qs');
+const Flight = require("../../models/Flight");
+//var qs = require('qs');
 
 //update flight
 
@@ -15,16 +14,12 @@ flight_router.get('/', function (req, res, next) {
       const regex = /\b(gt|gte|lt|lte|in)\b/g;
       queryStr = queryStr.replace(regex, '$$' + "$1");
       console.log(JSON.parse(queryStr));
-    Flights.find(JSON.parse(queryStr))
+    Flight.find(JSON.parse(queryStr))
     .then(flight => res.json(flight))
     .catch(err => res.status(404).json({msg : "No flights are found"}))
 });
 
 
-=======
-const Flight = require('../../models/Flight');
-
->>>>>>> eab4844941ee4e7287236855ddbbfe31fd571ea6
 flight_router.put("/", (req, res) => {
   //console.log("in update");
   const id = req.body._id;
