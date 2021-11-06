@@ -26,7 +26,7 @@ class SearchFlights extends React.Component {
 
     axios({
       method: "get",
-      url: "http://localhost:8000/api/flights/showAllflights",
+      url: "http://localhost:8000/api/flights",
       params: data,
     })
       .then((res) => {
