@@ -109,3 +109,6 @@ dist
 #peter dev
 test
 .eslintrc.json
+
+#client package lock
+client/package-lock.json
