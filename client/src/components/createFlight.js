@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import {Route, Redirect} from "react-router-dom";
 
 class CreateFlight extends React.Component {
     constructor(){
@@ -45,7 +44,7 @@ class CreateFlight extends React.Component {
       hasTransit: this.state.hasTransit
     }; 
     axios
-      .post('http://localhost:8000/api/flights/create', data)
+      .post('http://localhost:8000/api/flights', data)
       .then(res => {
         this.setState({
             from:'',
