@@ -110,5 +110,6 @@ dist
 test
 .eslintrc.json
 
-#client package lock
+#package lock
 client/package-lock.json
+package-lock.json
