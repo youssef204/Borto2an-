@@ -15,6 +15,7 @@ const FlightSchema = new Schema({
   flightNumber: {
     type: Number,
     required: true,
+    unique: true
   },
   flightDate: {
     type: Date,

@@ -135,9 +135,16 @@ class FlightDetails extends React.Component {
         <br/>
         </div>*/
     return(
+      <>
+      <button onClick={() => this.props.history.push('/')}>
+                Home
+              </button>
+              <br/><br/>
         <div>
+          
  {flightlist}
         </div>
+        </>
        
     )
        }

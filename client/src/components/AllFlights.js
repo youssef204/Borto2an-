@@ -30,7 +30,6 @@ class AllFlights extends Component {
     };
 
     onChange = flightNumber => {
-      console.log(flightNumber); 
       this.props.history.push({
         pathname:"/flight_details",state:{flightNumber}
       });
@@ -57,6 +56,10 @@ class AllFlights extends Component {
 
     return (
       <body>
+        <button onClick={() => this.props.history.push('/')}>
+                Home
+              </button>
+              <br/>
         <div>
           <header
             style={{
