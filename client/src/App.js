@@ -1,10 +1,10 @@
-import CreateFlight from './components/CreateFlight';
 import SearchFlights from './components/SearchFlights';
 import Flight from './components/Flight';
 import { BrowserRouter as Router, Route} from 'react-router-dom';
 import React from 'react';
-import AllFlights from "./components/AllFlights";
 import SearchResults from './components/SearchResults';
+import AllFlights from "./components/AllFlights";
+import CreateFlight from './components/CreateFlight';
 
 function App() {
   return (
