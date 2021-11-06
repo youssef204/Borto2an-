@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import {Link, useHistory} from "react-router-dom";  
+import { Link, useHistory } from "react-router-dom";
 class SearchFlights extends React.Component {
   constructor() {
     super();
@@ -26,23 +26,20 @@ class SearchFlights extends React.Component {
 
     axios({
       method: "get",
-      url: "http://localhost:8000/api/flights/showAllflights",
+      url: "http://localhost:8000/api/flights",
       params: data,
     })
       .then((res) => {
         // go to search results component with the data
         console.log(res.data);
         this.props.history.push({
-          pathname :"/search_results" , state:res.data
-        })
-        
-
+          pathname: "/search_results",
+          state: res.data,
+        });
       })
       .catch((err) => {
         console.log(err);
       });
-
-
   };
 
   getNonEmptyFields = (obj) => {
@@ -54,23 +51,20 @@ class SearchFlights extends React.Component {
   };
 
   render() {
-
     return (
       <>
-
-<header
-            style={{
-              marginLeft: "auto",
-              marginRight: "auto",
-              textAlign: "center",
-              fontSize: 20,
-            }}
-          >
-            Search Flights Page
-          </header>
-          <br></br>
-          <br></br>
-
+        <header
+          style={{
+            marginLeft: "auto",
+            marginRight: "auto",
+            textAlign: "center",
+            fontSize: 20,
+          }}
+        >
+          Search Flights Page
+        </header>
+        <br></br>
+        <br></br>
 
         <form noValidate onSubmit={(e) => this.onSubmit(e, this.state)}>
           <div>
@@ -145,20 +139,21 @@ class SearchFlights extends React.Component {
               onChange={this.onChange}
             />
           </div>
-          <br>
-          </br>
+          <br></br>
 
           <input
             type="submit"
             className="btn btn-outline-warning btn-block mt-4"
           />
-         
         </form>
-        <br>
-        </br>
-        <button onClick={()=>{ 
-          this.props.history.push('/all_flights')
-        }}>View all flights</button>
+        <br></br>
+        <button
+          onClick={() => {
+            this.props.history.push("/all_flights");
+          }}
+        >
+          View all flights
+        </button>
       </>
     );
   }
