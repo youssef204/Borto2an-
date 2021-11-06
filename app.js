@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 8000;
 
 // Connect to Database
 const MONGODB_URI = process.env.MONGODB_URI;
+console.log(MONGODB_URI);
 mongoose
   .connect(MONGODB_URI, {
     useNewUrlParser: true,
