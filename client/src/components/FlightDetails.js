@@ -110,9 +110,10 @@ class FlightDetails extends React.Component {
           <br />
           <label> Airline : {flight.airline} </label>
           <br />
-          <button onClick={(e) => this.handleClick(e, state)}>update</button>
+          <button onClick={(e) => this.handleClick(e, state)}>Update</button>
           <div>
-            <button onClick={handleClickOpen}>delete</button>
+            <br></br>
+            <button onClick={handleClickOpen}>Delete</button>
             <Dialog
               open={this.state.open}
               onClose={handleClose}

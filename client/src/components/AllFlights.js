@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios';
 import Flight from './Flight';
 import { Component } from 'react';
+import Header from './Header';
 
 class AllFlights extends Component {
     constructor(props) {
@@ -30,6 +31,7 @@ class AllFlights extends Component {
     };
 
     onChange = flightNumber => {
+      console.log(flightNumber); 
       this.props.history.push({
         pathname:"/flight_details",state:{flightNumber}
       });
@@ -56,21 +58,11 @@ class AllFlights extends Component {
 
     return (
       <body>
+        <div>
         <button onClick={() => this.props.history.push('/')}>
                 Home
               </button>
-              <br/>
-        <div>
-          <header
-            style={{
-              marginLeft: "auto",
-              marginRight: "auto",
-              textAlign: "center",
-              fontSize: 20,
-            }}
-          >
-            All Flights Page
-          </header>
+         <Header Title = "All Flights "/>
           <br></br>
           <br></br>
           <br></br>

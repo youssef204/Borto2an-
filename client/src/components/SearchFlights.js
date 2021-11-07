@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
+import Header from "./Header";
 class SearchFlights extends React.Component {
   constructor() {
     super();
@@ -53,16 +54,8 @@ class SearchFlights extends React.Component {
   render() {
     return (
       <>
-        <header
-          style={{
-            marginLeft: "auto",
-            marginRight: "auto",
-            textAlign: "center",
-            fontSize: 20,
-          }}
-        >
-          Search Flights Page
-        </header>
+        <Header Title =" Search Flights Page" />
+        
         <br></br>
         <br></br>
 

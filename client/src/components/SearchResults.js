@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios';
 import Flight from './Flight';
 import { Component } from 'react';
+import Header from './Header';
 
 class SearchResults extends Component {
     constructor(props) {
@@ -42,12 +43,29 @@ class SearchResults extends Component {
     }
     return (
       <body>
+        <Header Title ="Search List"/>
+        <br></br>
         <button onClick={() => this.props.history.push('/')}>
                 Home
               </button>
               <br/><br/>
         <div>
+        <table
+            style={{
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+          >
+            <tr>
+              <th>Flight Number</th>
+              <th>From</th>
+              <th>To</th>
+              <th>Airline</th>
+              <th>Flight Date</th>
+            </tr>
+
             {flightlist}
+            </table>
         </div>
       </body>
     );

@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import Header from "./Header";
 
 class CreateFlight extends React.Component {
     constructor(){
@@ -76,9 +77,10 @@ class CreateFlight extends React.Component {
                 Home
               </button>
               <br/>
-              <h1>
-                  Create a new flight
-              </h1>
+             <Header Title = " Create a new flight"/>
+           
+          
+          <br></br>
 
               <form noValidate onSubmit={this.onSubmit}>
                 <div>
@@ -207,10 +209,9 @@ class CreateFlight extends React.Component {
                           });}} />
                 </div>
 
-                <input
-                    type="submit"
-                    className="btn btn-outline-warning btn-block mt-4"
-                />
+                <button>
+                  Create
+                </button>
               </form>
           </>
     );

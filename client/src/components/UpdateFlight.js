@@ -47,10 +47,22 @@ class UpdateFlight extends React.Component {
   render() {
     return (
       <div>
-        <h1>Update flight {this.state.flight.flightNumber}</h1>
+       <header
+            style={{
+              marginLeft: "auto",
+              marginRight: "auto",
+              textAlign: "center",
+              fontSize: 30,
+            }}
+          >
+            Update Flight {this.state.flightNumber}
+          </header>
+          <br></br>
 
         <form noValidate onSubmit={this.onSubmit}>
           <div>
+            <label> From: </label>
+            <br></br>
             <input
               type="text"
               placeholder="From.."
@@ -61,6 +73,8 @@ class UpdateFlight extends React.Component {
           </div>
 
           <div>
+          <label> To: </label>
+            <br></br>
             <input
               type="text"
               placeholder="To.."
@@ -71,6 +85,9 @@ class UpdateFlight extends React.Component {
           </div>
 
           <div>
+
+          <label> Flight Date: </label>
+            <br></br>
             <input
               type="date"
               placeholder="Flight Date"
@@ -81,6 +98,8 @@ class UpdateFlight extends React.Component {
           </div>
 
           <div>
+          <label> Departure Time: </label>
+            <br></br>
             <input
               type="text"
               placeholder="Departure Time"
@@ -90,6 +109,8 @@ class UpdateFlight extends React.Component {
             />
           </div>
           <div>
+          <label> Arrival Time: </label>
+            <br></br>
             <input
               type="text"
               placeholder="Arrival Time"
@@ -100,6 +121,8 @@ class UpdateFlight extends React.Component {
           </div>
 
           <div>
+          <label> Seats Available: </label>
+            <br></br>
             <input
               type="number"
               placeholder="Seats Available"
@@ -109,6 +132,9 @@ class UpdateFlight extends React.Component {
             />
           </div>
           <div>
+          <label> Cabin: </label>
+            <br></br>
+
             <input
               type="text"
               placeholder="Cabin"
@@ -118,6 +144,8 @@ class UpdateFlight extends React.Component {
             />
           </div>
           <div>
+          <label> Total Seats: </label>
+            <br></br>
             <input
               type="number"
               placeholder="Total Seats"
@@ -127,6 +155,8 @@ class UpdateFlight extends React.Component {
             />
           </div>
           <div>
+          <label> Airplane Type: </label>
+            <br></br>
             <input
               type="text"
               placeholder="Airplane Type"
@@ -136,6 +166,8 @@ class UpdateFlight extends React.Component {
             />
           </div>
           <div>
+          <label> Duration: </label>
+            <br></br>
             <input
               type="number"
               placeholder="Duration"
@@ -145,6 +177,8 @@ class UpdateFlight extends React.Component {
             />
           </div>
           <div>
+          <label> Airline: </label>
+            <br></br>
             <input
               type="text"
               placeholder="Airline"
@@ -168,11 +202,11 @@ class UpdateFlight extends React.Component {
               }}
             />
           </div>
+            <br></br>
 
-          <input
-            type="submit"
-            className="btn btn-outline-warning btn-block mt-4"
-          />
+          <button>Update
+
+            </button> 
         </form>
       </div>
     );
