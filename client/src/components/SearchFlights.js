@@ -154,6 +154,14 @@ class SearchFlights extends React.Component {
         >
           View all flights
         </button>
+        <br/> <br/>
+        <button
+          onClick={() => {
+            this.props.history.push("/create_flight");
+          }}
+        >
+          Create a flight
+        </button>
       </>
     );
   }

@@ -65,13 +65,17 @@ class CreateFlight extends React.Component {
         this.props.history.push("/")
       })
       .catch(err => {
-        console.log(err);
+        alert("Enter Valid Data");
       })
       
   };
 
     render() { 
         return (<>
+              <button onClick={() => this.props.history.push('/')}>
+                Home
+              </button>
+              <br/>
               <h1>
                   Create a new flight
               </h1>

@@ -14,6 +14,11 @@ class SearchResults extends Component {
 
     }
    
+    onChange = flightNumber => {
+      this.props.history.push({
+        pathname:"/flight_details",state:{flightNumber}
+      });
+    };
    
   render() {
  //   console.log(this.props.history.location.state)
@@ -31,11 +36,16 @@ class SearchResults extends Component {
           to={flight.to}
           airline={flight.airline}
           flightDate={flight.flightDate}
+          onShowDetails={this.onChange}
         />
       ));
     }
     return (
       <body>
+        <button onClick={() => this.props.history.push('/')}>
+                Home
+              </button>
+              <br/><br/>
         <div>
             {flightlist}
         </div>

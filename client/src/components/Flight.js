@@ -1,7 +1,8 @@
 import React from 'react'
 
 
-function Flight({ flightNumber, from, to, airline, flightDate }) {
+function Flight({ flightNumber, from, to, airline, flightDate ,onShowDetails}) {
+  
   return (
     <>
     <tr style={{ background: "#dddddd" }}>
@@ -11,7 +12,7 @@ function Flight({ flightNumber, from, to, airline, flightDate }) {
       <td style={{ padding: "15px" }}>{airline}</td>
       <td style={{ padding: "15px" }} >{flightDate}</td>
     
-      <button style={{ margin: "15px" }} >
+      <button style={{ margin: "15px" }} onClick = {()=>onShowDetails(flightNumber)} >
         Show All Details
       </button >
     </tr>

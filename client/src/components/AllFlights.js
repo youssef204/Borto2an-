@@ -10,6 +10,7 @@ class AllFlights extends Component {
             flights: []
         }
     }
+
     componentDidMount() {
         axios
             .get('http://localhost:8000/api/flights/showAllflights')
@@ -20,13 +21,20 @@ class AllFlights extends Component {
                         flights: res.data
                     }
                 )
-                console.log(this.state.flights);
+          //      console.log(this.state.flights);
             })
             .catch(err => {
                 console.log(err);
             })
             
-    }
+    };
+
+    onChange = flightNumber => {
+      this.props.history.push({
+        pathname:"/flight_details",state:{flightNumber}
+      });
+    };
+  
 
   render() {
     let flightlist;
@@ -41,12 +49,17 @@ class AllFlights extends Component {
           to={flight.to}
           airline={flight.airline}
           flightDate={flight.flightDate}
+          onShowDetails = {this.onChange}
         />
       ));
     }
 
     return (
       <body>
+        <button onClick={() => this.props.history.push('/')}>
+                Home
+              </button>
+              <br/>
         <div>
           <header
             style={{
