@@ -1,6 +1,13 @@
 import axios from "axios";
 import React, { Component } from "react";
 
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+
 class UpdateFlight extends React.Component {
   constructor(props) {
     super(props);
@@ -34,6 +41,14 @@ class UpdateFlight extends React.Component {
   };
 
   render() {
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+
+    const handleClose = () => {
+      setOpen(false);
+    };
+
     return (
       <div>
         <h1>Update flight {this.state.flight.flightNumber}</h1>
@@ -162,6 +177,32 @@ class UpdateFlight extends React.Component {
             className="btn btn-outline-warning btn-block mt-4"
           />
         </form>
+        <div>
+          <Button variant="outlined" onClick={handleClickOpen}>
+            Open alert dialog
+          </Button>
+          <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">
+              {"Do you really want to delete?"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                if you really love me dont delete
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose}>Cancel</Button>
+              <Button onClick={handleClose} autoFocus>
+                Delete
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </div>
       </div>
     );
   }
