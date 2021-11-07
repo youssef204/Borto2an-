@@ -5,13 +5,19 @@ class UpdateFlight extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      flight: [],
+      flight: {},
       updated: {},
-      //todo
-      flightNumber: 1920,
+      flightNumber: -1,
     };
-    //todo
-    //this.setState(this.props.history.location.state);
+  }
+  componentDidMount() {
+    const flightData = { ...this.props.location.state.flight };
+    const date = flightData.flightDate;
+    flightData.flightDate = date.substring(0, 10);
+    this.setState({
+      flight: flightData,
+      flightNumber: this.props.location.state.flightNumber,
+    });
   }
   onChange = (e) => {
     const newUpdate = { ...this.state.updated };
@@ -19,6 +25,11 @@ class UpdateFlight extends React.Component {
     const value = e.target.value;
     newUpdate[name] = value;
     this.setState({ updated: newUpdate });
+
+    const newFlight = { ...this.state.flight };
+    newFlight[name] = value;
+    this.setState({ flight: newFlight });
+
     //console.log(this.state);
   };
   onSubmit = (e) => {
@@ -146,6 +157,7 @@ class UpdateFlight extends React.Component {
             Please check if this flight has a transit
             <input
               type="checkbox"
+              checked={this.state.flight.hasTransit}
               onChange={(e) => {
                 this.onChange({
                   target: {
