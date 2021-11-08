@@ -52,17 +52,10 @@ flight_router.delete("/:id", async (req, res) => {
 flight_router.post("/", async (req, res) => {
   const f = await Flight.findOne().sort({flightNumber: -1});
   let newFlightNumber = (!f)?0:f.flightNumber+1;
-  console.log(newFlightNumber);
   let dataTmp = req.body;
-
-  let result = {};
-  for(let i = 0; i < 3; i++){
-    dataTmp.flightNumber = newFlightNumber+i;
-    dataTmp.cabin = i==0?'Economy':i==1?'Business':'First';
-    result = await Flight.create(dataTmp);
-  }
+  dataTmp.flightNumber = newFlightNumber;
+  result = await Flight.create(dataTmp);
   res.send(result);
-
 });
 
 module.exports = flight_router;
