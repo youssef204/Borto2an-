@@ -54,8 +54,10 @@ flight_router.post("/", async (req, res) => {
   let newFlightNumber = (!f)?0:f.flightNumber+1;
   let dataTmp = req.body;
   dataTmp.flightNumber = newFlightNumber;
-  result = await Flight.create(dataTmp);
-  res.send(result);
+  Flight.create(dataTmp)
+  .then(result => {res.send(result);})
+  .catch(err => {res.status(400).send(err)});
+  
 });
 
 module.exports = flight_router;
