@@ -70,7 +70,7 @@ class UpdateFlight extends React.Component {
             <label> Flight Number: </label>
             <br></br>
             <input
-              type="text"
+              type="number"
               placeholder="Flight Number"
               name="flightNumber"
               value={this.state.flight.flightNumber}

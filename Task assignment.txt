@@ -1,0 +1,21 @@
+frontend:
+1. Home page contains search form                          => Omar Khair
+2. search results (add side bar filter bonus)              => Mohamed Eshiba
+3. flight details (edit, delete with confirmation options) => Peter Fahmi
+4. create new flight                                       => Hesham Moneer
+5. error page and 404 page                                 => Youssef Amin
+
+
+backend:
+1. create flight schema:                                       => Youssef Amin
+2. create the 4 crud routes on flights using express routers
+2.1 create                                                     => Hesham Moneer
+2.2 update                                                     => Peter Fahmi
+2.3 read                                                       => Youssef Amin
+2.4 delete                                                     => Omar Khair
+
+
+All Team work together on:
+1. create db on mongoAtlas and connect to db: New gmail shared among team members. (done)
+2. .env file.
+3.create project structure
