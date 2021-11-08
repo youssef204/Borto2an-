@@ -1,9 +1,11 @@
 frontend:
 1. Home page contains search form                          => Omar Khair
-2. search results (add side bar filter bonus)              => Mohamed Eshiba
-3. flight details (edit, delete with confirmation options) => Peter Fahmi
-4. create new flight                                       => Hesham Moneer
-5. error page and 404 page                                 => Youssef Amin
+2. search results / all flights                            => Mohamed Eshiba
+3. flight details view                                     => Mohamed Eshiba
+4. flight details (edit, delete with confirmation dialog)  => Peter Fahmi
+5. create new flight                                       => Hesham Moneer
+6. error page and 404 page                                 => Youssef Amin
+
 
 
 backend:
