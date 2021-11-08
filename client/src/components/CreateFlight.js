@@ -60,6 +60,7 @@ class CreateFlight extends React.Component {
             hasTransit: false
         })
         this.props.history.push("/");
+        alert("flight created successfully!!");
       })
       .catch(err => {
         alert("Enter Valid Data");

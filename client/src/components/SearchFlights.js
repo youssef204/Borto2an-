@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import Header from "./Header";
+
 class SearchFlights extends React.Component {
   constructor() {
     super();
@@ -56,7 +57,6 @@ class SearchFlights extends React.Component {
         
         <br></br>
         <br></br>
-
         <form noValidate onSubmit={(e) => this.onSubmit(e, this.state)}>
           <div>
             <label>Departure Airport: </label>
