@@ -11,14 +11,12 @@ flight_router.get("/", function (req, res, next) {
   let queryStr = JSON.stringify(queryObj);
   const regex = /\b(gt|gte|lt|lte|in)\b/g;
   queryStr = queryStr.replace(regex, "$$" + "$1");
-  console.log(JSON.parse(queryStr));
   Flight.find(JSON.parse(queryStr))
     .then((flight) => res.json(flight))
     .catch((err) => res.status(404).json({ msg: "No flights are found" }));
 });
 
 flight_router.put("/", (req, res) => {
-  console.log("in update");
   const curFlightNumber = req.body.flightNumber;
   const update = req.body.update;
   Flight.updateOne({ flightNumber: curFlightNumber }, update).then(() => {
@@ -57,7 +55,6 @@ flight_router.post("/", async (req, res) => {
   Flight.create(dataTmp)
   .then(result => {res.send(result);})
   .catch(err => {res.status(400).send(err)});
-  
 });
 
 module.exports = flight_router;

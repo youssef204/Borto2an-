@@ -6,12 +6,11 @@ class SearchFlights extends React.Component {
   constructor() {
     super();
     this.state = {
-      from: "",
-      to: "",
+      fromAirport: "",
+      toAirport: "",
       flightNumber: "",
-      flightDate: "",
       departureTime: "",
-      arrivalTime: "",
+      arrivalTime: ""
     };
   }
 
@@ -23,7 +22,6 @@ class SearchFlights extends React.Component {
     e.preventDefault();
 
     const data = this.getNonEmptyFields(state);
-    console.log(data);
 
     axios({
       method: "get",
@@ -61,26 +59,26 @@ class SearchFlights extends React.Component {
 
         <form noValidate onSubmit={(e) => this.onSubmit(e, this.state)}>
           <div>
-            <label>From: </label>
+            <label>Departure Airport: </label>
             <br />
             <input
               type="text"
-              placeholder="Cairo"
-              name="from"
-              value={this.state.from}
+              placeholder="e.x. Cairo"
+              name="fromAirport"
+              value={this.state.fromAirport}
               onChange={this.onChange}
             />
           </div>
 
           <div>
-            <label>To: </label>
+            <label>Arrival Airport: </label>
             <br />
 
             <input
               type="text"
-              placeholder="Paris"
-              name="to"
-              value={this.state.to}
+              placeholder="e.x. Paris"
+              name="toAirport"
+              value={this.state.toAirport}
               onChange={this.onChange}
             />
           </div>
@@ -99,23 +97,10 @@ class SearchFlights extends React.Component {
           </div>
 
           <div>
-            <label>Flight Date: </label>
-            <br />
-            <input
-              type="date"
-              placeholder="Flight Date"
-              name="flightDate"
-              value={this.state.flightDate}
-              onChange={this.onChange}
-            />
-          </div>
-
-          <div>
             <label>Departure Time: </label>
             <br />
             <input
-              type="text"
-              placeholder="10 AM"
+              type="datetime-local"
               name="departureTime"
               value={this.state.departureTime}
               onChange={this.onChange}
@@ -125,8 +110,7 @@ class SearchFlights extends React.Component {
             <label>Arrival Time: </label>
             <br />
             <input
-              type="text"
-              placeholder="3 PM"
+              type="datetime-local"
               name="arrivalTime"
               value={this.state.arrivalTime}
               onChange={this.onChange}
