@@ -20,7 +20,7 @@ class UpdateFlight extends React.Component {
     flightData.departureTime = flightData.departureTime.substring(0, 16);
     this.setState({
       flight: flightData,
-      _id: this.props.location.state._id,
+      _id: flightData._id,
     });
   }
   onChange = (e) => {
@@ -39,10 +39,10 @@ class UpdateFlight extends React.Component {
   onSubmit = (e) => {
     e.preventDefault();
     const data = {
-      flightNumber: this.state.flightNumber,
+      _id: this.state._id,
       update: this.state.updated,
     };
-    console.log(data);
+    console.log("sent item", data);
     axios
       .put("http://localhost:8000/api/flights", data)
       .then(this.props.history.push("/"));
