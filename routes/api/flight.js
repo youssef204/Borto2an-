@@ -5,6 +5,13 @@ const Flight = require("../../models/Flight");
 //var qs = require('qs');
 
 //update flight
+function storeTimeAsIs(dataTmp) {
+  if("departureTime" in dataTmp)
+    dataTmp.departureTime += "Z";
+  if("arrivalTime" in dataTmp)
+    dataTmp.arrivalTime += "Z";
+}
+
 
 flight_router.get("/", function (req, res, next) {
   const queryObj = { ...req.query };
@@ -19,6 +26,7 @@ flight_router.get("/", function (req, res, next) {
 flight_router.put("/", (req, res) => {
   const curFlightNumber = req.body.flightNumber;
   const update = req.body.update;
+  storeTimeAsIs(update);
   Flight.updateOne({ flightNumber: curFlightNumber }, update).then(() => {
     console.log("done");
     res.send("done");
@@ -51,6 +59,7 @@ flight_router.post("/", async (req, res) => {
   const f = await Flight.findOne().sort({flightNumber: -1});
   let newFlightNumber = (!f)?0:f.flightNumber+1;
   let dataTmp = req.body;
+  storeTimeAsIs(dataTmp);
   dataTmp.flightNumber = newFlightNumber;
   Flight.create(dataTmp)
   .then(result => {res.send(result);})
