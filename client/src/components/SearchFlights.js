@@ -71,6 +71,18 @@ class SearchFlights extends React.Component {
           </div>
 
           <div>
+            <label>Departure Terminal: </label>
+            <br />
+            <input
+              type="number"
+              placeholder="e.x. 1"
+              name="fromTerminal"
+              value={this.state.fromTerminal}
+              onChange={this.onChange}
+            />
+          </div>
+
+          <div>
             <label>Arrival Airport: </label>
             <br />
 
@@ -79,6 +91,19 @@ class SearchFlights extends React.Component {
               placeholder="e.x. Paris"
               name="toAirport"
               value={this.state.toAirport}
+              onChange={this.onChange}
+            />
+          </div>
+
+          <div>
+            <label>Arrival Terminal: </label>
+            <br />
+
+            <input
+              type="number"
+              placeholder="e.x. 1"
+              name="toTerminal"
+              value={this.state.toTerminal}
               onChange={this.onChange}
             />
           </div>

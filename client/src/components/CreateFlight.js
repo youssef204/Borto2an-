@@ -75,6 +75,7 @@ class CreateFlight extends React.Component {
           <br></br>
 
               <form noValidate onSubmit={this.onSubmit}>
+                Departure Airport:
                 <div>
                   <input
                     type='text'
@@ -84,6 +85,7 @@ class CreateFlight extends React.Component {
                     onChange={this.onChange}
                   />
                 </div>
+                Departure Terminal:
                 <div>
                   <input
                     type='number'
@@ -94,6 +96,7 @@ class CreateFlight extends React.Component {
                   />
                 </div>
 
+                Arrival Airport:
                 <div>
                   <input
                     type='text'
@@ -103,6 +106,7 @@ class CreateFlight extends React.Component {
                     onChange={this.onChange}
                   />
                 </div>
+                Arrival Terminal:
                 <div>
                   <input
                     type='number'
@@ -113,6 +117,7 @@ class CreateFlight extends React.Component {
                   />
                 </div>
 
+                Departure Time:
                 <div>
                   <input
                     type='datetime-local'
@@ -122,6 +127,8 @@ class CreateFlight extends React.Component {
                     onChange={this.onChange}
                   />
                 </div>
+
+                Arrival Time:
                 <div>
                   <input
                     type='datetime-local'
@@ -132,6 +139,7 @@ class CreateFlight extends React.Component {
                   />
                 </div>
 
+                Economy Seats Available:
                 <div>
                   <input
                     type='number'
@@ -141,6 +149,8 @@ class CreateFlight extends React.Component {
                     onChange={this.onChange}
                   />
                 </div>
+
+                Business Seats Available:
                 <div>
                   <input
                     type='number'
@@ -150,6 +160,8 @@ class CreateFlight extends React.Component {
                     onChange={this.onChange}
                   />
                 </div>
+
+                First Seats Available:
                 <div>
                   <input
                     type='number'
@@ -159,6 +171,8 @@ class CreateFlight extends React.Component {
                     onChange={this.onChange}
                   />
                 </div>
+
+                Airline:
                 <div>
                   <input
                     type='text'
