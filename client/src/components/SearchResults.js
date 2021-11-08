@@ -33,11 +33,10 @@ class SearchResults extends Component {
       flightlist = flights.map((flight) => (
         <Flight
           flightNumber={flight.flightNumber}
-          from={flight.from}
-          to={flight.to}
-          seatsAvailable={flight.seatsAvailable}
-          flightDate={flight.flightDate}
-          cabin = {flight.cabin}
+          fromAirport={flight.fromAirport}
+          toAirport={flight.toAirport}
+          departureTime={flight.departureTime}
+          arrivalTime={flight.arrivalTime}
           onShowDetails={this.onChange}
         />
       ));
@@ -59,11 +58,10 @@ class SearchResults extends Component {
           >
             <tr>
               <th>Flight Number</th>
-              <th>From</th>
-              <th>To</th>
-              <th>Seats Available</th>
-              <th>Flight Date</th>
-              <th>Cabin</th>
+              <th>Departure Airport</th>
+              <th>Arrival Airport</th>
+              <th>Departure Time</th>
+              <th>Arrival Time</th>
             </tr>
 
             {flightlist}

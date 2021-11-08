@@ -21,7 +21,7 @@ class FlightDetails extends React.Component {
     let curFlightNumber = {
       flightNumber: this.props.history.location.state.flightNumber,
     };
-    console.log(curFlightNumber, "curfn");
+  //  console.log(curFlightNumber, "curfn");
     axios({
       method: "get",
       url: "http://localhost:8000/api/flights",
@@ -76,7 +76,6 @@ class FlightDetails extends React.Component {
       flightNumber: this.state.flights[0]?.flightNumber,
       flight: this.state.flights[0] ? this.state.flights[0] : undefined,
     };
-    console.log("state is ", state);
     let flightlist;
     const flights = this.state.flights;
     if (!flights) {
@@ -84,31 +83,29 @@ class FlightDetails extends React.Component {
     } else {
       flightlist = flights.map((flight) => (
         <div>
-          <label> From :{flight.from} </label>
+          <label> Departure Airport :{flight.fromAirport} </label>
           <br />
-          <label> To : {flight.to} </label>
+          <label> Arrival Airport : {flight.toAirport} </label>
+          <br />
+          <label> Departure Terminal :{flight.fromTerminal} </label>
+          <br />
+          <label> Arrival Terminal : {flight.toTerminal} </label>
           <br />
           <label> Flight Number : {flight.flightNumber} </label>
-          <br />
-          <label> Flight Date :{flight.flightDate} </label>
           <br />
           <label> Departure Time :{flight.departureTime} </label>
           <br />
           <label> Arrival Time : {flight.arrivalTime} </label>
           <br />
-          <label> Transit : {flight.hasTransit.toString()} </label>
+          <label> Economy class seats available : {flight.economySeatsAvailable} </label>
           <br />
-          <label> Available Seats {flight.seatsAvailable} : </label>
+          <label> Business class seats available : {flight.businessSeatsAvailable} </label>
           <br />
-          <label> Total Seats :{flight.totalSeats} </label>
-          <br />
-          <label> Cabin : {flight.cabin} </label>
-          <br />
-          <label> Airplane Type : {flight.airplaneType} </label>
-          <br />
-          <label> Duration : {flight.duration} </label>
+          <label> First class seats available : {flight.firstSeatsAvailable} </label>
           <br />
           <label> Airline : {flight.airline} </label>
+          <br />
+          <label> Transit : {flight.hasTransit.toString()} </label>
           <br />
           <button onClick={(e) => this.handleClick(e, state)}>Update</button>
           <div>

@@ -12,8 +12,11 @@ class UpdateFlight extends React.Component {
   }
   componentDidMount() {
     const flightData = { ...this.props.location.state.flight };
-    const date = flightData.flightDate;
-    flightData.flightDate = date.substring(0, 10);
+    // const arrival = flightData.arrivalTime;
+    // const deprature = flightData.departureTime;
+    // flightData.flightDate = date.substring(0, 10);
+    flightData.arrivalTime = flightData.arrivalTime.substring(0,16);
+    flightData.departureTime = flightData.departureTime.substring(0,16);
     this.setState({
       flight: flightData,
       flightNumber: this.props.location.state.flightNumber,
@@ -47,6 +50,9 @@ class UpdateFlight extends React.Component {
   render() {
     return (
       <div>
+        <button onClick={() => this.props.history.push('/')}>
+                Home
+              </button>
        <header
             style={{
               marginLeft: "auto",
@@ -61,38 +67,49 @@ class UpdateFlight extends React.Component {
 
         <form noValidate onSubmit={this.onSubmit}>
           <div>
-            <label> From: </label>
+            <label> Departure Airport: </label>
             <br></br>
             <input
               type="text"
-              placeholder="From.."
-              name="from"
-              value={this.state.flight.from}
+              placeholder="From Airport"
+              name="fromAirport"
+              value={this.state.flight.fromAirport}
               onChange={this.onChange}
             />
           </div>
 
           <div>
-          <label> To: </label>
+            <label> Departure Terminal: </label>
             <br></br>
             <input
-              type="text"
-              placeholder="To.."
-              name="to"
-              value={this.state.flight.to}
+              type="number"
+              placeholder="From Terminal"
+              name="fromTerminal"
+              value={this.state.flight.fromTerminal}
               onChange={this.onChange}
             />
           </div>
 
           <div>
-
-          <label> Flight Date: </label>
+          <label> Arrival Airport: </label>
             <br></br>
             <input
-              type="date"
-              placeholder="Flight Date"
-              name="flightDate"
-              value={this.state.flight.flightDate}
+              type="text"
+              placeholder="To Airport"
+              name="toAirport"
+              value={this.state.flight.toAirport}
+              onChange={this.onChange}
+            />
+          </div>
+
+          <div>
+          <label> Arrival Terminal: </label>
+            <br></br>
+            <input
+              type="number"
+              placeholder="To Terminal"
+              name="toTerminal"
+              value={this.state.flight.toTerminal}
               onChange={this.onChange}
             />
           </div>
@@ -101,7 +118,7 @@ class UpdateFlight extends React.Component {
           <label> Departure Time: </label>
             <br></br>
             <input
-              type="text"
+              type="datetime-local"
               placeholder="Departure Time"
               name="departureTime"
               value={this.state.flight.departureTime}
@@ -112,7 +129,7 @@ class UpdateFlight extends React.Component {
           <label> Arrival Time: </label>
             <br></br>
             <input
-              type="text"
+              type="datetime-local"
               placeholder="Arrival Time"
               name="arrivalTime"
               value={this.state.flight.arrivalTime}
@@ -121,61 +138,41 @@ class UpdateFlight extends React.Component {
           </div>
 
           <div>
-          <label> Seats Available: </label>
+          <label> Economy Seats Available: </label>
             <br></br>
             <input
               type="number"
-              placeholder="Seats Available"
-              name="seatsAvailable"
-              value={this.state.flight.seatsAvailable}
+              placeholder="Economy Seats Available"
+              name="economySeatsAvailable"
+              value={this.state.flight.economySeatsAvailable}
               onChange={this.onChange}
             />
           </div>
-          <div>
-          <label> Cabin: </label>
-            <br></br>
 
-            <input
-              type="text"
-              placeholder="Cabin"
-              name="cabin"
-              value={this.state.flight.cabin}
-              onChange={this.onChange}
-            />
-          </div>
           <div>
-          <label> Total Seats: </label>
+          <label> Business Seats Available: </label>
             <br></br>
             <input
               type="number"
-              placeholder="Total Seats"
-              name="totalSeats"
-              value={this.state.flight.totalSeats}
+              placeholder="Business Seats Available"
+              name="businessSeatsAvailable"
+              value={this.state.flight.businessSeatsAvailable}
               onChange={this.onChange}
             />
           </div>
+
           <div>
-          <label> Airplane Type: </label>
-            <br></br>
-            <input
-              type="text"
-              placeholder="Airplane Type"
-              name="airplaneType"
-              value={this.state.flight.airplaneType}
-              onChange={this.onChange}
-            />
-          </div>
-          <div>
-          <label> Duration: </label>
+          <label> First class Seats Available: </label>
             <br></br>
             <input
               type="number"
-              placeholder="Duration"
-              name="duration"
-              value={this.state.flight.duration}
+              placeholder="First class Seats Available"
+              name="firstSeatsAvailable"
+              value={this.state.flight.firstSeatsAvailable}
               onChange={this.onChange}
             />
           </div>
+
           <div>
           <label> Airline: </label>
             <br></br>
@@ -208,7 +205,7 @@ class UpdateFlight extends React.Component {
 
             </button> 
         </form>
-      </div>
+        </div>
     );
   }
 }
