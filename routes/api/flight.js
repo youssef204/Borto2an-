@@ -24,13 +24,16 @@ flight_router.get("/", function (req, res, next) {
 });
 
 flight_router.put("/", (req, res) => {
-  const curFlightNumber = req.body.flightNumber;
+  const id = req.body._id;
   const update = req.body.update;
   storeTimeAsIs(update);
-  Flight.updateOne({ flightNumber: curFlightNumber }, update).then(() => {
+  Flight.findByIdAndUpdate(id,update)
+  //.updateOne({ _id: id }, update)
+  .then(() => {
     console.log("done");
     res.send("done");
-  });
+  })
+  .catch(err => console.log(err));
 });
 
 //read all flights
@@ -56,11 +59,8 @@ flight_router.delete("/:id", async (req, res) => {
 });
 
 flight_router.post("/", async (req, res) => {
-  const f = await Flight.findOne().sort({flightNumber: -1});
-  let newFlightNumber = (!f)?0:f.flightNumber+1;
   let dataTmp = req.body;
   storeTimeAsIs(dataTmp);
-  dataTmp.flightNumber = newFlightNumber;
   Flight.create(dataTmp)
   .then(result => {res.send(result);})
   .catch(err => {res.status(400).send(err)});

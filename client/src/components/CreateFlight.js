@@ -6,6 +6,7 @@ class CreateFlight extends React.Component {
     constructor(){
         super();
         this.state = {
+            flightNumber:'',
             fromAirport:'',
             toAirport:'',
             fromTerminal:'',
@@ -28,6 +29,7 @@ class CreateFlight extends React.Component {
     e.preventDefault();
 
     const data = {
+      flightNumber: this.state.flightNumber,
       fromAirport: this.state.fromAirport,
       toAirport: this.state.toAirport,
       fromTerminal: this.state.fromTerminal,
@@ -44,6 +46,7 @@ class CreateFlight extends React.Component {
       .post('http://localhost:8000/api/flights', data)
       .then(res => {
         this.setState({
+            flightNumber:'',
             fromAirport:'',
             toAirport:'',
             fromTerminal:'',
@@ -75,10 +78,18 @@ class CreateFlight extends React.Component {
           <br></br>
 
               <form noValidate onSubmit={this.onSubmit}>
-                
+                Flight Number:
                 <div>
-                <label>Departure Airport:</label>
-                <br></br>
+                  <input
+                    type='number'
+                    placeholder='Flight Number'
+                    name='flightNumber'
+                    value={this.state.flightNumber}
+                    onChange={this.onChange}
+                  />
+                </div>
+                Departure Airport:
+                <div>
                   <input
                     type='text'
                     placeholder='Departure Airport'

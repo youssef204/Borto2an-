@@ -7,19 +7,20 @@ class UpdateFlight extends React.Component {
     this.state = {
       flight: {},
       updated: {},
-      flightNumber: -1,
+      _id: -1,
     };
   }
   componentDidMount() {
     const flightData = { ...this.props.location.state.flight };
+    console.log("here", flightData);
     // const arrival = flightData.arrivalTime;
     // const deprature = flightData.departureTime;
     // flightData.flightDate = date.substring(0, 10);
-    flightData.arrivalTime = flightData.arrivalTime.substring(0,16);
-    flightData.departureTime = flightData.departureTime.substring(0,16);
+    flightData.arrivalTime = flightData.arrivalTime.substring(0, 16);
+    flightData.departureTime = flightData.departureTime.substring(0, 16);
     this.setState({
       flight: flightData,
-      flightNumber: this.props.location.state.flightNumber,
+      _id: flightData._id,
     });
   }
   onChange = (e) => {
@@ -38,10 +39,10 @@ class UpdateFlight extends React.Component {
   onSubmit = (e) => {
     e.preventDefault();
     const data = {
-      flightNumber: this.state.flightNumber,
+      _id: this.state._id,
       update: this.state.updated,
     };
-    console.log(data);
+    console.log("sent item", data);
     axios
       .put("http://localhost:8000/api/flights", data)
       .then(this.props.history.push("/"));
@@ -50,22 +51,32 @@ class UpdateFlight extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={() => this.props.history.push('/')}>
-                Home
-              </button>
-       <header
-            style={{
-              marginLeft: "auto",
-              marginRight: "auto",
-              textAlign: "center",
-              fontSize: 30,
-            }}
-          >
-            Update Flight {this.state.flightNumber}
-          </header>
-          <br></br>
+        <button onClick={() => this.props.history.push("/")}>Home</button>
+        <header
+          style={{
+            marginLeft: "auto",
+            marginRight: "auto",
+            textAlign: "center",
+            fontSize: 30,
+          }}
+        >
+          Update Flight {this.state.flightNumber}
+        </header>
+        <br></br>
 
         <form noValidate onSubmit={this.onSubmit}>
+          <div>
+            <label> Flight Number: </label>
+            <br></br>
+            <input
+              type="text"
+              placeholder="Flight Number"
+              name="flightNumber"
+              value={this.state.flight.flightNumber}
+              onChange={this.onChange}
+            />
+          </div>
+
           <div>
             <label> Departure Airport: </label>
             <br></br>
@@ -91,7 +102,7 @@ class UpdateFlight extends React.Component {
           </div>
 
           <div>
-          <label> Arrival Airport: </label>
+            <label> Arrival Airport: </label>
             <br></br>
             <input
               type="text"
@@ -103,7 +114,7 @@ class UpdateFlight extends React.Component {
           </div>
 
           <div>
-          <label> Arrival Terminal: </label>
+            <label> Arrival Terminal: </label>
             <br></br>
             <input
               type="number"
@@ -115,7 +126,7 @@ class UpdateFlight extends React.Component {
           </div>
 
           <div>
-          <label> Departure Time: </label>
+            <label> Departure Time: </label>
             <br></br>
             <input
               type="datetime-local"
@@ -126,7 +137,7 @@ class UpdateFlight extends React.Component {
             />
           </div>
           <div>
-          <label> Arrival Time: </label>
+            <label> Arrival Time: </label>
             <br></br>
             <input
               type="datetime-local"
@@ -138,7 +149,7 @@ class UpdateFlight extends React.Component {
           </div>
 
           <div>
-          <label> Economy Seats Available: </label>
+            <label> Economy Seats Available: </label>
             <br></br>
             <input
               type="number"
@@ -150,7 +161,7 @@ class UpdateFlight extends React.Component {
           </div>
 
           <div>
-          <label> Business Seats Available: </label>
+            <label> Business Seats Available: </label>
             <br></br>
             <input
               type="number"
@@ -162,7 +173,7 @@ class UpdateFlight extends React.Component {
           </div>
 
           <div>
-          <label> First class Seats Available: </label>
+            <label> First class Seats Available: </label>
             <br></br>
             <input
               type="number"
@@ -174,7 +185,7 @@ class UpdateFlight extends React.Component {
           </div>
 
           <div>
-          <label> Airline: </label>
+            <label> Airline: </label>
             <br></br>
             <input
               type="text"
@@ -199,13 +210,11 @@ class UpdateFlight extends React.Component {
               }}
             />
           </div>
-            <br></br>
+          <br></br>
 
-          <button>Update
-
-            </button> 
+          <button>Update</button>
         </form>
-        </div>
+      </div>
     );
   }
 }
