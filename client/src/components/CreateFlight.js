@@ -8,15 +8,13 @@ class CreateFlight extends React.Component {
         this.state = {
             from:'',
             to:'',
-            flightNumber:'',
             flightDate:'',
+            economySeatsAvailable: '',
+            businessSeatsAvailable: '',
+            firstSeatsAvailable: '',
             departureTime:'',
             arrivalTime:'',
-            seatsAvailable:'',
-            cabin:'',
-            totalSeats:'',
-            airplaneType:'',
-            duration:'',
+            airPort:'',
             airline:'',
             hasTransit: false
         }
@@ -32,15 +30,13 @@ class CreateFlight extends React.Component {
     const data = {
       from: this.state.from,
       to: this.state.to,
-      flightNumber: this.state.flightNumber,
       flightDate: this.state.flightDate,
+      economySeatsAvailable: this.state.economySeatsAvailable,
+      businessSeatsAvailable: this.state.businessSeatsAvailable,
+      firstSeatsAvailable: this.state.firstSeatsAvailable,
       departureTime: this.state.departureTime,
       arrivalTime: this.state.arrivalTime,
-      seatsAvailable: this.state.seatsAvailable,
-      cabin: this.state.cabin,
-      totalSeats: this.state.totalSeats,
-      airplaneType: this.state.airplaneType,
-      duration: this.state.duration,
+      airPort: this.state.airPort,
       airline: this.state.airline,
       hasTransit: this.state.hasTransit
     }; 
@@ -50,25 +46,21 @@ class CreateFlight extends React.Component {
         this.setState({
             from:'',
             to:'',
-            flightNumber:'',
             flightDate:'',
             departureTime:'',
             arrivalTime:'',
             seatsAvailable:'',
-            cabin:'',
             totalSeats:'',
             airplaneType:'',
             duration:'',
             airline:'',
             hasTransit: false
         })
-        console.log(this.state)
-        this.props.history.push("/")
+        this.props.history.push("/");
       })
       .catch(err => {
         alert("Enter Valid Data");
-      })
-      
+      });      
   };
 
     render() { 
@@ -99,16 +91,6 @@ class CreateFlight extends React.Component {
                     placeholder='To..'
                     name='to'
                     value={this.state.to}
-                    onChange={this.onChange}
-                  />
-                </div>
-
-                <div>
-                  <input
-                    type='number'
-                    placeholder='Flight Number'
-                    name='flightNumber'
-                    value={this.state.flightNumber}
                     onChange={this.onChange}
                   />
                 </div>
@@ -148,15 +130,6 @@ class CreateFlight extends React.Component {
                     placeholder='Seats Available'
                     name='seatsAvailable'
                     value={this.state.seatsAvailable}
-                    onChange={this.onChange}
-                  />
-                </div>
-                <div>
-                  <input
-                    type='text'
-                    placeholder='Cabin'
-                    name='cabin'
-                    value={this.state.cabin}
                     onChange={this.onChange}
                   />
                 </div>

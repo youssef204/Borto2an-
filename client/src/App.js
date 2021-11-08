@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import PageNotFound from "./components/PageNotFound";
 import FlightDetails from './components/FlightDetails';
 import UpdateFlight from "./components/UpdateFlight";
+import "./App.css";
 
 
 function App() {

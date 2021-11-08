@@ -35,8 +35,9 @@ class SearchResults extends Component {
           flightNumber={flight.flightNumber}
           from={flight.from}
           to={flight.to}
-          airline={flight.airline}
+          seatsAvailable={flight.seatsAvailable}
           flightDate={flight.flightDate}
+          cabin = {flight.cabin}
           onShowDetails={this.onChange}
         />
       ));
@@ -60,8 +61,9 @@ class SearchResults extends Component {
               <th>Flight Number</th>
               <th>From</th>
               <th>To</th>
-              <th>Airline</th>
+              <th>Seats Available</th>
               <th>Flight Date</th>
+              <th>Cabin</th>
             </tr>
 
             {flightlist}

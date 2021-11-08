@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-function Flight({ flightNumber, from, to, airline, flightDate ,onShowDetails}) {
+function Flight({ flightNumber, from, to, seatsAvailable, flightDate ,onShowDetails, cabin}) {
   
   return (
     <>
@@ -9,10 +9,11 @@ function Flight({ flightNumber, from, to, airline, flightDate ,onShowDetails}) {
       <td style={{ padding: "15px" }}> {flightNumber}</td>
       <td style={{ padding: "15px" }}> {from}</td>
       <td style={{ padding: "15px" }} >{to}</td>
-      <td style={{ padding: "15px" }}>{airline}</td>
+      <td style={{ padding: "15px" }}>{seatsAvailable}</td>
       <td style={{ padding: "15px" }} >{flightDate}</td>
+      <td style={{ padding: "15px" }} >{cabin}</td>
     
-      <button style={{ margin: "15px" }} onClick = {()=>onShowDetails(flightNumber)} >
+      <button className="showAllDetails" onClick = {()=>onShowDetails(flightNumber)} >
         Show All Details
       </button >
     </tr>
