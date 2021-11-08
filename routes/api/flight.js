@@ -33,7 +33,7 @@ flight_router.put("/", (req, res) => {
     console.log("done");
     res.send("done");
   })
-  .catch(err => console.log(err));
+  .catch(err => res.status(400).send(err));
 });
 
 //read all flights
