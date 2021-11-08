@@ -75,8 +75,10 @@ class CreateFlight extends React.Component {
           <br></br>
 
               <form noValidate onSubmit={this.onSubmit}>
-                Departure Airport:
+                
                 <div>
+                <label>Departure Airport:</label>
+                <br></br>
                   <input
                     type='text'
                     placeholder='Departure Airport'

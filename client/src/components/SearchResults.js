@@ -23,12 +23,12 @@ class SearchResults extends Component {
    
   render() {
  //   console.log(this.props.history.location.state)
-    let flightlist ; 
+    let flightlist = [] ; 
     const flights = this.props.history.location.state;
-  //  console.log(flights); 
+    console.log(flights); 
 
     if (!flights) {
-      flightlist = "there is no flights !";
+      flightlist = <button>Hello here </button>;
     } else {
       flightlist = flights.map((flight) => (
         <Flight
@@ -63,7 +63,6 @@ class SearchResults extends Component {
               <th>Departure Time</th>
               <th>Arrival Time</th>
             </tr>
-
             {flightlist}
             </table>
         </div>
