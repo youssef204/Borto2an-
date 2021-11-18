@@ -31,6 +31,9 @@ app.use(cors());
 const flight_routes = require("./routes/api/flight");
 app.use("/api/flights/", flight_routes);
 
+const reservation_routes = require("./routes/api/reservation");
+app.use("/api/reservations/", reservation_routes);
+
 // Starting server
 app.listen(PORT, () => {
   console.log(`Listening to requests on http://localhost:${PORT}`);
