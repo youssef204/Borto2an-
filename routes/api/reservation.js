@@ -15,13 +15,23 @@ reservation_router.get("/", function (req, res, next) {
     .catch((err) => res.status(404).json({ msg: "No reservations are found" }));
 });
 
-//read all flights
-reservation_router.get("/showAllReservations", (req, res) => {
-  Reservation.find()
-    .then((reservation) => {
-      res.json(reservation);
-    })
-    .catch((err) => res.status(404).json({ msg: "Reservations are found" }));
+reservation_router.delete("/:id", async (req, res) => {
+  try {
+    const reservation = await Reservation.findByIdAndDelete(req.params.id);
+    if (reservation){
+      res.send(reservation);
+      // const userId = reservation.userId;
+      // const User = require('../../models/User');
+      // const user = User.find({_id:userId});
+      // const email = user.email;
+      // sendEmail(email);
+    }
+    else
+      res.status(404).json({ msg: `No Reservation with id ${req.params.id} found` });
+  } catch (e) {
+    console.log(e);
+    res.status(404).json({ msg: `${req.params.id} is not a correct id` });
+  }
 });
 
 reservation_router.post("/", async (req, res) => {
