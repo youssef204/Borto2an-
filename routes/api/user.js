@@ -17,7 +17,8 @@ function isValidEntry(entry) {
     !entry.lastName ||
     !entry.email ||
     !entry.password ||
-    !isValidEmail(entry.email)
+    !isValidEmail(entry.email) ||
+    !entry.passportNumber
   )
     return false;
   return true;
@@ -29,6 +30,7 @@ function isValidUpdate(entry) {
     ("lastName" in entry && !entry.lastName) ||
     ("email" in entry && !entry.email) ||
     ("password" in entry && !entry.password) ||
+    ("passportNumber" in entry && !entry.passportNumber) ||
     ("email" in entry && !isValidEmail(entry.email))
   )
     return false;
