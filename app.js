@@ -34,6 +34,9 @@ app.use("/api/flights/", flight_routes);
 const reservation_routes = require("./routes/api/reservation");
 app.use("/api/reservations/", reservation_routes);
 
+const user_routes = require("./routes/api/user");
+app.use("/api/users/", user_routes);
+
 // Starting server
 app.listen(PORT, () => {
   console.log(`Listening to requests on http://localhost:${PORT}`);
