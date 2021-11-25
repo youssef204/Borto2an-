@@ -1,7 +1,56 @@
-// bare file to fill later with the schema of the db
-
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+
+const BaggageSchema = new Schema({
+  pieces: {
+    // number of bags allowed
+    type: Number,
+    required: true,
+  },
+  maxWeight: {
+    // max weight per piece
+    type: Number,
+    required: true,
+  },
+});
+
+const CabinSchema = new Schema({
+  takenSeats: {
+    type: [Number],
+    default: [],
+  },
+  adultPrice: {
+    type: Number,
+    required: true,
+  },
+  adultBaggage: {
+    type: BaggageSchema,
+    required: true,
+  },
+  childPrice: {
+    type: Number,
+    required: true,
+  },
+  childBaggage: {
+    type: BaggageSchema,
+    required: true,
+  },
+});
+
+const FlightPointSchema = new Schema({
+  airport: {
+    type: String,
+    required: true,
+  },
+  terminal: {
+    type: String,
+    required: true,
+  },
+  time: {
+    type: Date,
+    required: true,
+  },
+});
 
 const FlightSchema = new Schema(
   {
@@ -10,41 +59,13 @@ const FlightSchema = new Schema(
       required: true,
       unique: true,
     },
-    fromAirport: {
-      type: String,
-      required: true,
+    departure:{
+      type: FlightPointSchema,
+      required: true
     },
-    toAirport: {
-      type: String,
-      required: true,
-    },
-    fromTerminal: {
-      type: Number,
-      required: true,
-    },
-    toTerminal: {
-      type: Number,
-      required: true,
-    },
-    departureTime: {
-      type: Date,
-      required: true,
-    },
-    arrivalTime: {
-      type: Date,
-      required: true,
-    },
-    economySeatsAvailable: {
-      type: Number,
-      required: true,
-    },
-    businessSeatsAvailable: {
-      type: Number,
-      required: true,
-    },
-    firstSeatsAvailable: {
-      type: Number,
-      required: true,
+    arrival:{
+      type: FlightPointSchema,
+      required: true
     },
     airline: {
       type: String,
@@ -54,6 +75,14 @@ const FlightSchema = new Schema(
       type: Boolean,
       required: true,
     },
+    airplaneModelID: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "AirplaneModel",
+      required: true,
+    },
+    economyCabin: CabinSchema,
+    businessCabin: CabinSchema,
+    firstCabin: CabinSchema,
   },
   { timestamps: true }
 );
