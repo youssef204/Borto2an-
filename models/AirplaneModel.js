@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const AirplaneModelScbema = new Schema(
+const AirplaneModelSchema = new Schema(
   {
     name: {
         type: String,
@@ -35,5 +35,5 @@ const AirplaneModelScbema = new Schema(
   { timestamps: true }
 );
 
-const AirplaneModel = mongoose.model("AirplaneModel", AirplaneModelScbema);
+const AirplaneModel = mongoose.model("AirplaneModel", AirplaneModelSchema);
 module.exports = AirplaneModel;
