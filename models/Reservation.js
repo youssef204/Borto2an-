@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 const ReservationSchema = new Schema(
   {
     userId: {
-      type: Number,
+      type: String,
       required: true,
     },
     price: {
