@@ -31,11 +31,16 @@ app.use(cors());
 const flight_routes = require("./routes/api/flight");
 app.use("/api/flights/", flight_routes);
 
+
+const airplaneModel_routes = require("./routes/api/airplaneModel");
+app.use("/api/airplaneModel/", airplaneModel_routes);
+
 const reservation_routes = require("./routes/api/reservation");
 app.use("/api/reservations/", reservation_routes);
 
 const user_routes = require("./routes/api/user");
 app.use("/api/users/", user_routes);
+
 
 // Starting server
 app.listen(PORT, () => {
