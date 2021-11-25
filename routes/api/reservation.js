@@ -25,11 +25,13 @@ reservation_router.delete("/:id", async (req, res) => {
       const user = await User.findById(userId);
       const email = user.email;
       const nodeMailer = require('nodemailer');
+      const dotenv = require('dotenv');
+      dotenv.config();
       const transporter = nodeMailer.createTransport({
         service: 'gmail',
         auth: {
           user: 'borto2an5@gmail.com',
-          pass: 'borto2an55555'
+          pass: process.env.BORTO_PW
         }
       });
       const mailOptions = {
