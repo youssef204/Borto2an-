@@ -16,7 +16,6 @@ function App() {
     <Router>
       <div>
         <Switch>
-
           <Route exact path='/' component={SearchFlights} />
           <Route exact path='/flight' component={Flight} />
           <Route exact path='/all_flights' component={AllFlights} />
