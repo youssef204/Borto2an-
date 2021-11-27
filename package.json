@@ -22,6 +22,7 @@
   },
   "homepage": "htps://github.com/advanced-computer-lab/Borto2an-#readme",
   "dependencies": {
+    "@mui/lab": "^5.0.0-alpha.57",
     "concurrently": "^6.3.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
