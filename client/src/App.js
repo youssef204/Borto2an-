@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import PageNotFound from "./components/PageNotFound";
 import FlightDetails from './components/FlightDetails';
 import UpdateFlight from "./components/UpdateFlight";
+import UserSearchFlights from "./components/UserSearchFlights"
 import "./App.css";
 
 
@@ -21,6 +22,7 @@ function App() {
           <Route exact path='/all_flights' component={AllFlights} />
           <Route exact path='/create_flight' component={CreateFlight} />
           <Route exact path='/search_flights' component={SearchFlights} />
+          <Route exact path='/search_user_flights' component={UserSearchFlights} />
           <Route exact path='/search_results' component={SearchResults} />
           <Route exact path='/flight_details' component={FlightDetails} />
           <Route exact path="/update_flight" component={UpdateFlight} />
