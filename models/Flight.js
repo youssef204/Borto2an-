@@ -1,19 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const BaggageSchema = new Schema({
-  pieces: {
-    // number of bags allowed
-    type: Number,
-    required: true,
-  },
-  maxWeight: {
-    // max weight per piece
-    type: Number,
-    required: true,
-  },
-});
-
 const CabinSchema = new Schema({
   takenSeats: {
     type: [Number],
@@ -23,16 +10,16 @@ const CabinSchema = new Schema({
     type: Number,
     required: true,
   },
-  adultBaggage: {
-    type: BaggageSchema,
+  adultBaggage: { // max Weight in Kg
+    type: Number,
     required: true,
   },
   childPrice: {
     type: Number,
     required: true,
   },
-  childBaggage: {
-    type: BaggageSchema,
+  childBaggage: { // max Weight in Kg
+    type: Number,
     required: true,
   },
 });
