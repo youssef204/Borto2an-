@@ -59,6 +59,16 @@ function NavigationBar({user}) {
       <li className="NavBar">
         <Link to="/create_flight" exact className="NavBar">Create Flight</Link>
       </li>
+
+      <li className="NavBar">
+        <Link to="/all_models" exact className="NavBar">All Flight Models</Link>
+      </li>
+      
+    
+    
+      <li className="NavBar">
+        <Link to="/create_model" exact className="NavBar">Create Flight Model</Link>
+      </li>
       
     
       {userLabel}

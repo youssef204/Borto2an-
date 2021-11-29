@@ -10,13 +10,15 @@ import FlightDetails from './components/FlightDetails';
 import UpdateFlight from "./components/UpdateFlight";
 import "./App.css";
 import NavBar from "./components/NavBar/NavBar";
+import CreateModel from "./components/CreateModel";
+import AllModels from './components/AllModels';
 
 
 function App() {
   return (
     <>
     <Router>
-      <NavBar></NavBar>
+      <NavBar user={{name:'hesham',isAdmin:true}}></NavBar>
        <br/><br/><br/>
       <div>
         <Switch>
@@ -29,6 +31,8 @@ function App() {
           <Route exact path='/search_results' component={SearchResults} />
           <Route exact path='/flight_details' component={FlightDetails} />
           <Route exact path="/update_flight" component={UpdateFlight} />
+          <Route exact path="/create_model" component={CreateModel} />
+          <Route exact path='/all_models' component={AllModels} />
 
           <Route component={PageNotFound} />
         </Switch>

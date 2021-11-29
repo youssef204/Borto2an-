@@ -15,6 +15,14 @@ airplaneModel_router.get("/", function (req, res, next) {
     .catch((err) => res.status(404).json({ msg: "No models are found" }));
 });
 
+airplaneModel_router.get("/showAllModels", (req, res) => {
+  AirplaneModel.find()
+    .then((model) => {
+      res.json(model);
+    })
+    .catch((err) => res.status(404).json({ msg: "No models are found" }));
+});
+
 airplaneModel_router.put("/", (req, res) => {
   const id = req.body._id;
   const update = req.body.update;
