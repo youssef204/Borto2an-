@@ -13,6 +13,8 @@ import "./App.css";
 import NavBar from "./components/NavBar/NavBar";
 import CreateModel from "./components/CreateModel";
 import AllModels from './components/AllModels';
+import SeatSelection from './components/SeatSelection';
+
 
 
 function App() {
@@ -34,6 +36,8 @@ function App() {
           <Route exact path="/update_flight" component={UpdateFlight} />
           <Route exact path="/create_model" component={CreateModel} />
           <Route exact path='/all_models' component={AllModels} />
+          <Route exact path='/select_seats' component={SeatSelection} />
+
 
           <Route component={PageNotFound} />
         </Switch>
