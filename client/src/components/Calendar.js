@@ -4,17 +4,17 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 
-export default function Calendar({label}) {
-  const [value, setValue] = React.useState(null);
+export default function Calendar({label,selected,onChange,value}) {
+  //const [value, setValue] = React.useState(null);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DatePicker
         label={label}
         value={value}
-        onChange={(newValue) => {
-          setValue(newValue);
-        }}
+        selected={selected}
+        onChange={onChange}
+        
         renderInput={(params) => <TextField {...params} />}
       />
     </LocalizationProvider>
