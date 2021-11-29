@@ -4,16 +4,20 @@ import React from "react";
 import SearchResults from "./components/SearchResults";
 import AllFlights from "./components/AllFlights";
 import CreateFlight from "./components/CreateFlight";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import PageNotFound from "./components/PageNotFound";
 import FlightDetails from './components/FlightDetails';
 import UpdateFlight from "./components/UpdateFlight";
 import "./App.css";
+import NavBar from "./components/NavBar/NavBar";
 
 
 function App() {
   return (
+    <>
     <Router>
+      <NavBar></NavBar>
+       <br/><br/><br/>
       <div>
         <Switch>
 
@@ -30,6 +34,7 @@ function App() {
         </Switch>
       </div>
     </Router>
+    </>
   );
 }
 
