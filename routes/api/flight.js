@@ -6,10 +6,12 @@ const Flight = require("../../models/Flight");
 
 //update flight
 function storeTimeAsIs(dataTmp) {
-  if("departureTime" in dataTmp)
-    dataTmp.departureTime += "Z";
-  if("arrivalTime" in dataTmp)
-    dataTmp.arrivalTime += "Z";
+  if("departure" in dataTmp)
+    if('time' in dataTmp.departure && dataTmp.departure.time.charAt(dataTmp.departure.time.length-1)!='Z')
+      dataTmp.departure.time += "Z";
+  if("arrival" in dataTmp)
+    if('time' in dataTmp.arrival && dataTmp.arrival.time.charAt(dataTmp.arrival.time.length-1)!='Z')
+      dataTmp.arrival.time += "Z";
 }
 
 
@@ -28,7 +30,6 @@ flight_router.put("/", (req, res) => {
   const update = req.body.update;
   storeTimeAsIs(update);
   Flight.findByIdAndUpdate(id,update)
-  //.updateOne({ _id: id }, update)
   .then(() => {
     console.log("done");
     res.send("done");

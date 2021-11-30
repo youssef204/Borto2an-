@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
-import Header from "./Header";
+import Header from "../Header";
 
 class SearchFlights extends React.Component {
   constructor() {
