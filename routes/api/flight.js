@@ -16,7 +16,7 @@ function storeTimeAsIs(dataTmp) {
 flight_router.get("/", function (req, res, next) {
   const queryObj = { ...req.query };
   let queryStr = JSON.stringify(queryObj);
-  const regex = /\b(gt|gte|lt|lte|in)\b/g;
+ const regex = /\b(gt|gte|lt|lte|in)\b/g;
   queryStr = queryStr.replace(regex, "$$" + "$1");
   Flight.find(JSON.parse(queryStr))
     .then((flight) => res.json(flight))

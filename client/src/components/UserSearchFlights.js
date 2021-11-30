@@ -18,6 +18,11 @@ import { Popover } from "@mui/material";
 import { InputLabel } from "@mui/material";
 
 class UserSearchFlights extends React.Component {
+  selectedArrday;
+  selectedDepday;
+  chosenCabin;
+  adultnumber;
+  childnumber;
   constructor() {
     super();
     this.state = {
@@ -59,15 +64,15 @@ class UserSearchFlights extends React.Component {
   };
 
   onChangeDepTime = date => {
-    const inputval = date.toISOString();
     this.setState(prevState =>({
       departure :{
         ... prevState.departure,
-        time : inputval
+        time : date
       }
     }
 
     ));
+    this.selectedDepday = date
     console.log(this.state);
 }
 
@@ -81,33 +86,28 @@ onChangeArrTime = date => {
   }
 
   ));
-  console.log(this.state);
+  this.selectedArrday = date;
+  //console.log(this.state);
 }
 
   
 onChangeCabin = e => {
-  let chosenCabin = '';
   if(e.target.value === "Economy")
-    chosenCabin = "economyCabin"
+    this.chosenCabin = "economyCabin"
   else if(e.target.value === "Business")
-    chosenCabin = "businessCabin"
+    this.chosenCabin = "businessCabin"
   else if(e.target.value === "First")
-    chosenCabin = "firstCabin"
-  console.log(chosenCabin);
-  return chosenCabin;
+    this.chosenCabin = "firstCabin"
+  console.log(this.chosenCabin);
 }
 onChangeAdult = e => {
-  let AdultNumber;
-  AdultNumber = e.target.value.replace(/\D/,'')
-  console.log(AdultNumber);
-  return (AdultNumber);
+  this.adultnumber = e.target.value.replace(/\D/,'')
+  console.log(this.adultnumber);
 }
 
 onChangeChild = e => {
-  let ChildNumber;
-  ChildNumber = e.target.value.replace(/\D/,'')
-  console.log(ChildNumber);
-  return (ChildNumber);
+  this.childnumber = e.target.value.replace(/\D/,'')
+  console.log(this.childnumber);
 }
 
 getAirplaneEconomySeats = flight => {
@@ -148,33 +148,50 @@ getAirplaneFirstClassSeats = flight => {
 
   onSubmit = (e, state) => {
     e.preventDefault();
-
+    //let arrDate = Date.parse(this.state.arrival.time);
+    //console.log("arrival date is",arrDate);
+    this.setState(prevState =>({
+      arrival :{
+        ... prevState.arrival,
+        time : this.selectedArrday.toISOString()
+      },
+      departure :{
+        ... prevState.departure,
+        time : this.selectedDepday.toISOString()
+      }
+    }
+  
+    ));
     const data = this.getNonEmptyFields(state);
-
+    console.log(data);
+    let paramsData ={
+      "departure.airport" : data["departure"]["airport"],
+      "departure.time" : data["departure"]["time"],
+      "arrival.airport" : data["arrival"]["airport"],
+      "arrival.time" : data["arrival"]["time"]
+    }
+console.log("x=",paramsData);
     axios({
       method: "get",
       url: "http://localhost:8000/api/flights",
-      params: data,
+      params: paramsData
     })
       .then((res) => {
         // go to search results component with the data
-        let choosenCabin = this.onChangeCabin();
-        let AdultNo = this.onChangeAdult();
-        let ChildNo = this.onChangeChild();
-        let totalSeats = +ChildNo + +AdultNo;
+        let totalSeats = +this.childnumber + +this.adultnumber;
 
         let sentData;
-        if(choosenCabin === "economyCabin"){
+        if(this.chosenCabin === "economyCabin"){
            sentData = res.data.filter((entry) => entry.economyCabin !== null) 
            sentData.map((info) => info["chosenCabin"] = "economy");
            sentData.filter((entry) => totalSeats <= getAirplaneEconomySeats(entry) - entry["economyCabin"]["takenSeats"].length )
         }
-        else if(choosenCabin === "businessCabin"){
+        else if(this.chosenCabin === "businessCabin"){
            sentData = res.data.filter((entry) => entry.businessCabin !== null) 
            sentData.map((info) => info["chosenCabin"] = "business");
            sentData.filter((entry) => totalSeats <= getAirplaneBusinessSeats(entry) - entry["businessCabin"]["takenSeats"].length )
         }
-        else if(choosenCabin === "firstCabin"){
+        else if(this.chosenCabin === "firstCabin"){
            sentData = res.data.filter((entry) => entry.firstCabin !== null) 
            sentData.map((info) => info["chosenCabin"] = "first");
            sentData.filter((entry) => totalSeats <= getAirplaneFirstClassSeats(entry) - entry["firstCabin"]["takenSeats"].length )
@@ -200,7 +217,6 @@ getAirplaneFirstClassSeats = flight => {
 
   render() {
     return (
-        <form noValidate onSubmit={(e) => this.onSubmit(e, this.state)}>
           <div 
           style = {{display: 'flex',  justifyContent:'center', alignItems:'center', height: '100vh'}}>
                <Box component="span" border={2}
@@ -267,12 +283,11 @@ getAirplaneFirstClassSeats = flight => {
                   index={1}
                   width={70}
                   height={40}
-                  onClick={this.onSubmit}>
+                  onClick={(e) => this.onSubmit(e, this.state)}>
                   </Button>
             </Stack>
             </Box>
           </div>
-        </form>
     );
   }
 }
