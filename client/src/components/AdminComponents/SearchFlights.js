@@ -53,10 +53,6 @@ class SearchFlights extends React.Component {
   render() {
     return (
       <>
-        <Header Title =" Search Flights Page" />
-        
-        <br></br>
-        <br></br>
         <form noValidate onSubmit={(e) => this.onSubmit(e, this.state)}>
           <div>
             <label>Departure Airport: </label>
@@ -148,22 +144,6 @@ class SearchFlights extends React.Component {
             className="btn btn-outline-warning btn-block mt-4"
           />
         </form>
-        <br></br>
-        <button
-          onClick={() => {
-            this.props.history.push("/all_flights");
-          }}
-        >
-          View all flights
-        </button>
-        <br/> <br/>
-        <button
-          onClick={() => {
-            this.props.history.push("/create_flight");
-          }}
-        >
-          Create a flight
-        </button>
       </>
     );
   }
