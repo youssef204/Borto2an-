@@ -7,16 +7,22 @@ class SearchFlights extends React.Component {
   constructor() {
     super();
     this.state = {
-      fromAirport: "",
-      toAirport: "",
-      flightNumber: "",
-      departureTime: "",
-      arrivalTime: ""
+      departure:{},
+      arrival:{},
+      flightNumber:''
     };
   }
 
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
+  };
+
+  departureOnChange = (e) => {
+    this.setState({departure:{ ...this.state.departure,[e.target.name]: e.target.value }});
+  };
+
+  arrivalOnChange = (e) => {
+    this.setState({arrival:{ ...this.state.arrival,[e.target.name]: e.target.value }});
   };
 
   onSubmit = (e, state) => {
@@ -59,10 +65,9 @@ class SearchFlights extends React.Component {
             <br />
             <input
               type="text"
-              placeholder="e.x. Cairo"
-              name="fromAirport"
-              value={this.state.fromAirport}
-              onChange={this.onChange}
+              placeholder="Departure Airport"
+              name="airport"
+              onChange={this.departureOnChange}
             />
           </div>
 
@@ -70,11 +75,10 @@ class SearchFlights extends React.Component {
             <label>Departure Terminal: </label>
             <br />
             <input
-              type="number"
-              placeholder="e.x. 1"
-              name="fromTerminal"
-              value={this.state.fromTerminal}
-              onChange={this.onChange}
+              type="text"
+              placeholder="Departure Terminal"
+              name="terminal"
+              onChange={this.departureOnChange}
             />
           </div>
 
@@ -84,10 +88,9 @@ class SearchFlights extends React.Component {
 
             <input
               type="text"
-              placeholder="e.x. Paris"
-              name="toAirport"
-              value={this.state.toAirport}
-              onChange={this.onChange}
+              placeholder="Arrival Airport"
+              name="airport"
+              onChange={this.arrivalOnChange}
             />
           </div>
 
@@ -96,11 +99,10 @@ class SearchFlights extends React.Component {
             <br />
 
             <input
-              type="number"
-              placeholder="e.x. 1"
-              name="toTerminal"
-              value={this.state.toTerminal}
-              onChange={this.onChange}
+              type="text"
+              placeholder="Arrival Terminal"
+              name="terminal"
+              onChange={this.arrivalOnChange}
             />
           </div>
 
@@ -112,7 +114,6 @@ class SearchFlights extends React.Component {
               type="number"
               placeholder="Flight Number"
               name="flightNumber"
-              value={this.state.flightNumber}
               onChange={this.onChange}
             />
           </div>
@@ -122,9 +123,8 @@ class SearchFlights extends React.Component {
             <br />
             <input
               type="datetime-local"
-              name="departureTime"
-              value={this.state.departureTime}
-              onChange={this.onChange}
+              name="time"
+              onChange={this.departureOnChange}
             />
           </div>
           <div>
@@ -132,9 +132,8 @@ class SearchFlights extends React.Component {
             <br />
             <input
               type="datetime-local"
-              name="arrivalTime"
-              value={this.state.arrivalTime}
-              onChange={this.onChange}
+              name="time"
+              onChange={this.arrivalOnChange}
             />
           </div>
           <br></br>
