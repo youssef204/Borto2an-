@@ -6,12 +6,9 @@ const Flight = require("../../models/Flight");
 
 //update flight
 function storeTimeAsIs(dataTmp) {
-  if("departureTime" in dataTmp)
-    dataTmp.departureTime += "Z";
-  if("arrivalTime" in dataTmp)
-    dataTmp.arrivalTime += "Z";
+  if ("departureTime" in dataTmp) dataTmp.departureTime += "Z";
+  if ("arrivalTime" in dataTmp) dataTmp.arrivalTime += "Z";
 }
-
 
 flight_router.get("/", function (req, res, next) {
   const queryObj = { ...req.query };
@@ -28,13 +25,13 @@ flight_router.put("/", (req, res) => {
   const id = req.body._id;
   const update = req.body.update;
   storeTimeAsIs(update);
-  Flight.findByIdAndUpdate(id,update)
-  //.updateOne({ _id: id }, update)
-  .then(() => {
-    console.log("done");
-    res.send("done");
-  })
-  .catch(err => res.status(400).send(err));
+  Flight.findByIdAndUpdate(id, update)
+    //.updateOne({ _id: id }, update)
+    .then(() => {
+      console.log("done");
+      res.send("done");
+    })
+    .catch((err) => res.status(400).send(err));
 });
 
 //read all flights
@@ -64,8 +61,12 @@ flight_router.post("/", async (req, res) => {
   let dataTmp = req.body;
   storeTimeAsIs(dataTmp);
   Flight.create(dataTmp)
-  .then(result => {res.send(result);})
-  .catch(err => {res.status(400).send(err)});
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    });
 });
 
 module.exports = flight_router;
