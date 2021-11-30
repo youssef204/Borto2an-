@@ -1,18 +1,19 @@
-import SearchFlights from "./components/Admin components/SearchFlights";
-import Flight from "./components/Admin components/Flight";
+import SearchFlights from "./components/AdminComponents/SearchFlights";
+import Flight from "./components/AdminComponents/Flight";
 import React from "react";
-import SearchResults from "./components/Admin components/SearchResults";
-import AllFlights from "./components/Admin components/AllFlights";
-import CreateFlight from "./components/Admin components/CreateFlight";
+import SearchResults from "./components/AdminComponents/SearchResults";
+import AllFlights from "./components/AdminComponents/AllFlights";
+import CreateFlight from "./components/AdminComponents/CreateFlight";
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import PageNotFound from "./components/PageNotFound";
-import FlightDetails from './components/Admin components/FlightDetails';
-import UpdateFlight from "./components/Admin components/UpdateFlight";
-import UserSearchFlights from "./components/UserSearchFlights"
+import FlightDetails from './components/AdminComponents/FlightDetails';
+import UpdateFlight from "./components/AdminComponents/UpdateFlight";
+import UserSearchFlights from "./components/UserComponents/UserSearchFlights"
 import "./App.css";
 import NavBar from "./components/NavBar/NavBar";
-import CreateModel from "./components/Admin components/CreateModel";
-import AllModels from './components/Admin components/AllModels';
+import CreateModel from "./components/AdminComponents/CreateModel";
+import AllModels from './components/AdminComponents/AllModels';
+import FlightComponent from "./components/UserComponents/FlightComponent";
 
 
 function App() {
@@ -35,10 +36,13 @@ function App() {
           <Route exact path="/create_model" component={CreateModel} />
           <Route exact path='/all_models' component={AllModels} />
 
+          <Route exact path="/flight_component" component={FlightComponent} />
+
           <Route component={PageNotFound} />
         </Switch>
       </div>
     </Router>
+
     </>
   );
 }

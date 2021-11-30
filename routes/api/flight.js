@@ -14,13 +14,13 @@ function storeTimeAsIs(dataTmp) {
       dataTmp.arrival.time += "Z";
 }
 
-
 flight_router.get("/", function (req, res, next) {
   const queryObj = { ...req.query };
   let queryStr = JSON.stringify(queryObj);
   const regex = /\b(gt|gte|lt|lte|in)\b/g;
   queryStr = queryStr.replace(regex, "$$" + "$1");
   Flight.find(JSON.parse(queryStr))
+    .populate('airplaneModelID')
     .then((flight) => res.json(flight))
     .catch((err) => res.status(404).json({ msg: "No flights are found" }));
 });
@@ -40,6 +40,7 @@ flight_router.put("/", (req, res) => {
 //read all flights
 flight_router.get("/showAllflights", (req, res) => {
   Flight.find()
+    .populate('airplaneModelID')
     .then((flight) => {
       res.json(flight);
     })
@@ -63,8 +64,12 @@ flight_router.post("/", async (req, res) => {
   let dataTmp = req.body;
   storeTimeAsIs(dataTmp);
   Flight.create(dataTmp)
-  .then(result => {res.send(result);})
-  .catch(err => {res.status(400).send(err)});
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    });
 });
 
 module.exports = flight_router;
