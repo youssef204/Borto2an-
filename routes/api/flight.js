@@ -11,7 +11,22 @@ function storeTimeAsIs(dataTmp) {
   if("arrivalTime" in dataTmp)
     dataTmp.arrivalTime += "Z";
 }
-
+// flight_router.get("/searchResult", (req, res) => {
+//   Flight.find()
+//     .populate('airplaneModelID')
+//     .then((flight) => {
+//       flight.map((entry) => entry["departure"]["time"] = entry["departure"]["time"].toISOString().substring(11) ,
+//       entry["departure"]["date"] = entry["departure"]["time"].toISOString().substring(0, 10) ,
+//       entry["arrival"]["time"] = entry["arrival"]["time"].toISOString().substring(10) ,
+//       entry["arrival"]["date"] = entry["arrival"]["time"].toISOString().substring(0, 10) );
+//       flight.filter((entry) => entry["departure"]["date"] === req.params.departure.time ,
+//       entry["arrival"]["date"] === req.params.arrival.time,
+//       entry["departure"]["airport"] === req.params.departure.airport,
+//       entry["arrival"]["airport"] === req.params.arrival.airport )
+//       res.json(flight);
+//     })
+//     .catch((err) => res.status(404).json({ msg: "No flights are found" }));
+// });
 
 flight_router.get("/", function (req, res, next) {
   const queryObj = { ...req.query };

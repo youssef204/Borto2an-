@@ -23,6 +23,7 @@ class UserSearchFlights extends React.Component {
   chosenCabin;
   adultnumber;
   childnumber;
+  numberOfSelecetedInputs = [0,0,0,0,0,0];
   constructor() {
     super();
     this.state = {
@@ -48,7 +49,13 @@ class UserSearchFlights extends React.Component {
     }
 
     ));
+    if(e.target.value.length !== 0)
+    this.numberOfSelecetedInputs[0] = 1;
+    else
+    this.numberOfSelecetedInputs[0] = 0;
     console.log(this.state);
+    console.log(this.numberOfSelecetedInputs);
+    //this.render();
   };
 
   onChangeTo = (e) => {
@@ -60,7 +67,13 @@ class UserSearchFlights extends React.Component {
     }
 
     ));
-    console.log(this.state);
+    if(e.target.value.length !== 0)
+    this.numberOfSelecetedInputs[1] = 1;
+    else
+    this.numberOfSelecetedInputs[1] = 0;
+    console.log(e.target.value);
+    console.log(this.numberOfSelecetedInputs);
+    //this.render();
   };
 
   onChangeDepTime = date => {
@@ -73,7 +86,14 @@ class UserSearchFlights extends React.Component {
 
     ));
     this.selectedDepday = date
-    console.log(this.state);
+    if(this.selectedDepday !== null)
+    this.numberOfSelecetedInputs[2] = 1;
+    else 
+    this.numberOfSelecetedInputs[2] = 0;
+    console.log(this.numberOfSelecetedInputs);
+   // console.log(this.selectedDepday);
+    //this.render();
+    //console.log(this.state);
 }
 
 onChangeArrTime = date => {
@@ -87,6 +107,13 @@ onChangeArrTime = date => {
 
   ));
   this.selectedArrday = date;
+  if(this.selectedArrday !== null)
+  this.numberOfSelecetedInputs[3] = 1;
+  else 
+  this.numberOfSelecetedInputs[3] = 0;
+  console.log(this.numberOfSelecetedInputs);
+ // console.log(this.selectedArrday);
+  //this.render();
   //console.log(this.state);
 }
 
@@ -98,53 +125,70 @@ onChangeCabin = e => {
     this.chosenCabin = "businessCabin"
   else if(e.target.value === "First")
     this.chosenCabin = "firstCabin"
-  console.log(this.chosenCabin);
+  else
+    this.chosenCabin = null;
+  if(this.chosenCabin !== null)
+  this.numberOfSelecetedInputs[4] = 1;
+  else
+  this.numberOfSelecetedInputs[4] = 0;
+  console.log(this.numberOfSelecetedInputs);
+  this.setState({});
+  //this.render();
+  //console.log(this.chosenCabin);
 }
 onChangeAdult = e => {
-  this.adultnumber = e.target.value.replace(/\D/,'')
-  console.log(this.adultnumber);
+  this.adultnumber = e.target.value
+  if(e.target.value.length !== 0)
+  this.numberOfSelecetedInputs[5] = 1;
+  else
+  this.numberOfSelecetedInputs[5] = 0;
+  console.log(this.numberOfSelecetedInputs);
+  console.log(this.numberOfSelecetedInputs.includes(0));
+  this.setState({});
+ // this.render();
+ // console.log(this.adultnumber);
 }
 
 onChangeChild = e => {
-  this.childnumber = e.target.value.replace(/\D/,'')
+  this.childnumber = e.target.value
   console.log(this.childnumber);
 }
 
-getAirplaneEconomySeats = flight => {
-  axios({
-    method: "get",
-    url: "http://localhost:8000/api/airplaneModel/",
-    params: {_id : flight["airplaneModelID"]},
-  }).then((res) => {
-      let totalEconomySeats;
-      totalEconomySeats = res["economyRows"] * res["economyColumns"];
-      return totalEconomySeats;
-  })
-}
+// getAirplaneEconomySeats = flight => {
+//   axios({
+//     method: "get",
+//     url: "http://localhost:8000/api/airplaneModel/",
+//     params: {_id : flight["airplaneModelID"]},
+//   }).then((res) => {
+//       let totalEconomySeats;
+//       totalEconomySeats = res["economyRows"] * res["economyColumns"];
+//       return totalEconomySeats;
+//   })
+// }
 
-getAirplaneBusinessSeats = flight => {
-  axios({
-    method: "get",
-    url: "http://localhost:8000/api/airplaneModel/",
-    params: {_id : flight["airplaneModelID"]},
-  }).then((res) => {
-      let totalEconomySeats;
-      totalEconomySeats = res["businessRows"] * res["businessColumns"];
-      return totalEconomySeats;
-  })
-}
+// getAirplaneBusinessSeats = flight => {
+//   axios({
+//     method: "get",
+//     url: "http://localhost:8000/api/airplaneModel/",
+//     params: {_id : flight["airplaneModelID"]},
+//   }).then((res) => {
+//       let totalEconomySeats;
+//       totalEconomySeats = res["businessRows"] * res["businessColumns"];
+//       return totalEconomySeats;
+//   })
+// }
 
-getAirplaneFirstClassSeats = flight => {
-  axios({
-    method: "get",
-    url: "http://localhost:8000/api/airplaneModel/",
-    params: {_id : flight["airplaneModelID"]},
-  }).then((res) => {
-      let totalEconomySeats;
-      totalEconomySeats = res["firstClassRows"] * res["firstClassColumns"];
-      return totalEconomySeats;
-  })
-}
+// getAirplaneFirstClassSeats = flight => {
+//   axios({
+//     method: "get",
+//     url: "http://localhost:8000/api/airplaneModel/",
+//     params: {_id : flight["airplaneModelID"]},
+//   }).then((res) => {
+//       let totalEconomySeats;
+//       totalEconomySeats = res["firstClassRows"] * res["firstClassColumns"];
+//       return totalEconomySeats;
+//   })
+// }
 
   onSubmit = (e, state) => {
     e.preventDefault();
@@ -153,15 +197,17 @@ getAirplaneFirstClassSeats = flight => {
     this.setState(prevState =>({
       arrival :{
         ... prevState.arrival,
-        time : this.selectedArrday.toISOString()
+        time : this.selectedArrday.toISOString().substring(0, 10)
       },
       departure :{
         ... prevState.departure,
-        time : this.selectedDepday.toISOString()
+        time : this.selectedDepday.toISOString().substring(0, 10)
       }
     }
   
     ));
+    console.log(this.selectedArrday.toISOString().substring(0, 10));
+    console.log("are they equal ", this.selectedArrday.toISOString().localeCompare("2021-11-30T11:33:00.000Z"))
     const data = this.getNonEmptyFields(state);
     console.log(data);
     let paramsData ={
@@ -170,6 +216,8 @@ getAirplaneFirstClassSeats = flight => {
       "arrival.airport" : data["arrival"]["airport"],
       "arrival.time" : data["arrival"]["time"]
     }
+    if(this.childnumber === null)
+       this.childnumber = 0;
 console.log("x=",paramsData);
     axios({
       method: "get",
@@ -184,19 +232,25 @@ console.log("x=",paramsData);
         if(this.chosenCabin === "economyCabin"){
            sentData = res.data.filter((entry) => entry.economyCabin !== null) 
            sentData.map((info) => info["chosenCabin"] = "economy");
-           sentData.filter((entry) => totalSeats <= getAirplaneEconomySeats(entry) - entry["economyCabin"]["takenSeats"].length )
+           sentData.filter((entry) => totalSeats <= (entry["airplaneModelID"]["economyRows"] * entry["airplaneModelID"]["economyColumns"]) - entry["economyCabin"]["takenSeats"].length )
+           sentData.map((info) => info["AdultNumber"] = this.adultnumber);
+           sentData.map((info) => info["childNumber"] = this.childnumber);
         }
         else if(this.chosenCabin === "businessCabin"){
            sentData = res.data.filter((entry) => entry.businessCabin !== null) 
            sentData.map((info) => info["chosenCabin"] = "business");
-           sentData.filter((entry) => totalSeats <= getAirplaneBusinessSeats(entry) - entry["businessCabin"]["takenSeats"].length )
-        }
+           sentData.filter((entry) => totalSeats <= (entry["airplaneModelID"]["businessRows"] * entry["airplaneModelID"]["businessColumns"]) - entry["businessCabin"]["takenSeats"].length )
+           sentData.map((info) => info["AdultNumber"] = this.adultnumber);
+           sentData.map((info) => info["childNumber"] = this.childnumber);
+          }
         else if(this.chosenCabin === "firstCabin"){
            sentData = res.data.filter((entry) => entry.firstCabin !== null) 
            sentData.map((info) => info["chosenCabin"] = "first");
-           sentData.filter((entry) => totalSeats <= getAirplaneFirstClassSeats(entry) - entry["firstCabin"]["takenSeats"].length )
-        }
-        console.log(sentData);
+           sentData.filter((entry) => totalSeats <= (entry["airplaneModelID"]["firstClassRows"] * entry["airplaneModelID"]["firstClassColumns"]) - entry["firstCabin"]["takenSeats"].length )
+           sentData.map((info) => info["AdultNumber"] = this.adultnumber);
+           sentData.map((info) => info["childNumber"] = this.childnumber);
+          }
+        console.log("sentData are",sentData);
         this.props.history.push({
           pathname: "/search_results",
           state: sentData,
@@ -227,7 +281,7 @@ console.log("x=",paramsData);
               <Stack direction="row" spacing={7} style={{justifyContent:'center', alignItems:'center'}}>
                   <Stack spacing={5}>
                    <OutlinedTextField
-                   label = "From"
+                   label = "From*"
                    width={200}
                    fontsize={18}
                    onChange={this.onChangeFrom}
@@ -235,7 +289,7 @@ console.log("x=",paramsData);
                    value={this.state.departure.airport}>
                    </OutlinedTextField>
                    <OutlinedTextField
-                   label = "To"
+                   label = "To*"
                    width={200}
                    fontsize={18}
                    value={this.state.arrival.airport}
@@ -247,17 +301,20 @@ console.log("x=",paramsData);
                       onChange={this.onChangeDepTime}
                        selected={this.state.departure.time}
                        value={this.state.departure.time}
-                      label="Departure Date">
+                       //minDate={Date.now()}
+                       //maxDate={this.selectedArrday === null ? {} : this.selectedArrday}
+                      label="Departure Date*">
                       </Calendar>
                       <Calendar
-                      label="Arrival Date"
+                      label="Arrival Date*"
                       onChange={this.onChangeArrTime}
                       selected={this.state.arrival.time}
+                     // minDate={this.selectedDepday === undefined ? Date.now() : this.selectedDepday}
                       value={this.state.arrival.time}>
                       </Calendar>
                   </Stack>
                   <FormControl component="fieldset">
-                    <FormLabel component="legend">Choose your Cabin</FormLabel>
+                    <FormLabel component="legend">Choose your Cabin*</FormLabel>
                         <RadioGroup
                           aria-label="cabin"
                           name="radio-buttons-group"
@@ -270,21 +327,23 @@ console.log("x=",paramsData);
                   </FormControl>
                   <Stack spacing={5}>
                     <div >
-                    <label style={{margin:"10px"}}>No. of Adults: </label>
+                    <label style={{margin:"10px"}}>No. of Adults*: </label>
                   <input style={{width:"150px" , height:"20px"}} type="number" max="9" min="1" onInvalid={this.invalid}  onChange={this.onChangeAdult}/>
                   </div>
                   <div >
-                    <label style={{margin:"1.5px"}}>No. of Children: </label>
+                    <label style={{margin:"5.75px"}}>No. of Children: </label>
                   <input style={{width:"150px" , height:"20px"}} type="number" max="5" min="0"  onChange={this.onChangeAdult}/>
                   </div>
                   </Stack>
+                  <Stack spacing={5}>
                   <Button
                   label="Search"
-                  index={1}
+                  index = {this.numberOfSelecetedInputs.includes(0) ? 0 : 1}
                   width={70}
                   height={40}
-                  onClick={(e) => this.onSubmit(e, this.state)}>
+                  onClick={this.numberOfSelecetedInputs.includes(0) ? {} : (e) => this.onSubmit(e, this.state)}>
                   </Button>
+                  </Stack>
             </Stack>
             </Box>
           </div>
