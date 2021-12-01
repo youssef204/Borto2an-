@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useMemo } from "react";
 import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
-
 const axios = require("axios");
 import "./FlightComponentCSS.css";
 
+import Dep_ArrComponent from "./Dep_ArrComponent";
+import FlightCabin from "./FlightCabin";
+
 export default function FlightComponent() {
-  const [id, setId] = useState("61a16d9e690b9ff649eb0419");
+  const [id, setId] = useState("61a59b84b407eba753da9c9a");
   const [details, setDetails] = useState(undefined); //getDetails(id));
   const [loading, setLoading] = useState(true);
-  const [airplaneModelName, setAirplaneModelName] = useState("");
 
   const handleClick = async () => {
     console.log(details);
@@ -18,13 +19,12 @@ export default function FlightComponent() {
   useEffect(async () => {
     //console.log("details are ", details);
     const res = await getDetails(id);
-    const name = await getAirplaneModelName(res.airplaneModelID);
+    console.log(res);
 
     setDetails(res);
-    setAirplaneModelName(name);
 
     setLoading(false);
-
+    //console.log(details.departure.airport);
     //console.log(details);
   }, []);
   if (loading) {
@@ -52,42 +52,38 @@ export default function FlightComponent() {
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
           crossOrigin="anonymous"
         ></link>
-        <div style={{}}>
+        <div>
           <div className="shadow p-3 m-3 bg-white rounded flex-Container-Row">
             {/**airline +airplane model+flightNumber */}
             <div className="airline-grp flex-Container-Col">
               <img src="egyptair.png" width="80" height="80" />
-              <div
-                className="mt-2"
-                style={{
-                  textAlign: "center",
-                  font: "20px  sans-serif",
-                  color: "#2222222",
-                }}
-              >
-                {airplaneModelName}
-              </div>
-              <div
-                className="mt-2"
-                style={{
-                  textAlign: "center",
-                  font: "20px  sans-serif",
-                  color: "#2222222",
-                }}
-              >
+              <div className="mt-2 text">{details.airplaneModelID.name}</div>
+              <div className="mt-2 text">
                 <label style={{ color: "#555555", font: "13px  sans-serif" }}>
                   Flight No.{" "}
                 </label>
                 {details.flightNumber}
               </div>
             </div>
+
             {/** departure arrival airport terminal date  */}
-            <div className="from-to flex-Container-Row">
-              <div className="place"></div>
-              <div className="place"></div>
+            <div className="from-to">
+              <div className="line"></div>
+              <div className="flex-Container-Row">
+                <Dep_ArrComponent
+                  isDeparture="true"
+                  probs={details.departure}
+                />
+                <Dep_ArrComponent isDeparture="false" probs={details.arrival} />
+              </div>
             </div>
-            <div className="prices">{details.flightNumber}</div>
-            <div className="details"></div>
+            <div className="prices flex-Container-Row">
+              <FlightCabin
+                economy={details.economyCabin}
+                business={details.businessCabin}
+                first={details.firstCabin}
+              />
+            </div>
           </div>
           <button onClick={handleClick}>refresh</button>
         </div>
@@ -103,15 +99,4 @@ async function getDetails(id) {
     params: { _id: id },
   });
   return res.data[0];
-}
-
-async function getAirplaneModelName(id) {
-  console.log(id);
-  const res = await axios({
-    method: "get",
-    url: "http://localhost:8000/api/airplaneModel",
-    params: { _id: id },
-  });
-  console.log(res);
-  return res.data[0].name;
 }
