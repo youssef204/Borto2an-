@@ -1,3 +1,8 @@
+
+          
+    
+
+
 import SearchFlights from "./components/AdminComponents/SearchFlights";
 import Flight from "./components/AdminComponents/Flight";
 import React from "react";
@@ -16,18 +21,11 @@ import AllModels from "./components/AdminComponents/AllModels";
 import FlightComponent from "./components/UserComponents/FlightComponents/FlightComponent";
 import FlightsMenu from "./components/UserComponents/FlightsMenu";
 import FlightSelection from "./components/UserComponents/FlightSelection";
-<<<<<<< HEAD
-<<<<<<< HEAD
 import Login from "./components/Login";
 import Register from "./components/Register";
 import "./App.css";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-=======
->>>>>>> 100c7cd1e195cfa8c39d015abb17621ba1c824d5
-=======
 import FlightSeatsSelection from "./components/FlightSeatsSelection";
->>>>>>> 0b49a1f70d1bb48f048436e592890a2c7c372082
-
 function App() {
   return (
     <>
@@ -38,14 +36,8 @@ function App() {
         <br />
         <div>
           <Switch>
-<<<<<<< HEAD
-<<<<<<< HEAD
           <Route exact path='/login' component={Login} />
           <Route exact path='/register' component={Register} />
-=======
->>>>>>> 100c7cd1e195cfa8c39d015abb17621ba1c824d5
-=======
->>>>>>> 0b49a1f70d1bb48f048436e592890a2c7c372082
             <Route exact path="/" component={SearchFlights} />
             <Route exact path="/flight" component={Flight} />
             <Route exact path="/all_flights" component={AllFlights} />
@@ -65,10 +57,7 @@ function App() {
             {/* <Route exact path="/flight_component" component={FlightComponent} />
             <Route exact path="/flight_menu" component={FlightsMenu} />*/}
             <Route exact path="/flight_selection" component={FlightSelection} />
-<<<<<<< HEAD
-=======
             <Route exact path="/seat_selection" component={FlightSeatsSelection} />
->>>>>>> 0b49a1f70d1bb48f048436e592890a2c7c372082
 
             <Route component={PageNotFound} />
           </Switch>
