@@ -16,6 +16,7 @@ import AllModels from "./components/AdminComponents/AllModels";
 import FlightComponent from "./components/UserComponents/FlightComponents/FlightComponent";
 import FlightsMenu from "./components/UserComponents/FlightsMenu";
 import FlightSelection from "./components/UserComponents/FlightSelection";
+import FlightSeatsSelection from "./components/FlightSeatsSelection";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
             {/* <Route exact path="/flight_component" component={FlightComponent} />
             <Route exact path="/flight_menu" component={FlightsMenu} />*/}
             <Route exact path="/flight_selection" component={FlightSelection} />
+            <Route exact path="/seat_selection" component={FlightSeatsSelection} />
 
             <Route component={PageNotFound} />
           </Switch>
