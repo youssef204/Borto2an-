@@ -1,3 +1,8 @@
+
+          
+    
+
+
 import SearchFlights from "./components/AdminComponents/SearchFlights";
 import Flight from "./components/AdminComponents/Flight";
 import React from "react";
@@ -16,8 +21,11 @@ import AllModels from "./components/AdminComponents/AllModels";
 import FlightComponent from "./components/UserComponents/FlightComponents/FlightComponent";
 import FlightsMenu from "./components/UserComponents/FlightsMenu";
 import FlightSelection from "./components/UserComponents/FlightSelection";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import "./App.css";
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import FlightSeatsSelection from "./components/FlightSeatsSelection";
-
 function App() {
   return (
     <>
@@ -28,6 +36,8 @@ function App() {
         <br />
         <div>
           <Switch>
+          <Route exact path='/login' component={Login} />
+          <Route exact path='/register' component={Register} />
             <Route exact path="/" component={SearchFlights} />
             <Route exact path="/flight" component={Flight} />
             <Route exact path="/all_flights" component={AllFlights} />

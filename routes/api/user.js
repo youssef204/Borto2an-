@@ -1,6 +1,9 @@
-const express = require("express");
+const express = require("express"); 
 const User = require("./../../models/User");
+const jwt = require('jsonwebtoken');
 const user_Router = express.Router();
+const cookieParser = require('cookie-parser');
+const session = require('express-session') ;
 
 const isValidEmail = (v) => {
   //checks if email has @ and . after @
@@ -55,9 +58,9 @@ user_Router.get("/", (req, res) => {
 });
 
 //create
-user_Router.post("/", (req, res) => {
-  const entry = req.body;
-  if (isValidEntry(entry)) {
+user_Router.post("/register", async(req, res) => {
+  if (isValidEntry(req.body)) {
+  let entry = req.body; 
     const user = User(entry);
     user
       .save()
@@ -66,13 +69,38 @@ user_Router.post("/", (req, res) => {
       })
       .catch((err) => {
         if (err) {
-          console.error(err);
+              console.error(err);
           res.status(500).send("Database error " + err);
         }
       });
   } else {
-    res.sendStatus(422);
+    res.sendStatus(402);
   }
+});
+
+user_Router.post("/login", async(req, res) => {
+  console.log(req.body);
+  const {email,password} = req.body;
+  const user = await User.find({email:email});
+  if(user[0]){
+    console.log(user);
+    const compare = (user[0].password===password) ; 
+    if(compare){
+      const id = user.id ; 
+      const token = jwt.sign({id},"jwtsecret",{
+        expiresIn:300,
+      })
+           res.status(200).json({auth:true , token:token,user});
+    }
+    else{
+      res.send({message:"Wrong Password !"});
+    }
+
+  }
+  else{
+    res.send({message:"User not found"});
+  }
+
 });
 
 //update
