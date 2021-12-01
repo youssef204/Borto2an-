@@ -9,7 +9,7 @@ import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 
-export default function FlightCabin({ economy, business, first }) {
+export default function FlightCabin({ economy, business, first, onSelect }) {
   const [value, setValue] = useState("1");
   const [open, setOpen] = useState(false);
 
@@ -21,13 +21,15 @@ export default function FlightCabin({ economy, business, first }) {
   });
   const onClick = (number) => {
     if (number == 1) {
-      //economy
+      onSelect(economy, "economy");
       setOpen(true);
     } else if (number == 2) {
       //business
+      onSelect(business, "business");
       setOpen(true);
     } else {
       //first
+      onSelect(first, "first");
       setOpen(true);
     }
   };
@@ -86,15 +88,16 @@ export default function FlightCabin({ economy, business, first }) {
                 sx={{
                   color: "#222222",
                   background:
-                    "linear-gradient(to bottom, #ffffff, rgba(30,240,32,0.2))",
+                    value == 1
+                      ? "linear-gradient(to bottom, #ffffff, rgba(200,150,0,0.2))"
+                      : "white",
                 }}
               />
               <Tab
                 label="Business"
                 value="2"
                 sx={{
-                  background:
-                    "linear-gradient(to bottom, #ffffff, rgba(200,200,50,0.2))",
+                  //background:  "linear-gradient(to bottom, #ffffff, rgba(200,200,50,0.2))",
                   color: "#222222",
                   borderLeft: "1px solid rgba(0,0,0,0.2)",
                   borderRight: "1px solid rgba(0,0,0,0.2)",
@@ -104,8 +107,7 @@ export default function FlightCabin({ economy, business, first }) {
                 label="First"
                 value="3"
                 sx={{
-                  background:
-                    "linear-gradient(to bottom, #ffffff,rgba(2500,100,50,0.2))",
+                  //background:"linear-gradient(to bottom, #ffffff,rgba(2500,100,50,0.2))",
                   color: "#222222",
                 }}
               />
@@ -113,25 +115,31 @@ export default function FlightCabin({ economy, business, first }) {
           </Box>
           <TabPanel
             value="1"
-            sx={{
-              background: "linear-gradient(rgba(30,240,32,0.2),white)",
-            }}
+            sx={
+              {
+                //background: "linear-gradient(rgba(30,240,32,0.2),white)",
+              }
+            }
           >
             {getContentOf(economy, 1)}
           </TabPanel>
           <TabPanel
             value="2"
-            sx={{
-              background: "linear-gradient(rgba(200,200,50,0.2),#ffffff)",
-            }}
+            sx={
+              {
+                //background: "linear-gradient(rgba(200,200,50,0.2),#ffffff)",
+              }
+            }
           >
             {getContentOf(business, 2)}
           </TabPanel>
           <TabPanel
             value="3"
-            sx={{
-              background: "linear-gradient(rgba(250,100,50,0.2),#ffffff)",
-            }}
+            sx={
+              {
+                // background: "linear-gradient(rgba(250,100,50,0.2),#ffffff)",
+              }
+            }
           >
             {getContentOf(first, 3)}
           </TabPanel>

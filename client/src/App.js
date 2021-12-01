@@ -14,6 +14,8 @@ import NavBar from "./components/NavBar/NavBar";
 import CreateModel from "./components/AdminComponents/CreateModel";
 import AllModels from "./components/AdminComponents/AllModels";
 import FlightComponent from "./components/UserComponents/FlightComponents/FlightComponent";
+import FlightsMenu from "./components/UserComponents/FlightsMenu";
+import FlightSelection from "./components/UserComponents/FlightSelection";
 
 function App() {
   return (
@@ -41,7 +43,9 @@ function App() {
             <Route exact path="/create_model" component={CreateModel} />
             <Route exact path="/all_models" component={AllModels} />
 
-            <Route exact path="/flight_component" component={FlightComponent} />
+            {/* <Route exact path="/flight_component" component={FlightComponent} />
+            <Route exact path="/flight_menu" component={FlightsMenu} />*/}
+            <Route exact path="/flight_selection" component={FlightSelection} />
 
             <Route component={PageNotFound} />
           </Switch>
