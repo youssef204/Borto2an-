@@ -2,6 +2,7 @@
   font-family: monospace;
   font-weight: bold;
   font-size: large;
+  z-index: 100;
 }
 
 ul.NavBar {

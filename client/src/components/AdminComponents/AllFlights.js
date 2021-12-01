@@ -2,7 +2,6 @@ import React from 'react'
 import axios from 'axios';
 import Flight from './Flight';
 import { Component } from 'react';
-import Header from './Header';
 
 class AllFlights extends Component {
     constructor(props) {
@@ -47,10 +46,10 @@ class AllFlights extends Component {
       flightlist = flights.map((flight) => (
         <Flight
           flightNumber={flight.flightNumber}
-          fromAirport={flight.fromAirport}
-          toAirport={flight.toAirport}
-          departureTime={flight.departureTime}
-          arrivalTime={flight.arrivalTime}
+          fromAirport={flight.departure.airport}
+          toAirport={flight.arrival.airport}
+          departureTime={flight.departure.time}
+          arrivalTime={flight.arrival.time}
           onShowDetails={this.onChange}
         />
       ));
@@ -59,13 +58,6 @@ class AllFlights extends Component {
     return (
       <body>
         <div>
-        <button onClick={() => this.props.history.push('/')}>
-                Home
-              </button>
-         <Header Title = "All Flights "/>
-          <br></br>
-          <br></br>
-          <br></br>
 
           <table
             style={{

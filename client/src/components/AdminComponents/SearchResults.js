@@ -1,7 +1,6 @@
 import React from 'react';
 import Flight from './Flight';
 import { Component } from 'react';
-import Header from './Header';
 
 class SearchResults extends Component {
     constructor(props) {
@@ -32,22 +31,16 @@ class SearchResults extends Component {
       flightlist = flights.map((flight) => (
         <Flight
           flightNumber={flight.flightNumber}
-          fromAirport={flight.fromAirport}
-          toAirport={flight.toAirport}
-          departureTime={flight.departureTime}
-          arrivalTime={flight.arrivalTime}
+          fromAirport={flight.departure.airport}
+          toAirport={flight.arrival.airport}
+          departureTime={flight.departure.time}
+          arrivalTime={flight.arrival.time}
           onShowDetails={this.onChange}
         />
       ));
     }
     return (
       <body>
-        <Header Title ="Search List"/>
-        <br></br>
-        <button onClick={() => this.props.history.push('/')}>
-                Home
-              </button>
-              <br/><br/>
         <div>
         <table
             style={{
