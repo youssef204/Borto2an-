@@ -1,22 +1,15 @@
 import React from "react";
 import axios from "axios";
-import { Link, useHistory } from "react-router-dom";
-import Header from "./Header";
 
 class SearchFlights extends React.Component {
   constructor() {
     super();
     this.state = {
-      fromAirport: "",
-      toAirport: "",
-      flightNumber: "",
-      departureTime: "",
-      arrivalTime: ""
     };
   }
 
   onChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ [e.target.name]: e.target.value});
   };
 
   onSubmit = (e, state) => {
@@ -53,19 +46,14 @@ class SearchFlights extends React.Component {
   render() {
     return (
       <>
-        <Header Title =" Search Flights Page" />
-        
-        <br></br>
-        <br></br>
         <form noValidate onSubmit={(e) => this.onSubmit(e, this.state)}>
           <div>
             <label>Departure Airport: </label>
             <br />
             <input
               type="text"
-              placeholder="e.x. Cairo"
-              name="fromAirport"
-              value={this.state.fromAirport}
+              placeholder="Departure Airport"
+              name="departure.airport"
               onChange={this.onChange}
             />
           </div>
@@ -74,10 +62,9 @@ class SearchFlights extends React.Component {
             <label>Departure Terminal: </label>
             <br />
             <input
-              type="number"
-              placeholder="e.x. 1"
-              name="fromTerminal"
-              value={this.state.fromTerminal}
+              type="text"
+              placeholder="Departure Terminal"
+              name="departure.terminal"
               onChange={this.onChange}
             />
           </div>
@@ -88,9 +75,8 @@ class SearchFlights extends React.Component {
 
             <input
               type="text"
-              placeholder="e.x. Paris"
-              name="toAirport"
-              value={this.state.toAirport}
+              placeholder="Arrival Airport"
+              name="arrival.airport"
               onChange={this.onChange}
             />
           </div>
@@ -100,10 +86,9 @@ class SearchFlights extends React.Component {
             <br />
 
             <input
-              type="number"
-              placeholder="e.x. 1"
-              name="toTerminal"
-              value={this.state.toTerminal}
+              type="text"
+              placeholder="Arrival Terminal"
+              name="arrival.terminal"
               onChange={this.onChange}
             />
           </div>
@@ -116,7 +101,6 @@ class SearchFlights extends React.Component {
               type="number"
               placeholder="Flight Number"
               name="flightNumber"
-              value={this.state.flightNumber}
               onChange={this.onChange}
             />
           </div>
@@ -125,9 +109,8 @@ class SearchFlights extends React.Component {
             <label>Departure Time: </label>
             <br />
             <input
-              type="datetime-local"
-              name="departureTime"
-              value={this.state.departureTime}
+              type="date"
+              name="departure.time"
               onChange={this.onChange}
             />
           </div>
@@ -135,9 +118,8 @@ class SearchFlights extends React.Component {
             <label>Arrival Time: </label>
             <br />
             <input
-              type="datetime-local"
-              name="arrivalTime"
-              value={this.state.arrivalTime}
+              type="date"
+              name="arrival.time"
               onChange={this.onChange}
             />
           </div>
@@ -148,22 +130,6 @@ class SearchFlights extends React.Component {
             className="btn btn-outline-warning btn-block mt-4"
           />
         </form>
-        <br></br>
-        <button
-          onClick={() => {
-            this.props.history.push("/all_flights");
-          }}
-        >
-          View all flights
-        </button>
-        <br/> <br/>
-        <button
-          onClick={() => {
-            this.props.history.push("/create_flight");
-          }}
-        >
-          Create a flight
-        </button>
       </>
     );
   }

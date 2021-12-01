@@ -31,7 +31,6 @@ class FlightDetails extends React.Component {
         this.setState({
           flights: res.data,
         });
-        console.log(this.state);
         //      console.log(this.state.flights);
       })
       .catch((err) => {
@@ -79,34 +78,85 @@ class FlightDetails extends React.Component {
     let flightlist;
     const flights = this.state.flights;
     if (!flights) {
-      flightlist = "there is no flights !";
+      flightlist = "there is no such flight !";
     } else {
       flightlist = flights.map((flight) => (
         <div>
-          <label> Departure Airport :{flight.fromAirport} </label>
-          <br />
-          <label> Arrival Airport : {flight.toAirport} </label>
-          <br />
-          <label> Departure Terminal :{flight.fromTerminal} </label>
-          <br />
-          <label> Arrival Terminal : {flight.toTerminal} </label>
-          <br />
-          <label> Flight Number : {flight.flightNumber} </label>
-          <br />
-          <label> Departure Time :{flight.departureTime} </label>
-          <br />
-          <label> Arrival Time : {flight.arrivalTime} </label>
-          <br />
-          <label> Economy class seats available : {flight.economySeatsAvailable} </label>
-          <br />
-          <label> Business class seats available : {flight.businessSeatsAvailable} </label>
-          <br />
-          <label> First class seats available : {flight.firstSeatsAvailable} </label>
-          <br />
-          <label> Airline : {flight.airline} </label>
-          <br />
-          <label> Transit : {flight.hasTransit.toString()} </label>
-          <br />
+          Flight Number: {flight.flightNumber}
+          <br/>
+          <hr/>
+          Departure Details:
+          <br/>
+          Airport: {flight.departure.airport}
+          <br/>
+          Terminal: {flight.departure.terminal}
+          <br/>
+          Time: {flight.departure.time.substring(0, 10)+" at "+flight.departure.time.substring(11, 16)}
+          <br/> <hr/>
+          Arrival Details:
+          <br/>
+          Airport: {flight.arrival.airport}
+          <br/>
+          Terminal: {flight.arrival.terminal}
+          <br/>
+          Time: {flight.arrival.time.substring(0, 10)+" at "+flight.arrival.time.substring(11, 16)}
+          <br/> <hr/>
+          Airline: {flight.airline}
+          <br/>
+          Has transit: {flight.hasTransit?'True':'False'}
+          <br/>
+          Airplane Model: {flight.airplaneModelID.name+ 
+                          " ==> [Economy seats: "+flight.airplaneModelID.economyRows+" × "+flight.airplaneModelID.economyColumns+
+                          "] [Business seats: "+flight.airplaneModelID.businessRows+" × "+flight.airplaneModelID.businessColumns+
+                          "] [First Class seats: "+flight.airplaneModelID.firstClassRows+" × "+flight.airplaneModelID.firstClassColumns+']'
+                          }
+          <br/> <hr/>
+
+
+          Economy Cabin Details:
+          <br/>
+          Taken seats: {flight.economyCabin.takenSeats}
+          <br/>
+          Adult Price: {flight.economyCabin.adultPrice}
+          <br/>
+          Adult Baggage: {flight.economyCabin.adultBaggage}
+          <br/>
+          Child Price: {flight.economyCabin.childPrice}
+          <br/>
+          Child Baggage: {flight.economyCabin.childBaggage}
+          <br/> <hr/>
+
+
+          Business Cabin Details:
+          <br/>
+          Taken seats: {flight.businessCabin.takenSeats}
+          <br/>
+          Adult Price: {flight.businessCabin.adultPrice}
+          <br/>
+          Adult Baggage: {flight.businessCabin.adultBaggage}
+          <br/>
+          Child Price: {flight.businessCabin.childPrice}
+          <br/>
+          Child Baggage: {flight.businessCabin.childBaggage}
+          <br/> <hr/>
+
+
+          First Class Cabin Details:
+          <br/>
+          Taken seats: {flight.firstCabin.takenSeats}
+          <br/>
+          Adult Price: {flight.firstCabin.adultPrice}
+          <br/>
+          Adult Baggage: {flight.firstCabin.adultBaggage}
+          <br/>
+          Child Price: {flight.firstCabin.childPrice}
+          <br/>
+          Child Baggage: {flight.firstCabin.childBaggage}
+
+          <br/>
+          <br/>
+
+          
           <button onClick={(e) => this.handleClick(e, state)}>Update</button>
           <div>
             <br></br>
@@ -137,77 +187,9 @@ class FlightDetails extends React.Component {
       ));
     }
 
-    /*render() {
-      let flights = this.state.flights ;
-      console.log(flights);
-       const flightlist = flights.map((flight)=>{
-        <div>
-        <label> From :{flight.from} </label>
-        <br/>
-        <label> To : {flight.to} </label>
-        <br/>
-        <label> Flight Number : {flight.flightNumber} </label>
-        <br/>
-        <label> Flight Date :{flight.flightDate}  </label>
-        <br/>
-        <label> Departure Time :{flight.departureTime}  </label>
-        <br/>
-        <label> Arrival Time : {flight.arrivalTime} </label>
-        <br/>
-        <label> Transit : {flight.hasTransit} </label>
-        <br/>
-        <label> Available Seats {flight.seatsAvailable} :  </label>
-        <br/>
-        <label> Total Seats :{flight.totalSeats}  </label>
-        <br/>
-        <label> Cabin : {flight.cabin} </label>
-        <br/>
-        <label> Airplane Type : {flight.airplaneType} </label>
-        <br/>
-        <label> Duration : {flight.duration} </label>
-        <br/>
-        <label> Airline  : {flight.airline} </label>
-        <br/>
-        </div>
-    }); */
-    /*  let flights = this.state.flights ; 
-    console.log(flights);
+    
     return (
-        <div>
-        <label> From :{flights.from} </label>
-        <br/>
-        <label> To : {flights.to} </label>
-        <br/>
-        <label> Flight Number : {this.state.flightNumber} </label>
-        <br/>
-        <label> Flight Date :{this.state.flightDate}  </label>
-        <br/>
-        <label> Departure Time :{this.state.departureTime}  </label>
-        <br/>
-        <label> Arrival Time : {this.state.arrivalTime} </label>
-        <br/>
-        <label> Transit : {this.state.hasTransit} </label>
-        <br/>
-        <label> Available Seats {this.state.seatsAvailable} :  </label>
-        <br/>
-        <label> Total Seats :{this.state.totalSeats}  </label>
-        <br/>
-        <label> Cabin : {this.state.cabin} </label>
-        <br/>
-        <label> Airplane Type : {this.state.airplaneType} </label>
-        <br/>
-        <label> Duration : {this.state.duration} </label>
-        <br/>
-        <label> Airline  : {this.state.airline} </label>
-        <br/>
-        </div>*/
-    return (
-      <>
-        <button onClick={() => this.props.history.push("/")}>Home</button>
-        <br />
-        <br />
         <div>{flightlist}</div>
-      </>
     );
   }
 }

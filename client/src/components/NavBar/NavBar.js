@@ -45,7 +45,7 @@ function NavigationBar({user}) {
     
     
       <li className="NavBar">
-        <Link to="/" exact className="NavBar">Home</Link>
+        <Link to="/" exact className="NavBar">Search Flights</Link>
       </li>
       
     

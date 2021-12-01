@@ -15,12 +15,11 @@ class AllFlights extends Component {
         axios
             .get('http://localhost:8000/api/airplaneModel/showAllModels')
             .then(res => {
-                console.log(res.msg);
                 this.setState(
                     {
                         models: res.data
                     }
-                )
+                );
             })
             .catch(err => {
                 console.log(err);
@@ -28,7 +27,7 @@ class AllFlights extends Component {
     };
 
     componentDidMount() {
-        this.getAllModels();            
+        this.getAllModels();         
     };
 
     deleteModel = id => {

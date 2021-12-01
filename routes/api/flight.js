@@ -6,10 +6,12 @@ const Flight = require("../../models/Flight");
 
 //update flight
 function storeTimeAsIs(dataTmp) {
-  if("departureTime" in dataTmp)
-    dataTmp.departureTime += "Z";
-  if("arrivalTime" in dataTmp)
-    dataTmp.arrivalTime += "Z";
+  if("departure" in dataTmp)
+    if('time' in dataTmp.departure && dataTmp.departure.time.charAt(dataTmp.departure.time.length-1)!='Z')
+      dataTmp.departure.time += "Z";
+  if("arrival" in dataTmp)
+    if('time' in dataTmp.arrival && dataTmp.arrival.time.charAt(dataTmp.arrival.time.length-1)!='Z')
+      dataTmp.arrival.time += "Z";
 }
 // flight_router.get("/searchResult", (req, res) => {
 //   Flight.find()
@@ -29,11 +31,23 @@ function storeTimeAsIs(dataTmp) {
 // });
 
 flight_router.get("/", function (req, res, next) {
-  const queryObj = { ...req.query };
+  let queryObj = { ...req.query };
   let queryStr = JSON.stringify(queryObj);
  const regex = /\b(gt|gte|lt|lte|in)\b/g;
   queryStr = queryStr.replace(regex, "$$" + "$1");
-  Flight.find(JSON.parse(queryStr))
+  const query = JSON.parse(queryStr);
+
+  if('departure.time' in query){
+    const date = query['departure.time'];
+    query['departure.time'] = {$gte: new Date(date),$lte: new Date(new Date(date).setHours(23,59,59))+'Z'};
+  }
+
+  if('arrival.time' in query){
+    const date = query['arrival.time'];
+    query['arrival.time'] = {$gte: new Date(date),$lte: new Date(new Date(date).setHours(23,59,59))+'Z'};
+  }
+
+  Flight.find(query)
     .populate('airplaneModelID')
     .then((flight) => res.json(flight))
     .catch((err) => res.status(404).json({ msg: "No flights are found" }));
@@ -44,7 +58,6 @@ flight_router.put("/", (req, res) => {
   const update = req.body.update;
   storeTimeAsIs(update);
   Flight.findByIdAndUpdate(id,update)
-  //.updateOne({ _id: id }, update)
   .then(() => {
     console.log("done");
     res.send("done");
@@ -79,8 +92,12 @@ flight_router.post("/", async (req, res) => {
   let dataTmp = req.body;
   storeTimeAsIs(dataTmp);
   Flight.create(dataTmp)
-  .then(result => {res.send(result);})
-  .catch(err => {res.status(400).send(err)});
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    });
 });
 
 module.exports = flight_router;
