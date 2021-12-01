@@ -52,7 +52,8 @@ class SearchFlights extends React.Component {
 
   render() {
     return (
-      <>
+      <div className="outer">
+            <div className="inner">
         <Header Title =" Search Flights Page" />
         
         <br></br>
@@ -164,7 +165,8 @@ class SearchFlights extends React.Component {
         >
           Create a flight
         </button>
-      </>
+      </div>
+      </div>
     );
   }
 }
