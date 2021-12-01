@@ -22,8 +22,11 @@
   },
   "homepage": "htps://github.com/advanced-computer-lab/Borto2an-#readme",
   "dependencies": {
+<<<<<<< HEAD
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
+=======
+>>>>>>> 0b49a1f70d1bb48f048436e592890a2c7c372082
     "@mui/lab": "^5.0.0-alpha.57",
     "concurrently": "^6.3.0",
     "cookie-parser": "^1.4.6",
