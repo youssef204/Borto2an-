@@ -14,12 +14,25 @@ function storeTimeAsIs(dataTmp) {
       dataTmp.arrival.time += "Z";
 }
 
+
 flight_router.get("/", function (req, res, next) {
-  const queryObj = { ...req.query };
+  let queryObj = { ...req.query };
   let queryStr = JSON.stringify(queryObj);
   const regex = /\b(gt|gte|lt|lte|in)\b/g;
   queryStr = queryStr.replace(regex, "$$" + "$1");
-  Flight.find(JSON.parse(queryStr))
+  const query = JSON.parse(queryStr);
+
+  if('departure.time' in query){
+    const date = query['departure.time'];
+    query['departure.time'] = {$gte: new Date(date),$lte: new Date(new Date(date).setHours(23,59,59))+'Z'};
+  }
+
+  if('arrival.time' in query){
+    const date = query['arrival.time'];
+    query['arrival.time'] = {$gte: new Date(date),$lte: new Date(new Date(date).setHours(23,59,59))+'Z'};
+  }
+
+  Flight.find(query)
     .populate('airplaneModelID')
     .then((flight) => res.json(flight))
     .catch((err) => res.status(404).json({ msg: "No flights are found" }));

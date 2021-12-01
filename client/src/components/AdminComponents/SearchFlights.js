@@ -1,28 +1,15 @@
 import React from "react";
 import axios from "axios";
-import { Link, useHistory } from "react-router-dom";
-import Header from "../Header";
 
 class SearchFlights extends React.Component {
   constructor() {
     super();
     this.state = {
-      departure:{},
-      arrival:{},
-      flightNumber:''
     };
   }
 
   onChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-
-  departureOnChange = (e) => {
-    this.setState({departure:{ ...this.state.departure,[e.target.name]: e.target.value }});
-  };
-
-  arrivalOnChange = (e) => {
-    this.setState({arrival:{ ...this.state.arrival,[e.target.name]: e.target.value }});
+    this.setState({ [e.target.name]: e.target.value});
   };
 
   onSubmit = (e, state) => {
@@ -66,8 +53,8 @@ class SearchFlights extends React.Component {
             <input
               type="text"
               placeholder="Departure Airport"
-              name="airport"
-              onChange={this.departureOnChange}
+              name="departure.airport"
+              onChange={this.onChange}
             />
           </div>
 
@@ -77,8 +64,8 @@ class SearchFlights extends React.Component {
             <input
               type="text"
               placeholder="Departure Terminal"
-              name="terminal"
-              onChange={this.departureOnChange}
+              name="departure.terminal"
+              onChange={this.onChange}
             />
           </div>
 
@@ -89,8 +76,8 @@ class SearchFlights extends React.Component {
             <input
               type="text"
               placeholder="Arrival Airport"
-              name="airport"
-              onChange={this.arrivalOnChange}
+              name="arrival.airport"
+              onChange={this.onChange}
             />
           </div>
 
@@ -101,8 +88,8 @@ class SearchFlights extends React.Component {
             <input
               type="text"
               placeholder="Arrival Terminal"
-              name="terminal"
-              onChange={this.arrivalOnChange}
+              name="arrival.terminal"
+              onChange={this.onChange}
             />
           </div>
 
@@ -122,18 +109,18 @@ class SearchFlights extends React.Component {
             <label>Departure Time: </label>
             <br />
             <input
-              type="datetime-local"
-              name="time"
-              onChange={this.departureOnChange}
+              type="date"
+              name="departure.time"
+              onChange={this.onChange}
             />
           </div>
           <div>
             <label>Arrival Time: </label>
             <br />
             <input
-              type="datetime-local"
-              name="time"
-              onChange={this.arrivalOnChange}
+              type="date"
+              name="arrival.time"
+              onChange={this.onChange}
             />
           </div>
           <br></br>
