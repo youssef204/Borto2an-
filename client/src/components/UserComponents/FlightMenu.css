@@ -1,0 +1,25 @@
+.list {
+  width: 85%;
+  margin: auto;
+  justify-content: center;
+  align-content: center;
+}
+.settings {
+  height: 50px;
+  width: 100%;
+  background-color: darkblue;
+}
+.container {
+  width: inherit;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+}
+.text-holder {
+  width: 40%;
+  height: 100%;
+  background-color: rgba(255, 0, 0, 0.7);
+  font: 30px Tahoma, sans-serif;
+  color: aliceblue;
+  margin: auto;
+  padding-left: 10px;
+  padding-top: 5px;
+}

@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const morgan = require("morgan"); // http logger
 const cors = require("cors"); // connect the node with react
 const dotenv = require("dotenv"); // loads the .env file into the process.env (environment variables)
-const cookieParser = require('cookie-parser');
 const session = require('express-session') ;
 const bcrypt = require('bcrypt');
 dotenv.config();

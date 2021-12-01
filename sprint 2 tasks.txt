@@ -1,0 +1,69 @@
+schema updates include all CRUD operations
+
+airplane model schema (Jo)
+	name, economy rows, economy columns, business rows, business columns, first class rows, first class columns
+
+reservation schema (etch)
+	user._id, two JSON for departure and return flights
+	JSON (flight _id, seats numbers, cabin, no. adults, no. children)
+
+User schema CRUD (peter)
+	email (unique), password, first name, last name, passport number, is_admin
+
+session + token + authentication + cookies (eshiba)
+	Log in page
+	sign up page
+
+flight schema: (kaizer) [checks in endpoints]
+	airplane model _id
+	create 3 cabin objects each with
+	(type - array of taken seats - adult price - adult baggage allowance - child price - child baggage allowance)
+
+Guest/existing user:
+	search flights by number of available seats (age), d/r dates, d/r airport 
+	the search results page is split in two halves: departure flights on top, return flights on bottom
+	select flights to show details in drop down (select cabin), then select or cancel
+	click continue to show the whole trip summary in a page
+	next page, click reserve to sign in if guest
+
+existing user:
+	click reserve (with confirmation message)
+	display/select seats in flights (departure/return) (2D array) in the same page split
+	display itinierary (summary) including all data
+	show reservations (enable cancel reservation with pop up cancel message)
+	send email confirming cancellation (with refund amount)
+	
+***************************** 
+Frontend Tasks : 
+
+*Phase1 : Components 
+
+1-Navigation bar--->(Button components) [Hesham]
+2-Search bar Component (Flight Search) [Joe]
+3-(3 types of buttons) , TextBox , Dropdown list , CheckBox [Joe] 
+4- Home Component as Logo [Hesham]
+5- Flight Component (pop up up to you ) [Peter]
+6- Flight Table(Search Results) ---- Left and Right Arrows for Date Navigation [Peter]
+7- Details bar Component (Summary of the two flights)[Eshiba]
+8- Plane Component (Matrix of Buttons dynamic) [Omar Khair]
+9- Sign in , sign up forms [Eshiba]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,47 @@
+.NavBar {
+  font-family: monospace;
+  font-weight: bold;
+  font-size: large;
+  z-index: 100;
+}
+
+ul.NavBar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #f3f3f3;
+  position: sticky;
+  top: 8px;
+}
+li.NavBar {
+  display: inline;
+  float: left;
+}
+div.NavBar {
+  font-size: x-large;
+  padding: 12px 14px 12px 14px;
+  margin: 0px 10px 0px 0px;
+  display: inline;
+  float: left;
+}
+div.logo {
+  display: inline;
+  float: left;
+}
+li a.NavBar {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  transition-duration: 300ms;
+}
+li a.NavBar:hover:not(.active) {
+  background-color: #ddd;
+  transition-duration: 300ms;
+}
+li a.NavBar.active {
+  color: white;
+  background-color: rgb(231, 167, 47);
+}
