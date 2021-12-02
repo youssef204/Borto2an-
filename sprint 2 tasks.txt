@@ -48,7 +48,12 @@ Frontend Tasks :
 8- Plane Component (Matrix of Buttons dynamic) [Omar Khair]
 9- Sign in , sign up forms [Eshiba]
 
-
+*******************************************************
+1-pass acess token and refresh token to app component then to all rendering components
+2-reservations backend fix
+3-user page + reservations
+4-pass guest selected data to sign in 
+5-merge components together
 
 
 

@@ -5,7 +5,7 @@
 
 import SearchFlights from "./components/AdminComponents/SearchFlights";
 import Flight from "./components/AdminComponents/Flight";
-import React from "react";
+import React, { useState } from "react";
 import SearchResults from "./components/AdminComponents/SearchResults";
 import AllFlights from "./components/AdminComponents/AllFlights";
 import CreateFlight from "./components/AdminComponents/CreateFlight";
@@ -27,6 +27,8 @@ import "./App.css";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import FlightSeatsSelection from "./components/FlightSeatsSelection";
 function App() {
+
+
   return (
     <>
       <Router>
@@ -36,7 +38,7 @@ function App() {
         <br />
         <div>
           <Switch>
-          <Route exact path='/login' component={Login} />
+          <Route exact path='/login' component={Login}/>
           <Route exact path='/register' component={Register} />
             <Route exact path="/" component={SearchFlights} />
             <Route exact path="/flight" component={Flight} />
