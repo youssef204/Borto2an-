@@ -105,10 +105,10 @@ class FlightDetails extends React.Component {
           <br/>
           Has transit: {flight.hasTransit?'True':'False'}
           <br/>
-          Airplane Model: {flight.airplaneModelID.name+ 
+          Airplane Model: {flight.airplaneModelID?(flight.airplaneModelID.name+ 
                           " ==> [Economy seats: "+flight.airplaneModelID.economyRows+" × "+flight.airplaneModelID.economyColumns+
                           "] [Business seats: "+flight.airplaneModelID.businessRows+" × "+flight.airplaneModelID.businessColumns+
-                          "] [First Class seats: "+flight.airplaneModelID.firstClassRows+" × "+flight.airplaneModelID.firstClassColumns+']'
+                          "] [First Class seats: "+flight.airplaneModelID.firstClassRows+" × "+flight.airplaneModelID.firstClassColumns+']'):""
                           }
           <br/> <hr/>
 
