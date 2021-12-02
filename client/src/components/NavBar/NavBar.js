@@ -26,7 +26,7 @@ function NavigationBar({user}) {
   <>
   <li style={{float:'right'}} className="NavBar">
         <Link to="/user" exact className="NavBar">
-          {user.name}
+          {user.firstName+" "+user.lastName}
         </Link>
       </li>
   </>;

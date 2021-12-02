@@ -81,29 +81,6 @@ user_Router.post("/register", async(req, res) => {
   }
 });
 
-user_Router.post("/login", async(req, res) => {
-  console.log(req.body);
-  const {email,password} = req.body;
-  const user = await User.find({email:email});
-  if(user[0]){
-    console.log(user);
-    const compare = (user[0].password===password) ; 
-    if(compare){
-      const {email,password}=user[0];
-      const new_user = {email,password};
-      const token = jwt.sign(new_user,process.env.ACCESS_TOKEN_SECRET);
-           res.status(200).json({auth:true , token:token});
-    }
-    else{
-      res.send({message:"Wrong Password !"});
-    }
-
-  }
-  else{
-    res.send({message:"User not found"});
-  }
-});
-
 function authenticate(req,res,next){
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
