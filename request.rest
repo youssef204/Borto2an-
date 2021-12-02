@@ -1,0 +1,32 @@
+
+
+
+POST http://localhost:8000/api/user/auth/login
+Content-Type: application/json 
+
+{
+    "email":"mohamedeshiba2021@gmail.com",
+    "password":"12345"
+}
+### 
+GET http://localhost:8000/api/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtZWRlc2hpYmEyMDIxQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiMTIzNDUiLCJpYXQiOjE2Mzg0NTk0MTAsImV4cCI6MTYzODQ1OTQ3MH0.UQz1A5GjYdBaUIkJMuD8lPWzpbUIVDMQN0TfcA-dfPU
+### 
+POST http://localhost:8000/api/user/auth/refreshToken
+Content-Type: application/json 
+
+{
+
+    "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtZWRlc2hpYmEyMDIxQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiMTIzNDUiLCJpYXQiOjE2Mzg0NTkyNDB9.2tbpBIFvlTklpNPvRjcP-lZnvl6ld7-wxUdaClDicno"
+
+}
+###
+DELETE  http://localhost:8000/api/user/auth/logout
+Content-Type: application/json 
+
+{
+
+ "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtZWRlc2hpYmEyMDIxQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiMTIzNDUiLCJpYXQiOjE2Mzg0NTkyNDB9.2tbpBIFvlTklpNPvRjcP-lZnvl6ld7-wxUdaClDicno"
+
+}
+

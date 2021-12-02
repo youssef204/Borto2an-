@@ -2,9 +2,11 @@ const express = require("express");
 const User = require("./../../models/User");
 const jwt = require('jsonwebtoken');
 const user_Router = express.Router();
-const cookieParser = require('cookie-parser');
 const session = require('express-session') ;
-
+const dotenv = require("dotenv");
+const app = express();
+app.use(express.json());
+dotenv.config(); 
 const isValidEmail = (v) => {
   //checks if email has @ and . after @
   if (!v.includes("@")) return false;
@@ -51,10 +53,11 @@ user_Router.get("/:id", (req, res) => {
     });
 });
 
-user_Router.get("/", (req, res) => {
-  //authentication for requester here
-  //
-  User.find().then((e) => res.send(e));
+user_Router.get("/",authenticate, async(req, res) => {
+  const users = await User.find();
+//  console.log(users);
+  console.log(req.user);
+  res.json(users.filter(user=>(user.email==req.user.email)));
 });
 
 //create
@@ -86,11 +89,10 @@ user_Router.post("/login", async(req, res) => {
     console.log(user);
     const compare = (user[0].password===password) ; 
     if(compare){
-      const id = user.id ; 
-      const token = jwt.sign({id},"jwtsecret",{
-        expiresIn:300,
-      })
-           res.status(200).json({auth:true , token:token,user});
+      const {email,password}=user[0];
+      const new_user = {email,password};
+      const token = jwt.sign(new_user,process.env.ACCESS_TOKEN_SECRET);
+           res.status(200).json({auth:true , token:token});
     }
     else{
       res.send({message:"Wrong Password !"});
@@ -100,8 +102,20 @@ user_Router.post("/login", async(req, res) => {
   else{
     res.send({message:"User not found"});
   }
-
 });
+
+function authenticate(req,res,next){
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+  console.log(token);
+  if(token==null)return res.sendStatus(401);
+  jwt.verify(token,process.env.ACCESS_TOKEN_SECRET,(err,user)=>{
+    if(err)return res.sendStatus(403);
+    req.user = user ; 
+    next();
+  })
+
+}
 
 //update
 user_Router.put("/", (req, res) => {
