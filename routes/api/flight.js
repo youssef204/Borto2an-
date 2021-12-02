@@ -39,7 +39,8 @@ flight_router.get("/", function (req, res, next) {
 
   if('departure.time' in query){
     const date = query['departure.time'];
-    query['departure.time'] = {$gte: new Date(date),$lte: new Date(new Date(date).setHours(23,59,59))+'Z'};
+    query['departure.time'] = {$gte: new Date(date).setHours(00,00,00),$lte: new Date(new Date(date).setHours(23,59,59))+'Z'};
+    console.log(query['departure.time']);
   }
 
   if('arrival.time' in query){

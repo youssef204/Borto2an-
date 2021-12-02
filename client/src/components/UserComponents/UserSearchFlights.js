@@ -219,7 +219,7 @@ onErrorDep = e => {
     }
   
     ));
-   // console.log(this.selectedArrday.toISOString().substring(0, 10));
+    console.log(this.selectedDepday.toISOString().substring(0, 10));
   //  console.log("are they equal ", this.selectedArrday.toISOString().localeCompare("2021-11-30T11:33:00.000Z"))
     const data = this.getNonEmptyFields(state);
     console.log(data);
@@ -264,7 +264,7 @@ console.log("x=",paramsData);
            sentData.map((info) => info["AdultNumber"] = this.adultnumber);
            sentData.map((info) => info["childNumber"] = this.childnumber);
           }
-        console.log("sentData are",sentData);
+        // console.log("sentData are",sentData);
         // this.props.history.push({
         //   pathname: "/search_results",
         //   state: sentData,
@@ -313,10 +313,12 @@ console.log("x=",paramsData);
              returnData.map((info) => info["AdultNumber"] = this.adultnumber);
              returnData.map((info) => info["childNumber"] = this.childnumber);
             }
-          console.log("sentData are",returnData);
+          console.log("sentData are",sentData);
+          console.log("returnData are",returnData);
+          let stateData = [sentData,returnData];
           this.props.history.push({
             pathname: "/search_results",
-            state: returnData,sentData
+            state: sentData,returnData
           });
         })
         .catch((err) => {
@@ -382,7 +384,7 @@ console.log("x=",paramsData);
                       label="Departure Date*">
                       </Calendar>
                       <Calendar
-                      label="Arrival Date*"
+                      label="Return Date*"
                       onChange={this.onChangeArrTime}
                       selected={this.state.arrival.time}
                       minDate={this.selectedDepday === undefined ? Date.now() : this.selectedDepday}
