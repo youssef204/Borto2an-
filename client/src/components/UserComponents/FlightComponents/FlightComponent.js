@@ -7,23 +7,24 @@ import "./FlightComponentCSS.css";
 import Dep_ArrComponent from "./Dep_ArrComponent";
 import FlightCabin from "./FlightCabin";
 
-export default function FlightComponent() {
-  const [id, setId] = useState("61a59b84b407eba753da9c9a");
+export default function FlightComponent(probs) {
+  const [id, setId] = useState(probs.id); //"61a59b84b407eba753da9c9a");
   const [details, setDetails] = useState(undefined); //getDetails(id));
   const [loading, setLoading] = useState(true);
 
-  const handleClick = async () => {
-    console.log(details);
+  const onSelect = (cabin, name) => {
+    probs.onSelect(details, cabin, name);
   };
-
+  //console.log(onSelect);
   useEffect(async () => {
     //console.log("details are ", details);
+    //console.log("probid is ", probsId.id);
+
     const res = await getDetails(id);
-    console.log(res);
-
-    setDetails(res);
-
-    setLoading(false);
+    if (res) {
+      setDetails(res);
+      setLoading(false);
+    }
     //console.log(details.departure.airport);
     //console.log(details);
   }, []);
@@ -36,7 +37,7 @@ export default function FlightComponent() {
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
           crossOrigin="anonymous"
         ></link>
-        <Box sx={{ width: 600 }}>
+        <Box sx={{ width: 600, margin: "auto", marginTop: 5, marginBottom: 5 }}>
           <Skeleton className="skeleton" />
           <Skeleton animation="wave" />
           <Skeleton animation={false} />
@@ -56,8 +57,10 @@ export default function FlightComponent() {
           <div className="shadow p-3 m-3 bg-white rounded flex-Container-Row">
             {/**airline +airplane model+flightNumber */}
             <div className="airline-grp flex-Container-Col">
-              <img src="egyptair.png" width="80" height="80" />
-              <div className="mt-2 text">{details.airplaneModelID.name}</div>
+              <img src="egyptair.png" width="70" height="70" />
+              <div className="mt-2 text border-top border-bottom">
+                {details.airplaneModelID.name}
+              </div>
               <div className="mt-2 text">
                 <label style={{ color: "#555555", font: "13px  sans-serif" }}>
                   Flight No.{" "}
@@ -82,10 +85,10 @@ export default function FlightComponent() {
                 economy={details.economyCabin}
                 business={details.businessCabin}
                 first={details.firstCabin}
+                onSelect={onSelect}
               />
             </div>
           </div>
-          <button onClick={handleClick}>refresh</button>
         </div>
       </>
     );
@@ -93,6 +96,10 @@ export default function FlightComponent() {
 }
 
 async function getDetails(id) {
+  if (!id) {
+    console.log("undefined id in flight");
+    return;
+  }
   const res = await axios({
     method: "get",
     url: "http://localhost:8000/api/flights",

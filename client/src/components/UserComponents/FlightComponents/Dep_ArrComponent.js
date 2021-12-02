@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 export default function Dep_ArrComponent({ isDeparture, probs }) {
-  console.log("is dep ", typeof isDeparture);
+  //console.log("is dep ", typeof isDeparture);
   const [details, setDetails] = useState(probs);
   const innerText = (
     <>
@@ -32,11 +32,11 @@ export default function Dep_ArrComponent({ isDeparture, probs }) {
       ></link>
       <div className="place flex-Container-Row">
         {isDeparture === "true" ? (
-          <img src="takingOff2.png" width="40%" height="60%" />
+          <img src="takingOff2.png" width="30%" height="60%" />
         ) : undefined}
         {text}
         {isDeparture === "false" ? (
-          <img src="landing2.png" width="40%" height="60%" />
+          <img src="landing2.png" width="30%" height="60%" />
         ) : undefined}
       </div>
     </>
