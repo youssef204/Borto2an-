@@ -42,7 +42,8 @@ app.use("/api/reservations/", reservation_routes);
 
 const user_routes = require("./routes/api/user");
 app.use("/api/user/", user_routes);
-
+const auth_routes = require("./routes/api/authServer");
+app.use("/api/user/auth/",auth_routes);
 
 // Starting server
 app.listen(PORT, () => {

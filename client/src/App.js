@@ -1,8 +1,3 @@
-
-          
-    
-
-
 import SearchFlights from "./components/AdminComponents/SearchFlights";
 import Flight from "./components/AdminComponents/Flight";
 import React from "react";
@@ -54,8 +49,8 @@ function App() {
             <Route exact path="/create_model" component={CreateModel} />
             <Route exact path="/all_models" component={AllModels} />
 
-            {/* <Route exact path="/flight_component" component={FlightComponent} />
-            <Route exact path="/flight_menu" component={FlightsMenu} />*/}
+             <Route exact path="/flight_component" component={FlightComponent} />
+            <Route exact path="/flight_menu" component={FlightsMenu} />
             <Route exact path="/flight_selection" component={FlightSelection} />
             <Route exact path="/seat_selection" component={FlightSeatsSelection} />
 
