@@ -1,8 +1,3 @@
-
-          
-    
-
-
 import SearchFlights from "./components/AdminComponents/SearchFlights";
 import Flight from "./components/AdminComponents/Flight";
 import React from "react";

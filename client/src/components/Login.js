@@ -22,11 +22,11 @@ import axios from "axios";
     axios
       .post('http://localhost:8000/api/user/login',data)
       .then(res => {
-          if(!res.data.message){
+          if(res.data.auth){
         this.setState({loggedIn:true,email:"",password:""
         });
         this.props.history.push("/");
-        alert("Logged in successfully!!");
+        alert("Logged in successfully");
       }
       else{        
           alert(res.data.message);
