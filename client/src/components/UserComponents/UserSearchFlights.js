@@ -18,11 +18,14 @@ import { Popover } from "@mui/material";
 import { InputLabel } from "@mui/material";
 
 class UserSearchFlights extends React.Component {
+  selectedDepAirport;
+  selectedArrAirport;
   selectedArrday;
   selectedDepday;
   chosenCabin;
   adultnumber;
   childnumber;
+  errorYes;
   numberOfSelecetedInputs = [0,0,0,0,0,0];
   constructor() {
     super();
@@ -53,6 +56,7 @@ class UserSearchFlights extends React.Component {
     this.numberOfSelecetedInputs[0] = 1;
     else
     this.numberOfSelecetedInputs[0] = 0;
+    this.selectedDepAirport = e.target.value;
     console.log(this.state);
     console.log(this.numberOfSelecetedInputs);
     //this.render();
@@ -71,10 +75,16 @@ class UserSearchFlights extends React.Component {
     this.numberOfSelecetedInputs[1] = 1;
     else
     this.numberOfSelecetedInputs[1] = 0;
+    this.selectedArrAirport = e.target.value
     console.log(e.target.value);
     console.log(this.numberOfSelecetedInputs);
     //this.render();
   };
+
+  onChangeToError = e => {
+    this.selectedArrAirport = e.target.value;
+    this.setState({});
+  }
 
   onChangeDepTime = date => {
     this.setState(prevState =>({
@@ -154,6 +164,9 @@ onChangeChild = e => {
   console.log(this.childnumber);
 }
 
+onErrorDep = e => {
+  e.target.label = "error";
+}
 // getAirplaneEconomySeats = flight => {
 //   axios({
 //     method: "get",
@@ -206,18 +219,20 @@ onChangeChild = e => {
     }
   
     ));
-    console.log(this.selectedArrday.toISOString().substring(0, 10));
-    console.log("are they equal ", this.selectedArrday.toISOString().localeCompare("2021-11-30T11:33:00.000Z"))
+   // console.log(this.selectedArrday.toISOString().substring(0, 10));
+  //  console.log("are they equal ", this.selectedArrday.toISOString().localeCompare("2021-11-30T11:33:00.000Z"))
     const data = this.getNonEmptyFields(state);
     console.log(data);
     let paramsData ={
       "departure.airport" : data["departure"]["airport"],
       "departure.time" : data["departure"]["time"],
       "arrival.airport" : data["arrival"]["airport"],
-      "arrival.time" : data["arrival"]["time"]
+      //"arrival.time" : data["arrival"]["time"]
     }
     if(this.childnumber === null)
        this.childnumber = 0;
+
+  let sentData;
 console.log("x=",paramsData);
     axios({
       method: "get",
@@ -228,7 +243,6 @@ console.log("x=",paramsData);
         // go to search results component with the data
         let totalSeats = +this.childnumber + +this.adultnumber;
 
-        let sentData;
         if(this.chosenCabin === "economyCabin"){
            sentData = res.data.filter((entry) => entry.economyCabin !== null) 
            sentData.map((info) => info["chosenCabin"] = "economy");
@@ -251,14 +265,63 @@ console.log("x=",paramsData);
            sentData.map((info) => info["childNumber"] = this.childnumber);
           }
         console.log("sentData are",sentData);
-        this.props.history.push({
-          pathname: "/search_results",
-          state: sentData,
-        });
+        // this.props.history.push({
+        //   pathname: "/search_results",
+        //   state: sentData,
+        // });
       })
       .catch((err) => {
         console.log(err);
       });
+      
+
+      let paramsDataReturn ={
+        "departure.airport" : data["arrival"]["airport"],
+        "departure.time" : data["arrival"]["time"],
+        "arrival.airport" : data["departure"]["airport"],
+        //"arrival.time" : data["arrival"]["time"]
+      } 
+
+      axios({
+        method: "get",
+        url: "http://localhost:8000/api/flights",
+        params: paramsDataReturn
+      })
+        .then((res) => {
+          // go to search results component with the data
+          let totalSeats = +this.childnumber + +this.adultnumber;
+  
+          let returnData;
+          if(this.chosenCabin === "economyCabin"){
+             returnData = res.data.filter((entry) => entry.economyCabin !== null) 
+             returnData.map((info) => info["chosenCabin"] = "economy");
+             returnData.filter((entry) => totalSeats <= (entry["airplaneModelID"]["economyRows"] * entry["airplaneModelID"]["economyColumns"]) - entry["economyCabin"]["takenSeats"].length )
+             returnData.map((info) => info["AdultNumber"] = this.adultnumber);
+             returnData.map((info) => info["childNumber"] = this.childnumber);
+          }
+          else if(this.chosenCabin === "businessCabin"){
+             returnData = res.data.filter((entry) => entry.businessCabin !== null) 
+             returnData.map((info) => info["chosenCabin"] = "business");
+             returnData.filter((entry) => totalSeats <= (entry["airplaneModelID"]["businessRows"] * entry["airplaneModelID"]["businessColumns"]) - entry["businessCabin"]["takenSeats"].length )
+             returnData.map((info) => info["AdultNumber"] = this.adultnumber);
+             returnData.map((info) => info["childNumber"] = this.childnumber);
+            }
+          else if(this.chosenCabin === "firstCabin"){
+             returnData = res.data.filter((entry) => entry.firstCabin !== null) 
+             returnData.map((info) => info["chosenCabin"] = "first");
+             returnData.filter((entry) => totalSeats <= (entry["airplaneModelID"]["firstClassRows"] * entry["airplaneModelID"]["firstClassColumns"]) - entry["firstCabin"]["takenSeats"].length )
+             returnData.map((info) => info["AdultNumber"] = this.adultnumber);
+             returnData.map((info) => info["childNumber"] = this.childnumber);
+            }
+          console.log("sentData are",returnData);
+          this.props.history.push({
+            pathname: "/search_results",
+            state: returnData,sentData
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
   };
 
   getNonEmptyFields = (obj) => {
@@ -280,36 +343,49 @@ console.log("x=",paramsData);
       borderColor="#a9a9a9" sx={{ p: 5}}>
               <Stack direction="row" spacing={7} style={{justifyContent:'center', alignItems:'center'}}>
                   <Stack spacing={5}>
-                   <OutlinedTextField
+                  <OutlinedTextField
                    label = "From*"
                    width={200}
                    fontsize={18}
-                   onChange={this.onChangeFrom}
-                   name="departure{airport}"
-                   value={this.state.departure.airport}>
+                   value={this.state.departure.airport}
+                   onChange={this.onChangeFrom}>
                    </OutlinedTextField>
+                    {this.selectedDepAirport !== undefined && this.selectedArrAirport !== undefined && this.selectedArrAirport === this.selectedDepAirport ?
+                      <TextField
+                      style={{width:"200px" ,fontsize:"18px"}}
+                      onChange = {this.onChangeToError}
+                      error
+                      id="outlined-error-helper-text"
+                      label="To*"
+                      defaultValue={this.selectedArrAirport}
+                      helperText="please enter different destinations."
+                    />
+                    :
                    <OutlinedTextField
                    label = "To*"
                    width={200}
                    fontsize={18}
-                   value={this.state.arrival.airport}
-                   onChange={this.onChangeTo}>
+                   onChange={this.onChangeTo}
+                   name="arrival{airport}"
+                   value={this.state.arrival.airport}>
                    </OutlinedTextField>
+  }
             </Stack>
                   <Stack spacing={5}>
                       <Calendar
                       onChange={this.onChangeDepTime}
                        selected={this.state.departure.time}
                        value={this.state.departure.time}
-                       //minDate={Date.now()}
-                       //maxDate={this.selectedArrday === null ? {} : this.selectedArrday}
+                       minDate={Date.now()}
+                       maxDate={this.selectedArrday === null ? {} : this.selectedArrday}
+                      // onError = {this.onErrorDep}
                       label="Departure Date*">
                       </Calendar>
                       <Calendar
                       label="Arrival Date*"
                       onChange={this.onChangeArrTime}
                       selected={this.state.arrival.time}
-                     // minDate={this.selectedDepday === undefined ? Date.now() : this.selectedDepday}
+                      minDate={this.selectedDepday === undefined ? Date.now() : this.selectedDepday}
                       value={this.state.arrival.time}>
                       </Calendar>
                   </Stack>
