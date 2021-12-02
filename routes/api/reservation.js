@@ -15,11 +15,27 @@ reservation_router.get("/", function (req, res, next) {
     .catch((err) => res.status(404).json({ msg: "No reservations are found" }));
 });
 
+deleteSeats = (flight, seats, cabinName) =>{
+  const cabin = flight[cabinName+'Cabin'];
+  cabin.takenSeats = cabin.takenSeats.filter(seat => !seats.includes(seat));
+}
+
 reservation_router.delete("/:id", async (req, res) => {
   try {
     const reservation = await Reservation.findByIdAndDelete(req.params.id);
     if (reservation){
       res.send(reservation);
+
+      const Flight = require("../../models/Flight");
+      const departureFlight = await Flight.findById(reservation.departureFlight.flightId);
+      const returnFlight = await Flight.findById(reservation.returnFlight.flightId);
+
+      deleteSeats(departureFlight, reservation.departureFlight.seats, reservation.departureFlight.cabin);
+      deleteSeats(returnFlight, reservation.returnFlight.seats, reservation.returnFlight.cabin);
+
+      await departureFlight.save();
+      await returnFlight.save(); 
+
       const userId = reservation.userId;
       const User = require('../../models/User');
       const user = await User.findById(userId);
