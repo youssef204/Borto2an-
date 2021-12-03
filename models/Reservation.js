@@ -3,10 +3,36 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+
+const reservationFlightSchema = new Schema({
+      flightId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Flight",
+        required: true
+      },
+      seats: {
+        type:[Number],
+        required: true
+      },
+      cabin: {
+        type:String,
+        required: true
+      },
+      noAdults: {
+        type: Number,
+        required: true
+      },
+      noChildren: {
+        type:Number,
+        required:true
+      }
+});
+
 const ReservationSchema = new Schema(
   {
     userId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
       required: true,
     },
     price: {
@@ -14,18 +40,12 @@ const ReservationSchema = new Schema(
       required: true
     },
     departureFlight: {
-      flightId: Number,
-      seatNumbers: [Number],
-      cabin: String,
-      noAdults: Number,
-      noChildren: Number
+      type: reservationFlightSchema,
+      required: true
     },
     returnFlight: {
-      flightId: Number,
-      seatNumbers: [Number],
-      cabin: String,
-      noAdults: Number,
-      noChildren: Number
+      type: reservationFlightSchema,
+      required: true
     },
   },
   { timestamps: true }

@@ -102,7 +102,12 @@ user_Router.delete("/:id",authenticate, async (req, res) => {
   }
   try {
     const user = await User.findByIdAndDelete(req.params.id);
-    if (user) res.send(user);
+
+    if (user) {
+      const Reservation = require("../../models/Reservation");
+      await Reservation.deleteMany({userId:user._id});
+      res.send(user);
+    }
     else
       res.status(404).json({ msg: `No user with id ${req.params.id} found` });
   } catch (e) {

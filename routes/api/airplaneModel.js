@@ -36,9 +36,12 @@ airplaneModel_router.put("/", authenticate , (req, res) => {
 airplaneModel_router.delete("/:id",authenticate ,  async (req, res) => {
   try {
     const airplaneModel = await AirplaneModel.findByIdAndDelete(req.params.id);
-    const Flight = require("../../models/Flight");
-    await Flight.deleteMany({airplaneModelID:airplaneModel._id});
-    if (airplaneModel) res.send(airplaneModel);
+
+    if (airplaneModel) { 
+      const Flight = require("../../models/Flight");
+      await Flight.deleteMany({airplaneModelID:airplaneModel._id});
+      res.send(airplaneModel);
+    }
     else
       res.status(404).json({ msg: `No AirplaneModel with id ${req.params.id} found` });
   } catch (e) {

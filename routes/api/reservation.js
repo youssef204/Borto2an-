@@ -15,11 +15,27 @@ reservation_router.get("/", function (req, res, next) {
     .catch((err) => res.status(404).json({ msg: "No reservations are found" }));
 });
 
+deleteSeats = (flight, seats, cabinName) =>{
+  const cabin = flight[cabinName+'Cabin'];
+  cabin.takenSeats = cabin.takenSeats.filter(seat => !seats.includes(seat));
+}
+
 reservation_router.delete("/:id", async (req, res) => {
   try {
     const reservation = await Reservation.findByIdAndDelete(req.params.id);
     if (reservation){
       res.send(reservation);
+
+      const Flight = require("../../models/Flight");
+      const departureFlight = await Flight.findById(reservation.departureFlight.flightId);
+      const returnFlight = await Flight.findById(reservation.returnFlight.flightId);
+
+      deleteSeats(departureFlight, reservation.departureFlight.seats, reservation.departureFlight.cabin);
+      deleteSeats(returnFlight, reservation.returnFlight.seats, reservation.returnFlight.cabin);
+
+      await departureFlight.save();
+      await returnFlight.save(); 
+
       const userId = reservation.userId;
       const User = require('../../models/User');
       const user = await User.findById(userId);
@@ -56,10 +72,49 @@ reservation_router.delete("/:id", async (req, res) => {
   }
 });
 
+validateReservationFlights = (flight, seats, cabinName) =>{
+  if(!flight || !seats || !cabinName)
+    throw "error invalid data";
+
+  const cabin = flight[cabinName+'Cabin'];
+  for(let seat of seats)
+    if(cabin.takenSeats.includes(seat))
+      throw "there is a seat already taken in this flight";
+
+  cabin.takenSeats = cabin.takenSeats.concat(seats);
+}
+
 reservation_router.post("/", async (req, res) => {
-  Reservation.create(req.body)
-  .then(result => {res.send(result);})
-  .catch(err => {res.status(400).send(err)});
+  try{
+    const reservation = req.body;
+
+    if(!reservation|| ! ('departureFlight' in reservation) || ! ('returnFlight' in reservation) )
+      throw "reservation not found in the request body";
+
+    
+    const User = require("./../../models/User");
+    const user = await User.findById(reservation.userId);
+    if(!user)
+      throw "no such user exists";
+
+    const Flight = require("../../models/Flight");
+
+    const departureFlight = await Flight.findById(reservation.departureFlight.flightId);
+    const returnFlight = await Flight.findById(reservation.returnFlight.flightId);
+
+    validateReservationFlights(departureFlight, reservation.departureFlight.seats, reservation.departureFlight.cabin);
+    validateReservationFlights(returnFlight, reservation.returnFlight.seats, reservation.returnFlight.cabin);
+
+    await departureFlight.save();
+    await returnFlight.save();
+
+    Reservation.create(reservation)
+    .then(result => {res.send(result);})
+    .catch(err => {res.status(400).send(err)});
+  }
+  catch(e){
+    res.status(400).send(e);
+  }
 });
 
 module.exports = reservation_router;

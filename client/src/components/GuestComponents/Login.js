@@ -5,9 +5,12 @@ import axios from "axios";
     constructor(props){
         super(props);
         this.state = {
-            loggedIn:false,
+            user:"",
+            refresh:"",
+            access:"",
             email:"",
             password:"",
+            loggedIn:false
         }
     }
 
@@ -17,20 +20,16 @@ import axios from "axios";
     onSubmit = e => {
     e.preventDefault();
     const data = this.state;
-    console.log(data);
-    console.log(this.state); 
     axios
       .post('http://localhost:8000/api/user/auth/login',data)
       .then(res => {
-          console.log(res.data);
-          if(res.data.auth){
-              localStorage.setItem("token",res.token);
-              localStorage.setItem("refresh",res.refreshToken);
-        this.setState({loggedIn:true,email:"",password:""});
-        this.props.history.push("/");
-        alert("Logged in successfully");
-      }
-      else{        
+        if(res.data.auth){
+            this.setState({user:res.data.user, refresh: res.data.refresh, access: res.data.access, email:"", password:"", loggedIn:true});
+            this.props.onLogin(this.state.user, this.state.refresh, this.state.access);
+            this.props.history.push("/");
+            alert("Logged in successfully");
+        }
+        else{        
           alert(res.data.message);
     }
     })
@@ -39,7 +38,10 @@ import axios from "axios";
       });      
   };
 
+
+
     render() {
+        if(!this.state.user)
         return (
             <div className="outer">
             <div className="inner">
@@ -72,6 +74,10 @@ import axios from "axios";
             </div>
             </div>
         );
+        else{
+            this.props.history.push("/page_not_found");
+            return <></>;
+        }
     }
 }
 export default Login;
