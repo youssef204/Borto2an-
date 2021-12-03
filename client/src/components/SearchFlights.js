@@ -2,17 +2,17 @@
 
 import React from "react";
 import axios from "axios";
-import Header from "../Header";
+import Header from "./Header";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Stack from "@mui/material/Stack";
-import FilledTextField from "../FilledTextField";
-import OutlinedTextField from "../OutlinedTextField";
-import Button from "../Button";
-import Calendar from "../Calendar";
+import FilledTextField from "./FilledTextField";
+import OutlinedTextField from "./OutlinedTextField";
+import Button from "./Button";
+import Calendar from "./Calendar";
 import Box from "@mui/material/Box";
 import { TextField } from "@mui/material";
 import { Popover } from "@mui/material";
@@ -59,6 +59,7 @@ class SearchFlights extends React.Component {
     axios({
       method: "get",
       url: "http://localhost:8000/api/flights",
+      headers:{"authorization":"Bearer "+localStorage.getItem("token")},
       params: data,
     })
       .then((res) => {
@@ -239,6 +240,7 @@ class SearchFlights extends React.Component {
     let res = await axios({
       method: "get",
       url: "http://localhost:8000/api/flights",
+      headers:{"authorization":"Bearer "+localStorage.getItem("token")},
       params: paramsData,
     });
     // .then((res) => {
@@ -302,6 +304,7 @@ class SearchFlights extends React.Component {
     res = await axios({
       method: "get",
       url: "http://localhost:8000/api/flights",
+      headers:{"authorization":"Bearer "+localStorage.getItem("token")},
       params: paramsDataReturn,
     });
     // .then((res) => {
@@ -349,12 +352,15 @@ class SearchFlights extends React.Component {
     console.log("returnData are", returnData);
     let stateData = {sentData, returnData , "adultNumber" : this.adultnumber , "childNumber" : this.childnumber , "ChosenCabin" : this.chosenCabin};
     console.log("state Data ", stateData);
-    localStorage.setItem("depData",JSON.stringify(sentData));
-    localStorage.setItem("retData",JSON.stringify(returnData));
-    localStorage.setItem("adultNumber",JSON.stringify(this.adultnumber));
-    localStorage.setItem("chosenCabin",JSON.stringify(this.chosenCabin));
-    localStorage.setItem("chilcNumber",JSON.stringify(this.childnumber));
+    // localStorage.setItem("depData",JSON.stringify(sentData));
+    // localStorage.setItem("retData",JSON.stringify(returnData));
+    // localStorage.setItem("adultNumber",JSON.stringify(this.adultnumber));
+    // localStorage.setItem("chosenCabin",JSON.stringify(this.chosenCabin));
+    // localStorage.setItem("chilcNumber",JSON.stringify(this.childnumber));
+    localStorage.setItem("searchResultData",JSON.stringify(stateData));
+    console.log(JSON.parse(localStorage.getItem("searchResultData")));
     window.location.href="http://localhost:3000/flight_component"
+
     // this.props.history.push({
     //   pathname: "/flight_component",
     //   state: stateData
