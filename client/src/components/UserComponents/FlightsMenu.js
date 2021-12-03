@@ -9,8 +9,8 @@ export default function FlightsMenu(probs) {
 
   //console.log(probs);
 
-  const onSelect = (flight, cabin, name) => {
-    setFlightChosen({ flight, cabin, name });
+  const onSelect = (flight, cabin, name, duration) => {
+    setFlightChosen({ flight, cabin, name, duration });
     //console.log(flightChosen);
   };
 
@@ -35,7 +35,7 @@ export default function FlightsMenu(probs) {
         <div className="container">
           {flightArr.map((f) => {
             //console.log(f._id);
-            return <FlightComponent id={f._id} onSelect={onSelect} />;
+            return <FlightComponent flight={f} onSelect={onSelect} />;
           })}
         </div>
       </div>
