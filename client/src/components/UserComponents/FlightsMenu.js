@@ -35,7 +35,7 @@ export default function FlightsMenu(probs) {
         <div className="container">
           {flightArr.map((f) => {
             //console.log(f._id);
-            return <FlightComponent id={f._id} onSelect={onSelect} />;
+            return <FlightComponent flight={f} onSelect={onSelect} />;
           })}
         </div>
       </div>
