@@ -23,6 +23,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import FlightSeatsSelection from "./components/FlightSeatsSelection";
 import User from "./components/UserComponents/User"
 import Reservations from "./components/UserComponents/Reservations"
+import ReservationDetails from "./components/UserComponents/ReservationDetails";
 
 
 function App() {
@@ -61,6 +62,7 @@ function App() {
             <Route exact path="/seat_selection" component={FlightSeatsSelection} />
             <Route exact path="/user" component={User} />
             <Route exact path="/reservations" component={Reservations} />
+            <Route exact path="/reservation_details" component={ReservationDetails} />
 
             <Route component={PageNotFound} />
           </Switch>
