@@ -13,8 +13,37 @@ export default function FlightComponent(probs) {
   const [details, setDetails] = useState(probs.flight); //getDetails(id));
   const [loading, setLoading] = useState(true);
 
+  const calculateDuration = (details) => {
+    console.log("details", details.arrival.time);
+    const diff =
+      new Date(details.arrival.time) - new Date(details.departure.time);
+    var unitmapping = {
+      days: 24 * 60 * 60 * 1000,
+      hours: 60 * 60 * 1000,
+      minutes: 60 * 1000,
+      seconds: 1000,
+    };
+    const days =
+      Math.floor(diff / unitmapping.days) == 0
+        ? ""
+        : Math.floor(diff / unitmapping.days) + " days ";
+    const hours =
+      Math.floor((diff % unitmapping.days) / unitmapping.hours) == 0
+        ? ""
+        : Math.floor((diff % unitmapping.days) / unitmapping.hours) + " hours ";
+    const minutes =
+      Math.floor((diff % unitmapping.hours) / unitmapping.minutes) == 0
+        ? ""
+        : Math.floor((diff % unitmapping.hours) / unitmapping.minutes) +
+          " minutes ";
+    return days + hours + minutes;
+  };
+
+  const [duration, setDuration] = useState(calculateDuration(details));
+
+  console.log("duration", duration);
   const onSelect = (cabin, name) => {
-    probs.onSelect(details, cabin, name);
+    probs.onSelect(details, cabin, name, duration);
   };
   //console.log(onSelect);
   useEffect(async () => {

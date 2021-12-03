@@ -19,7 +19,20 @@ export default function ChosenFLightsDetails({
   const [index, setIndex] = useState(0);
   const onClick = () => {
     if (index) {
-    } else {
+      const data = {
+        flight1: firstFlight.flight,
+        flight2: secondFlight.flight,
+        chosenCabin1: firstFlight.name,
+        chosenCabin2: secondFlight.name,
+        price1: getPriceOfFlight(firstFlight),
+        price2: getPriceOfFlight(secondFlight),
+        adultNumber,
+        childNumber,
+        duration1: firstFlight.duration,
+        duration2: secondFlight.duration,
+      };
+      localStorage.setItem("flightSelectionData", JSON.stringify(data));
+      window.location.href = "http://localhost:3000/trip_summary";
     }
   };
 
@@ -52,8 +65,9 @@ export default function ChosenFLightsDetails({
   };
 
   const getPriceOfFlight = (flight) => {
+    console.log("get price ", flight);
     const adultPrice = flight.cabin.adultPrice * adultNumber;
-    const childPrice = flight.cabin.childPrice * adultNumber;
+    const childPrice = flight.cabin.childPrice * childNumber;
     return adultPrice + childPrice + " L.E";
   };
 

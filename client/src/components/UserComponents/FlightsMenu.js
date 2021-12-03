@@ -9,8 +9,8 @@ export default function FlightsMenu(probs) {
 
   //console.log(probs);
 
-  const onSelect = (flight, cabin, name) => {
-    setFlightChosen({ flight, cabin, name });
+  const onSelect = (flight, cabin, name, duration) => {
+    setFlightChosen({ flight, cabin, name, duration });
     //console.log(flightChosen);
   };
 
