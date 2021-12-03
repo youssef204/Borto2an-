@@ -21,7 +21,6 @@ class FlightDetails extends React.Component {
     let curFlightNumber = {
       flightNumber: this.props.history.location.state.flightNumber,
     };
-  //  console.log(curFlightNumber, "curfn");
     axios({
       method: "get",
       url: "http://localhost:8000/api/flights",
@@ -31,7 +30,6 @@ class FlightDetails extends React.Component {
         this.setState({
           flights: res.data,
         });
-        //      console.log(this.state.flights);
       })
       .catch((err) => {
         console.log(err);

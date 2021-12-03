@@ -5,6 +5,7 @@ class SearchFlights extends React.Component {
   constructor() {
     super();
     this.state = {
+
     };
   }
 
@@ -132,6 +133,7 @@ class SearchFlights extends React.Component {
         </form>
       </>
     );
+    
   }
 }
 

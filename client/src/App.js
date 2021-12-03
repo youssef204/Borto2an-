@@ -21,11 +21,15 @@ import Register from "./components/GuestComponents/Register";
 import "./App.css";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import FlightSeatsSelection from "./components/FlightSeatsSelection";
+import User from "./components/UserComponents/User"
+import Reservations from "./components/UserComponents/Reservations"
+
+
 function App() {
   return (
     <>
       <Router>
-        <NavBar ></NavBar>
+        <NavBar></NavBar>
         <br />
         <br />
         <br />
@@ -55,6 +59,8 @@ function App() {
             <Route exact path="/flight_menu" component={FlightsMenu} />
             <Route exact path="/flight_selection" component={FlightSelection} />
             <Route exact path="/seat_selection" component={FlightSeatsSelection} />
+            <Route exact path="/user" component={User} />
+            <Route exact path="/reservations" component={Reservations} />
 
             <Route component={PageNotFound} />
           </Switch>

@@ -26,7 +26,8 @@ import axios from "axios";
             localStorage.setItem("refreshToken",res.data.refreshToken);
             localStorage.setItem("user",JSON.stringify(res.data.user));
             this.setState({email:"", password:"", loggedIn:true});
-            this.props.history.push("/");
+            //this.props.history.push("/");
+            window.location.href="http://localhost:3000";
             alert("Logged in successfully");
         }
         else{        
