@@ -6,7 +6,7 @@ function Reservation({Reservation}) {
 
   const history = useHistory();
 
-  function onClick(){history.push({pathname:"/reservaion_details",state:Reservation});};
+  function onClick(){history.push({pathname:"/reservation_details",state:Reservation});};
   
   return (
     <>
