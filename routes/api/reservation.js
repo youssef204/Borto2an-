@@ -5,13 +5,13 @@ const Reservation = require("../../models/Reservation");
 const authenticate = require("./Authentication");
 
 
+//get reservations by access token
 reservation_router.get("/", authenticate , function (req, res, next) {
-  const queryObj = { ...req.query };
-  let queryStr = JSON.stringify(queryObj);
-  const regex = /\b(gt|gte|lt|lte|in)\b/g;
-  queryStr = queryStr.replace(regex, "$$" + "$1");
-  Reservation.find(JSON.parse(queryStr))
-    .then((reservation) => res.json(reservation))
+  const queryObj = req.user.userId ; 
+  Reservation.find(queryObj)
+    .populate('departureFlight.flightId')
+    .populate('returnFlight.flightId')
+    .then((reservation) =>{ console.log(reservation) ; res.json(reservation)})
     .catch((err) => res.status(404).json({ msg: "No reservations are found" }));
 });
 

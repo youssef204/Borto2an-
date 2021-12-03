@@ -34,8 +34,8 @@ auth_Router.post("/login", async(req, res) => {
       console.log(user);
       const compare = (user[0].password===password) ; 
       if(compare){
-        const {email,password,isAdmin}=user[0];
-        const new_user = {email,password,isAdmin};  
+        const {_id,email,password,isAdmin}=user[0];
+        const new_user = {usedId:_id,email,password,isAdmin};  
         const token = generateAccessToken(new_user);
         const refreshToken = jwt.sign(new_user, process.env.REFRESH_TOKEN_SECRET)
         refreshTokens.push(refreshToken);

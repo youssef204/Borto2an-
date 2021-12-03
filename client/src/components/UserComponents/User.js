@@ -14,7 +14,7 @@ class User extends Component {
         this.setState({user:JSON.parse(localStorage.getItem('user'))});
     };
 
-    onClick = ()=>{
+    logout = ()=>{
         
         axios
         .delete("http://localhost:8000/api/user/auth/logout", {
@@ -31,6 +31,10 @@ class User extends Component {
         })
         .catch(err => console.log(err));    
     };
+
+    showReservations = () =>{
+        this.props.history.push('/reservations');
+    }
   
 
   render() {
@@ -41,7 +45,8 @@ class User extends Component {
           Last name: {this.state.user.lastName} <br/>
           Email: {this.state.user.email} <br/>
           Passport number: {this.state.user.passportNumber} <br/>
-          <button onClick={this.onClick}>Log out</button>
+          <button onClick={this.logout}>Log out</button>
+          <button onClick={this.showReservations}>Show my reservations</button>
       </body>
     );
     else return <p/>;
