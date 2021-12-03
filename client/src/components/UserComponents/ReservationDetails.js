@@ -1,9 +1,21 @@
 import axios from 'axios';
 import React from 'react';
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 
 class ReservationDetails extends React.Component {
 
+    constructor(props) {
+    super(props);
+    this.state = {
+      open: false
+    };
+    }
   
   
   render(){
@@ -17,6 +29,13 @@ class ReservationDetails extends React.Component {
         })
         .then(res => {alert("an email with refund amount has been sent to you"); this.props.history.push("/");})
         .catch(err => console.log(err));
+    };
+
+    const handleClickOpen = () => {
+      this.setState({ open: true });
+    };
+    const handleClose = () => {
+      this.setState({ open: false });
     };
 
     return (
@@ -61,10 +80,29 @@ class ReservationDetails extends React.Component {
 
             <br/> <br/>
 
+            <button onClick={handleClickOpen}>Delete</button>
         
-        <button className="showAllDetails" onClick ={onClick} >
-            Delete Reservation
-        </button >
+        <Dialog
+              open={this.state.open}
+              onClose={handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogTitle id="alert-dialog-title">
+                {"Do you really want to delete?"}
+              </DialogTitle>
+              <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                  This action is irrevertable
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose}>Cancel</Button>
+                <Button onClick={onClick} autoFocus>
+                  Delete
+                </Button>
+              </DialogActions>
+            </Dialog>
         <br/>
         <br/>
         </>
