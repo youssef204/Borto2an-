@@ -381,7 +381,6 @@ class SearchFlights extends React.Component {
 
   render() {
     if(JSON.parse(localStorage.getItem("user")) && JSON.parse(localStorage.getItem("user"))["isAdmin"]){
-      console.log(localStorage.getItem("user")["isAdmin"]);
     return (
       <>
         <form noValidate onSubmit={(e) => this.onSubmit2(e, this.state)}>
@@ -531,10 +530,10 @@ class SearchFlights extends React.Component {
                 onChange={this.onChangeDepTime}
                 selected={this.state.departure.time}
                 value={this.state.departure.time}
-                minDate={Date.now()}
+                /*minDate={Date.now()}}
                 maxDate={
                   this.selectedArrday === null ? {} : this.selectedArrday
-                }
+                */
                 // onError = {this.onErrorDep}
                 label="Departure Date*"
               ></Calendar>
@@ -542,11 +541,11 @@ class SearchFlights extends React.Component {
                 label="Return Date*"
                 onChange={this.onChangeArrTime}
                 selected={this.state.arrival.time}
-                minDate={
+                /*minDate={
                   this.selectedDepday === undefined
                     ? Date.now()
                     : this.selectedDepday
-                }
+                }*/
                 value={this.state.arrival.time}
               ></Calendar>
             </Stack>
