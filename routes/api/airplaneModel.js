@@ -2,10 +2,9 @@
 const express = require("express");
 const airplaneModel_router = express.Router();
 const AirplaneModel = require("../../models/AirplaneModel");
+const authenticate = require("./Authentication");
 
-
-
-airplaneModel_router.get("/", function (req, res, next) {
+airplaneModel_router.get("/", authenticate , function (req, res, next) {
   const queryObj = { ...req.query };
   let queryStr = JSON.stringify(queryObj);
   const regex = /\b(gt|gte|lt|lte|in)\b/g;
@@ -15,7 +14,7 @@ airplaneModel_router.get("/", function (req, res, next) {
     .catch((err) => res.status(404).json({ msg: "No models are found" }));
 });
 
-airplaneModel_router.get("/showAllModels", (req, res) => {
+airplaneModel_router.get("/showAllModels",authenticate, (req, res) => {
   AirplaneModel.find()
     .then((model) => {
       res.json(model);
@@ -23,7 +22,7 @@ airplaneModel_router.get("/showAllModels", (req, res) => {
     .catch((err) => res.status(404).json({ msg: "No models are found" }));
 });
 
-airplaneModel_router.put("/", (req, res) => {
+airplaneModel_router.put("/", authenticate , (req, res) => {
   const id = req.body._id;
   const update = req.body.update;
   AirplaneModel.findByIdAndUpdate(id,update)
@@ -34,7 +33,7 @@ airplaneModel_router.put("/", (req, res) => {
 });
 
 
-airplaneModel_router.delete("/:id", async (req, res) => {
+airplaneModel_router.delete("/:id",authenticate ,  async (req, res) => {
   try {
     const airplaneModel = await AirplaneModel.findByIdAndDelete(req.params.id);
     const Flight = require("../../models/Flight");
@@ -48,7 +47,7 @@ airplaneModel_router.delete("/:id", async (req, res) => {
   }
 });
 
-airplaneModel_router.post("/", async (req, res) => {
+airplaneModel_router.post("/",authenticate , async (req, res) => {
   AirplaneModel.create(req.body)
   .then(result => {res.send(result);})
   .catch(err => {res.status(400).send(err)});
