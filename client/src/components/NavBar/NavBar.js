@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import "./NavBar.css";
 import Logo from '../Logo/Logo';
 import {NavLink as Link, BrowserRouter as Router} from 'react-router-dom';
 
-function NavigationBar() {
-
-  const [user,setUser] = useState(JSON.parse(localStorage.getItem("user")));
-
+function NavigationBar({user=JSON.parse(localStorage.getItem("user"))}) {
+  console.log(user);
   const userLabel = 
-  (!user)?
+  (!user)?  
   <>
   <li style={{float:'right'}} className="NavBar">
         <Link to="/signup" exact className="NavBar">
