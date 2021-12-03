@@ -24,6 +24,7 @@ import FlightSeatsSelection from "./components/FlightSeatsSelection";
 import User from "./components/UserComponents/User"
 import Reservations from "./components/UserComponents/Reservations"
 import ReservationDetails from "./components/UserComponents/ReservationDetails";
+import TripSummary from "./components/UserComponents/TripSummary";
 
 
 function App() {
@@ -63,6 +64,7 @@ function App() {
             <Route exact path="/user" component={User} />
             <Route exact path="/reservations" component={Reservations} />
             <Route exact path="/reservation_details" component={ReservationDetails} />
+            <Route exact path="/trip_summary" component={TripSummary} />
 
             <Route component={PageNotFound} />
           </Switch>
