@@ -55,7 +55,7 @@ user_Router.get("/:id",authenticate, (req, res) => {
     });
 });
 
-user_Router.get("/profile",authenticate, async(req, res) => {
+user_Router.get("/",authenticate, async(req, res) => {
   const users = await User.find();
 //  console.log(users);
   console.log(req.user);

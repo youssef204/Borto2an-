@@ -15,8 +15,7 @@ auth_Router.post('/refreshToken', (req, res) => {
   if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403);
   jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
     if (err) return res.sendStatus(403)
-    const new_user = {firstName:user.firstName, lastName: user.lastName , email:user.email,password:user.password,passportNumber:user.passportNumber,isAdmin:user.isAdmin}
-    const accessToken = generateAccessToken(new_user);
+    const accessToken = generateAccessToken(user);
     res.json({ accessToken: accessToken })
   })
 })
@@ -53,7 +52,7 @@ auth_Router.post("/login", async(req, res) => {
   
 
 function generateAccessToken(user) {
-  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '10m' })
+  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
 }
 
 module.exports = auth_Router ; 
