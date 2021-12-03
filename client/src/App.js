@@ -1,4 +1,4 @@
-import SearchFlights from "./components/AdminComponents/SearchFlights";
+import SearchFlights from "./components/SearchFlights";
 import Flight from "./components/AdminComponents/Flight";
 import React, { useState } from "react";
 import SearchResults from "./components/AdminComponents/SearchResults";

@@ -7,7 +7,7 @@ const authenticate = require("./Authentication");
 
 //get reservations by access token
 reservation_router.get("/", authenticate , function (req, res, next) {
-  const queryObj = req.user.userId ; 
+  const queryObj = {userId: req.user.userId} ; 
   Reservation.find(queryObj)
     .populate('departureFlight.flightId')
     .populate('returnFlight.flightId')
