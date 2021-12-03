@@ -13,7 +13,9 @@ class AllFlights extends Component {
 
     componentDidMount() {
         axios
-            .get('http://localhost:8000/api/flights/showAllflights')
+            .get('http://localhost:8000/api/flights/showAllflights',{
+              headers:{"authorization":"Bearer "+localStorage.getItem("token")}
+            })
             .then(res => {
                 console.log(res.msg);
                 this.setState(
@@ -25,7 +27,7 @@ class AllFlights extends Component {
             })
             .catch(err => {
                 console.log(err);
-            })
+            });
             
     };
 

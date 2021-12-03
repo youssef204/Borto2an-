@@ -2,10 +2,10 @@
 const express = require("express");
 const reservation_router = express.Router();
 const Reservation = require("../../models/Reservation");
+const authenticate = require("./Authentication");
 
 
-
-reservation_router.get("/", function (req, res, next) {
+reservation_router.get("/", authenticate , function (req, res, next) {
   const queryObj = { ...req.query };
   let queryStr = JSON.stringify(queryObj);
   const regex = /\b(gt|gte|lt|lte|in)\b/g;
@@ -20,7 +20,7 @@ deleteSeats = (flight, seats, cabinName) =>{
   cabin.takenSeats = cabin.takenSeats.filter(seat => !seats.includes(seat));
 }
 
-reservation_router.delete("/:id", async (req, res) => {
+reservation_router.delete("/:id", authenticate , async (req, res) => {
   try {
     const reservation = await Reservation.findByIdAndDelete(req.params.id);
     if (reservation){
@@ -84,10 +84,9 @@ validateReservationFlights = (flight, seats, cabinName) =>{
   cabin.takenSeats = cabin.takenSeats.concat(seats);
 }
 
-reservation_router.post("/", async (req, res) => {
+reservation_router.post("/", authenticate , async (req, res) => {
   try{
     const reservation = req.body;
-
     if(!reservation|| ! ('departureFlight' in reservation) || ! ('returnFlight' in reservation) )
       throw "reservation not found in the request body";
 

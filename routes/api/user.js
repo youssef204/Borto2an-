@@ -64,6 +64,7 @@ user_Router.get("/profile",authenticate, async(req, res) => {
 
 //create
 user_Router.post("/register", async(req, res) => {
+  console.log(req.body);
   if (isValidEntry(req.body)) {
   let entry = req.body;
     const user = User(entry);

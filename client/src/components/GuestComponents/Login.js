@@ -21,6 +21,10 @@ import axios from "axios";
       .post('http://localhost:8000/api/user/auth/login',data)
       .then(res => {
         if(res.data.auth){
+            console.log(res.data.user);
+            localStorage.setItem("token",res.data.token);
+            localStorage.setItem("refreshToken",res.data.refreshToken);
+            localStorage.setItem("user",JSON.stringify(res.data.user));
             this.setState({email:"", password:"", loggedIn:true});
             this.props.history.push("/");
             alert("Logged in successfully");
