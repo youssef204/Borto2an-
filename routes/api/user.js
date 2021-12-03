@@ -5,6 +5,7 @@ const user_Router = express.Router();
 const session = require('express-session') ;
 const dotenv = require("dotenv");
 const app = express();
+const authenticate = require("./Authentication");
 app.use(express.json());
 dotenv.config(); 
 const isValidEmail = (v) => {
@@ -42,9 +43,10 @@ function isValidUpdate(entry) {
   return true;
 }
 
-user_Router.get("/:id", (req, res) => {
-  //authentication for requester here
-  //
+user_Router.get("/:id",authenticate, (req, res) => {
+  if(!req.user.isAdmin){
+    res.sendStatus(401);
+  }
   User.findById(req.params.id)
     .then((e) => res.send(e))
     .catch((err) => {
@@ -53,7 +55,7 @@ user_Router.get("/:id", (req, res) => {
     });
 });
 
-user_Router.get("/",authenticate, async(req, res) => {
+user_Router.get("/profile",authenticate, async(req, res) => {
   const users = await User.find();
 //  console.log(users);
   console.log(req.user);
@@ -62,8 +64,9 @@ user_Router.get("/",authenticate, async(req, res) => {
 
 //create
 user_Router.post("/register", async(req, res) => {
+  console.log(req.body);
   if (isValidEntry(req.body)) {
-  let entry = req.body; 
+  let entry = req.body;
     const user = User(entry);
     user
       .save()
@@ -81,21 +84,8 @@ user_Router.post("/register", async(req, res) => {
   }
 });
 
-function authenticate(req,res,next){
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
-  console.log(token);
-  if(token==null)return res.sendStatus(401);
-  jwt.verify(token,process.env.ACCESS_TOKEN_SECRET,(err,user)=>{
-    if(err)return res.sendStatus(403);
-    req.user = user ; 
-    next();
-  })
-
-}
-
 //update
-user_Router.put("/", (req, res) => {
+user_Router.put("/", authenticate , (req, res) => {
   const id = req.body._id;
   const update = req.body.update;
   if (!id || !isValidUpdate(update)) res.sendStatus(422);
@@ -107,7 +97,10 @@ user_Router.put("/", (req, res) => {
     .catch((err) => res.status(400).send(err));
 });
 
-user_Router.delete("/:id", async (req, res) => {
+user_Router.delete("/:id",authenticate, async (req, res) => {
+  if(!req.user.isAdmin){
+    return res.sendStatus(401);
+  }
   try {
     const user = await User.findByIdAndDelete(req.params.id);
 
@@ -123,5 +116,4 @@ user_Router.delete("/:id", async (req, res) => {
     res.status(404).json({ msg: `${req.params.id} is not a correct id` });
   }
 });
-
 module.exports = user_Router;

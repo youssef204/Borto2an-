@@ -5,9 +5,6 @@ import axios from "axios";
     constructor(props){
         super(props);
         this.state = {
-            user:"",
-            refresh:"",
-            access:"",
             email:"",
             password:"",
             loggedIn:false
@@ -24,8 +21,11 @@ import axios from "axios";
       .post('http://localhost:8000/api/user/auth/login',data)
       .then(res => {
         if(res.data.auth){
-            this.setState({user:res.data.user, refresh: res.data.refresh, access: res.data.access, email:"", password:"", loggedIn:true});
-            this.props.onLogin(this.state.user, this.state.refresh, this.state.access);
+            console.log(res.data.user);
+            localStorage.setItem("token",res.data.token);
+            localStorage.setItem("refreshToken",res.data.refreshToken);
+            localStorage.setItem("user",JSON.stringify(res.data.user));
+            this.setState({email:"", password:"", loggedIn:true});
             this.props.history.push("/");
             alert("Logged in successfully");
         }
@@ -41,7 +41,6 @@ import axios from "axios";
 
 
     render() {
-        if(!this.state.user)
         return (
             <div className="outer">
             <div className="inner">
@@ -74,10 +73,6 @@ import axios from "axios";
             </div>
             </div>
         );
-        else{
-            this.props.history.push("/page_not_found");
-            return <></>;
-        }
     }
 }
 export default Login;

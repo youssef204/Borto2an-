@@ -22,23 +22,17 @@ import "./App.css";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import FlightSeatsSelection from "./components/FlightSeatsSelection";
 function App() {
-  const [user, setUser] = useState(0);
-  const [refresh, setRefresh] = useState(0);
-  const [access, setAccess] = useState(0);
-
-  const onLogin = (user, refresh, access) => {setUser(user); setRefresh(refresh); setAccess(access);}
-
   return (
     <>
       <Router>
-        <NavBar user={user}></NavBar>
+        <NavBar ></NavBar>
         <br />
         <br />
         <br />
         <div>
           <Switch>
             {/* guest  */}
-            <Route exact path='/login' render={(props) => <Login {...props} user={user} onLogin={onLogin}/>}/>
+            <Route exact path='/login' component={Login}/>
             <Route exact path='/register' component={Register} />
 
             {/* all */}

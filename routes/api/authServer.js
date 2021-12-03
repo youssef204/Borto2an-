@@ -34,12 +34,12 @@ auth_Router.post("/login", async(req, res) => {
       console.log(user);
       const compare = (user[0].password===password) ; 
       if(compare){
-        const {email,password}=user[0];
-        const new_user = {email,password};
+        const {email,password,isAdmin}=user[0];
+        const new_user = {email,password,isAdmin};  
         const token = generateAccessToken(new_user);
         const refreshToken = jwt.sign(new_user, process.env.REFRESH_TOKEN_SECRET)
         refreshTokens.push(refreshToken);
-        res.status(200).json({auth:true , access:token , refresh:refreshToken, user:{...user[0]._doc,password:''}});
+        res.status(200).json({auth:true , token:token , refreshToken:refreshToken, user:{...user[0]._doc,password:''}});
       }
       else{
         res.send({auth:false , message:"Wrong Password"});

@@ -2,6 +2,7 @@
 const express = require("express");
 const flight_router = express.Router();
 const Flight = require("../../models/Flight");
+const authenticate = require("./Authentication");
 //var qs = require('qs');
 
 //update flight
@@ -54,7 +55,8 @@ flight_router.get("/", function (req, res, next) {
     .catch((err) => res.status(404).json({ msg: "No flights are found" }));
 });
 
-flight_router.put("/", (req, res) => {
+flight_router.put("/", authenticate,(req, res) => {
+  if(!req.user.isAdmin)return res.setStatus(401);
   const id = req.body._id;
   const update = req.body.update;
   storeTimeAsIs(update);
@@ -67,7 +69,9 @@ flight_router.put("/", (req, res) => {
 });
 
 //read all flights
-flight_router.get("/showAllflights", (req, res) => {
+flight_router.get("/showAllflights", authenticate , (req, res) => {
+  console.log(req.user);
+  if(!req.user.isAdmin)return res.sendStatus(401);
   Flight.find()
     .populate('airplaneModelID')
     .then((flight) => {
@@ -77,7 +81,8 @@ flight_router.get("/showAllflights", (req, res) => {
 });
 
 //delete flight with given ID
-flight_router.delete("/:id", async (req, res) => {
+flight_router.delete("/:id", authenticate , async (req, res) => {
+  if(!req.user.isAdmin)return res.setStatus(401);
   try {
     const flight = await Flight.findByIdAndDelete(req.params.id);
     if (flight) res.send(flight);
@@ -89,7 +94,8 @@ flight_router.delete("/:id", async (req, res) => {
   }
 });
 
-flight_router.post("/", async (req, res) => {
+flight_router.post("/", authenticate , async (req, res) => {
+  if(!req.user.isAdmin)return res.setStatus(401);
   let dataTmp = req.body;
   storeTimeAsIs(dataTmp);
   Flight.create(dataTmp)
@@ -100,5 +106,7 @@ flight_router.post("/", async (req, res) => {
       res.status(400).send(err);
     });
 });
+
+
 
 module.exports = flight_router;
