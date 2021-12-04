@@ -90,7 +90,7 @@ function NavigationBar({user=JSON.parse(localStorage.getItem("user"))}) {
     
     
       <li className="NavBar">
-        <Link to="/" exact className="NavBar">Home</Link>
+        <Link to="/" exact className="NavBar">Search Flights</Link>
       </li>
       
     
@@ -132,7 +132,7 @@ function NavigationBar({user=JSON.parse(localStorage.getItem("user"))}) {
     
     
      <li className="NavBar">
-        <Link to="/" exact className="NavBar">Home</Link>
+        <Link to="/" exact className="NavBar">Search Flights</Link>
       </li>
       
     
