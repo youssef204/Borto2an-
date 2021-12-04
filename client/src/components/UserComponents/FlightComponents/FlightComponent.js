@@ -7,6 +7,8 @@ import "./FlightComponentCSS.css";
 import Dep_ArrComponent from "./Dep_ArrComponent";
 import FlightCabin from "./FlightCabin";
 import FlightAirplane from "./FlightAirplane";
+import { getHours, getMinutes } from "@mui/lab/ClockPicker/shared";
+import { textAlign } from "@mui/system";
 
 export default function FlightComponent(probs) {
   //const [flight, setFlight] = useState(probs.flight); //"61a59b84b407eba753da9c9a");
@@ -35,13 +37,13 @@ export default function FlightComponent(probs) {
       Math.floor((diff % unitmapping.hours) / unitmapping.minutes) == 0
         ? ""
         : Math.floor((diff % unitmapping.hours) / unitmapping.minutes) +
-          " minutes ";
+          " minutes";
     return days + hours + minutes;
   };
 
   const [duration, setDuration] = useState(calculateDuration(details));
 
-  console.log("duration", duration);
+  //console.log("duration", duration);
   const onSelect = (cabin, name) => {
     probs.onSelect(details, cabin, name, duration);
   };
@@ -96,6 +98,37 @@ export default function FlightComponent(probs) {
                 <Dep_ArrComponent isDeparture="false" probs={details.arrival} />
               </div>
             </div>
+            {/**duration */}
+            <div
+              className="duration"
+              style={{ marginTop: "10px", textAlign: "center" }}
+            >
+              <br />
+              <label
+                className="duration-text text-muted"
+                style={{ marginBottom: 10 }}
+              >
+                Duration
+              </label>
+
+              <br />
+
+              <div className="text-muted" style={{ font: "23px Verdana" }}>
+                {getDurationSplit(duration).map((e, idx) => {
+                  if (idx % 2 === 0) {
+                    return e;
+                  } else {
+                    return (
+                      <>
+                        {"  " + e}
+                        <br />
+                      </>
+                    );
+                  }
+                })}
+              </div>
+            </div>
+            {/** prices and cabins */}
             <div className="prices flex-Container-Row">
               <FlightCabin
                 economy={details.economyCabin}
@@ -124,4 +157,13 @@ async function getDetails(id) {
   });
   //console.log(res.data[0], "  id ", id);
   return res.data[0];
+}
+
+function getDurationSplit(duration) {
+  let arr = duration.split(" ");
+  return arr.map((item) => {
+    if (item === "hours") return "hrs.";
+    if (item === "minutes") return "min.";
+    return item;
+  });
 }

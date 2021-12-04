@@ -14,6 +14,8 @@ export default function Dep_ArrComponent({ isDeparture, probs }) {
       Ter: {details.terminal}
       <br />
       {details.time.substring(0, 10)}
+      <br />
+      {details.time.substring(11, 19)}
     </>
   );
   const text =

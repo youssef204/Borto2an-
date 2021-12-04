@@ -73,7 +73,7 @@ img {
 }
 
 .prices {
-  width: 50%;
+  width: 40%;
   min-height: 80px;
   background-color: white;
   margin-right: 10px;
@@ -87,4 +87,12 @@ img {
 .left-border {
   padding-left: 5px;
   border-left: 2px solid rgba(0, 0, 0, 0.2);
+}
+.duration {
+  width: 10%;
+  background-color: white;
+  border-left: 2px solid #bbbbbb;
+}
+.duration-text {
+  font: 15px Verdana;
 }
