@@ -1,0 +1,47 @@
+.footer {
+  position: fixed;
+  bottom: 0;
+  height: 130px !important;
+  width: 100% !important;
+  background-color: rgba(20, 20, 20, 0.9);
+  z-index: 10;
+}
+.flight {
+  width: 25%;
+  height: 100%;
+  background-color: rgba(100, 100, 100, 0.7);
+  margin: auto;
+  padding: auto;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  vertical-align: middle;
+  border-left: 2px dashed black;
+  border-right: 2px dashed black;
+  font: 30px Verdana;
+  color: rgb(200, 200, 200);
+}
+.button-holder {
+  width: 30%;
+  height: 100%;
+  margin: auto;
+
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 35px;
+}
+.planeContainer {
+  width: 25%;
+  height: 100%;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  vertical-align: middle;
+  background-color: rgba(100, 0, 0, 0.7);
+  border-radius: 3%;
+  font: 30px Verdana;
+  color: rgb(200, 200, 200);
+}

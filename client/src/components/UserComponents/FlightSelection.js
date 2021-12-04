@@ -1,8 +1,20 @@
 import React, { useState, useEffect } from "react";
+import ChosenFLightsDetails from "./ChosenFLightsDetails";
 import FlightsMenu from "./FlightsMenu";
 
+function getFromLocalStorage(itemName) {
+  const searchResults = JSON.parse(localStorage.getItem("searchResultData"));
+  const requiredItem = searchResults[itemName];
+  //console.log("search results", searchResults);
+  // console.log("req", requiredItem);
+  return requiredItem;
+}
+
 export default function FlightSelection() {
-  const [firstFlightArr, setFirstFlightArr] = useState([
+  const [firstFlightArr, setFirstFlightArr] = useState(
+    getFromLocalStorage("sentData")
+  );
+  /*[
     {
       _id: "61a59b84b407eba753da9c9a",
       flightNumber: 109,
@@ -119,9 +131,19 @@ export default function FlightSelection() {
       updatedAt: "2021-12-01T01:59:07.257Z",
       __v: 0,
     },
-  ]);
-  const [secondFlightArr, setSecondFlightArr] = useState([
-    {
+  ]);*/
+  const [secondFlightArr, setSecondFlightArr] = useState(
+    getFromLocalStorage("returnData")
+  );
+  const [adultNumber, setAdultNumber] = useState(
+    getFromLocalStorage("adultNumber")
+  );
+  const [childNumber, setChildNumber] = useState(
+    getFromLocalStorage("childNumber")
+  );
+
+  /*{
+      [
       _id: "61a6d6eb396fa0eae7f63dca",
       flightNumber: 178,
       departure: {
@@ -179,7 +201,7 @@ export default function FlightSelection() {
       updatedAt: "2021-12-01T01:59:07.257Z",
       __v: 0,
     },
-  ]);
+  ]);*/
   const [firstFlight, setFirstFlight] = useState(undefined);
   const [secondFlight, setSecondFlight] = useState(undefined);
 
@@ -194,10 +216,18 @@ export default function FlightSelection() {
     console.log("second flight chosen", secondFlight);
   }, [firstFlight, secondFlight]);
   return (
-    <>
+    <div style={{ paddingBottom: "300px" }}>
       {/*JSON.stringify(firstFlightArr)*/}
       <FlightsMenu flights={firstFlightArr} onSelect={onFirstFlightSelect} />
       <FlightsMenu flights={secondFlightArr} onSelect={onSecondFlightSelect} />
-    </>
+      {
+        <ChosenFLightsDetails
+          firstFlight={firstFlight}
+          secondFlight={secondFlight}
+          adultNumber={adultNumber}
+          childNumber={childNumber}
+        />
+      }
+    </div>
   );
 }

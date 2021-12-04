@@ -29,25 +29,28 @@ class SearchFlights extends React.Component {
   numberOfSelecetedInputs = [0, 0, 0, 0, 0, 0];
   constructor() {
     super();
-    if(JSON.parse(localStorage.getItem("user")) && JSON.parse(localStorage.getItem("user"))["isAdmin"])
-    this.state = {};
+    if (
+      JSON.parse(localStorage.getItem("user")) &&
+      JSON.parse(localStorage.getItem("user"))["isAdmin"]
+    )
+      this.state = {};
     else
-    this.state = {
-      departure: {
-        airport: "",
-        terminal: "",
-        time: "",
-      },
-      arrival: {
-        airport: "",
-        terminal: "",
-        time: "",
-      },
-    };
+      this.state = {
+        departure: {
+          airport: "",
+          terminal: "",
+          time: "",
+        },
+        arrival: {
+          airport: "",
+          terminal: "",
+          time: "",
+        },
+      };
   }
 
   onChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value});
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   onSubmit2 = (e, state) => {
@@ -58,7 +61,7 @@ class SearchFlights extends React.Component {
     axios({
       method: "get",
       url: "http://localhost:8000/api/flights",
-      headers:{"authorization":"Bearer "+localStorage.getItem("token")},
+      headers: { authorization: "Bearer " + localStorage.getItem("token") },
       params: data,
     })
       .then((res) => {
@@ -239,7 +242,7 @@ class SearchFlights extends React.Component {
     let res = await axios({
       method: "get",
       url: "http://localhost:8000/api/flights",
-      headers:{"authorization":"Bearer "+localStorage.getItem("token")},
+      headers: { authorization: "Bearer " + localStorage.getItem("token") },
       params: paramsData,
     });
     // .then((res) => {
@@ -256,11 +259,11 @@ class SearchFlights extends React.Component {
             entry["airplaneModelID"]["economyColumns"] -
             entry["economyCabin"]["takenSeats"].length
       );
-     // sentData.map((info) => (info["AdultNumber"] = this.adultnumber));
-     // sentData.map((info) => (info["childNumber"] = this.childnumber));
+      // sentData.map((info) => (info["AdultNumber"] = this.adultnumber));
+      // sentData.map((info) => (info["childNumber"] = this.childnumber));
     } else if (this.chosenCabin === "businessCabin") {
       sentData = res.data.filter((entry) => entry.businessCabin !== null);
-     // sentData.map((info) => (info["chosenCabin"] = "business"));
+      // sentData.map((info) => (info["chosenCabin"] = "business"));
       sentData.filter(
         (entry) =>
           totalSeats <=
@@ -268,11 +271,11 @@ class SearchFlights extends React.Component {
             entry["airplaneModelID"]["businessColumns"] -
             entry["businessCabin"]["takenSeats"].length
       );
-     // sentData.map((info) => (info["AdultNumber"] = this.adultnumber));
-     // sentData.map((info) => (info["childNumber"] = this.childnumber));
+      // sentData.map((info) => (info["AdultNumber"] = this.adultnumber));
+      // sentData.map((info) => (info["childNumber"] = this.childnumber));
     } else if (this.chosenCabin === "firstCabin") {
       sentData = res.data.filter((entry) => entry.firstCabin !== null);
-     // sentData.map((info) => (info["chosenCabin"] = "first"));
+      // sentData.map((info) => (info["chosenCabin"] = "first"));
       sentData.filter(
         (entry) =>
           totalSeats <=
@@ -280,8 +283,8 @@ class SearchFlights extends React.Component {
             entry["airplaneModelID"]["firstClassColumns"] -
             entry["firstCabin"]["takenSeats"].length
       );
-     // sentData.map((info) => (info["AdultNumber"] = this.adultnumber));
-     // sentData.map((info) => (info["childNumber"] = this.childnumber));
+      // sentData.map((info) => (info["AdultNumber"] = this.adultnumber));
+      // sentData.map((info) => (info["childNumber"] = this.childnumber));
     }
     // console.log("sentData are",sentData);
     // this.props.history.push({
@@ -303,7 +306,7 @@ class SearchFlights extends React.Component {
     res = await axios({
       method: "get",
       url: "http://localhost:8000/api/flights",
-      headers:{"authorization":"Bearer "+localStorage.getItem("token")},
+      headers: { authorization: "Bearer " + localStorage.getItem("token") },
       params: paramsDataReturn,
     });
     // .then((res) => {
@@ -312,7 +315,7 @@ class SearchFlights extends React.Component {
     let returnData;
     if (this.chosenCabin === "economyCabin") {
       returnData = res.data.filter((entry) => entry.economyCabin !== null);
-     // returnData.map((info) => (info["chosenCabin"] = "economy"));
+      // returnData.map((info) => (info["chosenCabin"] = "economy"));
       returnData.filter(
         (entry) =>
           totalSeats <=
@@ -320,8 +323,8 @@ class SearchFlights extends React.Component {
             entry["airplaneModelID"]["economyColumns"] -
             entry["economyCabin"]["takenSeats"].length
       );
-     // returnData.map((info) => (info["AdultNumber"] = this.adultnumber));
-     // returnData.map((info) => (info["childNumber"] = this.childnumber));
+      // returnData.map((info) => (info["AdultNumber"] = this.adultnumber));
+      // returnData.map((info) => (info["childNumber"] = this.childnumber));
     } else if (this.chosenCabin === "businessCabin") {
       returnData = res.data.filter((entry) => entry.businessCabin !== null);
       //returnData.map((info) => (info["chosenCabin"] = "business"));
@@ -332,11 +335,11 @@ class SearchFlights extends React.Component {
             entry["airplaneModelID"]["businessColumns"] -
             entry["businessCabin"]["takenSeats"].length
       );
-     // returnData.map((info) => (info["AdultNumber"] = this.adultnumber));
-     // returnData.map((info) => (info["childNumber"] = this.childnumber));
+      // returnData.map((info) => (info["AdultNumber"] = this.adultnumber));
+      // returnData.map((info) => (info["childNumber"] = this.childnumber));
     } else if (this.chosenCabin === "firstCabin") {
       returnData = res.data.filter((entry) => entry.firstCabin !== null);
-    //  returnData.map((info) => (info["chosenCabin"] = "first"));
+      //  returnData.map((info) => (info["chosenCabin"] = "first"));
       returnData.filter(
         (entry) =>
           totalSeats <=
@@ -344,21 +347,27 @@ class SearchFlights extends React.Component {
             entry["airplaneModelID"]["firstClassColumns"] -
             entry["firstCabin"]["takenSeats"].length
       );
-    //  returnData.map((info) => (info["AdultNumber"] = this.adultnumber));
-     // returnData.map((info) => (info["childNumber"] = this.childnumber));
+      //  returnData.map((info) => (info["AdultNumber"] = this.adultnumber));
+      // returnData.map((info) => (info["childNumber"] = this.childnumber));
     }
     console.log("sentData are", sentData);
     console.log("returnData are", returnData);
-    let stateData = {sentData, returnData , "adultNumber" : this.adultnumber , "childNumber" : this.childnumber , "ChosenCabin" : this.chosenCabin};
+    let stateData = {
+      sentData,
+      returnData,
+      adultNumber: this.adultnumber,
+      childNumber: this.childnumber,
+      ChosenCabin: this.chosenCabin,
+    };
     console.log("state Data ", stateData);
     // localStorage.setItem("depData",JSON.stringify(sentData));
     // localStorage.setItem("retData",JSON.stringify(returnData));
     // localStorage.setItem("adultNumber",JSON.stringify(this.adultnumber));
     // localStorage.setItem("chosenCabin",JSON.stringify(this.chosenCabin));
     // localStorage.setItem("chilcNumber",JSON.stringify(this.childnumber));
-    localStorage.setItem("searchResultData",JSON.stringify(stateData));
+    localStorage.setItem("searchResultData", JSON.stringify(stateData));
     console.log(JSON.parse(localStorage.getItem("searchResultData")));
-    window.location.href="http://localhost:3000/flight_component"
+    window.location.href = "http://localhost:3000/flight_selection";
 
     // this.props.history.push({
     //   pathname: "/flight_component",
@@ -379,241 +388,239 @@ class SearchFlights extends React.Component {
   };
 
   render() {
-    if(JSON.parse(localStorage.getItem("user")) && JSON.parse(localStorage.getItem("user"))["isAdmin"]){
+    if (
+      JSON.parse(localStorage.getItem("user")) &&
+      JSON.parse(localStorage.getItem("user"))["isAdmin"]
+    ) {
       console.log(localStorage.getItem("user")["isAdmin"]);
-    return (
-      <>
-        <form noValidate onSubmit={(e) => this.onSubmit2(e, this.state)}>
-          <div>
-            <label>Departure Airport: </label>
-            <br />
+      return (
+        <>
+          <form noValidate onSubmit={(e) => this.onSubmit2(e, this.state)}>
+            <div>
+              <label>Departure Airport: </label>
+              <br />
+              <input
+                type="text"
+                placeholder="Departure Airport"
+                name="departure.airport"
+                onChange={this.onChange}
+              />
+            </div>
+
+            <div>
+              <label>Departure Terminal: </label>
+              <br />
+              <input
+                type="text"
+                placeholder="Departure Terminal"
+                name="departure.terminal"
+                onChange={this.onChange}
+              />
+            </div>
+
+            <div>
+              <label>Arrival Airport: </label>
+              <br />
+
+              <input
+                type="text"
+                placeholder="Arrival Airport"
+                name="arrival.airport"
+                onChange={this.onChange}
+              />
+            </div>
+
+            <div>
+              <label>Arrival Terminal: </label>
+              <br />
+
+              <input
+                type="text"
+                placeholder="Arrival Terminal"
+                name="arrival.terminal"
+                onChange={this.onChange}
+              />
+            </div>
+
+            <div>
+              <label>Flight Number: </label>
+              <br />
+
+              <input
+                type="number"
+                placeholder="Flight Number"
+                name="flightNumber"
+                onChange={this.onChange}
+              />
+            </div>
+
+            <div>
+              <label>Departure Time: </label>
+              <br />
+              <input
+                type="date"
+                name="departure.time"
+                onChange={this.onChange}
+              />
+            </div>
+            <div>
+              <label>Arrival Time: </label>
+              <br />
+              <input type="date" name="arrival.time" onChange={this.onChange} />
+            </div>
+            <br></br>
+
             <input
-              type="text"
-              placeholder="Departure Airport"
-              name="departure.airport"
-              onChange={this.onChange}
+              type="submit"
+              className="btn btn-outline-warning btn-block mt-4"
             />
-          </div>
-
-          <div>
-            <label>Departure Terminal: </label>
-            <br />
-            <input
-              type="text"
-              placeholder="Departure Terminal"
-              name="departure.terminal"
-              onChange={this.onChange}
-            />
-          </div>
-
-          <div>
-            <label>Arrival Airport: </label>
-            <br />
-
-            <input
-              type="text"
-              placeholder="Arrival Airport"
-              name="arrival.airport"
-              onChange={this.onChange}
-            />
-          </div>
-
-          <div>
-            <label>Arrival Terminal: </label>
-            <br />
-
-            <input
-              type="text"
-              placeholder="Arrival Terminal"
-              name="arrival.terminal"
-              onChange={this.onChange}
-            />
-          </div>
-
-          <div>
-            <label>Flight Number: </label>
-            <br />
-
-            <input
-              type="number"
-              placeholder="Flight Number"
-              name="flightNumber"
-              onChange={this.onChange}
-            />
-          </div>
-
-          <div>
-            <label>Departure Time: </label>
-            <br />
-            <input
-              type="date"
-              name="departure.time"
-              onChange={this.onChange}
-            />
-          </div>
-          <div>
-            <label>Arrival Time: </label>
-            <br />
-            <input
-              type="date"
-              name="arrival.time"
-              onChange={this.onChange}
-            />
-          </div>
-          <br></br>
-
-          <input
-            type="submit"
-            className="btn btn-outline-warning btn-block mt-4"
-          />
-        </form>
-      </>
-    );
-    }
-    else {
-    return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-        }}
-      >
-        <Box
-          component="span"
-          border={2}
-          borderRadius={10}
-          borderLeft={2}
-          borderRight={2}
-          borderColor="#a9a9a9"
-          sx={{ p: 5 }}
+          </form>
+        </>
+      );
+    } else {
+      return (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+          }}
         >
-          <Stack
-            direction="row"
-            spacing={7}
-            style={{ justifyContent: "center", alignItems: "center" }}
+          <Box
+            component="span"
+            border={2}
+            borderRadius={10}
+            borderLeft={2}
+            borderRight={2}
+            borderColor="#a9a9a9"
+            sx={{ p: 5 }}
           >
-            <Stack spacing={5}>
-              <OutlinedTextField
-                label="From*"
-                width={200}
-                fontsize={18}
-                value={this.state.departure.airport}
-                onChange={this.onChangeFrom}
-              ></OutlinedTextField>
-              {this.selectedDepAirport !== undefined &&
-              this.selectedArrAirport !== undefined &&
-              this.selectedArrAirport === this.selectedDepAirport ? (
-                <TextField
-                  style={{ width: "200px", fontsize: "18px" }}
-                  onChange={this.onChangeToError}
-                  error
-                  id="outlined-error-helper-text"
-                  label="To*"
-                  defaultValue={this.selectedArrAirport}
-                  helperText="please enter different destinations."
-                />
-              ) : (
+            <Stack
+              direction="row"
+              spacing={7}
+              style={{ justifyContent: "center", alignItems: "center" }}
+            >
+              <Stack spacing={5}>
                 <OutlinedTextField
-                  label="To*"
+                  label="From*"
                   width={200}
                   fontsize={18}
-                  onChange={this.onChangeTo}
-                  name="arrival{airport}"
-                  value={this.state.arrival.airport}
+                  value={this.state.departure.airport}
+                  onChange={this.onChangeFrom}
                 ></OutlinedTextField>
-              )}
+                {this.selectedDepAirport !== undefined &&
+                this.selectedArrAirport !== undefined &&
+                this.selectedArrAirport === this.selectedDepAirport ? (
+                  <TextField
+                    style={{ width: "200px", fontsize: "18px" }}
+                    onChange={this.onChangeToError}
+                    error
+                    id="outlined-error-helper-text"
+                    label="To*"
+                    defaultValue={this.selectedArrAirport}
+                    helperText="please enter different destinations."
+                  />
+                ) : (
+                  <OutlinedTextField
+                    label="To*"
+                    width={200}
+                    fontsize={18}
+                    onChange={this.onChangeTo}
+                    name="arrival{airport}"
+                    value={this.state.arrival.airport}
+                  ></OutlinedTextField>
+                )}
+              </Stack>
+              <Stack spacing={5}>
+                <Calendar
+                  onChange={this.onChangeDepTime}
+                  selected={this.state.departure.time}
+                  value={this.state.departure.time}
+                  minDate={Date.now()}
+                  maxDate={
+                    this.selectedArrday === null ? {} : this.selectedArrday
+                  }
+                  // onError = {this.onErrorDep}
+                  label="Departure Date*"
+                ></Calendar>
+                <Calendar
+                  label="Return Date*"
+                  onChange={this.onChangeArrTime}
+                  selected={this.state.arrival.time}
+                  minDate={
+                    this.selectedDepday === undefined
+                      ? Date.now()
+                      : this.selectedDepday
+                  }
+                  value={this.state.arrival.time}
+                ></Calendar>
+              </Stack>
+              <FormControl component="fieldset">
+                <FormLabel component="legend">Choose your Cabin*</FormLabel>
+                <RadioGroup
+                  aria-label="cabin"
+                  name="radio-buttons-group"
+                  onChange={this.onChangeCabin}
+                >
+                  <FormControlLabel
+                    value="Economy"
+                    control={<Radio />}
+                    label="Economy"
+                  />
+                  <FormControlLabel
+                    value="Business"
+                    control={<Radio />}
+                    label="Business"
+                  />
+                  <FormControlLabel
+                    value="First"
+                    control={<Radio />}
+                    label="First Class"
+                  />
+                </RadioGroup>
+              </FormControl>
+              <Stack spacing={5}>
+                <div>
+                  <label style={{ margin: "10px" }}>No. of Adults*: </label>
+                  <input
+                    style={{ width: "150px", height: "20px" }}
+                    type="number"
+                    max="9"
+                    min="1"
+                    onInvalid={this.invalid}
+                    onChange={this.onChangeAdult}
+                  />
+                </div>
+                <div>
+                  <label style={{ margin: "5.75px" }}>No. of Children: </label>
+                  <input
+                    style={{ width: "150px", height: "20px" }}
+                    type="number"
+                    max="5"
+                    min="0"
+                    onChange={this.onChangeChild}
+                  />
+                </div>
+              </Stack>
+              <Stack spacing={5}>
+                <Button
+                  label="Search"
+                  index={this.numberOfSelecetedInputs.includes(0) ? 0 : 1}
+                  width={70}
+                  height={40}
+                  onClick={
+                    this.numberOfSelecetedInputs.includes(0)
+                      ? {}
+                      : (e) => this.onSubmit(e, this.state)
+                  }
+                ></Button>
+              </Stack>
             </Stack>
-            <Stack spacing={5}>
-              <Calendar
-                onChange={this.onChangeDepTime}
-                selected={this.state.departure.time}
-                value={this.state.departure.time}
-                minDate={Date.now()}
-                maxDate={
-                  this.selectedArrday === null ? {} : this.selectedArrday
-                }
-                // onError = {this.onErrorDep}
-                label="Departure Date*"
-              ></Calendar>
-              <Calendar
-                label="Return Date*"
-                onChange={this.onChangeArrTime}
-                selected={this.state.arrival.time}
-                minDate={
-                  this.selectedDepday === undefined
-                    ? Date.now()
-                    : this.selectedDepday
-                }
-                value={this.state.arrival.time}
-              ></Calendar>
-            </Stack>
-            <FormControl component="fieldset">
-              <FormLabel component="legend">Choose your Cabin*</FormLabel>
-              <RadioGroup
-                aria-label="cabin"
-                name="radio-buttons-group"
-                onChange={this.onChangeCabin}
-              >
-                <FormControlLabel
-                  value="Economy"
-                  control={<Radio />}
-                  label="Economy"
-                />
-                <FormControlLabel
-                  value="Business"
-                  control={<Radio />}
-                  label="Business"
-                />
-                <FormControlLabel
-                  value="First"
-                  control={<Radio />}
-                  label="First Class"
-                />
-              </RadioGroup>
-            </FormControl>
-            <Stack spacing={5}>
-              <div>
-                <label style={{ margin: "10px" }}>No. of Adults*: </label>
-                <input
-                  style={{ width: "150px", height: "20px" }}
-                  type="number"
-                  max="9"
-                  min="1"
-                  onInvalid={this.invalid}
-                  onChange={this.onChangeAdult}
-                />
-              </div>
-              <div>
-                <label style={{ margin: "5.75px" }}>No. of Children: </label>
-                <input
-                  style={{ width: "150px", height: "20px" }}
-                  type="number"
-                  max="5"
-                  min="0"
-                  onChange={this.onChangeChild}
-                />
-              </div>
-            </Stack>
-            <Stack spacing={5}>
-              <Button
-                label="Search"
-                index={this.numberOfSelecetedInputs.includes(0) ? 0 : 1}
-                width={70}
-                height={40}
-                onClick={
-                  this.numberOfSelecetedInputs.includes(0)
-                    ? {}
-                    : (e) => this.onSubmit(e, this.state)
-                }
-              ></Button>
-            </Stack>
-          </Stack>
-        </Box>
-      </div>
-    );
-              }
+          </Box>
+        </div>
+      );
+    }
   }
 }
 
