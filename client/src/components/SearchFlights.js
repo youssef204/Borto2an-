@@ -18,15 +18,12 @@ import { Popover } from "@mui/material";
 import { InputLabel } from "@mui/material";
 
 class SearchFlights extends React.Component {
-  selectedDepAirport;
-  selectedArrAirport;
-  selectedArrday;
-  selectedDepday;
-  chosenCabin;
-  adultnumber;
-  childnumber;
-  errorYes;
-  numberOfSelecetedInputs = [0, 0, 0, 0, 0, 0];
+  //selectedArrday;
+  //selectedDepday;
+  //chosenCabin;
+  // adultNumber;
+  // childNumber;
+  //numberOfSelecetedInputs = [0, 0, 0, 0, 0, 0];
   constructor() {
     super();
     if (
@@ -39,13 +36,16 @@ class SearchFlights extends React.Component {
         departure: {
           airport: "",
           terminal: "",
-          time: "",
+          time: null,
         },
         arrival: {
           airport: "",
           terminal: "",
-          time: "",
+          time: null,
         },
+        chosenCabin: undefined,
+        adultNumber: 0,
+        childNumber: 0,
       };
   }
 
@@ -84,11 +84,7 @@ class SearchFlights extends React.Component {
         airport: e.target.value,
       },
     }));
-    if (e.target.value.length !== 0) this.numberOfSelecetedInputs[0] = 1;
-    else this.numberOfSelecetedInputs[0] = 0;
-    this.selectedDepAirport = e.target.value;
     console.log(this.state);
-    console.log(this.numberOfSelecetedInputs);
     //this.render();
   };
 
@@ -99,17 +95,7 @@ class SearchFlights extends React.Component {
         airport: e.target.value,
       },
     }));
-    if (e.target.value.length !== 0) this.numberOfSelecetedInputs[1] = 1;
-    else this.numberOfSelecetedInputs[1] = 0;
-    this.selectedArrAirport = e.target.value;
-    console.log(e.target.value);
-    console.log(this.numberOfSelecetedInputs);
     //this.render();
-  };
-
-  onChangeToError = (e) => {
-    this.selectedArrAirport = e.target.value;
-    this.setState({});
   };
 
   onChangeDepTime = (date) => {
@@ -119,10 +105,6 @@ class SearchFlights extends React.Component {
         time: date,
       },
     }));
-    this.selectedDepday = date;
-    if (this.selectedDepday !== null) this.numberOfSelecetedInputs[2] = 1;
-    else this.numberOfSelecetedInputs[2] = 0;
-    console.log(this.numberOfSelecetedInputs);
     // console.log(this.selectedDepday);
     //this.render();
     //console.log(this.state);
@@ -136,97 +118,66 @@ class SearchFlights extends React.Component {
         time: date,
       },
     }));
-    this.selectedArrday = date;
-    if (this.selectedArrday !== null) this.numberOfSelecetedInputs[3] = 1;
-    else this.numberOfSelecetedInputs[3] = 0;
-    console.log(this.numberOfSelecetedInputs);
     // console.log(this.selectedArrday);
     //this.render();
     //console.log(this.state);
   };
 
   onChangeCabin = (e) => {
-    if (e.target.value === "Economy") this.chosenCabin = "economyCabin";
-    else if (e.target.value === "Business") this.chosenCabin = "businessCabin";
-    else if (e.target.value === "First") this.chosenCabin = "firstCabin";
-    else this.chosenCabin = null;
-    if (this.chosenCabin !== null) this.numberOfSelecetedInputs[4] = 1;
-    else this.numberOfSelecetedInputs[4] = 0;
-    console.log(this.numberOfSelecetedInputs);
-    this.setState({});
+    if (e.target.value === "Economy")
+      this.setState((prevState) => ({
+        ...prevState,
+        chosenCabin: "economyCabin",
+      }));
+    else if (e.target.value === "Business")
+      this.setState((prevState) => ({
+        ...prevState,
+        chosenCabin: "businessCabin",
+      }));
+    else if (e.target.value === "First")
+      this.setState((prevState) => ({
+        ...prevState,
+        chosenCabin: "firstCabin",
+      }));
     //this.render();
     //console.log(this.chosenCabin);
   };
   onChangeAdult = (e) => {
-    this.adultnumber = e.target.value;
-    if (e.target.value.length !== 0) this.numberOfSelecetedInputs[5] = 1;
-    else this.numberOfSelecetedInputs[5] = 0;
-    console.log(this.numberOfSelecetedInputs);
-    console.log(this.numberOfSelecetedInputs.includes(0));
-    this.setState({});
+    this.setState((prevState) => ({
+      ...prevState,
+      adultNumber: e.target.value,
+    }));
     // this.render();
     // console.log(this.adultnumber);
   };
 
   onChangeChild = (e) => {
-    this.childnumber = e.target.value;
-    console.log(this.childnumber);
+    this.setState((prevState) => ({
+      ...prevState,
+      childNumber: e.target.value,
+    }));
   };
 
   onErrorDep = (e) => {
     e.target.label = "error";
   };
-  // getAirplaneEconomySeats = flight => {
-  //   axios({
-  //     method: "get",
-  //     url: "http://localhost:8000/api/airplaneModel/",
-  //     params: {_id : flight["airplaneModelID"]},
-  //   }).then((res) => {
-  //       let totalEconomySeats;
-  //       totalEconomySeats = res["economyRows"] * res["economyColumns"];
-  //       return totalEconomySeats;
-  //   })
-  // }
-
-  // getAirplaneBusinessSeats = flight => {
-  //   axios({
-  //     method: "get",
-  //     url: "http://localhost:8000/api/airplaneModel/",
-  //     params: {_id : flight["airplaneModelID"]},
-  //   }).then((res) => {
-  //       let totalEconomySeats;
-  //       totalEconomySeats = res["businessRows"] * res["businessColumns"];
-  //       return totalEconomySeats;
-  //   })
-  // }
-
-  // getAirplaneFirstClassSeats = flight => {
-  //   axios({
-  //     method: "get",
-  //     url: "http://localhost:8000/api/airplaneModel/",
-  //     params: {_id : flight["airplaneModelID"]},
-  //   }).then((res) => {
-  //       let totalEconomySeats;
-  //       totalEconomySeats = res["firstClassRows"] * res["firstClassColumns"];
-  //       return totalEconomySeats;
-  //   })
-  // }
 
   onSubmit = async (e, state) => {
+    if (!this.validateInput()) return;
     e.preventDefault();
     //let arrDate = Date.parse(this.state.arrival.time);
     //console.log("arrival date is",arrDate);
     this.setState((prevState) => ({
       arrival: {
         ...prevState.arrival,
-        time: this.selectedArrday.toISOString().substring(0, 10),
+        time: this.state.arrival.time.toISOString().substring(0, 10),
       },
       departure: {
         ...prevState.departure,
-        time: this.selectedDepday.toISOString().substring(0, 10),
+        time: this.state.departure.time.toISOString().substring(0, 10),
       },
     }));
-    console.log(this.selectedDepday.toISOString().substring(0, 10));
+    console.log(this.state.departure.time.toISOString().substring(0, 10));
     //  console.log("are they equal ", this.selectedArrday.toISOString().localeCompare("2021-11-30T11:33:00.000Z"))
     const data = this.getNonEmptyFields(state);
     console.log(data);
@@ -236,7 +187,7 @@ class SearchFlights extends React.Component {
       "arrival.airport": data["arrival"]["airport"],
       //"arrival.time" : data["arrival"]["time"]
     };
-    if (this.childnumber === undefined) this.childnumber = "0";
+    if (this.state.childNumber === undefined) this.state.childNumber = "0";
 
     let sentData;
     let res = await axios({
@@ -247,9 +198,9 @@ class SearchFlights extends React.Component {
     });
     // .then((res) => {
     // go to search results component with the data
-    let totalSeats = +this.childnumber + +this.adultnumber;
+    let totalSeats = +this.state.childNumber + +this.state.adultNumber;
 
-    if (this.chosenCabin === "economyCabin") {
+    if (this.state.chosenCabin === "economyCabin") {
       sentData = res.data.filter((entry) => entry.economyCabin !== null);
       //sentData.map((info) => (info["chosenCabin"] = "economy"));
       sentData.filter(
@@ -261,7 +212,7 @@ class SearchFlights extends React.Component {
       );
       // sentData.map((info) => (info["AdultNumber"] = this.adultnumber));
       // sentData.map((info) => (info["childNumber"] = this.childnumber));
-    } else if (this.chosenCabin === "businessCabin") {
+    } else if (this.state.chosenCabin === "businessCabin") {
       sentData = res.data.filter((entry) => entry.businessCabin !== null);
       // sentData.map((info) => (info["chosenCabin"] = "business"));
       sentData.filter(
@@ -273,7 +224,7 @@ class SearchFlights extends React.Component {
       );
       // sentData.map((info) => (info["AdultNumber"] = this.adultnumber));
       // sentData.map((info) => (info["childNumber"] = this.childnumber));
-    } else if (this.chosenCabin === "firstCabin") {
+    } else if (this.state.chosenCabin === "firstCabin") {
       sentData = res.data.filter((entry) => entry.firstCabin !== null);
       // sentData.map((info) => (info["chosenCabin"] = "first"));
       sentData.filter(
@@ -313,7 +264,7 @@ class SearchFlights extends React.Component {
     // go to search results component with the data
 
     let returnData;
-    if (this.chosenCabin === "economyCabin") {
+    if (this.state.chosenCabin === "economyCabin") {
       returnData = res.data.filter((entry) => entry.economyCabin !== null);
       // returnData.map((info) => (info["chosenCabin"] = "economy"));
       returnData.filter(
@@ -325,7 +276,7 @@ class SearchFlights extends React.Component {
       );
       // returnData.map((info) => (info["AdultNumber"] = this.adultnumber));
       // returnData.map((info) => (info["childNumber"] = this.childnumber));
-    } else if (this.chosenCabin === "businessCabin") {
+    } else if (this.state.chosenCabin === "businessCabin") {
       returnData = res.data.filter((entry) => entry.businessCabin !== null);
       //returnData.map((info) => (info["chosenCabin"] = "business"));
       returnData.filter(
@@ -337,7 +288,7 @@ class SearchFlights extends React.Component {
       );
       // returnData.map((info) => (info["AdultNumber"] = this.adultnumber));
       // returnData.map((info) => (info["childNumber"] = this.childnumber));
-    } else if (this.chosenCabin === "firstCabin") {
+    } else if (this.state.chosenCabin === "firstCabin") {
       returnData = res.data.filter((entry) => entry.firstCabin !== null);
       //  returnData.map((info) => (info["chosenCabin"] = "first"));
       returnData.filter(
@@ -355,9 +306,11 @@ class SearchFlights extends React.Component {
     let stateData = {
       sentData,
       returnData,
-      adultNumber: this.adultnumber,
-      childNumber: this.childnumber,
-      ChosenCabin: this.chosenCabin,
+      adultNumber: this.state.adultNumber,
+      childNumber: this.state.childNumber,
+      chosenCabin: this.state.chosenCabin,
+      from: this.state.departure.airport,
+      to: this.state.arrival.airport,
     };
     console.log("state Data ", stateData);
     // localStorage.setItem("depData",JSON.stringify(sentData));
@@ -367,7 +320,7 @@ class SearchFlights extends React.Component {
     // localStorage.setItem("chilcNumber",JSON.stringify(this.childnumber));
     localStorage.setItem("searchResultData", JSON.stringify(stateData));
     console.log(JSON.parse(localStorage.getItem("searchResultData")));
-    window.location.href = "http://localhost:3000/flight_selection";
+    //window.location.href = "http://localhost:3000/flight_selection";
 
     // this.props.history.push({
     //   pathname: "/flight_component",
@@ -385,6 +338,35 @@ class SearchFlights extends React.Component {
       if (value) res[key] = value;
     }
     return res;
+  };
+
+  validateInput = () => {
+    if (!this.state.departure.airport) {
+      console.log("dep problem");
+      return false;
+    }
+    if (!this.state.arrival.airport) {
+      console.log("arr problem");
+      return false;
+    }
+    if (!this.state.chosenCabin) {
+      console.log("cabin problem");
+      return false;
+    }
+    if (!this.state.adultNumber) {
+      console.log("adult problem");
+      return false;
+    }
+    if (!this.state.departure.time || isNaN(this.state.departure.time)) {
+      console.log("dep time problem");
+      return false;
+    }
+    if (!this.state.arrival.time || isNaN(this.state.arrival.time)) {
+      console.log("arr time problem");
+      return false;
+    }
+    console.log("no problem");
+    return true;
   };
 
   render() {
@@ -509,16 +491,16 @@ class SearchFlights extends React.Component {
                   value={this.state.departure.airport}
                   onChange={this.onChangeFrom}
                 ></OutlinedTextField>
-                {this.selectedDepAirport !== undefined &&
-                this.selectedArrAirport !== undefined &&
-                this.selectedArrAirport === this.selectedDepAirport ? (
+                {this.state.departure.airport &&
+                this.state.arrival.airport !== undefined &&
+                this.state.arrival.airport === this.state.departure.airport ? (
                   <TextField
                     style={{ width: "200px", fontsize: "18px" }}
-                    onChange={this.onChangeToError}
+                    onChange={this.onChangeTo}
                     error
                     id="outlined-error-helper-text"
                     label="To*"
-                    defaultValue={this.selectedArrAirport}
+                    defaultValue={this.state.arrival.airport}
                     helperText="please enter different destinations."
                   />
                 ) : (
@@ -527,9 +509,8 @@ class SearchFlights extends React.Component {
                     width={200}
                     fontsize={18}
                     onChange={this.onChangeTo}
-                    name="arrival{airport}"
                     value={this.state.arrival.airport}
-                  ></OutlinedTextField>
+                  />
                 )}
               </Stack>
               <Stack spacing={5}>
@@ -539,21 +520,25 @@ class SearchFlights extends React.Component {
                   value={this.state.departure.time}
                   minDate={Date.now()}
                   maxDate={
-                    this.selectedArrday === null ? {} : this.selectedArrday
+                    this.state.arrival.time === null
+                      ? {}
+                      : this.state.arrival.time
                   }
                   // onError = {this.onErrorDep}
                   label="Departure Date*"
+                  error={isNaN(this.state.departure.time)}
                 ></Calendar>
                 <Calendar
                   label="Return Date*"
                   onChange={this.onChangeArrTime}
                   selected={this.state.arrival.time}
                   minDate={
-                    this.selectedDepday === undefined
+                    this.state.departure.time === undefined
                       ? Date.now()
-                      : this.selectedDepday
+                      : this.state.departure.time
                   }
                   value={this.state.arrival.time}
+                  error={isNaN(this.state.arrival.time)}
                 ></Calendar>
               </Stack>
               <FormControl component="fieldset">
@@ -606,14 +591,10 @@ class SearchFlights extends React.Component {
               <Stack spacing={5}>
                 <Button
                   label="Search"
-                  index={this.numberOfSelecetedInputs.includes(0) ? 0 : 1}
+                  index={this.validateInput() ? 1 : 0} //{this.numberOfSelecetedInputs.includes(0) ? 0 : 1}
                   width={70}
                   height={40}
-                  onClick={
-                    this.numberOfSelecetedInputs.includes(0)
-                      ? {}
-                      : (e) => this.onSubmit(e, this.state)
-                  }
+                  onClick={(e) => this.onSubmit(e, this.state)}
                 ></Button>
               </Stack>
             </Stack>

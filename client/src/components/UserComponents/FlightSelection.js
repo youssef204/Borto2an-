@@ -5,7 +5,7 @@ import FlightsMenu from "./FlightsMenu";
 function getFromLocalStorage(itemName) {
   const searchResults = JSON.parse(localStorage.getItem("searchResultData"));
   const requiredItem = searchResults[itemName];
-  //console.log("search results", searchResults);
+  console.log("search results", searchResults);
   // console.log("req", requiredItem);
   return requiredItem;
 }
@@ -141,6 +141,8 @@ export default function FlightSelection() {
   const [childNumber, setChildNumber] = useState(
     getFromLocalStorage("childNumber")
   );
+  const [from, setFrom] = useState(getFromLocalStorage("from"));
+  const [to, setTo] = useState(getFromLocalStorage("to"));
 
   /*{
       [
@@ -216,10 +218,20 @@ export default function FlightSelection() {
     console.log("second flight chosen", secondFlight);
   }, [firstFlight, secondFlight]);
   return (
-    <div style={{ paddingBottom: "300px" }}>
+    <div style={{ paddingBottom: "150px" }}>
       {/*JSON.stringify(firstFlightArr)*/}
-      <FlightsMenu flights={firstFlightArr} onSelect={onFirstFlightSelect} />
-      <FlightsMenu flights={secondFlightArr} onSelect={onSecondFlightSelect} />
+      <FlightsMenu
+        flights={firstFlightArr}
+        onSelect={onFirstFlightSelect}
+        from={from}
+        to={to}
+      />
+      <FlightsMenu
+        flights={secondFlightArr}
+        onSelect={onSecondFlightSelect}
+        from={to}
+        to={from}
+      />
       {
         <ChosenFLightsDetails
           firstFlight={firstFlight}

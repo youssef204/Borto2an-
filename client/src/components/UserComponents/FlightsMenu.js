@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import FlightComponent from "./FlightComponents/FlightComponent";
 
-import CSS from "./FlightMenu.css";
+import "./FlightMenu.css";
 
 export default function FlightsMenu(probs) {
   const [flightArr, setflightArr] = useState(probs.flights);
   const [flightChosen, setFlightChosen] = useState(undefined);
+  const [from, setFrom] = useState(probs.from);
+  const [to, setTo] = useState(probs.to);
 
   //console.log(probs);
 
@@ -17,6 +19,14 @@ export default function FlightsMenu(probs) {
   useEffect(() => {
     probs.onSelect(flightChosen);
   }, [flightChosen]);
+  // if (flightArr.length === 0)
+  //   return (
+  //     <>
+  //       <div>No Flights</div>
+  //     </>
+  //   );
+  console.log("flightArr", flightArr);
+
   return (
     <>
       <link
@@ -28,11 +38,21 @@ export default function FlightsMenu(probs) {
       <div className="list ">
         <div className="settings d-flex flex-row">
           <div className="text-holder">
-            Flights from {flightArr[0].departure.airport} to{" "}
-            {flightArr[0].arrival.airport}
+            Flights from {from} to {to}
           </div>
         </div>
-        <div className="container">
+        <div className="container p-auto">
+          {flightArr.length === 0 && (
+            <label
+              style={{
+                margin: "2% 37%",
+                font: "25px Verdana",
+                color: "rgba(0,0,0,0.7)",
+              }}
+            >
+              No flights are found
+            </label>
+          )}
           {flightArr.map((f) => {
             //console.log(f._id);
             return <FlightComponent flight={f} onSelect={onSelect} />;

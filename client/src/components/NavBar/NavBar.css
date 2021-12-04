@@ -12,7 +12,7 @@ ul.NavBar {
   overflow: hidden;
   background-color: #f3f3f3;
   position: sticky;
-  top: 8px;
+  top: 0px;
 }
 li.NavBar {
   display: inline;
