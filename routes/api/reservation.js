@@ -11,7 +11,7 @@ reservation_router.get("/", authenticate , function (req, res, next) {
   Reservation.find(queryObj)
     .populate('departureFlight.flightId')
     .populate('returnFlight.flightId')
-    .then((reservation) =>{ console.log(reservation) ; res.json(reservation)})
+    .then((reservation) =>{res.json(reservation)})
     .catch((err) => res.status(404).json({ msg: "No reservations are found" }));
 });
 

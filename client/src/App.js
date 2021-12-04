@@ -16,8 +16,6 @@ import AllModels from "./components/AdminComponents/AllModels";
 import FlightComponent from "./components/UserComponents/FlightComponents/FlightComponent";
 import FlightsMenu from "./components/UserComponents/FlightsMenu";
 import FlightSelection from "./components/UserComponents/FlightSelection";
-import Login from "./components/GuestComponents/Login";
-import Register from "./components/GuestComponents/Register";
 import "./App.css";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import FlightSeatsSelection from "./components/FlightSeatsSelection";
@@ -25,6 +23,10 @@ import User from "./components/UserComponents/User"
 import Reservations from "./components/UserComponents/Reservations"
 import ReservationDetails from "./components/UserComponents/ReservationDetails";
 import TripSummary from "./components/UserComponents/TripSummary";
+import ReservationSummary from "./components/UserComponents/ReservationSummary";
+import SignIn from "./components/GuestComponents/SignIn";
+import SignUp from "./components/GuestComponents/SignUp";
+
 import UpdateUser from "./components/UserComponents/UpdateUser";
 
 
@@ -39,8 +41,8 @@ function App() {
         <div>
           <Switch>
             {/* guest  */}
-            <Route exact path='/login' component={Login}/>
-            <Route exact path='/register' component={Register} />
+            <Route exact path='/Sign_up' component={SignUp}/>
+            <Route exact path='/Sign_in' component={SignIn}/>
 
             {/* all */}
             <Route exact path="/" component={SearchFlights} />
@@ -66,8 +68,15 @@ function App() {
             <Route exact path="/reservations" component={Reservations} />
             <Route exact path="/reservation_details" component={ReservationDetails} />
             <Route exact path="/trip_summary" component={TripSummary} />
+<<<<<<< HEAD
+<<<<<<< HEAD
+            <Route exact path="/reservation_summary" component={ReservationSummary} />
+=======
+=======
+>>>>>>> 4fd56c1c72cf0e96cdf8e5f1e46e3b0d311bfa20
             <Route exact path="/update_user" component={UpdateUser} />
 
+>>>>>>> 4fd56c1c72cf0e96cdf8e5f1e46e3b0d311bfa20
             <Route component={PageNotFound} />
           </Switch>
         </div>
