@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import "./NavBar.css";
 import Logo from '../Logo/Logo';
 import {NavLink as Link, BrowserRouter as Router} from 'react-router-dom';
 
-function NavigationBar() {
-
-  const [user,setUser] = useState(JSON.parse(localStorage.getItem("user")));
-
+function NavigationBar({user=JSON.parse(localStorage.getItem("user"))}) {
+  console.log(user);
   const userLabel = 
-  (!user)?
+  (!user)?  
   <>
   <li style={{float:'right'}} className="NavBar">
         <Link to="/signup" exact className="NavBar">
@@ -92,7 +90,7 @@ function NavigationBar() {
     
     
       <li className="NavBar">
-        <Link to="/" exact className="NavBar">Home</Link>
+        <Link to="/" exact className="NavBar">Search Flights</Link>
       </li>
       
     
@@ -134,7 +132,7 @@ function NavigationBar() {
     
     
      <li className="NavBar">
-        <Link to="/" exact className="NavBar">Home</Link>
+        <Link to="/" exact className="NavBar">Search Flights</Link>
       </li>
       
     

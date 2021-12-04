@@ -21,7 +21,7 @@ class ReservationDetails extends React.Component {
   render(){
 
     const Reservation = this.props.history.location.state;
-
+    console.log(Reservation);
     const onClick=()=>{
         axios.
         delete(`http://localhost:8000/api/reservations/${Reservation._id}`, {

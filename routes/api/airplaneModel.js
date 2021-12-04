@@ -5,6 +5,9 @@ const AirplaneModel = require("../../models/AirplaneModel");
 const authenticate = require("./Authentication");
 
 airplaneModel_router.get("/", authenticate , function (req, res, next) {
+  if(!req.user.isAdmin){
+    return res.sendStatus(401);
+  }
   const queryObj = { ...req.query };
   let queryStr = JSON.stringify(queryObj);
   const regex = /\b(gt|gte|lt|lte|in)\b/g;
@@ -15,6 +18,9 @@ airplaneModel_router.get("/", authenticate , function (req, res, next) {
 });
 
 airplaneModel_router.get("/showAllModels",authenticate, (req, res) => {
+  if(!req.user.isAdmin){
+    return res.sendStatus(401);
+  }
   AirplaneModel.find()
     .then((model) => {
       res.json(model);
@@ -23,6 +29,9 @@ airplaneModel_router.get("/showAllModels",authenticate, (req, res) => {
 });
 
 airplaneModel_router.put("/", authenticate , (req, res) => {
+  if(!req.user.isAdmin){
+    return res.sendStatus(401);
+  }
   const id = req.body._id;
   const update = req.body.update;
   AirplaneModel.findByIdAndUpdate(id,update)
@@ -34,14 +43,14 @@ airplaneModel_router.put("/", authenticate , (req, res) => {
 
 
 airplaneModel_router.delete("/:id",authenticate ,  async (req, res) => {
+  if(!req.user.isAdmin){
+    return res.sendStatus(401);
+  }
   try {
     const airplaneModel = await AirplaneModel.findByIdAndDelete(req.params.id);
-
-    if (airplaneModel) { 
-      const Flight = require("../../models/Flight");
-      await Flight.deleteMany({airplaneModelID:airplaneModel._id});
-      res.send(airplaneModel);
-    }
+    const Flight = require("../../models/Flight");
+    await Flight.deleteMany({airplaneModelID:airplaneModel._id});
+    if (airplaneModel) res.send(airplaneModel);
     else
       res.status(404).json({ msg: `No AirplaneModel with id ${req.params.id} found` });
   } catch (e) {
@@ -51,6 +60,9 @@ airplaneModel_router.delete("/:id",authenticate ,  async (req, res) => {
 });
 
 airplaneModel_router.post("/",authenticate , async (req, res) => {
+  if(!req.user.isAdmin){
+    return res.sendStatus(401);
+  }
   AirplaneModel.create(req.body)
   .then(result => {res.send(result);})
   .catch(err => {res.status(400).send(err)});
