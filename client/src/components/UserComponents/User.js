@@ -35,6 +35,10 @@ class User extends Component {
     showReservations = () =>{
         this.props.history.push('/reservations');
     }
+
+    updateData = () => {
+        this.props.history.push('/update_user');
+    }
   
 
   render() {
@@ -47,6 +51,7 @@ class User extends Component {
           Passport number: {this.state.user.passportNumber} <br/>
           <button onClick={this.logout}>Log out</button>
           <button onClick={this.showReservations}>Show my reservations</button>
+          <button onClick={this.updateData}>Update my data</button>
       </body>
     );
     else return <p/>;

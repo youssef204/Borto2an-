@@ -25,6 +25,7 @@ import User from "./components/UserComponents/User"
 import Reservations from "./components/UserComponents/Reservations"
 import ReservationDetails from "./components/UserComponents/ReservationDetails";
 import TripSummary from "./components/UserComponents/TripSummary";
+import UpdateUser from "./components/UserComponents/UpdateUser";
 
 
 function App() {
@@ -65,6 +66,7 @@ function App() {
             <Route exact path="/reservations" component={Reservations} />
             <Route exact path="/reservation_details" component={ReservationDetails} />
             <Route exact path="/trip_summary" component={TripSummary} />
+            <Route exact path="/update_user" component={UpdateUser} />
 
             <Route component={PageNotFound} />
           </Switch>
