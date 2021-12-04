@@ -5,19 +5,19 @@ POST http://localhost:8000/api/user/auth/login
 Content-Type: application/json 
 
 {
-    "email":"mohamedeshiba2021@gmail.com",
+    "email":"Admin.123@gmail.com",
     "password":"12345"
 }
 ### 
-GET http://localhost:8000/api/user
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtZWRlc2hpYmEyMDIxQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiMTIzNDUiLCJpYXQiOjE2Mzg0NjQ0NTcsImV4cCI6MTYzODQ2NDUxN30.u7F6T4T_j7xVdDsV5LEzHD312DBkYsk_NieQZlowLE8
+GET http://localhost:8000/api/user/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkFkbWluLjEyM0BnbWFpbC5jb20iLCJwYXNzd29yZCI6IjEyMzQ1IiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjM4NTM3NzI2LCJleHAiOjE2Mzg1MzgzMjZ9.HdXDhI3XBcEX00FwWK66zbAcQaBtI23q6TJmCL0V53E
 ### 
 POST http://localhost:8000/api/user/auth/refreshToken
 Content-Type: application/json 
 
 {
 
-    "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtZWRlc2hpYmEyMDIxQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiMTIzNDUiLCJpYXQiOjE2Mzg0NjQ0MjR9.0U9FY-BQ8pIQMN3fNZcOHt3TMLtVovXqGZPTHyn5fjM"
+    "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtZWRlc2hpYmEyMDIxQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiMTIzNDUiLCJpYXQiOjE2Mzg0ODEwNTh9.vD_uxOwLNU8gJFc7qh8hv1J8vL686f_sEGbND0v1XnM"
 }
 ###
 DELETE  http://localhost:8000/api/user/auth/logout
@@ -28,4 +28,27 @@ Content-Type: application/json
  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtZWRlc2hpYmEyMDIxQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiMTIzNDUiLCJpYXQiOjE2Mzg0NjQ0MjR9.0U9FY-BQ8pIQMN3fNZcOHt3TMLtVovXqGZPTHyn5fjM"
 
 }
+
+###
+
+POST http://localhost:8000/api/user/register
+Content-Type: application/json 
+
+{
+
+    "email":"Admin.123@gmail.com",
+    "password":"12345",
+    "firstName":"Admin",
+    "lastName":"Admin",
+    "passportNumber":"0",
+    "isAdmin":"true"
+}
+
+### 
+
+GET http://localhost:8000/api/airplaneModel/showAllModels
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkFkbWluLjEyM0BnbWFpbC5jb20iLCJwYXNzd29yZCI6IjEyMzQ1IiwiaWF0IjoxNjM4NDk1MTQ4LCJleHAiOjE2Mzg0OTU3NDh9.x1aXV6V_z37fZzZ0XRL2G6Jhth9cUDBmV6dUgXZgXM4
+
+
+
 
