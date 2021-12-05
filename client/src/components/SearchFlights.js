@@ -16,7 +16,6 @@ import Box from "@mui/material/Box";
 import { TextField } from "@mui/material";
 import { Popover } from "@mui/material";
 import { InputLabel } from "@mui/material";
-import AdminSearch from './AdminComponents/SearchFlights';
 
 class SearchFlights extends React.Component {
   //selectedArrday;
@@ -296,85 +295,93 @@ class SearchFlights extends React.Component {
       return (
         <>
           <div className="createFlight-container">
-          <form className=" UpdateForm-container" noValidate onSubmit={(e) => this.onSubmit2(e, this.state)}>
-            <h2>Search For Flights</h2>
-            <br></br>
-            <div>
-              <label>Departure Airport: </label>
-              <br />
-              <input
-                type="text"
-                placeholder="Departure Airport"
-                name="departure.airport"
-                onChange={this.onChange}
-              />
-            </div>
+            <form
+              className=" UpdateForm-container"
+              noValidate
+              onSubmit={(e) => this.onSubmit2(e, this.state)}
+            >
+              <h2>Search For Flights</h2>
+              <br></br>
+              <div>
+                <label>Departure Airport: </label>
+                <br />
+                <input
+                  type="text"
+                  placeholder="Departure Airport"
+                  name="departure.airport"
+                  onChange={this.onChange}
+                />
+              </div>
 
-            <div>
-              <label>Departure Terminal: </label>
-              <br />
-              <input
-                type="text"
-                placeholder="Departure Terminal"
-                name="departure.terminal"
-                onChange={this.onChange}
-              />
-            </div>
+              <div>
+                <label>Departure Terminal: </label>
+                <br />
+                <input
+                  type="text"
+                  placeholder="Departure Terminal"
+                  name="departure.terminal"
+                  onChange={this.onChange}
+                />
+              </div>
 
-            <div>
-              <label>Arrival Airport: </label>
-              <br />
+              <div>
+                <label>Arrival Airport: </label>
+                <br />
 
-              <input
-                type="text"
-                placeholder="Arrival Airport"
-                name="arrival.airport"
-                onChange={this.onChange}
-              />
-            </div>
+                <input
+                  type="text"
+                  placeholder="Arrival Airport"
+                  name="arrival.airport"
+                  onChange={this.onChange}
+                />
+              </div>
 
-            <div>
-              <label>Arrival Terminal: </label>
-              <br />
+              <div>
+                <label>Arrival Terminal: </label>
+                <br />
 
-              <input
-                type="text"
-                placeholder="Arrival Terminal"
-                name="arrival.terminal"
-                onChange={this.onChange}
-              />
-            </div>
+                <input
+                  type="text"
+                  placeholder="Arrival Terminal"
+                  name="arrival.terminal"
+                  onChange={this.onChange}
+                />
+              </div>
 
-            <div>
-              <label>Flight Number: </label>
-              <br />
+              <div>
+                <label>Flight Number: </label>
+                <br />
 
-              <input
-                type="number"
-                placeholder="Flight Number"
-                name="flightNumber"
-                onChange={this.onChange}
-              />
-            </div>
+                <input
+                  type="number"
+                  placeholder="Flight Number"
+                  name="flightNumber"
+                  onChange={this.onChange}
+                />
+              </div>
 
-            <div>
-              <label>Departure Time: </label>
-              <br />
-              <input
-                type="date"
-                name="departure.time"
-                onChange={this.onChange}
-              />
-            </div>
-            <div>
-              <label>Arrival Time: </label>
-              <br />
-              <input type="date" name="arrival.time" onChange={this.onChange} />
-            </div>
-            <br></br>
+              <div>
+                <label>Departure Time: </label>
+                <br />
+                <input
+                  type="date"
+                  name="departure.time"
+                  onChange={this.onChange}
+                />
+              </div>
+              <div>
+                <label>Arrival Time: </label>
+                <br />
+                <input
+                  type="date"
+                  name="arrival.time"
+                  onChange={this.onChange}
+                />
+              </div>
+              <br></br>
 
-            <button>Search</button>
-          </form>
+              <button>Search</button>
+            </form>
           </div>
         </>
       );

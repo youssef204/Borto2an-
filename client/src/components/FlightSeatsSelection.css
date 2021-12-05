@@ -1,0 +1,44 @@
+#seatsBackground {
+  background-color: aliceblue;
+}
+.seatElement {
+  width: 32%;
+  height: 100%;
+}
+.seatElementText {
+  padding-top: 8.5%;
+  text-align: center;
+  width: 18%;
+  border-left: 4px solid rgba(0, 0, 0, 0.2);
+  border-right: 1px dashed rgba(0, 0, 0, 0.2);
+  padding: auto;
+}
+#seatSelectionTitle {
+  height: 150px;
+  background-color: #ff416c;
+}
+.seat-wrap {
+  overflow: hidden;
+  position: relative;
+}
+
+.seat-bg {
+  mask-image: linear-gradient(to left, rgba(0, 0, 1, 1), rgba(0, 0, 1, 0));
+  opacity: 0.6;
+  position: absolute;
+  left: 200px;
+  top: -300px;
+  width: 100%;
+  height: auto;
+}
+.seatTitleText {
+  padding-left: 3%;
+  padding-top: 2%;
+  color: rgb(230, 230, 230);
+  font: 55px Montserrat;
+}
+#seatButton {
+  padding: auto;
+  height: 130px;
+  background-color: #141414e6;
+}

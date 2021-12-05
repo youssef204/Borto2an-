@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SeatSelection from "./SeatSelection";
-import Button from "@mui/material/Button";
+import Button from "./Button.js";
+import "./FlightSeatsSelection.css";
 
 class FlightSeatsSelection extends React.Component {
   state = {
@@ -28,29 +29,9 @@ class FlightSeatsSelection extends React.Component {
     );
   }
 
-  renderConfirmButton = () => {
+  render() {
     const { departureSeats, arrivalSeats } = this.state;
     const allChosen = this.isAllChosen();
-    //  departureSeats.length == this.props.departure.numberOfSeats &&
-    //  arrivalSeats.length == this.props.arrival.numberOfSeats;
-    return (
-      <Button
-        variant="contained"
-        disabled={!allChosen}
-        onClick={() => {
-          localStorage.setItem("selectedSeats", JSON.stringify(this.state));
-          alert(`chosen seats are ${departureSeats} and ${arrivalSeats}`);
-          localStorage.setItem("path", "http://localhost:3000/trip_summary");
-          window.location.href = "http://localhost:3000/trip_summary";
-        }}
-        sx={{ margin: "20px" }}
-      >
-        Confirm
-      </Button>
-    );
-  };
-
-  render() {
     const departure = {
       flight: JSON.parse(localStorage.getItem("flightSelectionData")).flight1,
       numberOfSeats:
@@ -68,23 +49,77 @@ class FlightSeatsSelection extends React.Component {
         .chosenCabin2,
     };
     return (
-      <div>
-        <h1> Departure Flight </h1>
-        <SeatSelection
-          {...departure}
-          onUpdateSeats={(seats) => {
-            this.updateSeats("departureSeats", seats);
-          }}
-        />
-        <h1> Arrival Flight </h1>
-        <SeatSelection
-          {...arrival}
-          onUpdateSeats={(seats) => {
-            this.updateSeats("arrivalSeats", seats);
-          }}
-        />
-        {this.renderConfirmButton()}
-      </div>
+      <>
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+          crossOrigin="anonymous"
+        ></link>
+        <div>
+          <div id="seatSelectionTitle" className="seat-wrap">
+            <div className="seatTitleText">Choose your seats</div>
+            <img class="seat-bg" src="seats.jpg" width="700px" height="50px" />
+          </div>
+          <div className="d-flex flex-row" id="seatsBackground">
+            <div className="seatElementText">
+              <h1>
+                Departure <br />
+                Flight
+              </h1>
+            </div>
+            <div className="seatElement">
+              <SeatSelection
+                {...departure}
+                onUpdateSeats={(seats) => {
+                  this.updateSeats("departureSeats", seats);
+                }}
+              />
+            </div>
+            <div className="seatElementText">
+              <h1>
+                Arrival
+                <br /> Flight
+              </h1>
+            </div>
+            <div>
+              <SeatSelection
+                {...arrival}
+                onUpdateSeats={(seats) => {
+                  this.updateSeats("arrivalSeats", seats);
+                }}
+              />
+            </div>
+          </div>
+          <div id="seatButton" className="seat-wrap">
+            {/* <img class="seat-bg" src="seats.jpg" width="700px" height="50px" /> */}
+            <div style={{ marginLeft: "70%", marginTop: "30px" }}>
+              <Button
+                variant="contained"
+                index={this.isAllChosen() == 1 ? 1 : 0}
+                onClick={() => {
+                  if (this.isAllChosen() != 1) {
+                    console.log("here");
+                    return;
+                  }
+                  localStorage.setItem(
+                    "selectedSeats",
+                    JSON.stringify(this.state)
+                  );
+                  localStorage.setItem(
+                    "path",
+                    "http://localhost:3000/trip_summary"
+                  );
+                  window.location.href = "http://localhost:3000/trip_summary";
+                }}
+                width="250px"
+                height="60px"
+                label="Confirm"
+              />
+            </div>
+          </div>
+        </div>
+      </>
     );
   }
 }

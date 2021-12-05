@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Box } from "@mui/system";
+import { Box, width } from "@mui/system";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import Button from "../Button";
@@ -216,7 +216,7 @@ class TripSummary extends React.Component {
       })
         .then((res) => {
           console.log("result is ", res);
-          localStorage.setItem("reservationSummary" , JSON.stringify(res.data));
+          localStorage.setItem("reservationSummary", JSON.stringify(res.data));
           window.location.href = "http://localhost:3000/reservation_summary";
         })
         .catch((e) => {
@@ -227,9 +227,10 @@ class TripSummary extends React.Component {
 
   render() {
     return (
+      <>
         <Stack>
-          <br/>
-          <br/>
+          <br />
+          <br />
           <div
             style={{
               display: "flex",
@@ -618,16 +619,26 @@ class TripSummary extends React.Component {
               justifyContent: "space-around",
               margin: "10px",
             }}
-          >
+          ></div>
+        </Stack>
+        <div
+          style={{
+            width: "100%",
+            height: "105px",
+            backgroundColor: "rgba(20, 20, 20, 0.9)",
+          }}
+        >
+          <div style={{ marginLeft: "70%", paddingTop: "20px" }}>
             <Button
               label="Confirm Reservation"
               index={1}
-              width={300}
-              height={40}
+              width={250}
+              height={60}
               onClick={this.onClick}
-            ></Button>
+            />
           </div>
-        </Stack>
+        </div>
+      </>
     );
   }
 }

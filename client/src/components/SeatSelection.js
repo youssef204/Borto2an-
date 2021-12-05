@@ -10,7 +10,7 @@ class SeatSelection extends React.Component {
 
   remainingSeats = () => {
     return this.props.numberOfSeats - this.state.selectedSeats.length;
-  }
+  };
 
   addSeatCallback = ({ row, number, id }, addCb) => {
     this.setState(
@@ -93,33 +93,16 @@ class SeatSelection extends React.Component {
     return seats;
   };
 
-  renderConfirmButton = () => {
-    const allChosen =
-      this.state.selectedSeats.length == this.props.numberOfSeats;
-    return (
-      <Button
-        variant="contained"
-        disabled={!allChosen}
-        onClick={() => {
-          this.props.onSelect(this.state.selectedSeats);
-        }}
-        sx={{ margin: "20px" }}
-      >
-        Confirm
-      </Button>
-    );
-  };
-
-  onConfirm = () => {
-    alert(`chosen seats are ${this.state.selectedSeats}`);
-  };
-
   render() {
     const seats = this.buildSeatsArray();
     const { loading } = this.state;
     return (
       <div>
-        <h2>{`Choose ${this.remainingSeats()} more seats.`}</h2>
+        {this.remainingSeats() == 0 ? (
+          <h2>Select chosen seat to deselect.</h2>
+        ) : (
+          <h2>{`Choose ${this.remainingSeats()} more seats.`}</h2>
+        )}
         <div style={{ margin: "20px" }}>
           <SeatPicker
             addSeatCallback={this.addSeatCallback}
@@ -133,7 +116,6 @@ class SeatSelection extends React.Component {
             tooltipProps={{ multiline: true }}
           />
         </div>
-        {/* {this.renderConfirmButton()} */}
       </div>
     );
   }

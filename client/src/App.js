@@ -12,8 +12,6 @@ import "./App.css";
 import NavBar from "./components/NavBar/NavBar";
 import CreateModel from "./components/AdminComponents/CreateModel";
 import AllModels from "./components/AdminComponents/AllModels";
-import FlightComponent from "./components/UserComponents/FlightComponents/FlightComponent";
-import FlightsMenu from "./components/UserComponents/FlightsMenu";
 import FlightSelection from "./components/UserComponents/FlightSelection";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import FlightSeatsSelection from "./components/FlightSeatsSelection";
