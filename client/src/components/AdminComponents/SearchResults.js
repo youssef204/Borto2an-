@@ -40,25 +40,24 @@ class SearchResults extends Component {
       ));
     }
     return (
-      <body>
-        <div>
-        <table
-            style={{
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-          >
-            <tr>
-              <th>Flight Number</th>
-              <th>Departure Airport</th>
-              <th>Arrival Airport</th>
-              <th>Departure Time</th>
-              <th>Arrival Time</th>
-            </tr>
-            {flightlist}
-            </table>
+      <section>
+      <div class="tbl-header">
+        <table>
+            <th>Flight Number</th>
+            <th>Departure Airport</th>
+            <th>Arrival Airport</th>
+            <th>Departure Time</th>
+            <th>Arrival Time</th>
+            <th>Show all details</th>
+
+        </table>
+        <div class="tbl-content">
+  <table cellpadding="0" cellspacing="0" border="0">
+        {flightlist}
+        </table>
         </div>
-      </body>
+      </div>
+    </section>
     );
   }
 }

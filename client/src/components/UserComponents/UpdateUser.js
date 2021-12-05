@@ -49,16 +49,19 @@ class UpdateUser extends React.Component {
       <div class="update-container" >
       <form className="UpdateForm-container" action="#" noValidate onSubmit={this.onSubmit}>
         <h2>Update Personal Information </h2>
+        <br></br>
+        
+
         First Name:
-              <input type="text"   name = "firstName" value = {this.state.updated.firstName} onChange={this.onChange} />
+              <input  className="profile-input" type="text"   name = "firstName" value = {this.state.updated.firstName} onChange={this.onChange} />
         Last Name:
-              <input type="text"   value = {this.state.updated.lastName} name = "lastName" onChange={this.onChange} />
+              <input  className="profile-input" type="text"   value = {this.state.updated.lastName} name = "lastName" onChange={this.onChange} />
         Passport Number:
-              <input type="text"  value = {this.state.updated.passportNumber} name = "passportNumber" onChange={this.onChange}  />
+              <input  className="profile-input" type="text"  value = {this.state.updated.passportNumber} name = "passportNumber" onChange={this.onChange}  />
         Email:
-              <input type="email"  value = {this.state.updated.email}  name = "email" onChange={this.onChange}/>
+              <input  className="profile-input" type="email"  value = {this.state.updated.email}  name = "email" onChange={this.onChange}/>
         Password:
-              <input type="password"  placeholder="Enter New Password" name = "password" onChange={this.onChange} />
+              <input  className="profile-input" type="password"  placeholder="Enter New Password" name = "password" onChange={this.onChange} />
   
         <button>Update Info</button>
         </form>

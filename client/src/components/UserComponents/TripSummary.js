@@ -133,6 +133,8 @@ class TripSummary extends React.Component {
         sx={{ p: 1 }}
       >
         <Stack>
+          <br/>
+          <br/>
           <div
             style={{
               display: "flex",
@@ -519,7 +521,7 @@ class TripSummary extends React.Component {
             style={{
               display: "flex",
               justifyContent: "space-around",
-              margin: "0px",
+              margin: "10px",
             }}
           >
             <Button
