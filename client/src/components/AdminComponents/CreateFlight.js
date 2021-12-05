@@ -84,7 +84,9 @@ class CreateFlight extends React.Component {
       firstCabin: this.state.firstCabin
     }; 
     axios
-      .post('http://localhost:8000/api/flights', data)
+      .post('http://localhost:8000/api/flights', data,{
+          headers:{"authorization":"Bearer "+localStorage.getItem("token")}
+        })
       .then(res => {
         this.setState({
           flightNumber:0,
@@ -133,8 +135,11 @@ class CreateFlight extends React.Component {
 
     render() { 
         return (<>
+        <div className="createFlight-container">
 
-              <form noValidate onSubmit={this.onSubmit}>
+              <form className=" UpdateForm-container" noValidate onSubmit={this.onSubmit}>
+              <h2>Create New Flight </h2>
+              <br></br>
                 Flight Number:
                 <div>
                   <input
@@ -414,6 +419,7 @@ class CreateFlight extends React.Component {
                   Create
                 </button>
               </form>
+              </div>
           </>
     );
     }

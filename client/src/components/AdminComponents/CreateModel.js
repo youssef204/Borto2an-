@@ -33,7 +33,9 @@ class CreateModel extends React.Component {
       firstClassColumns: this.state.firstClassColumns
     }; 
     axios
-      .post('http://localhost:8000/api/airplaneModel', data)
+      .post('http://localhost:8000/api/airplaneModel', data,{
+          headers:{"authorization":"Bearer "+localStorage.getItem("token")}
+        })
       .then(res => {
         this.setState({
             name:'',
@@ -54,8 +56,11 @@ class CreateModel extends React.Component {
 
     render() { 
         return (<>
-
+        <div className="createFlight-container">
               <form noValidate onSubmit={this.onSubmit}>
+              <h2>Create New Model </h2>
+              <br></br>
+
                 Model Name:
                 <div>
                   <input
@@ -125,6 +130,7 @@ class CreateModel extends React.Component {
                   Create
                 </button>
               </form>
+              </div>
           </>
     );
     }

@@ -13,7 +13,7 @@ export class SignIn extends Component {
         }
     }
 
-    onChange = () => {
+    onChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
     };
     onSubmit = e => {
@@ -24,7 +24,6 @@ export class SignIn extends Component {
       .post('http://localhost:8000/api/user/auth/login',data)
       .then(res => {
         if(res.data.auth){
-            console.log(res.data.user);
             localStorage.setItem("token",res.data.token);
             localStorage.setItem("refreshToken",res.data.refreshToken);
             localStorage.setItem("user",JSON.stringify(res.data.user));
@@ -43,6 +42,10 @@ export class SignIn extends Component {
    onClick = ()=>{this.props.history.push({pathname:"/sign_up"});};
 
     render() {
+        if(localStorage.getItem("user")){
+            this.props.history.push('/');
+            return <p></p>;
+        }
 
         return (
             <>
@@ -76,7 +79,7 @@ export class SignIn extends Component {
 <footer>
 	<p>
 		Created by <i class="fa fa-heart"></i> 
-		<a target="_blank" href="https://florin-pop.com">Borto2an Airline</a>
+		<a>Borto2an Airline</a>
 	</p>
 </footer>
 </>
