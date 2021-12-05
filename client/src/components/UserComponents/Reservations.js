@@ -18,6 +18,7 @@ class Reservations extends Component {
         })
         .then(res=>{
             this.setState({reservations:res.data})
+            console.log("my reservations are ", this.state);
         })
         .catch(err => console.log(err));
     };

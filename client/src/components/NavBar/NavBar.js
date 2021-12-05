@@ -73,9 +73,9 @@ function NavigationBar({user=JSON.parse(localStorage.getItem("user"))}) {
   return (
     <ul className="NavBar">
 
-      <div className="logo"><Logo dim="25px"/></div>
+      <Logo/>
       
-      <div className="NavBar">Borto2an</div>
+      <li className="NavBar"><a className="NavBar" href='/'>Borto2an</a></li>
       
     
     
@@ -118,9 +118,9 @@ function NavigationBar({user=JSON.parse(localStorage.getItem("user"))}) {
   return (
     <ul className="NavBar">
 
-      <div className="logo"><Logo dim="30px"/></div>
+      <Logo/>
       
-      <div className="NavBar">Borto2an</div>
+      <li className="NavBar"><a className="NavBar" href='/'>Borto2an</a></li>
       
     
     
@@ -146,7 +146,7 @@ function NavigationBar({user=JSON.parse(localStorage.getItem("user"))}) {
       {(reservation)?
         
         <li className="NavBar">
-        <Link to="/reservation_details" exact className="NavBar">Reservation Details</Link>
+        <Link to="/reservation_summary" exact className="NavBar">Reservation Summary</Link>
       </li>:<></>
       
       }
