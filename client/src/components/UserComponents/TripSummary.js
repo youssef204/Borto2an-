@@ -152,7 +152,9 @@ class TripSummary extends React.Component {
       duration2: "18",
     };*/
     const selectedFlights =  JSON.parse(localStorage.getItem("flightSelectionData"));
-    const selectedFlightsWithSeats = {... selectedFlights, selectedDepSeats :[18, 19 , 20 ,21 , 18] , selectedArrSeats :[17 , 0]}
+    const selectedDepSeats = JSON.parse(localStorage.getItem("selectedSeats")).departureSeats;
+    const selectedArrSeats = JSON.parse(localStorage.getItem("selectedSeats")).arrivalSeats;
+    const selectedFlightsWithSeats = {... selectedFlights, selectedDepSeats, selectedArrSeats}
     this.state = selectedFlightsWithSeats;
   }
 
