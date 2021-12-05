@@ -33,9 +33,6 @@ function App() {
     <>
       <Router>
         <NavBar></NavBar>
-        <br />
-        <br />
-        <br />
         <div>
           <Switch>
             {/* guest  */}

@@ -1,5 +1,5 @@
 .NavBar {
-  font-family: monospace;
+  font-family: "Trebuchet MS", sans-serif;
   font-weight: bold;
   font-size: large;
   z-index: 100;
@@ -7,23 +7,21 @@
 
 ul.NavBar {
   list-style-type: none;
-  margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #f3f3f3;
-  position: sticky;
-  top: 0px;
+  background-color: white;
+  margin-bottom: 0px;
 }
 li.NavBar {
   display: inline;
   float: left;
 }
 div.NavBar {
-  font-size: x-large;
-  padding: 12px 14px 12px 14px;
-  margin: 0px 10px 0px 0px;
-  display: inline;
-  float: left;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
 div.logo {
   display: inline;
@@ -36,6 +34,8 @@ li a.NavBar {
   padding: 14px 16px;
   text-decoration: none;
   transition-duration: 300ms;
+  margin-top: 21px;
+  margin-bottom: 0px;
 }
 li a.NavBar:hover:not(.active) {
   background-color: #ddd;
@@ -43,5 +43,5 @@ li a.NavBar:hover:not(.active) {
 }
 li a.NavBar.active {
   color: white;
-  background-color: rgb(231, 167, 47);
+  background-color: #ff416c;
 }
