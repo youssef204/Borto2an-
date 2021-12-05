@@ -166,18 +166,6 @@ class SearchFlights extends React.Component {
     if (!this.validateInput()) return;
     e.preventDefault();
 
-    // this.setState((prevState) => ({
-    //   arrival: {
-    //     ...prevState.arrival,
-    //     time: this.state.arrival.time.toISOString().substring(0, 10),
-    //   },
-    //   departure: {
-    //     ...prevState.departure,
-    //     time: this.state.departure.time.toISOString().substring(0, 10),
-    //   },
-    // }));
-    //console.log(this.state.departure.time.toISOString().substring(0, 10));
-
     const data = this.getNonEmptyFields(state);
     //console.log(data);
     let paramsDataSent = {
@@ -230,17 +218,8 @@ class SearchFlights extends React.Component {
     localStorage.removeItem("reservationSummary");
     console.log(JSON.parse(localStorage.getItem("searchResultData")));
     //this.props.history.push('/flight_selection');
-    window.location.href = '/flight_selection';
-    localStorage.setItem("path" , "http://localhost:3000/flight_selection");
-
-    // this.props.history.push({
-    //   pathname: "/flight_component",
-    //   state: stateData
-    // });
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // });
+    window.location.href = "/flight_selection";
+    localStorage.setItem("path", "http://localhost:3000/flight_selection");
   };
 
   filterData(cabin, unfilteredData) {
