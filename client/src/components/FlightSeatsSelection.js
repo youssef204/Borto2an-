@@ -22,6 +22,7 @@ class FlightSeatsSelection extends React.Component {
             disabled={!allChosen}
             onClick={() => {
               alert(`chosen seats are ${departureSeats} and ${arrivalSeats}`);
+              window.location.href = "http://localhost:3000/trip_summary";
             }}
             sx={{ margin: "20px" }}
           >

@@ -151,22 +151,82 @@ class TripSummary extends React.Component {
       price2: "980",
       duration2: "18",
     };*/
-    this.state = JSON.parse(localStorage.getItem("flightSelectionData"));
+    const selectedFlights =  JSON.parse(localStorage.getItem("flightSelectionData"));
+    const selectedFlightsWithSeats = {... selectedFlights, selectedDepSeats :[18, 19 , 20 ,21 , 18] , selectedArrSeats :[17 , 0]}
+    this.state = selectedFlightsWithSeats;
   }
 
   onClick = (e) => {
-    window.location.href = "http://localhost:3000/seat_selection";
+    if(JSON.parse(localStorage.getItem("user"))){
+      console.log("state is " , this.state);
+      const depFlightData = this.state.flight1;
+      const retFlightData = this.state.flight2;
+      const depCabin = this.state.chosenCabin1;
+      const arrCabin = this.state.chosenCabin2;
+      const adultno = this.state.adultNumber;
+      const childno = this.state.childNumber;
+      const selectedDepartureSeats = this.state.selectedDepSeats;
+      const selectedArrivalSeats = this.state.selectedArrSeats;
+      const price = +this.state.price1.split(' ')[0] + +this.state.price2.split(' ')[0];
+
+      const reservationSummary = {
+        "userId" : JSON.parse(localStorage.getItem("user"))._id,
+        "price" : price,
+        "departureFlight" : {
+          "flightId" : depFlightData._id,
+          "seats" : selectedDepartureSeats,
+          "cabin" : depCabin,
+          "noAdults" : adultno,
+          "noChildren" : childno
+        },
+        "returnFlight" : {
+          "flightId" : retFlightData._id,
+          "seats" : selectedArrivalSeats,
+          "cabin" : arrCabin,
+          "noAdults" : adultno,
+          "noChildren" : childno
+        },
+        
+
+      };
+
+      console.log("reserve summary is " , reservationSummary);
+
+      localStorage.setItem("reservationSummary" , JSON.stringify(reservationSummary));
+
+      axios({
+        method: "post",
+        url: "http://localhost:8000/api/reservations",
+        headers: { authorization: "Bearer " + localStorage.getItem("token") },
+        data : reservationSummary,
+      }).then((res) =>{
+        console.log("result is ", res);
+      }).catch((e)=>{
+        console.log(e.response);
+      });
+    window.location.href = "http://localhost:3000/reservation_summary";
+    }
+    else 
+    window.location.href = "http://localhost:3000/login";
   };
 
   render() {
     return (
-      <Stack spacing={5}>
+      <Box
+            component="span"
+            border={2}
+            borderRadius={10}
+            borderLeft={2}
+            borderRight={2}
+            borderColor="#a9a9a9"
+            sx={{ p: 1 }}
+          >
+      <Stack>
         <div
           style={{
             display: "flex",
             justifyContent: "space-around",
             alignItems: "left",
-            margin: "5px",
           }}
         >
           <Box
@@ -303,6 +363,21 @@ class TripSummary extends React.Component {
                 </label>
               </div>
             </Stack>
+            <Stack style={{ margin: "2px" }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-around",
+                }}
+              >
+                <label style={{ fontSize: "14px" }}>
+                  Flight Number : {this.state.flight1.flightNumber}
+                </label>
+                <label style={{ fontSize: "14px" }}>
+                  Seats : {this.state.selectedDepSeats.slice(0, this.state.selectedDepSeats.length-1).map((entry) => entry + ' , ') }  {this.state.selectedDepSeats[this.state.selectedDepSeats.length-1]} 
+                </label>
+              </div>
+            </Stack>
             <br />
             <div
               style={{
@@ -318,7 +393,7 @@ class TripSummary extends React.Component {
                   justifyContent: "center",
                 }}
               >
-                Price : {this.state.price1} $
+                Price : {this.state.price1} 
               </label>
             </div>
           </Box>
@@ -456,6 +531,21 @@ class TripSummary extends React.Component {
                 </label>
               </div>
             </Stack>
+            <Stack style={{ margin: "2px" }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-around",
+                }}
+              >
+                <label style={{ fontSize: "14px" }}>
+                  Flight Number : {this.state.flight1.flightNumber}
+                </label>
+                <label style={{ fontSize: "14px" }}>
+                 Seats : {this.state.selectedArrSeats.slice(0, this.state.selectedArrSeats.length-1).map((entry) => entry + ' , ') }  {this.state.selectedArrSeats[this.state.selectedArrSeats.length-1]} 
+                </label>
+              </div>
+            </Stack>
             <br />
             <div
               style={{
@@ -471,20 +561,37 @@ class TripSummary extends React.Component {
                   justifyContent: "center",
                 }}
               >
-                Price : {this.state.price2} $
+                Price : {this.state.price2} 
               </label>
             </div>
           </Box>
         </div>
         <div
+              style={{
+                display: "flex",
+                justifyContent: "space-around",
+              }}
+            >
+              <label
+                style={{
+                  fontSize: "22px",
+                  fontWeight: "bold",
+                  alignSelf: "center",
+                  justifyContent: "center",
+                }}
+              >
+                Total price : {+this.state.price2.split(' ')[0] + +this.state.price1.split(' ')[0]} L.E
+              </label>
+            </div>
+        <div
           style={{
             display: "flex",
             justifyContent: "space-around",
-            margin: "80px",
+            margin: "0px",
           }}
         >
           <Button
-            label="Proceed to Seat Selection"
+            label="Confirm Reservation"
             index={1}
             width={300}
             height={40}
@@ -492,6 +599,7 @@ class TripSummary extends React.Component {
           ></Button>
         </div>
       </Stack>
+      </Box>
     );
   }
 }
