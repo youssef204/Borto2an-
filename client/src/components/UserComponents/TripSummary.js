@@ -203,10 +203,10 @@ class TripSummary extends React.Component {
 
       console.log("reserve summary is ", reservationSummary);
 
-      localStorage.setItem(
-        "reservationSummary",
-        JSON.stringify(reservationSummary)
-      );
+      // localStorage.setItem(
+      //   "reservationSummary",
+      //   JSON.stringify(reservationSummary)
+      // );
 
       axios({
         method: "post",
@@ -216,6 +216,7 @@ class TripSummary extends React.Component {
       })
         .then((res) => {
           console.log("result is ", res);
+          localStorage.setItem("reservationSummary" , JSON.stringify(res.data));
           window.location.href = "http://localhost:3000/reservation_summary";
         })
         .catch((e) => {
