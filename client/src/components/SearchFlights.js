@@ -1,4 +1,3 @@
-//CHECK 3LA EL ACCESS TOKEN FE KOL EL AXIOSS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 import React from "react";
 import axios from "axios";
 import Header from "./Header";
@@ -16,6 +15,8 @@ import Box from "@mui/material/Box";
 import { TextField } from "@mui/material";
 import { Popover } from "@mui/material";
 import { InputLabel } from "@mui/material";
+import setHours from "date-fns/setHours";
+import getHours from "date-fns/getHours";
 
 class SearchFlights extends React.Component {
   //selectedArrday;
@@ -240,13 +241,30 @@ class SearchFlights extends React.Component {
     );
     return ans;
   }
+
   filterDataByDate(dep, arr, unfilteredData) {
-    console.log("timing ", typeof this.state.departure.time);
-    console.log("unfiltered", unfilteredData);
+    // console.log("timing ", typeof this.state.departure.time);
+    // console.log("unfiltered", unfilteredData);
+    //console.log(new Date(new Date(dep).setHours(0,0,0)));
+    console.log(new Date(unfilteredData[0].arrival.time));
+    console.log(new Date(arr));
+
     const ans = unfilteredData.filter((e) => {
       return (
-        new Date(e.departure.time) >= new Date(dep) &&
-        new Date(e.arrival.time) <= new Date(arr)
+        new Date(
+          new Date(
+            new Date(e.departure.time).setHours(
+              new Date(e.departure.time).getHours() - 2
+            )
+          )
+        ) >= new Date(new Date(dep).setHours(0, 0, 0)) &&
+        new Date(
+          new Date(
+            new Date(e.arrival.time).setHours(
+              new Date(e.arrival.time).getHours() - 2
+            )
+          )
+        ) <= new Date(new Date(arr).setHours(23, 59, 59))
       );
     });
     console.log("after filter", ans);
@@ -389,6 +407,7 @@ class SearchFlights extends React.Component {
       return (
         <div
           style={{
+            background: "#fff",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",

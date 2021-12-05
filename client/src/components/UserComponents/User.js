@@ -27,6 +27,11 @@ class User extends Component {
             localStorage.removeItem('refreshToken');
             localStorage.removeItem('token');
             localStorage.removeItem('user');
+            localStorage.removeItem('flightSelectionData');
+            localStorage.removeItem('reservationSummary');
+            localStorage.removeItem('selectedSeats');
+            localStorage.removeItem('searchResultData');
+            localStorage.removeItem('path');
             window.location.href="http://localhost:3000";
         })
         .catch(err => console.log(err));    
@@ -42,6 +47,9 @@ class User extends Component {
   
 
   render() {
+      if(!localStorage.getItem("user")){
+          return this.props.history.push("/");
+      }
     if(this.state.user)
     return (
         <div class="profile-container" >

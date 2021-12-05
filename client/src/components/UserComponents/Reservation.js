@@ -8,6 +8,10 @@ function Reservation({Reservation}) {
   const history = useHistory();
 
   function onClick(){history.push({pathname:"/reservation_details",state:Reservation});};
+
+  if(!localStorage.getItem("user")){
+    return this.props.history.push("/");
+}
   
   return (
     <>
@@ -26,9 +30,10 @@ function Reservation({Reservation}) {
 
 
       
-      <button className="showAllDetails" onClick ={onClick} >
+     <td> <button className="showAllDetails" onClick ={onClick} >
         Show All Details  
       </button >
+      </td>
     </tr>
     </>
 
