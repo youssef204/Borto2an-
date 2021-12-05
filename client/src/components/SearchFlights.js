@@ -295,7 +295,10 @@ class SearchFlights extends React.Component {
       console.log(localStorage.getItem("user")["isAdmin"]);
       return (
         <>
-          <form noValidate onSubmit={(e) => this.onSubmit2(e, this.state)}>
+          <div className="createFlight-container">
+          <form className=" UpdateForm-container" noValidate onSubmit={(e) => this.onSubmit2(e, this.state)}>
+            <h2>Search For Flights</h2>
+            <br></br>
             <div>
               <label>Departure Airport: </label>
               <br />
@@ -370,11 +373,9 @@ class SearchFlights extends React.Component {
             </div>
             <br></br>
 
-            <input
-              type="submit"
-              className="btn btn-outline-warning btn-block mt-4"
-            />
+            <button>Search</button>
           </form>
+          </div>
         </>
       );
     } else {

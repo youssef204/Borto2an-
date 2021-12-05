@@ -32,15 +32,9 @@ class Reservations extends Component {
     }
     if(this.state.reservations.length!=0)
     return (
-      <body>
-        <div>
-        <table
-            style={{
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-          >
-            <tr>
+      <section>
+      <div class="tbl-header">
+        <table>
               <th>Price</th>
 
               <th>From</th>
@@ -48,12 +42,16 @@ class Reservations extends Component {
 
               <th>To</th>
               <th>At</th>
-              
-            </tr>
+              <th> Show Details</th>
+              </table>
+              <div class="tbl-content">
+  <table cellpadding="0" cellspacing="0" border="0">
+
             {reservationList}
             </table>
         </div>
-      </body>
+        </div>
+      </section>
     );
     else return reservationList;
   }

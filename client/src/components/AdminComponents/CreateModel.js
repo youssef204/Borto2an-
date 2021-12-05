@@ -57,7 +57,7 @@ class CreateModel extends React.Component {
     render() { 
         return (<>
         <div className="createFlight-container">
-              <form noValidate onSubmit={this.onSubmit}>
+              <form className=" UpdateForm-container" noValidate onSubmit={this.onSubmit}>
               <h2>Create New Model </h2>
               <br></br>
 
