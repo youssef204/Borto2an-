@@ -8,13 +8,15 @@ class ReservationSummary extends React.Component {
     this.state = {
       Reservation:JSON.parse(localStorage.getItem("reservationSummary")),
     }
-onShowReservations=()=>{
-    this.props.history.push("/reservations");
-}
     }
+    onShowReservations=()=>{
+        this.props.history.push("/reservations");
+    };
 
   render(){
-    
+    if(!localStorage.getItem("reservationSummary")){
+        return this.props.history.push("/");
+    }
       const Reservation = this.state.Reservation;
     return (
         <> 

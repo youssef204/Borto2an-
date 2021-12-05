@@ -381,6 +381,7 @@ class SearchFlights extends React.Component {
       return (
         <div
           style={{
+            background:"#fff",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
