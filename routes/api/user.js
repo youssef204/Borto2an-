@@ -31,6 +31,8 @@ function isValidEntry(entry) {
 }
 function isValidUpdate(entry) {
   //check for all required data
+  if(!entry)
+    return false;
   if (
     ("firstName" in entry && !entry.firstName) ||
     ("lastName" in entry && !entry.lastName) ||
@@ -55,7 +57,7 @@ user_Router.get("/:id",authenticate, (req, res) => {
     });
 });
 
-user_Router.get("/profile",authenticate, async(req, res) => {
+user_Router.get("/",authenticate, async(req, res) => {
   const users = await User.find();
 //  console.log(users);
   console.log(req.user);
@@ -85,16 +87,13 @@ user_Router.post("/register", async(req, res) => {
 });
 
 //update
-user_Router.put("/", authenticate , (req, res) => {
+user_Router.put("/", authenticate , async (req, res) => {
   const id = req.body._id;
   const update = req.body.update;
-  if (!id || !isValidUpdate(update)) res.sendStatus(422);
-  User.findByIdAndUpdate(id, update)
-    .then(() => {
-      console.log("done");
-      res.send("done");
-    })
-    .catch((err) => res.status(400).send(err));
+  if (!id || !isValidUpdate(update)) {res.sendStatus(422); console.log(id);}
+  const updated = await User.findByIdAndUpdate(id, update, {new: true}).catch((err) => res.status(400).send(err));
+  updated['password'] = '';
+  res.send(updated);
 });
 
 user_Router.delete("/:id",authenticate, async (req, res) => {
