@@ -33,7 +33,7 @@ export default function ChosenFLightsDetails({
       };
       localStorage.setItem("flightSelectionData", JSON.stringify(data));
       localStorage.removeItem("reservationSummary");
-      localStorage.setItem("path" , "http://localhost:3000/select_seats");
+      localStorage.setItem("path", "http://localhost:3000/select_seats");
       window.location.href = "/select_seats";
     }
   };
@@ -75,12 +75,13 @@ export default function ChosenFLightsDetails({
 
   return (
     <>
-      <link
+      {/* <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
         rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
         crossOrigin="anonymous"
-      ></link>
+      ></link> */}
+
       <div className="footer d-flex flex-row">
         {flight1}
         {flight2}

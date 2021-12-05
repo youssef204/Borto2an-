@@ -29,19 +29,19 @@ export default function FlightsMenu(probs) {
 
   return (
     <>
-      <link
+      {/* <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
         rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
         crossOrigin="anonymous"
-      ></link>
+      ></link> */}
       <div className="list ">
         <div className="settings d-flex flex-row">
           <div className="text-holder">
             Flights from {from} to {to}
           </div>
         </div>
-        <div className="container p-auto">
+        <div className="flightMenuContainer p-auto">
           {flightArr.length === 0 && (
             <label
               style={{

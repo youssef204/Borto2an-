@@ -3,16 +3,18 @@
   margin: auto;
   justify-content: center;
   align-content: center;
-  margin-bottom: 30px;
+  margin-bottom: 5%;
+  margin-top: 5%;
 }
 .settings {
   height: 50px;
   width: 100%;
   background-color: darkblue;
 }
-.container {
-  width: inherit;
+.flightMenuContainer {
+  width: 100%;
   border: 2px solid rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.8);
 }
 .text-holder {
   width: 40%;
