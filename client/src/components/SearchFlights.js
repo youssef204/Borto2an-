@@ -165,91 +165,30 @@ class SearchFlights extends React.Component {
   onSubmit = async (e, state) => {
     if (!this.validateInput()) return;
     e.preventDefault();
-    //let arrDate = Date.parse(this.state.arrival.time);
-    //console.log("arrival date is",arrDate);
-    this.setState((prevState) => ({
-      arrival: {
-        ...prevState.arrival,
-        time: this.state.arrival.time.toISOString().substring(0, 10),
-      },
-      departure: {
-        ...prevState.departure,
-        time: this.state.departure.time.toISOString().substring(0, 10),
-      },
-    }));
-    console.log(this.state.departure.time.toISOString().substring(0, 10));
-    //  console.log("are they equal ", this.selectedArrday.toISOString().localeCompare("2021-11-30T11:33:00.000Z"))
+
     const data = this.getNonEmptyFields(state);
-    console.log(data);
-    let paramsData = {
+    //console.log(data);
+    let paramsDataSent = {
       "departure.airport": data["departure"]["airport"],
-      "departure.time": data["departure"]["time"],
+      //"departure.time": data["departure"]["time"],
       "arrival.airport": data["arrival"]["airport"],
       //"arrival.time" : data["arrival"]["time"]
     };
-    if (this.state.childNumber === undefined) this.state.childNumber = "0";
 
-    let sentData;
     let res = await axios({
       method: "get",
       url: "http://localhost:8000/api/flights",
       headers: { authorization: "Bearer " + localStorage.getItem("token") },
-      params: paramsData,
+      params: paramsDataSent,
     });
     // .then((res) => {
     // go to search results component with the data
-    let totalSeats = +this.state.childNumber + +this.state.adultNumber;
 
-    if (this.state.chosenCabin === "economyCabin") {
-      sentData = res.data.filter((entry) => entry.economyCabin !== null);
-      //sentData.map((info) => (info["chosenCabin"] = "economy"));
-      sentData.filter(
-        (entry) =>
-          totalSeats <=
-          entry["airplaneModelID"]["economyRows"] *
-            entry["airplaneModelID"]["economyColumns"] -
-            entry["economyCabin"]["takenSeats"].length
-      );
-      // sentData.map((info) => (info["AdultNumber"] = this.adultnumber));
-      // sentData.map((info) => (info["childNumber"] = this.childnumber));
-    } else if (this.state.chosenCabin === "businessCabin") {
-      sentData = res.data.filter((entry) => entry.businessCabin !== null);
-      // sentData.map((info) => (info["chosenCabin"] = "business"));
-      sentData.filter(
-        (entry) =>
-          totalSeats <=
-          entry["airplaneModelID"]["businessRows"] *
-            entry["airplaneModelID"]["businessColumns"] -
-            entry["businessCabin"]["takenSeats"].length
-      );
-      // sentData.map((info) => (info["AdultNumber"] = this.adultnumber));
-      // sentData.map((info) => (info["childNumber"] = this.childnumber));
-    } else if (this.state.chosenCabin === "firstCabin") {
-      sentData = res.data.filter((entry) => entry.firstCabin !== null);
-      // sentData.map((info) => (info["chosenCabin"] = "first"));
-      sentData.filter(
-        (entry) =>
-          totalSeats <=
-          entry["airplaneModelID"]["firstClassRows"] *
-            entry["airplaneModelID"]["firstClassColumns"] -
-            entry["firstCabin"]["takenSeats"].length
-      );
-      // sentData.map((info) => (info["AdultNumber"] = this.adultnumber));
-      // sentData.map((info) => (info["childNumber"] = this.childnumber));
-    }
-    // console.log("sentData are",sentData);
-    // this.props.history.push({
-    //   pathname: "/search_results",
-    //   state: sentData,
-    // });
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // });
+    let sentData = this.filterData(this.state.chosenCabin, res);
 
     let paramsDataReturn = {
       "departure.airport": data["arrival"]["airport"],
-      "departure.time": data["arrival"]["time"],
+      //"departure.time": data["arrival"]["time"],
       "arrival.airport": data["departure"]["airport"],
       //"arrival.time" : data["arrival"]["time"]
     };
@@ -260,49 +199,10 @@ class SearchFlights extends React.Component {
       headers: { authorization: "Bearer " + localStorage.getItem("token") },
       params: paramsDataReturn,
     });
-    // .then((res) => {
-    // go to search results component with the data
-
-    let returnData;
-    if (this.state.chosenCabin === "economyCabin") {
-      returnData = res.data.filter((entry) => entry.economyCabin !== null);
-      // returnData.map((info) => (info["chosenCabin"] = "economy"));
-      returnData.filter(
-        (entry) =>
-          totalSeats <=
-          entry["airplaneModelID"]["economyRows"] *
-            entry["airplaneModelID"]["economyColumns"] -
-            entry["economyCabin"]["takenSeats"].length
-      );
-      // returnData.map((info) => (info["AdultNumber"] = this.adultnumber));
-      // returnData.map((info) => (info["childNumber"] = this.childnumber));
-    } else if (this.state.chosenCabin === "businessCabin") {
-      returnData = res.data.filter((entry) => entry.businessCabin !== null);
-      //returnData.map((info) => (info["chosenCabin"] = "business"));
-      returnData.filter(
-        (entry) =>
-          totalSeats <=
-          entry["airplaneModelID"]["businessRows"] *
-            entry["airplaneModelID"]["businessColumns"] -
-            entry["businessCabin"]["takenSeats"].length
-      );
-      // returnData.map((info) => (info["AdultNumber"] = this.adultnumber));
-      // returnData.map((info) => (info["childNumber"] = this.childnumber));
-    } else if (this.state.chosenCabin === "firstCabin") {
-      returnData = res.data.filter((entry) => entry.firstCabin !== null);
-      //  returnData.map((info) => (info["chosenCabin"] = "first"));
-      returnData.filter(
-        (entry) =>
-          totalSeats <=
-          entry["airplaneModelID"]["firstClassRows"] *
-            entry["airplaneModelID"]["firstClassColumns"] -
-            entry["firstCabin"]["takenSeats"].length
-      );
-      //  returnData.map((info) => (info["AdultNumber"] = this.adultnumber));
-      // returnData.map((info) => (info["childNumber"] = this.childnumber));
-    }
+    let returnData = this.filterData(this.state.chosenCabin, res);
     console.log("sentData are", sentData);
     console.log("returnData are", returnData);
+
     let stateData = {
       sentData,
       returnData,
@@ -313,24 +213,45 @@ class SearchFlights extends React.Component {
       to: this.state.arrival.airport,
     };
     console.log("state Data ", stateData);
-    // localStorage.setItem("depData",JSON.stringify(sentData));
-    // localStorage.setItem("retData",JSON.stringify(returnData));
-    // localStorage.setItem("adultNumber",JSON.stringify(this.adultnumber));
-    // localStorage.setItem("chosenCabin",JSON.stringify(this.chosenCabin));
-    // localStorage.setItem("chilcNumber",JSON.stringify(this.childnumber));
     localStorage.setItem("searchResultData", JSON.stringify(stateData));
+    localStorage.removeItem("flightSelectionData");
+    localStorage.removeItem("reservationSummary");
     console.log(JSON.parse(localStorage.getItem("searchResultData")));
-    //window.location.href = "http://localhost:3000/flight_selection";
-
-    // this.props.history.push({
-    //   pathname: "/flight_component",
-    //   state: stateData
-    // });
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // });
+    //this.props.history.push('/flight_selection');
+    window.location.href = "/flight_selection";
+    localStorage.setItem("path", "http://localhost:3000/flight_selection");
   };
+
+  filterData(cabin, unfilteredData) {
+    console.log("timing ", typeof this.state.departure.time);
+    let totalSeats = +this.state.childNumber + +this.state.adultNumber;
+    let ans = unfilteredData.data.filter((entry) => entry[cabin] !== null);
+    ans.filter(
+      (entry) =>
+        totalSeats <=
+        entry["airplaneModelID"]["economyRows"] *
+          entry["airplaneModelID"]["economyColumns"] -
+          entry["economyCabin"]["takenSeats"].length
+    );
+    ans = this.filterDataByDate(
+      this.state.departure.time,
+      this.state.arrival.time,
+      ans
+    );
+    return ans;
+  }
+  filterDataByDate(dep, arr, unfilteredData) {
+    console.log("timing ", typeof this.state.departure.time);
+    console.log("unfiltered", unfilteredData);
+    const ans = unfilteredData.filter((e) => {
+      return (
+        new Date(e.departure.time) >= new Date(dep) &&
+        new Date(e.arrival.time) <= new Date(arr)
+      );
+    });
+    console.log("after filter", ans);
+    return ans;
+  }
 
   getNonEmptyFields = (obj) => {
     const res = {};
@@ -347,10 +268,6 @@ class SearchFlights extends React.Component {
     }
     if (!this.state.arrival.airport) {
       console.log("arr problem");
-      return false;
-    }
-    if (!this.state.chosenCabin) {
-      console.log("cabin problem");
       return false;
     }
     if (!this.state.adultNumber) {

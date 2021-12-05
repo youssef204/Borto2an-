@@ -16,7 +16,6 @@ import AllModels from "./components/AdminComponents/AllModels";
 import FlightComponent from "./components/UserComponents/FlightComponents/FlightComponent";
 import FlightsMenu from "./components/UserComponents/FlightsMenu";
 import FlightSelection from "./components/UserComponents/FlightSelection";
-import "./App.css";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import FlightSeatsSelection from "./components/FlightSeatsSelection";
 import User from "./components/UserComponents/User"
@@ -58,15 +57,11 @@ function App() {
             <Route exact path="/all_models" component={AllModels} />
 
             {/* user */}
-            <Route exact path="/search_user_flights" component={UserSearchFlights}/>
-            <Route exact path="/flight_component" component={FlightComponent} />
-            <Route exact path="/flight_menu" component={FlightsMenu} />
             <Route exact path="/flight_selection" component={FlightSelection} />
-            <Route exact path="/seat_selection" component={FlightSeatsSelection} />
+            <Route exact path="/select_seats" component={FlightSeatsSelection} />
             <Route exact path="/user" component={User} />
             <Route exact path="/reservations" component={Reservations} />
             <Route exact path="/reservation_details" component={ReservationDetails} />
-            <Route exact path="/trip_summary" component={TripSummary} />
             <Route exact path="/reservation_summary" component={ReservationSummary} />
             <Route exact path="/update_user" component={UpdateUser} />
             <Route component={PageNotFound} />
