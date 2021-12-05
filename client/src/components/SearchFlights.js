@@ -321,7 +321,7 @@ class SearchFlights extends React.Component {
     // localStorage.setItem("chilcNumber",JSON.stringify(this.childnumber));
     localStorage.setItem("searchResultData", JSON.stringify(stateData));
     console.log(JSON.parse(localStorage.getItem("searchResultData")));
-    //window.location.href = "http://localhost:3000/flight_selection";
+    window.location.href = "http://localhost:3000/flight_selection";
 
     // this.props.history.push({
     //   pathname: "/flight_component",
