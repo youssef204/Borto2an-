@@ -40,67 +40,22 @@ class UpdateUser extends React.Component {
 
   render() {
     return (
-      <div>
-
-        <form noValidate onSubmit={this.onSubmit}>
-                First Name:
-                <div>
-                  <input
-                    type='text'
-                    placeholder='First Name'
-                    name='firstName'
-                    onChange={this.onChange}
-                  />
-                </div>
-
-                Last Name:
-                <div>
-                  <input
-                    type='text'
-                    placeholder='Last Name'
-                    name='lastName'
-                    onChange={this.onChange}
-                  />
-                </div>
-
-                Email:
-                <div>
-                  <input
-                    type='text'
-                    placeholder='Email'
-                    name='email'
-                    onChange={this.onChange}
-                  />
-                </div>
-
-                Password:
-                <div>
-                  <input
-                    type='password'
-                    placeholder='Password'
-                    name='password'
-                    onChange={this.onChange}
-                  />
-                </div>
-
-
-                Passport Number:
-                <div>
-                  <input
-                    type='text'
-                    placeholder='Passport Number'
-                    name='passportNumber'
-                    onChange={this.onChange}
-                  />
-                </div>
-
-
-
-                <button>
-                  Update
-                </button>
-              </form>
-      </div>
+      
+      <div class="update-container" >
+      <div class="form-container UpdateForm-container">
+      <form action="#" noValidate onSubmit={this.onSubmit}>
+        <h1>Update Personal Information </h1>
+              <input type="text"  placeholder="First name" name = "firstName" onChange={this.onChange} />
+              <input type="text"  placeholder="Last name" name = "lastName" onChange={this.onChange} />
+              <input type="text"  placeholder="Enter Passport Number" name = "passportNumber" onChange={this.onChange}  />
+              <input type="email"  placeholder="Enter email"  name = "email" onChange={this.onChange}/>
+              <input type="password"  placeholder="Enter password" name = "password" onChange={this.onChange} />
+              <br></br>
+  
+        <button>Update Info</button>
+        </form>
+        </div>
+        </div>
     );
   }
 }
