@@ -34,6 +34,9 @@ export class SignUp extends Component {
   };
 
     render() {
+      if(localStorage.getItem("user")){
+        return this.props.history.push("/");
+      }
         return (
             <>
             <h2>Welcome to Borto2an Airline</h2>

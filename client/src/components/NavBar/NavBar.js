@@ -9,7 +9,7 @@ function NavigationBar({user=JSON.parse(localStorage.getItem("user"))}) {
   (!user)?  
   <>
   <li style={{float:'right'}} className="NavBar">
-        <Link to="/signup" exact className="NavBar">
+        <Link to="/sign_up" exact className="NavBar">
           Sign up
         </Link>
       </li>
@@ -17,7 +17,7 @@ function NavigationBar({user=JSON.parse(localStorage.getItem("user"))}) {
     
     
       <li style={{float:'right'}} className="NavBar">
-        <Link to="/login" exact className="NavBar">
+        <Link to="/sign_in" exact className="NavBar">
           Log in
         </Link>
       </li>

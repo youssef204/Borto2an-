@@ -26,7 +26,6 @@ import TripSummary from "./components/UserComponents/TripSummary";
 import ReservationSummary from "./components/UserComponents/ReservationSummary";
 import SignIn from "./components/GuestComponents/SignIn";
 import SignUp from "./components/GuestComponents/SignUp";
-
 import UpdateUser from "./components/UserComponents/UpdateUser";
 
 

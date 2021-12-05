@@ -5,7 +5,7 @@ class UpdateUser extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      updated: {},
+      updated:  JSON.parse(localStorage.getItem('user')),
       _id: -1
     };
   }
@@ -32,9 +32,8 @@ class UpdateUser extends React.Component {
     axios
       .put("http://localhost:8000/api/user", data, {
           headers:{"authorization":"Bearer "+localStorage.getItem("token")}
-
         })
-      .then(res => {localStorage.setItem('user',JSON.stringify(res.data));window.location.href='/';alert("updated successfully")})
+      .then(res => {localStorage.setItem('user',JSON.stringify(res.data));window.location.href='/user';alert("updated successfully")})
       .catch(err => alert("Update failed! Data Error!!"));
   };
 
@@ -42,19 +41,21 @@ class UpdateUser extends React.Component {
     return (
       
       <div class="update-container" >
-      <div class="form-container UpdateForm-container">
-      <form action="#" noValidate onSubmit={this.onSubmit}>
-        <h1>Update Personal Information </h1>
-              <input type="text"  placeholder="First name" name = "firstName" onChange={this.onChange} />
-              <input type="text"  placeholder="Last name" name = "lastName" onChange={this.onChange} />
-              <input type="text"  placeholder="Enter Passport Number" name = "passportNumber" onChange={this.onChange}  />
-              <input type="email"  placeholder="Enter email"  name = "email" onChange={this.onChange}/>
-              <input type="password"  placeholder="Enter password" name = "password" onChange={this.onChange} />
-              <br></br>
+      <form className="UpdateForm-container" action="#" noValidate onSubmit={this.onSubmit}>
+        <h2>Update Personal Information </h2>
+        First Name:
+              <input type="text"   name = "firstName" value = {this.state.updated.firstName} onChange={this.onChange} />
+        Last Name:
+              <input type="text"   value = {this.state.updated.lastName} name = "lastName" onChange={this.onChange} />
+        Passport Number:
+              <input type="text"  value = {this.state.updated.passportNumber} name = "passportNumber" onChange={this.onChange}  />
+        Email:
+              <input type="email"  value = {this.state.updated.email}  name = "email" onChange={this.onChange}/>
+        Password:
+              <input type="password"  placeholder="Enter New Password" name = "password" onChange={this.onChange} />
   
         <button>Update Info</button>
         </form>
-        </div>
         </div>
     );
   }
