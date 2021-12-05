@@ -37,22 +37,40 @@ class User extends Component {
     }
 
     updateData = () => {
-        this.props.history.push('/update_user');
+        this.props.history.push({pathname:'/update_user',state:this.state.user});
     }
   
 
   render() {
     if(this.state.user)
     return (
-      <body>
-          First name: {this.state.user.firstName} <br/>
-          Last name: {this.state.user.lastName} <br/>
-          Email: {this.state.user.email} <br/>
-          Passport number: {this.state.user.passportNumber} <br/>
-          <button onClick={this.logout}>Log out</button>
-          <button onClick={this.showReservations}>Show my reservations</button>
-          <button onClick={this.updateData}>Update my data</button>
-      </body>
+        <div class="profile-container" >
+        <div class= "ProfileForm-container">
+          <h2>Personal Information </h2>
+          <br></br>
+          First Name:
+                <input style={{left:0}} type="text"  value={this.state.user.firstName}  name = "firstName" onChange={this.onChange} />
+            Last Name:
+        
+                <input type="text"  value={this.state.user.lastName} name = "lastName" onChange={this.onChange} />
+                passport Number:
+
+                <input type="text"  value={this.state.user.passportNumber} name = "passportNumber" onChange={this.onChange}  />
+                Email:
+
+                <input type="email"  value={this.state.user.email}  name = "email" onChange={this.onChange}/>
+                <br></br>
+
+         <div>
+          <button inline="true" onClick={this.logout}>Log out</button>
+          <button inline = "true" onClick={this.showReservations}>Show my reservations</button>
+          <button inline = "true" onClick={this.updateData}>Update my data</button>
+          </div>
+
+
+          </div>
+          </div>
+
     );
     else return <p/>;
   }

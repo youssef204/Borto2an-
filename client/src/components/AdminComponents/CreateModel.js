@@ -54,8 +54,11 @@ class CreateModel extends React.Component {
 
     render() { 
         return (<>
-
+        <div className="createFlight-container">
               <form noValidate onSubmit={this.onSubmit}>
+              <h2>Create New Model </h2>
+              <br></br>
+
                 Model Name:
                 <div>
                   <input
@@ -125,6 +128,7 @@ class CreateModel extends React.Component {
                   Create
                 </button>
               </form>
+              </div>
           </>
     );
     }

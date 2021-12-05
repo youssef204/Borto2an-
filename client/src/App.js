@@ -26,7 +26,6 @@ import TripSummary from "./components/UserComponents/TripSummary";
 import ReservationSummary from "./components/UserComponents/ReservationSummary";
 import SignIn from "./components/GuestComponents/SignIn";
 import SignUp from "./components/GuestComponents/SignUp";
-
 import UpdateUser from "./components/UserComponents/UpdateUser";
 
 
@@ -68,15 +67,8 @@ function App() {
             <Route exact path="/reservations" component={Reservations} />
             <Route exact path="/reservation_details" component={ReservationDetails} />
             <Route exact path="/trip_summary" component={TripSummary} />
-<<<<<<< HEAD
-<<<<<<< HEAD
             <Route exact path="/reservation_summary" component={ReservationSummary} />
-=======
-=======
->>>>>>> 4fd56c1c72cf0e96cdf8e5f1e46e3b0d311bfa20
             <Route exact path="/update_user" component={UpdateUser} />
-
->>>>>>> 4fd56c1c72cf0e96cdf8e5f1e46e3b0d311bfa20
             <Route component={PageNotFound} />
           </Switch>
         </div>
