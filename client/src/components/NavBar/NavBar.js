@@ -146,7 +146,7 @@ function NavigationBar({user=JSON.parse(localStorage.getItem("user"))}) {
       {(reservation)?
         
         <li className="NavBar">
-        <Link to="/reservation_details" exact className="NavBar">Reservation Details</Link>
+        <Link to="/reservation_summary" exact className="NavBar">Reservation Summary</Link>
       </li>:<></>
       
       }

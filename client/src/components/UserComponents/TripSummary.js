@@ -227,16 +227,9 @@ class TripSummary extends React.Component {
 
   render() {
     return (
-      <Box
-        component="span"
-        border={2}
-        borderRadius={10}
-        borderLeft={2}
-        borderRight={2}
-        borderColor="#a9a9a9"
-        sx={{ p: 1 }}
-      >
         <Stack>
+          <br/>
+          <br/>
           <div
             style={{
               display: "flex",
@@ -623,7 +616,7 @@ class TripSummary extends React.Component {
             style={{
               display: "flex",
               justifyContent: "space-around",
-              margin: "0px",
+              margin: "10px",
             }}
           >
             <Button
@@ -635,7 +628,6 @@ class TripSummary extends React.Component {
             ></Button>
           </div>
         </Stack>
-      </Box>
     );
   }
 }
