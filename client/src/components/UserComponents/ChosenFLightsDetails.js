@@ -33,6 +33,7 @@ export default function ChosenFLightsDetails({
       };
       localStorage.setItem("flightSelectionData", JSON.stringify(data));
       localStorage.removeItem("reservationSummary");
+      localStorage.setItem("path" , "http://localhost:3000/select_seats");
       window.location.href = "/select_seats";
     }
   };
