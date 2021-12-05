@@ -3,6 +3,7 @@ import {useHistory} from 'react-router-dom';
 
 
 function Reservation({Reservation}) {
+  console.log(Reservation);
 
   const history = useHistory();
 
@@ -26,7 +27,7 @@ function Reservation({Reservation}) {
 
       
       <button className="showAllDetails" onClick ={onClick} >
-        Show All Details
+        Show All Details  
       </button >
     </tr>
     </>

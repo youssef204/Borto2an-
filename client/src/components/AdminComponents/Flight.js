@@ -5,16 +5,17 @@ function Flight({ flightNumber, fromAirport, toAirport, departureTime, arrivalTi
   
   return (
     <>
-    <tr style={{ background: "#dddddd" }}>
-      <td style={{ padding: "15px" }}> {flightNumber}</td>
-      <td style={{ padding: "15px" }}> {fromAirport}</td>
-      <td style={{ padding: "15px" }} >{toAirport}</td>
-      <td style={{ padding: "15px" }}>{departureTime.substring(0,10)+" at "+departureTime.substring(11,16)}</td>
-      <td style={{ padding: "15px" }} >{arrivalTime.substring(0,10)+" at "+arrivalTime.substring(11,16)}</td>
-    
-      <button className="showAllDetails" onClick = {()=>onShowDetails(flightNumber)} >
-        Show All Details
+    <tr>
+      <td> {flightNumber}</td>
+      <td> {fromAirport}</td>
+      <td>{toAirport}</td>
+      <td>{departureTime.substring(0,10)+" at "+departureTime.substring(11,16)}</td>
+      <td >{arrivalTime.substring(0,10)+" at "+arrivalTime.substring(11,16)}</td>
+    <td>
+      <button  onClick = {()=>onShowDetails(flightNumber)} >
+        Show all details
       </button >
+      </td>
     </tr>
     </>
 
