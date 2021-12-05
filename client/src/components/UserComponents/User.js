@@ -49,16 +49,16 @@ class User extends Component {
           <h2>Personal Information </h2>
           <br></br>
           First Name:
-                <input style={{left:0}} type="text"  value={this.state.user.firstName}  name = "firstName" onChange={this.onChange} />
+                <input className="profile-input"  type="text"  value={this.state.user.firstName}  name = "firstName" onChange={this.onChange} />
             Last Name:
         
-                <input type="text"  value={this.state.user.lastName} name = "lastName" onChange={this.onChange} />
+                <input   className="profile-input" type="text"  value={this.state.user.lastName} name = "lastName" onChange={this.onChange} />
                 passport Number:
 
-                <input type="text"  value={this.state.user.passportNumber} name = "passportNumber" onChange={this.onChange}  />
+                <input  className="profile-input" type="text"  value={this.state.user.passportNumber} name = "passportNumber" onChange={this.onChange}  />
                 Email:
 
-                <input type="email"  value={this.state.user.email}  name = "email" onChange={this.onChange}/>
+                <input type="email" className="profile-input"  value={this.state.user.email}  name = "email" onChange={this.onChange}/>
                 <br></br>
                 <br></br>
 

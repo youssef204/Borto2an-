@@ -8,7 +8,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import PageNotFound from "./components/PageNotFound";
 import FlightDetails from "./components/AdminComponents/FlightDetails";
 import UpdateFlight from "./components/AdminComponents/UpdateFlight";
-import UserSearchFlights from "./components/UserComponents/UserSearchFlights";
 import "./App.css";
 import NavBar from "./components/NavBar/NavBar";
 import CreateModel from "./components/AdminComponents/CreateModel";
