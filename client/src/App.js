@@ -64,6 +64,7 @@ function App() {
             <Route exact path="/reservation_details" component={ReservationDetails} />
             <Route exact path="/reservation_summary" component={ReservationSummary} />
             <Route exact path="/update_user" component={UpdateUser} />
+            <Route exact path="/trip_summary" component={TripSummary} />
             <Route component={PageNotFound} />
           </Switch>
         </div>
