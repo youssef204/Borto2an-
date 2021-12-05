@@ -6,6 +6,8 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import { Box } from '@mui/system';
+import { Stack } from '@mui/material';
 
 
 class ReservationDetails extends React.Component {
@@ -40,12 +42,63 @@ class ReservationDetails extends React.Component {
 
     return (
         <>       
-
-            Reservation Price: {Reservation.price}
+            <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
+            }}
+          >
+          
+        <Box
+              component="span"
+              border={2}
+              borderRadius={10}
+              borderLeft={2}
+              borderRight={2}
+              borderColor="#a9a9a9"
+              sx={{ p: 5 }}
+              style={{
+                backgroundColor: "#ffffff"
+              }}
+            >
+            <Stack style={{ margin: "2px" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-around"
+                  }}
+                >
+                  <label style={{ fontSize: "22px" , fontWeight:"bold"}}>
+                  Reservation Price : {Reservation.price} L.E
+                  </label>
+                </div>
+              </Stack>
 
             <hr/>
-            Departure Flight details:
+            <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "left",
+            }}
+          >
+            <div>
+            <Stack style={{ margin: "2px" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-around",
+                    marginRight:"20px"
+                  }}
+                >
+                  <label style={{ fontSize: "16px" , fontWeight:"16"}}>
+                      Departure Flight Details
+                  </label>
+                </div>
+              </Stack>
             <br/>
+            <div>
             <br/>Flight Number: {Reservation.departureFlight.flightId.flightNumber}
             <br/>From Airport: {Reservation.departureFlight.flightId.departure.airport}
             <br/>From Terminal: {Reservation.departureFlight.flightId.departure.terminal}
@@ -59,10 +112,22 @@ class ReservationDetails extends React.Component {
             <br/>Cabin: {Reservation.departureFlight.cabin}
             <br/>Number of Adults: {Reservation.departureFlight.noAdults}
             <br/>Number of Children: {Reservation.departureFlight.noChildren}
+            </div>
+            </div>
 
-
-            <hr/>
-            Return flight details:
+            <div>
+            <Stack style={{ margin: "2px" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-around",
+                  }}
+                >
+                  <label style={{ fontSize: "16px" , fontWeight:"16"}}>
+                      Return Flight Details
+                  </label>
+                </div>
+              </Stack>
             <br/>
             <br/>Flight Number: {Reservation.returnFlight.flightId.flightNumber}
             <br/>From Airport: {Reservation.returnFlight.flightId.departure.airport}
@@ -79,9 +144,17 @@ class ReservationDetails extends React.Component {
             <br/>Number of Children: {Reservation.returnFlight.noChildren}
 
             <br/> <br/>
-
+            </div>
+            </div>
+            <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center"
+                  }}>
             <button onClick={handleClickOpen}>Delete</button>
-        
+            </div>
+            </Box>
+            </div>
         <Dialog
               open={this.state.open}
               onClose={handleClose}

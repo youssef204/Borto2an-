@@ -39,19 +39,20 @@ class UpdateUser extends React.Component {
       .put("http://localhost:8000/api/user", data, {
           headers:{"authorization":"Bearer "+localStorage.getItem("token")}
         })
-      .then(res => {localStorage.setItem('user',JSON.stringify(res.data));window.location.href='/user';alert("updated successfully")})
+      .then(res => {localStorage.setItem('user',JSON.stringify(res.data));window.location.href='/user';
+      alert("updated successfully")})
       .catch(err => alert("Update failed! Data Error!!"));
   };
 
   render() {
     return (
-      
-      <div class="update-container" >
-      <form className="UpdateForm-container" action="#" noValidate onSubmit={this.onSubmit}>
+      <>
+      <br></br> 
+      <div class="profile-container" >
+      <form className="ProfileForm-container" action="#" noValidate onSubmit={this.onSubmit}>
         <h2>Update Personal Information </h2>
         <br></br>
         
-
         First Name:
               <input  className="profile-input" type="text"   name = "firstName" value = {this.state.updated.firstName} onChange={this.onChange} />
         Last Name:
@@ -66,6 +67,8 @@ class UpdateUser extends React.Component {
         <button>Update Info</button>
         </form>
         </div>
+        <br></br>
+        </>
     );
   }
 }

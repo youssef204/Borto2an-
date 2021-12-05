@@ -312,9 +312,10 @@ class SearchFlights extends React.Component {
       console.log(localStorage.getItem("user")["isAdmin"]);
       return (
         <>
-          <div className="createFlight-container">
+          <br></br>
+          <div className="profile-container">
             <form
-              className=" UpdateForm-container"
+              className=" ProfileForm-container"
               noValidate
               onSubmit={(e) => this.onSubmit2(e, this.state)}
             >
@@ -401,13 +402,13 @@ class SearchFlights extends React.Component {
               <button>Search</button>
             </form>
           </div>
+          <br></br>
         </>
       );
     } else {
       return (
         <div
           style={{
-            background: "#fff",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -416,6 +417,7 @@ class SearchFlights extends React.Component {
         >
           <Box
             component="span"
+            style={{ background: "#fff" }}
             border={2}
             borderRadius={10}
             borderLeft={2}
