@@ -1,4 +1,3 @@
-//CHECK 3LA EL ACCESS TOKEN FE KOL EL AXIOSS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 import React from "react";
 import axios from "axios";
 import Header from "./Header";
@@ -16,7 +15,6 @@ import Box from "@mui/material/Box";
 import { TextField } from "@mui/material";
 import { Popover } from "@mui/material";
 import { InputLabel } from "@mui/material";
-import AdminSearch from './AdminComponents/SearchFlights';
 
 class SearchFlights extends React.Component {
   //selectedArrday;
@@ -382,6 +380,7 @@ class SearchFlights extends React.Component {
       return (
         <div
           style={{
+            background:"#fff",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
