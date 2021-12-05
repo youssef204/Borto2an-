@@ -29,7 +29,22 @@ class ReservationSummary extends React.Component {
     this.state = {
       flightsWithReservation
     }
+    }
+
+  render(){
+    if(!localStorage.getItem("reservationSummary")){
+        return this.props.history.push("/");
+    }
+      const Reservation = this.state.Reservation;
   }
+
+componentDidMount(){
+  localStorage.removeItem('reservationSummary');
+  localStorage.removeItem('searchResultData');
+  localStorage.removeItem('selectedSeats');
+  localStorage.removeItem('flightSelectionData');
+}
+
 onShowReservations=()=>{
     this.props.history.push("/reservations");
 }

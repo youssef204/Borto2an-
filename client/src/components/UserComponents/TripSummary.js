@@ -7,6 +7,11 @@ import Button from "../Button";
 import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 10,
@@ -25,132 +30,9 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 class TripSummary extends React.Component {
   constructor() {
     super();
-    /*this.state = {
-      flight1: {
-        _id: "61a8f74d52f3604dd937856b",
-        flightNumber: "99",
-        departure: {
-          airport: "London",
-          terminal: "3",
-          time: "2021-12-02T12:41:00.000Z",
-          _id: "61a8f74d52f3604dd937856c",
-        },
-        arrival: {
-          airport: "New York",
-          terminal: "1",
-          time: "2021-12-02T12:41:00.000Z",
-          _id: "61a8f74d52f3604dd937856d",
-        },
-        airline: "Lufthanza",
-        hasTransit: true,
-        airplaneModelID: {
-          _id: "61a8f72352f3604dd9378564",
-          name: "Boeing 2012",
-          economyRows: 12,
-          economyColumns: 12,
-          businessRows: 10,
-          businessColumns: 10,
-          firstClassRows: 8,
-          firstClassColumns: 8,
-          createdAt: "2021-12-02T16:41:07.037Z",
-          updatedAt: "2021-12-02T16:41:07.037Z",
-          __v: 0,
-        },
-        economyCabin: {
-          takenSeats: [],
-          adultPrice: -4,
-          adultBaggage: 0,
-          childPrice: 0,
-          childBaggage: 0,
-          _id: "61a8f74d52f3604dd937856e",
-        },
-        businessCabin: {
-          takenSeats: [],
-          adultPrice: 0,
-          adultBaggage: 0,
-          childPrice: 0,
-          childBaggage: 0,
-          _id: "61a8f74d52f3604dd937856f",
-        },
-        firstCabin: {
-          takenSeats: [],
-          adultPrice: 0,
-          adultBaggage: 0,
-          childPrice: 0,
-          childBaggage: 0,
-          _id: "61a8f74d52f3604dd9378570",
-        },
-        createdAt: "2021-12-02T16:41:49.742Z",
-        updatedAt: "2021-12-02T22:53:36.246Z",
-        __v: 4,
-      },
-      flight2: {
-        _id: "61a8f74d52f3604dd937856b",
-        flightNumber: "99",
-        departure: {
-          airport: "London",
-          terminal: "3",
-          time: "2021-12-02T12:41:00.000Z",
-          _id: "61a8f74d52f3604dd937856c",
-        },
-        arrival: {
-          airport: "Berlin",
-          terminal: "1",
-          time: "2021-12-02T12:41:00.000Z",
-          _id: "61a8f74d52f3604dd937856d",
-        },
-        airline: "Lufthanza",
-        hasTransit: true,
-        airplaneModelID: {
-          _id: "61a8f72352f3604dd9378564",
-          name: "Boeing 2012",
-          economyRows: 12,
-          economyColumns: 12,
-          businessRows: 10,
-          businessColumns: 10,
-          firstClassRows: 8,
-          firstClassColumns: 8,
-          createdAt: "2021-12-02T16:41:07.037Z",
-          updatedAt: "2021-12-02T16:41:07.037Z",
-          __v: 0,
-        },
-        economyCabin: {
-          takenSeats: [],
-          adultPrice: -4,
-          adultBaggage: 0,
-          childPrice: 0,
-          childBaggage: 0,
-          _id: "61a8f74d52f3604dd937856e",
-        },
-        businessCabin: {
-          takenSeats: [],
-          adultPrice: 0,
-          adultBaggage: 0,
-          childPrice: 0,
-          childBaggage: 0,
-          _id: "61a8f74d52f3604dd937856f",
-        },
-        firstCabin: {
-          takenSeats: [],
-          adultPrice: 0,
-          adultBaggage: 0,
-          childPrice: 0,
-          childBaggage: 0,
-          _id: "61a8f74d52f3604dd9378570",
-        },
-        createdAt: "2021-12-02T16:41:49.742Z",
-        updatedAt: "2021-12-02T22:53:36.246Z",
-        __v: 4,
-      },
-      chosenCabin1: "Economy",
-      chosenCabin2: "economy",
-      adultNumber: "6",
-      childNumber: "2",
-      duration1: "4",
-      price1: "780",
-      price2: "980",
-      duration2: "18",
-    };*/
+    this.state = {
+      open : false
+    }
     const selectedFlights = JSON.parse(
       localStorage.getItem("flightSelectionData")
     );
@@ -168,9 +50,8 @@ class TripSummary extends React.Component {
     this.state = selectedFlightsWithSeats;
   }
 
-  onClick = (e) => {
-    if (JSON.parse(localStorage.getItem("user"))) {
-      console.log("state is ", this.state);
+  componentDidMount(){
+    console.log("state is ", this.state);
       const depFlightData = this.state.flight1;
       const retFlightData = this.state.flight2;
       const depCabin = this.state.chosenCabin1;
@@ -183,7 +64,7 @@ class TripSummary extends React.Component {
         +this.state.price1.split(" ")[0] + +this.state.price2.split(" ")[0];
 
       const reservationSummary = {
-        userId: JSON.parse(localStorage.getItem("user"))._id,
+        userId: localStorage.getItem("user")? JSON.parse(localStorage.getItem("user"))._id:"no user signed in yet",
         price: price,
         departureFlight: {
           flightId: depFlightData._id,
@@ -201,12 +82,19 @@ class TripSummary extends React.Component {
         },
       };
 
+      localStorage.setItem('reservationSummary',JSON.stringify(reservationSummary));
+  }
+
+  onClick = (e) => {
+    if (JSON.parse(localStorage.getItem("user"))) {
+
+      const reservationSummary = JSON.parse(localStorage.getItem('reservationSummary'));
+
       console.log("reserve summary is ", reservationSummary);
 
-      // localStorage.setItem(
-      //   "reservationSummary",
-      //   JSON.stringify(reservationSummary)
-      // );
+      reservationSummary["userId"] = JSON.parse(localStorage.getItem("user"))._id;
+
+      
 
       axios({
         method: "post",
@@ -216,17 +104,34 @@ class TripSummary extends React.Component {
       })
         .then((res) => {
           console.log("result is ", res);
-          localStorage.setItem("reservationSummary" , JSON.stringify(res.data));
-          window.location.href = "http://localhost:3000/reservation_summary";
+          window.location.href = "/reservation_summary";
         })
         .catch((e) => {
           console.log(e.response);
         });
-    } else window.location.href = "http://localhost:3000/sign_in";
+    } else window.location.href = "/sign_in";
   };
 
   render() {
+
+    const handleClickOpen = () => {
+      this.setState({ open: true });
+    };
+    const handleClose = () => {
+      this.setState({ open: false });
+    };
+
     return (
+      <>
+      <Box
+        component="span"
+        border={2}
+        borderRadius={10}
+        borderLeft={2}
+        borderRight={2}
+        borderColor="#a9a9a9"
+        sx={{ p: 1 }}
+      >
         <Stack>
           <br/>
           <br/>
@@ -620,14 +525,41 @@ class TripSummary extends React.Component {
             }}
           >
             <Button
-              label="Confirm Reservation"
+              label="Place Reservation"
               index={1}
               width={300}
               height={40}
-              onClick={this.onClick}
+              onClick={handleClickOpen}
             ></Button>
+
+
           </div>
         </Stack>
+      </Box>
+
+      <Dialog
+              open={this.state.open}
+              onClose={handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogTitle id="alert-dialog-title">
+                {"Do you really want to reserve?"}
+              </DialogTitle>
+              <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                  You are about to reserve and pay for the shown trip
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <button onClick={handleClose}>Cancel</button>
+                <button onClick={this.onClick} autoFocus>
+                  Pay
+                </button>
+              </DialogActions>
+            </Dialog>
+
+            </>
     );
   }
 }
