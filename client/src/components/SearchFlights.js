@@ -287,10 +287,6 @@ class SearchFlights extends React.Component {
       console.log("arr problem");
       return false;
     }
-    if (!this.state.chosenCabin) {
-      console.log("cabin problem");
-      return false;
-    }
     if (!this.state.adultNumber) {
       console.log("adult problem");
       return false;
