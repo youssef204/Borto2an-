@@ -20,8 +20,8 @@ function Reservation({Reservation}) {
         <td style={{ padding: "15px" }}> {Reservation.departureFlight.flightId.departure.time.substring(0,10)+" at "+Reservation.departureFlight.flightId.departure.time.substring(11,16)}</td>
 
         
-        <td style={{ padding: "15px" }}> {Reservation.returnFlight.flightId.arrival.airport}</td>
-        <td style={{ padding: "15px" }}> {Reservation.returnFlight.flightId.arrival.time.substring(0,10)+" at "+Reservation.returnFlight.flightId.arrival.time.substring(11,16)}</td>
+        <td style={{ padding: "15px" }}> {Reservation.returnFlight.flightId.departure.airport}</td>
+        <td style={{ padding: "15px" }}> {Reservation.returnFlight.flightId.departure.time.substring(0,10)+" at "+Reservation.returnFlight.flightId.departure.time.substring(11,16)}</td>
 
 
       

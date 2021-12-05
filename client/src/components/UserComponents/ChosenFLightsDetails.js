@@ -32,7 +32,7 @@ export default function ChosenFLightsDetails({
         duration2: secondFlight.duration,
       };
       localStorage.setItem("flightSelectionData", JSON.stringify(data));
-      window.location.href = "http://localhost:3000/trip_summary";
+      window.location.href = "http://localhost:3000/seat_selection";
     }
   };
 
