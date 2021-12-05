@@ -32,6 +32,7 @@ export default function ChosenFLightsDetails({
         duration2: secondFlight.duration,
       };
       localStorage.setItem("flightSelectionData", JSON.stringify(data));
+      localStorage.setItem("path" , "http://localhost:3000/seat_selection");
       window.location.href = "http://localhost:3000/seat_selection";
     }
   };
