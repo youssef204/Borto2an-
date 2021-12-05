@@ -28,8 +28,16 @@ export class SignIn extends Component {
             localStorage.setItem("refreshToken",res.data.refreshToken);
             localStorage.setItem("user",JSON.stringify(res.data.user));
             this.setState({email:"", password:"", loggedIn:true});
+            if(JSON.parse(localStorage.getItem("user")).isAdmin)
+            window.location.href="http://localhost:3000";
+            else {
+            if(localStorage.getItem("path")){
+            window.location.href= localStorage.getItem("path");
+            }
+            else
             window.location.href="http://localhost:3000";
             alert("Logged in successfully");
+            }
         }
         else{        
           alert(res.data.message);

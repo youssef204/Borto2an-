@@ -23,6 +23,7 @@ class FlightSeatsSelection extends React.Component {
             onClick={() => {
               localStorage.setItem("selectedSeats" , JSON.stringify(this.state));
               alert(`chosen seats are ${departureSeats} and ${arrivalSeats}`);
+              localStorage.setItem("path" , "http://localhost:3000/trip_summary");
               window.location.href = "http://localhost:3000/trip_summary";
             }}
             sx={{ margin: "20px" }}
