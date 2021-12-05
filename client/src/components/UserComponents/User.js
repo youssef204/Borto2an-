@@ -60,6 +60,7 @@ class User extends Component {
 
                 <input type="email"  value={this.state.user.email}  name = "email" onChange={this.onChange}/>
                 <br></br>
+                <br></br>
 
          <div>
           <button inline="true" onClick={this.logout}>Log out</button>
