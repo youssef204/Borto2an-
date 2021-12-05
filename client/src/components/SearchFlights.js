@@ -319,8 +319,11 @@ class SearchFlights extends React.Component {
     // localStorage.setItem("chosenCabin",JSON.stringify(this.chosenCabin));
     // localStorage.setItem("chilcNumber",JSON.stringify(this.childnumber));
     localStorage.setItem("searchResultData", JSON.stringify(stateData));
+    localStorage.removeItem("flightSelectionData");
+    localStorage.removeItem("reservationSummary");
     console.log(JSON.parse(localStorage.getItem("searchResultData")));
-    //window.location.href = "http://localhost:3000/flight_selection";
+    //this.props.history.push('/flight_selection');
+    window.location.href = '/flight_selection';
 
     // this.props.history.push({
     //   pathname: "/flight_component",
