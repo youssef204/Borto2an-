@@ -125,7 +125,7 @@ function NavigationBar({user=JSON.parse(localStorage.getItem("user"))}) {
     
     
       <li className="NavBar">
-        <Link to="/" onClick={resetJourney} exact className="NavBar">Search Flights</Link>
+        <Link to='/' onClick={resetJourney} exact className="NavBar">Search Flights</Link>
       </li>
       
     
@@ -146,7 +146,7 @@ function NavigationBar({user=JSON.parse(localStorage.getItem("user"))}) {
       {(reservation)?
         
         <li className="NavBar">
-        <Link to="/reservation_details" exact className="NavBar">Reservation Details</Link>
+        <Link to="/trip_summary" exact className="NavBar">Trip Summary</Link>
       </li>:<></>
       
       }
