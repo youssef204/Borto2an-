@@ -25,8 +25,8 @@ export class SignUp extends Component {
       .then(res => {
         this.setState({
         })
+        alert("Registered successfully");
         this.props.history.push("/sign_in");
-        alert("Registered successfully!!");
       })
       .catch(err => {
         alert("Enter Valid Data");
@@ -39,6 +39,7 @@ export class SignUp extends Component {
       }
         return (
             <>
+            <br></br>
             <h2>Welcome to Borto2an Airline</h2>
 <div class="container" id="container">
     <div class="form-container sign-up-container">

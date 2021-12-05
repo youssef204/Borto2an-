@@ -58,11 +58,12 @@ button {
 	margin-right: 5px;
 	margin-top: 5px;
 	margin-left: 5px;
+	margin-bottom: 5px;
 	transition-duration: 0.4s;
 	cursor: pointer;
 }
 button:hover{
-	background: #FF4B2B;
+	background: #ff416c;
 	color: white;
 	transition-duration: 300ms;
 }
@@ -116,6 +117,45 @@ input {
 	font-weight:    bold;
 }
 
+.searchAdmin-container {
+	background-color: #fff;
+	border-radius: 10px;
+  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+			0 10px 10px rgba(0,0,0,0.22);
+	position: relative;
+	overflow: hidden;
+	position: relative;
+	margin: auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	width: 700px;
+	max-width: 100%;
+	min-height: 550px;
+	text-align: left;
+
+
+}
+
+.searchAdminForm-container{
+	align-items: center;
+	align-content: center;
+	text-align: center;
+	width: 100%;
+	width: 100%;
+	opacity: 100%;
+	z-index: 1;
+	margin-left: 10px;
+	text-align: left;
+	margin-bottom: 10px;
+	margin-top:10px ;
+	right:0;
+	font-family:    Arial, Helvetica, sans-serif;
+	font-size:      15px;
+	font-weight:    bold;
+	color: rgb(7, 7, 7);
+	text-align: left;
+}
+
 .update-container {
 	background-color: #fff;
 	border-radius: 10px;
@@ -150,14 +190,12 @@ input {
 	border-radius: 10px;
   	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
 			0 10px 10px rgba(0,0,0,0.22);
-	position: relative;
 	overflow: hidden;
 	position: relative;
 	margin: auto;
 	width: 700px;
 	max-width: 100%;
 	min-height: 550px;
-	justify-content: center;
 	font-family:    Arial, Helvetica, sans-serif;
 	font-size:      15px;
 	font-weight:    bold;
@@ -188,9 +226,10 @@ input {
 	z-index: 1;
 }
 .UpdateForm-container {
-	align-items: left;
-	align-content: left;
+	overflow: hidden;
+	direction: ltr;
 	width: 100%;
+	display: flex;
 	opacity: 100%;
 	z-index: 1;
 	margin-left: 10px;
@@ -240,9 +279,9 @@ input {
 }
 
 .overlay {
-	background: #FF416C;
-	background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-	background: linear-gradient(to right, #FF4B2B, #FF416C);
+	background: #ff416c;
+	background: -webkit-linear-gradient(to right,#ff416c, #FF416C);
+	background: linear-gradient(to right,#FF416C, #FF416C);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;
@@ -319,7 +358,9 @@ footer a {
     text-decoration: none;
 }
 section{
-	margin: 50px;
+	margin-top: 200px;
+	margin-left: 100px;
+	margin-right: 100px;
   }
 
 
@@ -328,6 +369,7 @@ table{
 	table-layout: fixed;
 	margin-left: auto;
 	margin-right: auto;
+	vertical-align: middle;
   
   }
   .tbl-header{

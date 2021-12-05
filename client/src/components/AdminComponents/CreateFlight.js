@@ -135,9 +135,11 @@ class CreateFlight extends React.Component {
 
     render() { 
         return (<>
-        <div className="createFlight-container">
+        <br></br>
+        <div class="profile-container" >
+        <div class= "ProfileForm-container">
 
-              <form className=" UpdateForm-container" noValidate onSubmit={this.onSubmit}>
+              <form  noValidate onSubmit={this.onSubmit}>
               <h2>Create New Flight </h2>
               <br></br>
                 Flight Number:
@@ -420,6 +422,8 @@ class CreateFlight extends React.Component {
                 </button>
               </form>
               </div>
+              </div>
+              <br></br>
           </>
     );
     }

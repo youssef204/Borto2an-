@@ -56,6 +56,7 @@ class CreateModel extends React.Component {
 
     render() { 
         return (<>
+        <br></br>
         <div className="createFlight-container">
               <form className=" UpdateForm-container" noValidate onSubmit={this.onSubmit}>
               <h2>Create New Model </h2>
@@ -131,6 +132,7 @@ class CreateModel extends React.Component {
                 </button>
               </form>
               </div>
+              <br></br>
           </>
     );
     }
