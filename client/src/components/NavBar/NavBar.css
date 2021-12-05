@@ -1,0 +1,47 @@
+.NavBar {
+  font-family: "Trebuchet MS", sans-serif;
+  font-weight: bold;
+  font-size: large;
+  z-index: 100;
+}
+
+ul.NavBar {
+  list-style-type: none;
+  padding: 0;
+  overflow: hidden;
+  background-color: white;
+  margin-bottom: 0px;
+}
+li.NavBar {
+  display: inline;
+  float: left;
+}
+div.NavBar {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+div.logo {
+  display: inline;
+  float: left;
+}
+li a.NavBar {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  transition-duration: 300ms;
+  margin-top: 21px;
+  margin-bottom: 0px;
+}
+li a.NavBar:hover:not(.active) {
+  background-color: #ddd;
+  transition-duration: 300ms;
+}
+li a.NavBar.active {
+  color: white;
+  background-color: #ff416c;
+}

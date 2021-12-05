@@ -1,8 +1,6 @@
-import React from 'react'
-import axios from 'axios';
+import React from 'react';
 import Flight from './Flight';
 import { Component } from 'react';
-import Header from './Header';
 
 class SearchResults extends Component {
     constructor(props) {
@@ -33,40 +31,33 @@ class SearchResults extends Component {
       flightlist = flights.map((flight) => (
         <Flight
           flightNumber={flight.flightNumber}
-          fromAirport={flight.fromAirport}
-          toAirport={flight.toAirport}
-          departureTime={flight.departureTime}
-          arrivalTime={flight.arrivalTime}
+          fromAirport={flight.departure.airport}
+          toAirport={flight.arrival.airport}
+          departureTime={flight.departure.time}
+          arrivalTime={flight.arrival.time}
           onShowDetails={this.onChange}
         />
       ));
     }
     return (
-      <body>
-        <Header Title ="Search List"/>
-        <br></br>
-        <button onClick={() => this.props.history.push('/')}>
-                Home
-              </button>
-              <br/><br/>
-        <div>
-        <table
-            style={{
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-          >
-            <tr>
-              <th>Flight Number</th>
-              <th>Departure Airport</th>
-              <th>Arrival Airport</th>
-              <th>Departure Time</th>
-              <th>Arrival Time</th>
-            </tr>
-            {flightlist}
-            </table>
+      <section>
+      <div class="tbl-header">
+        <table>
+            <th>Flight Number</th>
+            <th>Departure Airport</th>
+            <th>Arrival Airport</th>
+            <th>Departure Time</th>
+            <th>Arrival Time</th>
+            <th>Show all details</th>
+
+        </table>
+        <div class="tbl-content">
+  <table cellpadding="0" cellspacing="0" border="0">
+        {flightlist}
+        </table>
         </div>
-      </body>
+      </div>
+    </section>
     );
   }
 }

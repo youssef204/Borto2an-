@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const morgan = require("morgan"); // http logger
 const cors = require("cors"); // connect the node with react
 const dotenv = require("dotenv"); // loads the .env file into the process.env (environment variables)
+const session = require('express-session') ;
+const bcrypt = require('bcrypt');
 dotenv.config();
 
 const app = express();
@@ -30,6 +32,18 @@ app.use(cors());
 // importing routers
 const flight_routes = require("./routes/api/flight");
 app.use("/api/flights/", flight_routes);
+
+
+const airplaneModel_routes = require("./routes/api/airplaneModel");
+app.use("/api/airplaneModel/", airplaneModel_routes);
+
+const reservation_routes = require("./routes/api/reservation");
+app.use("/api/reservations/", reservation_routes);
+
+const user_routes = require("./routes/api/user");
+app.use("/api/user/", user_routes);
+const auth_routes = require("./routes/api/authServer");
+app.use("/api/user/auth/",auth_routes);
 
 // Starting server
 app.listen(PORT, () => {
