@@ -66,16 +66,10 @@ class AllFlights extends Component {
     }
 
     return (
-      <body>
-        <div>
-
-          <table
-            style={{
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-          >
-            <tr>
+      <section>
+        <div class="tbl-header">
+    <table>
+          
               <th>Name</th>
               <th>Economy Rows</th>
               <th>Economy Columns</th>
@@ -83,11 +77,17 @@ class AllFlights extends Component {
               <th>Business Columns</th>
               <th>First Class Rows</th>
               <th>First Class Columns</th>
-            </tr>
+              <th>Delete Flight</th>
+            
+        </table>
+        <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
             {modellist}
-          </table>
+            </table>
+            </div>
+       
         </div>
-      </body>
+      </section>
     );
   }
 }
