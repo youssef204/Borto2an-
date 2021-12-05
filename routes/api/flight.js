@@ -85,7 +85,12 @@ flight_router.delete("/:id", authenticate , async (req, res) => {
   if(!req.user.isAdmin)return res.setStatus(401);
   try {
     const flight = await Flight.findByIdAndDelete(req.params.id);
-    if (flight) res.send(flight);
+    if (flight){ 
+      const Reservation = require("../../models/Reservation");
+      await Reservation.deleteMany({"departureFlight.flightId":flight._id});
+      await Reservation.deleteMany({"returnFlight.flightId":flight._id});
+      res.send(flight);
+    }
     else
       res.status(404).json({ msg: `No flight with id ${req.params.id} found` });
   } catch (e) {
