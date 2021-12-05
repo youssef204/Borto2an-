@@ -16,17 +16,16 @@ import AllModels from "./components/AdminComponents/AllModels";
 import FlightComponent from "./components/UserComponents/FlightComponents/FlightComponent";
 import FlightsMenu from "./components/UserComponents/FlightsMenu";
 import FlightSelection from "./components/UserComponents/FlightSelection";
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import FlightSeatsSelection from "./components/FlightSeatsSelection";
-import User from "./components/UserComponents/User"
-import Reservations from "./components/UserComponents/Reservations"
+import User from "./components/UserComponents/User";
+import Reservations from "./components/UserComponents/Reservations";
 import ReservationDetails from "./components/UserComponents/ReservationDetails";
 import TripSummary from "./components/UserComponents/TripSummary";
 import ReservationSummary from "./components/UserComponents/ReservationSummary";
 import SignIn from "./components/GuestComponents/SignIn";
 import SignUp from "./components/GuestComponents/SignUp";
 import UpdateUser from "./components/UserComponents/UpdateUser";
-
 
 function App() {
   return (
@@ -36,8 +35,8 @@ function App() {
         <div>
           <Switch>
             {/* guest  */}
-            <Route exact path='/Sign_up' component={SignUp}/>
-            <Route exact path='/Sign_in' component={SignIn}/>
+            <Route exact path="/Sign_up" component={SignUp} />
+            <Route exact path="/Sign_in" component={SignIn} />
 
             {/* all */}
             <Route exact path="/" component={SearchFlights} />
@@ -55,12 +54,25 @@ function App() {
 
             {/* user */}
             <Route exact path="/flight_selection" component={FlightSelection} />
-            <Route exact path="/select_seats" component={FlightSeatsSelection} />
+            <Route
+              exact
+              path="/select_seats"
+              component={FlightSeatsSelection}
+            />
             <Route exact path="/user" component={User} />
             <Route exact path="/reservations" component={Reservations} />
-            <Route exact path="/reservation_details" component={ReservationDetails} />
-            <Route exact path="/reservation_summary" component={ReservationSummary} />
+            <Route
+              exact
+              path="/reservation_details"
+              component={ReservationDetails}
+            />
+            <Route
+              exact
+              path="/reservation_summary"
+              component={ReservationSummary}
+            />
             <Route exact path="/update_user" component={UpdateUser} />
+            <Route exact path="/trip_summary" component={TripSummary} />
             <Route component={PageNotFound} />
           </Switch>
         </div>
