@@ -14,7 +14,7 @@ import Calendar from "./Calendar";
 import Box from "@mui/material/Box";
 import { TextField } from "@mui/material";
 import { Popover } from "@mui/material";
-import { InputLabel } from "@mui/material";
+import { InputLabel } from "@mui/material"; 
 
 class SearchFlights extends React.Component {
   //selectedArrday;
@@ -293,8 +293,9 @@ class SearchFlights extends React.Component {
       console.log(localStorage.getItem("user")["isAdmin"]);
       return (
         <>
-          <div className="createFlight-container">
-          <form className=" UpdateForm-container" noValidate onSubmit={(e) => this.onSubmit2(e, this.state)}>
+        <br></br>
+          <div className="profile-container">
+          <form className=" ProfileForm-container" noValidate onSubmit={(e) => this.onSubmit2(e, this.state)}>
             <h2>Search For Flights</h2>
             <br></br>
             <div>
@@ -374,13 +375,13 @@ class SearchFlights extends React.Component {
             <button>Search</button>
           </form>
           </div>
+          <br></br>
         </>
       );
     } else {
       return (
         <div
           style={{
-            background:"#fff",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -389,6 +390,7 @@ class SearchFlights extends React.Component {
         >
           <Box
             component="span"
+            style={{background:"#fff"}}
             border={2}
             borderRadius={10}
             borderLeft={2}

@@ -66,6 +66,7 @@ class AllFlights extends Component {
     }
 
     return (
+
       <section>
         <div class="tbl-header">
     <table>

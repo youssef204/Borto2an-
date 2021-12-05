@@ -36,7 +36,6 @@ export class SignIn extends Component {
             }
             else
             window.location.href="http://localhost:3000";
-            alert("Logged in successfully");
             }
         }
         else{        
@@ -57,6 +56,7 @@ export class SignIn extends Component {
 
         return (
             <>
+            <br></br>
             <h2>Welcome to Borto2an Airline</h2>
 <div class="container" id="container">
 	<div class="form-container sign-in-container">

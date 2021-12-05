@@ -52,6 +52,8 @@ class User extends Component {
       }
     if(this.state.user)
     return (
+        <>
+        <br></br>
         <div class="profile-container" >
         <div class= "ProfileForm-container">
           <h2>Personal Information </h2>
@@ -79,6 +81,8 @@ class User extends Component {
 
           </div>
           </div>
+          <br></br>
+          </>
 
     );
     else return <p/>;
