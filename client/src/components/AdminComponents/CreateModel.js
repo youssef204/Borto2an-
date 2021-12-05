@@ -33,7 +33,9 @@ class CreateModel extends React.Component {
       firstClassColumns: this.state.firstClassColumns
     }; 
     axios
-      .post('http://localhost:8000/api/airplaneModel', data)
+      .post('http://localhost:8000/api/airplaneModel', data,{
+          headers:{"authorization":"Bearer "+localStorage.getItem("token")}
+        })
       .then(res => {
         this.setState({
             name:'',

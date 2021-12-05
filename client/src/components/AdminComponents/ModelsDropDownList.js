@@ -12,7 +12,9 @@ class AllFlights extends Component {
 
     getAllModels = () =>{
         axios
-            .get('http://localhost:8000/api/airplaneModel/showAllModels')
+            .get('http://localhost:8000/api/airplaneModel/showAllModels',{
+          headers:{"authorization":"Bearer "+localStorage.getItem("token")}
+        })
             .then(res => {
                 this.setState(
                     {

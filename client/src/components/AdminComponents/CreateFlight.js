@@ -84,7 +84,9 @@ class CreateFlight extends React.Component {
       firstCabin: this.state.firstCabin
     }; 
     axios
-      .post('http://localhost:8000/api/flights', data)
+      .post('http://localhost:8000/api/flights', data,{
+          headers:{"authorization":"Bearer "+localStorage.getItem("token")}
+        })
       .then(res => {
         this.setState({
           flightNumber:0,

@@ -96,7 +96,9 @@ class UpdateFlight extends React.Component {
     };
     console.log("sent item", data);
     axios
-      .put("http://localhost:8000/api/flights", data)
+      .put("http://localhost:8000/api/flights", data, {
+          headers:{"authorization":"Bearer "+localStorage.getItem("token")}
+        })
       .then(res => {this.props.history.push("/"); alert("updated successfully")})
       .catch(err => alert("Update failed! Data Error!!"));
   };

@@ -13,7 +13,9 @@ class AllFlights extends Component {
 
     getAllModels = () =>{
         axios
-            .get('http://localhost:8000/api/airplaneModel/showAllModels')
+            .get('http://localhost:8000/api/airplaneModel/showAllModels',{
+          headers:{"authorization":"Bearer "+localStorage.getItem("token")}
+        })
             .then(res => {
                 this.setState(
                     {
@@ -32,7 +34,9 @@ class AllFlights extends Component {
 
     deleteModel = id => {
       axios
-        .delete('http://localhost:8000/api/airplaneModel/'+id)
+        .delete('http://localhost:8000/api/airplaneModel/'+id,{
+          headers:{"authorization":"Bearer "+localStorage.getItem("token")}
+        })
         .then(res => {this.getAllModels(); this.render();})
         .catch(err =>{
             alert("Error occurred in deletion");

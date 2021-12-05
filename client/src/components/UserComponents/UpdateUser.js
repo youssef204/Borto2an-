@@ -25,10 +25,16 @@ class UpdateUser extends React.Component {
 
   onSubmit = (e) => {
     e.preventDefault();
+    const update = this.state.updated;
+    if('password' in update && update['password']==='')
+    delete update.password;
+    delete update.isAdmin;
+    delete update._id;
     const data = {
       _id: this.state._id,
-      update: this.state.updated,
+      update: update
     };
+    console.log(data);
     axios
       .put("http://localhost:8000/api/user", data, {
           headers:{"authorization":"Bearer "+localStorage.getItem("token")}

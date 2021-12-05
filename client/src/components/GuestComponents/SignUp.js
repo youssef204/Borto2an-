@@ -72,7 +72,7 @@ export class SignUp extends Component {
 <footer>
 	<p>
 		Created by <i class="fa fa-heart"></i> 
-		<a target="_blank" href="https://florin-pop.com">Borto2an Airline</a>
+		<a>Borto2an Airline</a>
 	</p>
 </footer>
 </>

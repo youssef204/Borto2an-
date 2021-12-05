@@ -43,7 +43,8 @@ export class SignIn extends Component {
 
     render() {
         if(localStorage.getItem("user")){
-            return this.props.history.push("/");
+            this.props.history.push('/');
+            return <p></p>;
         }
 
         return (
@@ -78,7 +79,7 @@ export class SignIn extends Component {
 <footer>
 	<p>
 		Created by <i class="fa fa-heart"></i> 
-		<a target="_blank">Borto2an Airline</a>
+		<a>Borto2an Airline</a>
 	</p>
 </footer>
 </>
