@@ -46,11 +46,11 @@ componentDidMount(){
 }
 
 onShowReservations=()=>{
-    this.props.history.push("/reservations");
+    window.location.href="http://localhost:3000";
 }
     
 onReturnToHome=()=>{
-  window.location.href="http://localhost:3000";
+  this.props.history.push("/reservations");
 }
 
   render(){
