@@ -146,7 +146,11 @@ export default function FlightCabin({ economy, business, first, onSelect }) {
         </TabContext>
       </Box>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+        <Alert
+          onClose={handleClose}
+          severity="success"
+          sx={{ width: "100%", marginBottom: "115px" }}
+        >
           Selected!
         </Alert>
       </Snackbar>
