@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const express = require("express");
 const app = express();
 const auth_Router = express.Router();
+const bcrypt = require('bcrypt');
 
 app.use(express.json())
 
@@ -26,12 +27,11 @@ auth_Router.delete('/logout', (req, res) => {
 })
 
 auth_Router.post("/login", async(req, res) => {
-    console.log(req.body);
     const {email,password} = req.body;
     const user = await User.find({email:email});
+    console.log(user);
     if(user[0]){
-      console.log(user);
-      const compare = (user[0].password===password) ; 
+      const compare = await bcrypt.compare(password,user[0].password); 
       if(compare){
         const {_id,email,password,isAdmin}=user[0];
         const new_user = {userId:_id,email,password,isAdmin};  

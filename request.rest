@@ -10,7 +10,7 @@ Content-Type: application/json
 }
 ### 
 GET http://localhost:8000/api/user/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkFkbWluLjEyM0BnbWFpbC5jb20iLCJwYXNzd29yZCI6IjEyMzQ1IiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjM4NTM3NzI2LCJleHAiOjE2Mzg1MzgzMjZ9.HdXDhI3XBcEX00FwWK66zbAcQaBtI23q6TJmCL0V53E
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWI5YmYyMWUyOTgyZTk0NThkNTBmNjciLCJlbWFpbCI6ImpvYmVlbDQ1NkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCQyQjgxb3ZkWklRR2VJU2s3OFB2LnhlcnFOSDBCc2daS0MuMi9GV3c1dVJDRnZqd0FDWnB5UyIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2Mzk1NjMwNTd9.C7UUUuEuwZI25NCoUsJO5obJ9YPaB5wPWmsMByOEw_g
 ### 
 POST http://localhost:8000/api/user/auth/refreshToken
 Content-Type: application/json 
@@ -48,6 +48,43 @@ Content-Type: application/json
 
 GET http://localhost:8000/api/airplaneModel/showAllModels
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkFkbWluLjEyM0BnbWFpbC5jb20iLCJwYXNzd29yZCI6IjEyMzQ1IiwiaWF0IjoxNjM4NDk1MTQ4LCJleHAiOjE2Mzg0OTU3NDh9.x1aXV6V_z37fZzZ0XRL2G6Jhth9cUDBmV6dUgXZgXM4
+
+
+###
+POST http://localhost:8000/api/user/register
+Content-Type: application/json 
+
+{
+    "email":"jobeel123@gmail.com",
+    "password":"12345",
+    "passportNumber":"12345",
+    "firstName":"Mohamed",
+    "lastName":"Jobeel"
+}
+
+###
+
+POST http://localhost:8000/api/user/auth/login
+Content-Type: application/json 
+
+{
+    "email":"jobeel456@gmail.com",
+    "password":"12345"
+}
+### 
+
+POST http://localhost:8000/api/user/register
+Content-Type: application/json 
+
+{
+    "email":"jobeel456@gmail.com",
+    "password":"12345",
+    "passportNumber":"12345",
+    "firstName":"Mahmoud",
+    "lastName":"Jobbel"
+}
+
+
 
 
 

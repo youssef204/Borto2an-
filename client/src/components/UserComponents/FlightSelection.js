@@ -220,26 +220,28 @@ export default function FlightSelection() {
   return (
     <div style={{ paddingBottom: "150px" }}>
       {/*JSON.stringify(firstFlightArr)*/}
-      <FlightsMenu
-        flights={firstFlightArr}
-        onSelect={onFirstFlightSelect}
-        from={from}
-        to={to}
-      />
+      {
+        <FlightsMenu
+          flights={firstFlightArr}
+          onSelect={onFirstFlightSelect}
+          from={from}
+          to={to}
+        />
+      }
+
       <FlightsMenu
         flights={secondFlightArr}
         onSelect={onSecondFlightSelect}
         from={to}
         to={from}
       />
-      {
-        <ChosenFLightsDetails
-          firstFlight={firstFlight}
-          secondFlight={secondFlight}
-          adultNumber={adultNumber}
-          childNumber={childNumber}
-        />
-      }
+
+      <ChosenFLightsDetails
+        firstFlight={firstFlight}
+        secondFlight={secondFlight}
+        adultNumber={adultNumber}
+        childNumber={childNumber}
+      />
     </div>
   );
 }

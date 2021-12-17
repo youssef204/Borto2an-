@@ -61,13 +61,15 @@ export default function FlightComponent(probs) {
   if (loading) {
     return (
       <>
-        <link
+        {/* <link
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
           rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
           crossOrigin="anonymous"
-        ></link>
-        <Box sx={{ width: 600, margin: "auto", marginTop: 5, marginBottom: 5 }}>
+        ></link> */}
+        <Box
+          sx={{ width: "80%", margin: "auto", marginTop: 5, marginBottom: 5 }}
+        >
           <Skeleton className="skeleton" />
           <Skeleton animation="wave" />
           <Skeleton animation={false} />
@@ -77,12 +79,12 @@ export default function FlightComponent(probs) {
   } else {
     return (
       <>
-        <link
+        {/* <link
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
           rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
           crossOrigin="anonymous"
-        ></link>
+        ></link> */}
         <div>
           <div className="shadow p-3 m-3 bg-white rounded flex-Container-Row">
             {/**airline +airplane model+flightNumber */}
