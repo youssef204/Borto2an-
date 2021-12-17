@@ -38,7 +38,7 @@ auth_Router.post("/login", async(req, res) => {
         const token = generateAccessToken(new_user);
         const refreshToken = jwt.sign(new_user, process.env.REFRESH_TOKEN_SECRET)
         refreshTokens.push(refreshToken);
-        res.status(200).json({auth:true , token:token , refreshToken:refreshToken, user:{...user[0]._doc,password:''}});
+        res.status(200).json({auth:true , token:token , refreshToken:refreshToken, user:{...user[0]._doc}});
       }
       else{
         res.send({auth:false , message:"Wrong Password"});
