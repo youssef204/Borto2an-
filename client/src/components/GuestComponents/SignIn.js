@@ -87,7 +87,7 @@ export class SignIn extends Component {
 <footer>
 	<p>
 		Created by <i class="fa fa-heart"></i> 
-		<a>Borto2an Airline</a>
+		<a href="/">Borto2an Airline</a>
 	</p>
 </footer>
 </>

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import "./NavBar.css";
 import Logo from '../Logo/Logo';
-import {NavLink as Link} from 'react-router-dom';
+import {NavLink as Link,useLocation} from 'react-router-dom';
 
 function NavigationBar({user=JSON.parse(localStorage.getItem("user"))}) {
+
+  let path = useLocation().pathname; 
 
   const [search,setSearch] = useState(0);
   const [flightSelection,setFlightSelection] = useState(0);
@@ -68,6 +70,8 @@ function NavigationBar({user=JSON.parse(localStorage.getItem("user"))}) {
 
 
 
+  if(path=="/sign_in"||path=="/sign_up")
+  return <></>;
 
   if(user&&user.isAdmin)
   return (

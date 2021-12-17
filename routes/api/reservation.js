@@ -108,7 +108,37 @@ reservation_router.post("/", authenticate , async (req, res) => {
     await returnFlight.save();
 
     Reservation.create(reservation)
-    .then(result => {res.send(result);})
+    .then(async (result) => {res.send(result);
+    
+      const userId = reservation.userId;
+      const User = require('../../models/User');
+      const user = await User.findById(userId);
+      const email = user.email;
+      const nodeMailer = require('nodemailer');
+      const dotenv = require('dotenv');
+      dotenv.config();
+      const transporter = nodeMailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'borto2an5@gmail.com',
+          pass: process.env.BORTO_PW
+        }
+      });
+      const mailOptions = {
+        from: 'borto2an5@gmail.com',
+        to: email,
+        subject: 'Created reservation',
+        text: 'Your reservation was successfully created and '+reservation.price+' L.E. amount was deducted from your credit card!!'
+      };
+      transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+      });
+
+    })
     .catch(err => {res.status(400).send(err)});
   }
   catch(e){

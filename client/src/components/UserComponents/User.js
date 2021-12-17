@@ -63,9 +63,14 @@ class User extends Component {
             Last Name:
         
                 <input   className="profile-input" type="text"  value={this.state.user.lastName} name = "lastName" onChange={this.onChange} />
-                passport Number:
+                
+                {this.state.user.isAdmin?<></>:
+                <>passport Number:
 
                 <input  className="profile-input" type="text"  value={this.state.user.passportNumber} name = "passportNumber" onChange={this.onChange}  />
+                </>
+                }
+                
                 Email:
 
                 <input type="email" className="profile-input"  value={this.state.user.email}  name = "email" onChange={this.onChange}/>

@@ -24,11 +24,12 @@ import SignIn from "./components/GuestComponents/SignIn";
 import SignUp from "./components/GuestComponents/SignUp";
 import UpdateUser from "./components/UserComponents/UpdateUser";
 
+
 function App() {
   return (
     <>
       <Router>
-        <NavBar></NavBar>
+      <NavBar></NavBar>
         <div>
           <Switch>
             {/* guest  */}
