@@ -9,7 +9,7 @@ function Reservation({Reservation}) {
 
   function onClick(){history.push({pathname:"/reservation_details",state:Reservation});};
 
-  if(!localStorage.getItem("user")){
+  if(!localStorage.getItem("")){
     return this.props.history.push("/");
 }
   

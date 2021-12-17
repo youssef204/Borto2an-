@@ -6,6 +6,7 @@ const session = require('express-session') ;
 const dotenv = require("dotenv");
 const app = express();
 const authenticate = require("./Authentication");
+const bcrypt = require('bcrypt');
 app.use(express.json());
 dotenv.config(); 
 const isValidEmail = (v) => {
@@ -69,6 +70,9 @@ user_Router.post("/register", async(req, res) => {
   console.log(req.body);
   if (isValidEntry(req.body)) {
   let entry = req.body;
+  const hashedPassword = bcrypt.hashSync(req.body.password,10);
+  entry.password = hashedPassword;
+  console.log(entry);
     const user = User(entry);
     user
       .save()
