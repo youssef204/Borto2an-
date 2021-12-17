@@ -38,6 +38,23 @@ const UserSchema = new Schema({
     type: Boolean,
     default: false,
   },
+   homeAddress: {
+    type: String,
+    required: true,
+  },
+  countryCode: {
+    type: String,
+    required: true,
+  },
+  userName: {
+    type: String,
+    unique: true,
+    required: true,
+  },
+  telephoneNumber: {
+    type: String,
+    required: true,
+  },
 });
 
 const User = mongoose.model("User", UserSchema);

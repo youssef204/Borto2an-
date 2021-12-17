@@ -4,6 +4,14 @@
   box-sizing: border-box;
 }
 
+input#telephoneNumber::-webkit-inner-spin-button, 
+input#telephoneNumber::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+
 body {
   background: #d6d5cb;
   display: flex;
@@ -45,37 +53,37 @@ a {
 }
 
 button {
-  border-radius: 20px;
-  border: 1px solid #ff4b2b;
-  background-color: #fcfcfc;
-  color: #af0606;
-  font-size: 12px;
-  font-weight: bold;
-  padding: 12px 45px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-right: 5px;
-  margin-top: 5px;
-  margin-left: 5px;
-  margin-bottom: 5px;
-  transition-duration: 0.4s;
-  cursor: pointer;
+	border-radius: 20px;
+	border: 1px solid #FF4B2B;
+	background-color: #fcfcfc;
+	color: #af0606;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 12px 45px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	margin-right: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 5px;
+	transition-duration: 0.4s;
+	cursor: pointer;
 }
-button:hover {
-  background: #ff416c;
-  color: white;
-  transition-duration: 300ms;
+button:hover{
+	background: #ff416c;
+	color: white;
+	transition-duration: 300ms;
 }
 
 form {
-  background-color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 0 50px;
-  height: 100%;
-  text-align: center;
+	background-color: #FFFFFF;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0 20px;
+	height: 100%;
+	text-align: center;
 }
 
 input {
@@ -89,13 +97,13 @@ input {
 }
 
 .profile-input {
-  border-radius: 10px;
-  background-color: rgb(238, 232, 232);
-  border: none;
-  padding: 10px 15px;
-  margin: 8px 0;
-  width: 100%;
-  color: #af0606;
+	border-radius: 10px;
+	background-color: rgb(238, 232, 232)	;
+	border: none;
+	padding: 10px 15px;
+	margin: 8px 0px;
+	width: 100%;
+	color:#af0606
 }
 
 .container {

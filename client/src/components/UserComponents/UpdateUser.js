@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-
+import Stack from "@mui/material/Stack";
 class UpdateUser extends React.Component {
   constructor(props) {
     super(props);
@@ -26,7 +26,7 @@ class UpdateUser extends React.Component {
   onSubmit = (e) => {
     e.preventDefault();
     const update = this.state.updated;
-    if('password' in update && update['password']==='')
+    // if('password' in update && update['password']==='')
     delete update.password;
     delete update.isAdmin;
     delete update._id;
@@ -52,18 +52,23 @@ class UpdateUser extends React.Component {
       <form className="ProfileForm-container" action="#" noValidate onSubmit={this.onSubmit}>
         <h2>Update Personal Information </h2>
         <br></br>
-        
-        First Name:
-              <input  className="profile-input" type="text"   name = "firstName" value = {this.state.updated.firstName} onChange={this.onChange} />
-        Last Name:
+        First Name : 
+              <input  className="profile-input" type="text"   name = "firstName" value = {this.state.updated.firstName} onChange={this.onChange} />   
+        Last Name : 
               <input  className="profile-input" type="text"   value = {this.state.updated.lastName} name = "lastName" onChange={this.onChange} />
+
         Passport Number:
               <input  className="profile-input" type="text"  value = {this.state.updated.passportNumber} name = "passportNumber" onChange={this.onChange}  />
         Email:
               <input  className="profile-input" type="email"  value = {this.state.updated.email}  name = "email" onChange={this.onChange}/>
-        Password:
-              <input  className="profile-input" type="password"  placeholder="Enter New Password" name = "password" onChange={this.onChange} />
-  
+        User Name:
+              <input  className="profile-input" type="text" value = {this.state.updated.userName} name = "userName" onChange={this.onChange} />
+        Home Address:
+              <input  className="profile-input" type="text" value = {this.state.updated.homeAddress} name = "homeAddress" onChange={this.onChange} />
+        Country Code:
+              <input  className="profile-input" id="telephoneNumber" type="number" value = {this.state.updated.countryCode} name = "countryCode" onChange={this.onChange} />
+        Mobile Number:
+              <input  className="profile-input"id="telephoneNumber"  type="number" value = {this.state.updated.telephoneNumber} name = "telephoneNumber" onChange={this.onChange} />
         <button>Update Info</button>
         </form>
         </div>
