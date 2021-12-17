@@ -32,7 +32,8 @@ class User extends Component {
             localStorage.removeItem('selectedSeats');
             localStorage.removeItem('searchResultData');
             localStorage.removeItem('path');
-            window.location.href="http://localhost:3000";
+            window.dispatchEvent( new Event('storage') );
+            this.props.history.push('/');
         })
         .catch(err => console.log(err));    
     };

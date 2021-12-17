@@ -43,10 +43,11 @@ componentDidMount(){
   localStorage.removeItem('searchResultData');
   localStorage.removeItem('selectedSeats');
   localStorage.removeItem('flightSelectionData');
+  window.dispatchEvent( new Event('storage') );
 }
 
 onShowReservations=()=>{
-    window.location.href="http://localhost:3000";
+    this.props.history.push('/');
 }
     
 onReturnToHome=()=>{

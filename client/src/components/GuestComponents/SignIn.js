@@ -29,13 +29,13 @@ export class SignIn extends Component {
             localStorage.setItem("user",JSON.stringify(res.data.user));
             this.setState({email:"", password:"", loggedIn:true});
             if(JSON.parse(localStorage.getItem("user")).isAdmin)
-            window.location.href="http://localhost:3000";
+            this.props.history.push('/');
             else {
             if(localStorage.getItem("path")){
-            window.location.href= localStorage.getItem("path");
+            this.props.history.push(localStorage.getItem("path").substring(21));
             }
             else
-            window.location.href="http://localhost:3000";
+            this.props.history.push('/');
             }
         }
         else{        
@@ -50,7 +50,6 @@ export class SignIn extends Component {
 
     render() {
         if(localStorage.getItem("user")){
-            this.props.history.push('/');
             return <p></p>;
         }
 

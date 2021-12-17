@@ -88,6 +88,7 @@ class TripSummary extends React.Component {
       "reservationSummary",
       JSON.stringify(reservationSummary)
     );
+    window.dispatchEvent( new Event('storage') );
   }
 
   onClick = (e) => {
@@ -110,12 +111,12 @@ class TripSummary extends React.Component {
       })
         .then((res) => {
           console.log("result is ", res);
-          window.location.href = "/reservation_summary";
+          this.props.history.push("/reservation_summary");
         })
         .catch((e) => {
           console.log(e.response);
         });
-    } else window.location.href = "/sign_in";
+    } else this.props.history.push("/sign_in");
   };
 
   render() {
