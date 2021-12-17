@@ -131,7 +131,7 @@ user_Router.put("/password", authenticate , async (req, res) => {
   if(oldpassUser.password !== update.oldPassword)
   res.sendStatus(401);
   delete update.oldPassword;
-  console.log("updated value is", updated);
+  console.log("updated value is", update);
   const updated = await User.findByIdAndUpdate(id, update, {new: true}).catch((err) => res.status(400).send(err));
   res.send(updated);
 });
