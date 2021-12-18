@@ -83,12 +83,13 @@ class User extends Component {
                 <input type="email" className="profile-input"  value={this.state.user.email}  name = "email" onChange={this.onChange}/>
                   </div>
                 </div>
+                {this.state.user.isAdmin?<></>:
                 <div>
                 Passport Number:
                   <div>
                 <input  className="profile-input" type="text"  value={this.state.user.passportNumber} name = "passportNumber" onChange={this.onChange}  />
                   </div>
-                </div>
+                </div>}
                 </Stack>
           <Stack
            spacing={2}
@@ -98,19 +99,16 @@ class User extends Component {
                justifyContent : "space-around"
            }}>
                <div >
+                 <div>
           First Name:
                 <input className="profile-input"  type="text"  value={this.state.user.firstName}  name = "firstName" onChange={this.onChange} />
-                </div>
+                </div></div>
+                <div>
             Last Name:
-                <input   className="profile-input" type="text"  value={this.state.user.lastName} name = "lastName" onChange={this.onChange} />
-                
-                {this.state.user.isAdmin?<></>:
-                <>passport Number:
-
-                <input  className="profile-input" type="text"  value={this.state.user.passportNumber} name = "passportNumber" onChange={this.onChange}  />
-                </>
-                }
-                </Stack>
+            <div>
+            <input className="profile-input"  type="text"  value={this.state.user.lastName}  name = "lastName" onChange={this.onChange} />                
+            </div></div>
+            </Stack>
 
                 <Stack
                  spacing={2}
