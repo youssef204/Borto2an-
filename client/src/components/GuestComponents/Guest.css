@@ -403,3 +403,7 @@ td {
 #signErrorMessage {
   color: red;
 }
+
+#signSuccessMessage {
+  color: green;
+}

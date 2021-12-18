@@ -5,10 +5,23 @@ class UpdateUser extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      showMessage: false ,
+    error : '' ,
       updated:  JSON.parse(localStorage.getItem('user')),
       _id: -1
     };
   }
+
+  componentDidUpdate(prevProps) {
+    if (this.state.showMessage) console.log("show message");
+    if (this.state.showMessage && !prevProps.showMessage) {
+      setTimeout(() => {
+        this.setState({ showMessage: false });
+        console.log("stop Showing message");
+      }, 3000);
+    }
+  }
+
   componentDidMount() {
     const userData = localStorage.getItem('user');
     this.setState({
@@ -40,8 +53,13 @@ class UpdateUser extends React.Component {
           headers:{"authorization":"Bearer "+localStorage.getItem("token")}
         })
       .then(res => {localStorage.setItem('user',JSON.stringify(res.data));window.dispatchEvent( new Event('storage') );this.props.histor.push('/user');
-      alert("updated successfully")})
-      .catch(err => alert("Update failed! Data Error!!"));
+      this.setState({ showMessage: true ,
+        error :"updated successfully"});
+     // alert("updated successfully")
+    })
+      .catch(err => 
+        this.setState({ showMessage: true ,
+          error :"update failed !! Data Error"}));
   };
 
   render() {
@@ -52,6 +70,11 @@ class UpdateUser extends React.Component {
       <form className="ProfileForm-container" action="#" noValidate onSubmit={this.onSubmit}>
         <h2>Update Personal Information </h2>
         <br></br>
+        {this.state.showMessage ? this.state.error === 'updated successfully' ? (
+                <label id="signSuccessMessage">{this.state.error}</label>
+              ) : <label id="signErrorMessage">{this.state.error}</label> : (
+                <br/>
+              )}
         First Name : 
               <input  className="profile-input" type="text"   name = "firstName" value = {this.state.updated.firstName} onChange={this.onChange} />   
         Last Name : 

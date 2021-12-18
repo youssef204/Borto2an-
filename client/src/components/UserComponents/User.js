@@ -110,12 +110,11 @@ class User extends Component {
                 <input  className="profile-input" type="text"  value={this.state.user.passportNumber} name = "passportNumber" onChange={this.onChange}  />
                 </>
                 }
-                
-                Email:
+                </Stack>
 
-                {/* <Stack
+                <Stack
                  spacing={2}
-                 direction="row"> */}
+                 direction="row">
                 <div style={{paddingLeft:"10px"}}>
                 Home Address:
                   <div>
