@@ -45,6 +45,9 @@ app.use("/api/user/", user_routes);
 const auth_routes = require("./routes/api/authServer");
 app.use("/api/user/auth/",auth_routes);
 
+const payment_routes = require("./routes/api/payment");
+app.use("/api/payment/", payment_routes);
+
 // Starting server
 app.listen(PORT, () => {
   console.log(`Listening to requests on http://localhost:${PORT}`);

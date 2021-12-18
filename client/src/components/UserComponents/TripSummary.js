@@ -60,8 +60,11 @@ class TripSummary extends React.Component {
     const childno = this.state.childNumber;
     const selectedDepartureSeats = this.state.selectedDepSeats;
     const selectedArrivalSeats = this.state.selectedArrSeats;
-    const price =
-      +this.state.price1.split(" ")[0] + +this.state.price2.split(" ")[0];
+    const price1 = +this.state.price1.split(" ")[0];
+    const price2 = +this.state.price2.split(" ")[0];
+    const price = price1 + price2;
+
+
 
     const reservationSummary = {
       userId: localStorage.getItem("user")
@@ -89,32 +92,45 @@ class TripSummary extends React.Component {
       JSON.stringify(reservationSummary)
     );
   }
-
-  onClick = (e) => {
+  //TODO: create pay button
+  onClickPay = (e) =>{
     if (JSON.parse(localStorage.getItem("user"))) {
       const reservationSummary = JSON.parse(
         localStorage.getItem("reservationSummary")
       );
-
-      console.log("reserve summary is ", reservationSummary);
-
       reservationSummary["userId"] = JSON.parse(
         localStorage.getItem("user")
       )._id;
 
-      axios({
-        method: "post",
-        url: "http://localhost:8000/api/reservations",
-        headers: { authorization: "Bearer " + localStorage.getItem("token") },
-        data: reservationSummary,
+      reservationSummary.departureFlight.price = +this.state.price1.split(" ")[0];
+      reservationSummary.returnFlight.price = +this.state.price2.split(" ")[0];
+
+      reservationSummary["success_url"] = "http://localhost:3000/reservation_summary";
+      reservationSummary["cancel_url"] = "http://localhost:3000/trip_summary";
+
+      console.log("reserve summary is ", reservationSummary);
+
+
+    axios({
+      method: "post",
+      url: "http://localhost:8000/api/payment/create-session",
+      headers: { authorization: "Bearer " + localStorage.getItem("token") },
+      data: reservationSummary,
+    })
+      .then((res) => {
+        console.log("result is ", res);
+        window.location.href = res.data.url;
       })
-        .then((res) => {
-          console.log("result is ", res);
-          window.location.href = "/reservation_summary";
-        })
-        .catch((e) => {
-          console.log(e.response);
-        });
+      .catch((e) => {
+        console.log(e.response);
+      });
+    } else window.location.href = "/sign_in";
+
+  }
+
+  onClickPaid = (e) => {
+    if (JSON.parse(localStorage.getItem("user"))) {
+      window.location.href = "/reservation_summary";
     } else window.location.href = "/sign_in";
   };
 
@@ -567,7 +583,10 @@ class TripSummary extends React.Component {
           </DialogContent>
           <DialogActions>
             <button onClick={handleClose}>Cancel</button>
-            <button onClick={this.onClick} autoFocus>
+            <button onClick={this.onClickPaid} autoFocus>
+              I already Paid
+            </button>
+            <button onClick={this.onClickPay} autoFocus>
               Pay
             </button>
           </DialogActions>

@@ -118,7 +118,6 @@ user_Router.put("/", authenticate , async (req, res) => {
 user_Router.put("/password", authenticate , async (req, res) => {
   const id = req.body._id;
   const update = req.body.update;
-<<<<<<< HEAD
   let oldpassUser;
   if (!id) {res.sendStatus(422);}
    oldpassUser = await User.findById(id);
@@ -132,7 +131,6 @@ user_Router.put("/password", authenticate , async (req, res) => {
   const updated = await User.findByIdAndUpdate(id, {password:new_hashedPassword}, {new: true}).catch((err) => res.status(400).send(err));
   res.send(updated);
   }
-=======
   let oldpassUser = '';
   console.log(update);
   if (!id) {res.sendStatus(422); console.log(id);}
@@ -149,7 +147,6 @@ user_Router.put("/password", authenticate , async (req, res) => {
   console.log("updated value is", update);
   const updated = await User.findByIdAndUpdate(id, update, {new: true}).catch((err) => res.status(400).send(err));
   res.send(updated);
->>>>>>> 9c17ccfe2dcf6b75275d7c2195b729615026d1a4
 });
 
 

@@ -38,7 +38,35 @@ class ReservationSummary extends React.Component {
       const Reservation = this.state.Reservation;
   }
 
+postReservation = () => {
+  if (JSON.parse(localStorage.getItem("user"))) {
+    const reservationSummary = JSON.parse(
+      localStorage.getItem("reservationSummary")
+    );
+
+    console.log("reserve summary is ", reservationSummary);
+
+    reservationSummary["userId"] = JSON.parse(
+      localStorage.getItem("user")
+    )._id;
+
+    axios({
+      method: "post",
+      url: "http://localhost:8000/api/reservations",
+      headers: { authorization: "Bearer " + localStorage.getItem("token") },
+      data: reservationSummary,
+    })
+      .then((res) => {
+        console.log("result is ", res);
+        // window.location.href = "/reservation_summary";
+      })
+      .catch((e) => {
+        console.log(e.response);
+      });
+  } else window.location.href = "/sign_in";
+}
 componentDidMount(){
+  this.postReservation();
   localStorage.removeItem('reservationSummary');
   localStorage.removeItem('searchResultData');
   localStorage.removeItem('selectedSeats');
