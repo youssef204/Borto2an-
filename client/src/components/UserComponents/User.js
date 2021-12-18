@@ -80,7 +80,8 @@ class User extends Component {
 
          <div>
           <button inline="true" onClick={this.logout}>Log out</button>
-          <button inline = "true" onClick={this.showReservations}>Show my reservations</button>
+          {this.state.user.isAdmin?<></>:
+          <button inline = "true" onClick={this.showReservations}>Show my reservations</button>}
           <button inline = "true" onClick={this.updateData}>Update my data</button>
           </div>
 
