@@ -21,7 +21,7 @@ class SeatSelection extends React.Component {
         //await new Promise((resolve) => setTimeout(resolve, 0));
         console.log(`Added seat ${number}, row ${row}, id ${id}`);
         const newTooltip = `tooltip for id-${id} added by callback`;
-        addCb(row, number, id, newTooltip);
+        addCb(row, number, id);
         const selectedSeats = [...this.state.selectedSeats];
         selectedSeats.push(id);
         this.setState({ loading: false, selectedSeats });
@@ -40,7 +40,7 @@ class SeatSelection extends React.Component {
         console.log(`Removed seat ${number}, row ${row}, id ${id}`);
         // A value of null will reset the tooltip to the original while '' will hide the tooltip
         const newTooltip = ["A", "B", "C"].includes(row) ? null : "";
-        removeCb(row, number, newTooltip);
+        removeCb(row, number);
         const selectedSeats = this.state.selectedSeats.filter(
           (curID) => curID != id
         );
@@ -84,7 +84,7 @@ class SeatSelection extends React.Component {
           id: id,
           number: id,
           isReserved: isReserved,
-          tooltip: tooltip,
+          // tooltip: tooltip,
         };
         row.push(seat);
       }
@@ -113,7 +113,7 @@ class SeatSelection extends React.Component {
             visible
             selectedByDefault
             loading={loading}
-            tooltipProps={{ multiline: true }}
+            // tooltipProps={{ multiline: true }}
           />
         </div>
       </div>
