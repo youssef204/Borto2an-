@@ -6,17 +6,8 @@ import Stack from "@mui/material/Stack";
 export class SignUp extends Component {
   constructor(props) {
     super(props);
-<<<<<<< HEAD
-<<<<<<< HEAD
-    this.state = { showMessage: false };
-=======
     this.state = { showMessage: false ,
     error : '' };
->>>>>>> 8f13f98a5e4384ac3f795d09ed5b74c042142d08
-=======
-    this.state = { showMessage: false ,
-    error : '' };
->>>>>>> 8f13f98a5e4384ac3f795d09ed5b74c042142d08
   }
 
   onChange = (e) => {
@@ -49,13 +40,6 @@ export class SignUp extends Component {
       })
       .catch(err => {
         if(err.response){
-
-          if(err.response.status === 401)
-          alert("Please enter a valid email format");
-          else if(err.response.status === 402)
-          alert("Please Fill all of the fields");
-          else if(err.response.status === 500)
-          alert("Email and User Name must be unique");
           if(err.response.status === 401){
             this.setState({ showMessage: true ,
             error : "Please enter a valid email format" });
@@ -71,10 +55,6 @@ export class SignUp extends Component {
               error :"Email and User Name must be unique"});
       //    alert("Email and User Name must be unique");
           }
-<<<<<<< HEAD
->>>>>>> 8f13f98a5e4384ac3f795d09ed5b74c042142d08
-=======
->>>>>>> 8f13f98a5e4384ac3f795d09ed5b74c042142d08
         }
         else{
           console.log("msh sh8alaaaa");
@@ -83,9 +63,8 @@ export class SignUp extends Component {
   };
 
     render() {
-      if (localStorage.getItem("user")) {
-        this.props.history.push("/");
-        return ;
+      if(localStorage.getItem("user")){
+        return this.props.history.push("/");
       }
         return (
             <>
@@ -101,21 +80,12 @@ export class SignUp extends Component {
 				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
 				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 			</div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 8f13f98a5e4384ac3f795d09ed5b74c042142d08
       {this.state.showMessage ? (
                 <label id="signErrorMessage">{this.state.error}</label>
               ) : (
                 <div>
                   </div>
               )}
-<<<<<<< HEAD
->>>>>>> 8f13f98a5e4384ac3f795d09ed5b74c042142d08
-=======
->>>>>>> 8f13f98a5e4384ac3f795d09ed5b74c042142d08
       <Stack
                       spacing={2}
                       direction="row">
@@ -170,15 +140,15 @@ export class SignUp extends Component {
           </div>
         </div>
 
-        <footer>
-          <p>
-            Created by <i class="fa fa-heart"></i>
-            <a>Borto2an Airline</a>
-          </p>
-        </footer>
-      </>
-    );
-  }
+<footer>
+	<p>
+		Created by <i class="fa fa-heart"></i> 
+		<a href="/">Borto2an Airline</a>
+	</p>
+</footer>
+</>
+        )
+    }
 }
 
 export default SignUp;
