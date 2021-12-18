@@ -23,6 +23,7 @@ import ReservationSummary from "./components/UserComponents/ReservationSummary";
 import SignIn from "./components/GuestComponents/SignIn";
 import SignUp from "./components/GuestComponents/SignUp";
 import UpdateUser from "./components/UserComponents/UpdateUser";
+import ChangePassword from "./components/UserComponents/ChangePassword";
 
 
 function App() {
@@ -71,6 +72,7 @@ function App() {
               component={ReservationSummary}
             />
             <Route exact path="/update_user" component={UpdateUser} />
+            <Route exact path="/change_password" component={ChangePassword} />
             <Route exact path="/trip_summary" component={TripSummary} />
             <Route component={PageNotFound} />
           </Switch>

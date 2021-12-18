@@ -1,35 +1,54 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import "./Guest.css";
 import axios from "axios";
+import Stack from "@mui/material/Stack";
 
 export class SignUp extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-        }
-    }
+  constructor(props) {
+    super(props);
+    this.state = { showMessage: false };
+  }
 
-    onChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
-    }
-    onSignIn = (e) => {
-      this.props.history.push("/sign_in");
+  onChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
   };
-    onSubmit = e => {
+  onSignIn = (e) => {
+    this.props.history.push("/sign_in");
+  };
+
+  componentDidUpdate(prevProps) {
+    if (this.state.showMessage) console.log("show message");
+    if (this.state.showMessage && !prevProps.showMessage) {
+      setTimeout(() => {
+        this.setState({ showMessage: false });
+        console.log("stop Showing message");
+      }, 3000);
+    }
+  }
+
+  onSubmit = (e) => {
     e.preventDefault();
     const data = this.state;
     console.log(data);
-    console.log(this.state); 
+    console.log(this.state);
     axios
-      .post('http://localhost:8000/api/user/register',data)
-      .then(res => {
-        this.setState({
-        })
-        alert("Registered successfully");
+      .post("http://localhost:8000/api/user/register", data)
+      .then((res) => {
+        this.setState({});
         this.props.history.push("/sign_in");
       })
       .catch(err => {
-        alert("Enter Valid Data");
+        if(err.response){
+          if(err.response.status === 401)
+          alert("Please enter a valid email format");
+          else if(err.response.status === 402)
+          alert("Please Fill all of the fields");
+          else if(err.response.status === 500)
+          alert("Email and User Name must be unique");
+        }
+        else{
+          console.log("msh sh8alaaaa");
+        }
       });      
   };
 
@@ -40,35 +59,70 @@ export class SignUp extends Component {
         return (
             <>
             <br></br>
-            <h2>Welcome to Borto2an Airline</h2>
+            <br></br>
+            {/* <h2>Welcome to Borto2an Airline</h2> */}
 <div class="container" id="container">
     <div class="form-container sign-up-container">
 		<form action="#" noValidate onSubmit={this.onSubmit}>
-			<h1>Create Account</h1>
+			<h2 style={{marginTop:"40px"}}>Create Account</h2>
 			<div class="social-container">
 				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
 				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
 				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 			</div>
+      <Stack
+                      spacing={2}
+                      direction="row">
+                        <div>
             <input type="text"  placeholder="First name" name = "firstName" onChange={this.onChange} />
+            </div>
+            <div>
             <input type="text"  placeholder="Last name" name = "lastName" onChange={this.onChange} />
-            <input type="text"  placeholder="Enter Passport Number" name = "passportNumber" onChange={this.onChange}  />
-            <input type="email"  placeholder="Enter email"  name = "email" onChange={this.onChange}/>
-            <input type="password"  placeholder="Enter password" name = "password" onChange={this.onChange} />
+            </div>
+            </Stack>
+            <Stack
+            spacing={2}
+            direction="row">
+              <div>
+            <input type="text"  placeholder="Passport Number" name = "passportNumber" onChange={this.onChange}  />
+            </div>
+            <div>
+              
+            <input type="number" id="telephoneNumber"  placeholder="Mobile Number"  name = "telephoneNumber" onChange={this.onChange}/>
+            </div>
+            </Stack>
+            <Stack
+            spacing={2}
+            direction="row">
+              <div>
+            <input type="text"  placeholder="Home Address" name = "homeAddress" onChange={this.onChange}  />
+            </div>
+            <div>
+              
+            <input type="number" id="telephoneNumber"  placeholder="Country Code"  name = "countryCode" onChange={this.onChange}/>
+            </div>
+            </Stack>
+            <input type="email"  placeholder="Email"  name = "email" onChange={this.onChange}/>
+            <input type="email"  placeholder="User Name"  name = "userName" onChange={this.onChange}/>
+            <input type="password"  placeholder="Password" name = "password" onChange={this.onChange} />
 
-			<button>Sign Up</button>
-		</form>
-	</div>
-    <div class="overlay-container">
-		<div class="overlay">
-			<div class="overlay-panel overlay-right">
-				<h1>Welcome Back!</h1>
-				<p>To keep connected with us please login with your personal info</p>
-				<button onClick={this.onSignIn} class="ghost" id="signIn">Sign In</button>
-			</div>
-		</div>
-	</div>
-</div>
+              <button>Sign Up</button>
+            </form>
+          </div>
+          <div class="overlay-container">
+            <div class="overlay">
+              <div class="overlay-panel overlay-right">
+                <h1>Welcome Back!</h1>
+                <p>
+                  To keep connected with us please login with your personal info
+                </p>
+                <button onClick={this.onSignIn} class="ghost" id="signIn">
+                  Sign In
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
 
 <footer>
 	<p>
@@ -81,4 +135,4 @@ export class SignUp extends Component {
     }
 }
 
-export default SignUp
+export default SignUp;

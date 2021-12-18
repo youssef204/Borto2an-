@@ -1,48 +1,58 @@
-import React from 'react'
-import axios from 'axios';
-import Model from './Model';
-import { Component } from 'react';
+import React from "react";
+import axios from "axios";
+
+import Box from "@mui/material/Box";
+import Skeleton from "@mui/material/Skeleton";
+
+import Model from "./Model";
+import { Component } from "react";
 
 class AllFlights extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            models: []
-        }
-    }
-
-    getAllModels = () =>{
-        axios
-            .get('http://localhost:8000/api/airplaneModel/showAllModels',{
-          headers:{"authorization":"Bearer "+localStorage.getItem("token")}
-        })
-            .then(res => {
-                this.setState(
-                    {
-                        models: res.data
-                    }
-                );
-            })
-            .catch(err => {
-                console.log(err);
-            })
+  constructor(props) {
+    super(props);
+    this.state = {
+      models: [],
+      loading: true,
+      minimumTime: false,
     };
+  }
 
-    componentDidMount() {
-        this.getAllModels();         
-    };
-
-    deleteModel = id => {
-      axios
-        .delete('http://localhost:8000/api/airplaneModel/'+id,{
-          headers:{"authorization":"Bearer "+localStorage.getItem("token")}
-        })
-        .then(res => {this.getAllModels(); this.render();})
-        .catch(err =>{
-            alert("Error occurred in deletion");
+  getAllModels = () => {
+    axios
+      .get("http://localhost:8000/api/airplaneModel/showAllModels", {
+        headers: { authorization: "Bearer " + localStorage.getItem("token") },
+      })
+      .then((res) => {
+        this.setState({
+          models: res.data,
+          loading: false,
         });
-    };
-  
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  componentDidMount() {
+    this.getAllModels();
+    setTimeout(() => {
+      this.setState({ minimumTime: true });
+    }, 1000);
+  }
+
+  deleteModel = (id) => {
+    axios
+      .delete("http://localhost:8000/api/airplaneModel/" + id, {
+        headers: { authorization: "Bearer " + localStorage.getItem("token") },
+      })
+      .then((res) => {
+        this.getAllModels();
+        this.render();
+      })
+      .catch((err) => {
+        alert("Error occurred in deletion");
+      });
+  };
 
   render() {
     let modellist;
@@ -52,41 +62,54 @@ class AllFlights extends Component {
     } else {
       modellist = models.map((model) => (
         <Model
-        _id={model._id}
-        name={model.name}
-        economyRows={model.economyRows}
-        economyColumns={model.economyColumns}
-        businessRows={model.businessRows}
-        businessColumns={model.businessColumns}
-        firstClassRows={model.firstClassRows}
-        firstClassColumns={model.firstClassColumns}
-        deleteModel={this.deleteModel}
+          _id={model._id}
+          name={model.name}
+          economyRows={model.economyRows}
+          economyColumns={model.economyColumns}
+          businessRows={model.businessRows}
+          businessColumns={model.businessColumns}
+          firstClassRows={model.firstClassRows}
+          firstClassColumns={model.firstClassColumns}
+          deleteModel={this.deleteModel}
         />
       ));
     }
 
-    return (
+    const loadBody = (
+      <Box
+        sx={{
+          width: "80%",
+          margin: "auto",
+          marginTop: 5,
+          marginBottom: 5,
+        }}
+      >
+        <Skeleton className="skeleton" />
+        <Skeleton animation="wave" />
+        <Skeleton animation={false} />
+      </Box>
+    );
+    let tableBody =
+      this.state.minimumTime && !this.state.loading ? modellist : loadBody;
 
+    return (
       <section>
         <div class="tbl-header">
-    <table>
-          
-              <th>Name</th>
-              <th>Economy Rows</th>
-              <th>Economy Columns</th>
-              <th>Business Rows</th>
-              <th>Business Columns</th>
-              <th>First Class Rows</th>
-              <th>First Class Columns</th>
-              <th>Delete Flight</th>
-            
-        </table>
-        <div class="tbl-content">
-    <table cellpadding="0" cellspacing="0" border="0">
-            {modellist}
+          <table>
+            <th>Name</th>
+            <th>Economy Rows</th>
+            <th>Economy Columns</th>
+            <th>Business Rows</th>
+            <th>Business Columns</th>
+            <th>First Class Rows</th>
+            <th>First Class Columns</th>
+            <th>Delete Flight</th>
+          </table>
+          <div class="tbl-content">
+            <table cellpadding="0" cellspacing="0" border="0">
+              {tableBody}
             </table>
-            </div>
-       
+          </div>
         </div>
       </section>
     );

@@ -1,23 +1,33 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import "./Guest.css";
 import axios from "axios";
 
-
 export class SignIn extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            email:"",
-            password:"",
-            loggedIn:false
-        }
-    }
-
-    onChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      password: "",
+      loggedIn: false,
+      showMessage: false,
     };
-    onSubmit = e => {
-        
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.state.showMessage) console.log("show message");
+    if (this.state.showMessage && !prevProps.showMessage) {
+      setTimeout(() => {
+        this.setState({ showMessage: false });
+        console.log("stop Showing message");
+      }, 3000);
+    }
+  }
+
+  onChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  onSubmit = (e) => {
     e.preventDefault();
     const data = this.state;
     axios
@@ -36,17 +46,17 @@ export class SignIn extends Component {
             }
             else
             this.props.history.push('/');
-            }
+            }}
+        else {this.setState({ showMessage: true });
         }
-        else{        
-          alert(res.data.message);
-    }
-    })
-      .catch(err => {
-          console.log(err);
-      });       
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
-   onClick = ()=>{this.props.history.push({pathname:"/sign_up"});};
+  onClick = () => {
+    this.props.history.push({ pathname: "/sign_up" });
+  };
 
     render() {
         if(localStorage.getItem("user")){
@@ -94,4 +104,4 @@ export class SignIn extends Component {
     }
 }
 
-export default SignIn
+export default SignIn;
