@@ -101,10 +101,8 @@ class User extends Component {
           First Name:
                 <input className="profile-input"  type="text"  value={this.state.user.firstName}  name = "firstName" onChange={this.onChange} />
                 </div>
-               <div>
             Last Name:
                 <input   className="profile-input" type="text"  value={this.state.user.lastName} name = "lastName" onChange={this.onChange} />
-<<<<<<< HEAD
                 
                 {this.state.user.isAdmin?<></>:
                 <>passport Number:
@@ -114,15 +112,10 @@ class User extends Component {
                 }
                 
                 Email:
-=======
-                </div>
 
-                </Stack>
->>>>>>> Sprint3Dev
-
-                <Stack
+                {/* <Stack
                  spacing={2}
-                 direction="row">
+                 direction="row"> */}
                 <div style={{paddingLeft:"10px"}}>
                 Home Address:
                   <div>
@@ -144,14 +137,6 @@ class User extends Component {
                 </Stack>
                 <br></br>
                 <br></br>
-<<<<<<< HEAD
-
-         <div>
-          <button inline="true" onClick={this.logout}>Log out</button>
-          {this.state.user.isAdmin?<></>:
-          <button inline = "true" onClick={this.showReservations}>Show my reservations</button>}
-          <button inline = "true" onClick={this.updateData}>Update my data</button>
-=======
         <Stack
         spacing={27}
         direction="row"
@@ -160,11 +145,13 @@ class User extends Component {
         }}>
             <div>
           <button style={{width:"150%" , marginLeft:"30px"}} inline="true" onClick={this.logout}>Log out</button>
->>>>>>> Sprint3Dev
           </div>
+          {this.state.user.isAdmin?<></>:
           <div>
+          
           <button style={{width:"100%" , marginLeft:"0px"}} inline = "true" onClick={this.showReservations}>Show my reservations</button>
           </div>
+          }
           </Stack>
           <Stack
         spacing={20}

@@ -56,12 +56,8 @@ class UpdateUser extends React.Component {
               <input  className="profile-input" type="text"   name = "firstName" value = {this.state.updated.firstName} onChange={this.onChange} />   
         Last Name : 
               <input  className="profile-input" type="text"   value = {this.state.updated.lastName} name = "lastName" onChange={this.onChange} />
-<<<<<<< HEAD
         {this.state.updated.isAdmin?<></>:
         <>
-=======
-
->>>>>>> Sprint3Dev
         Passport Number:
               <input  className="profile-input" type="text"  value = {this.state.updated.passportNumber} name = "passportNumber" onChange={this.onChange}  />
         </>
