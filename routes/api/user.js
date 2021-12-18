@@ -17,6 +17,7 @@ const isValidEmail = (v) => {
   return true;
 };
 
+
 function isValidEntry(entry) {
   //check for all required data
   if (
@@ -24,8 +25,11 @@ function isValidEntry(entry) {
     !entry.lastName ||
     !entry.email ||
     !entry.password ||
-    !isValidEmail(entry.email) ||
-    !entry.passportNumber
+    !entry.passportNumber ||
+    !entry.countryCode ||
+    !entry.homeAddress ||
+    !entry.userName ||
+    !entry.telephoneNumber
   )
     return false;
   return true;
@@ -40,7 +44,13 @@ function isValidUpdate(entry) {
     ("email" in entry && !entry.email) ||
     ("password" in entry && !entry.password) ||
     ("passportNumber" in entry && !entry.passportNumber) ||
-    ("email" in entry && !isValidEmail(entry.email))
+    ("email" in entry && !isValidEmail(entry.email)) ||
+    ("countryCode" in entry && !entry.countryCode) ||
+    ("homeAddress" in entry && !entry.homeAddress) ||
+    ("userName" in entry && !entry.userName) || 
+    ("telephoneNumber" in entry && !entry.telephoneNumber)
+    
+
   )
     return false;
   return true;
@@ -69,6 +79,7 @@ user_Router.get("/",authenticate, async(req, res) => {
 user_Router.post("/register", async(req, res) => {
   console.log(req.body);
   if (isValidEntry(req.body)) {
+    if(isValidEmail(req.body.email)) {
   let entry = req.body;
   const hashedPassword = bcrypt.hashSync(req.body.password,10);
   entry.password = hashedPassword;
@@ -85,6 +96,10 @@ user_Router.post("/register", async(req, res) => {
           res.status(500).send("Database error " + err);
         }
       });
+    }
+    else {
+      res.sendStatus(401);
+    }
   } else {
     res.sendStatus(402);
   }
@@ -94,11 +109,33 @@ user_Router.post("/register", async(req, res) => {
 user_Router.put("/", authenticate , async (req, res) => {
   const id = req.body._id;
   const update = req.body.update;
+  console.log(update);
   if (!id || !isValidUpdate(update)) {res.sendStatus(422); console.log(id);}
   const updated = await User.findByIdAndUpdate(id, update, {new: true}).catch((err) => res.status(400).send(err));
-  updated['password'] = '';
   res.send(updated);
 });
+
+user_Router.put("/password", authenticate , async (req, res) => {
+  const id = req.body._id;
+  const update = req.body.update;
+  let oldpassUser = '';
+  console.log(update);
+  if (!id) {res.sendStatus(422); console.log(id);}
+  try{
+   oldpassUser = await User.findById(id);
+  console.log("user data " , oldpassUser);
+  }
+  catch{
+    console.log("mafessh user kdaaa");
+  }
+  if(oldpassUser.password !== update.oldPassword)
+  res.sendStatus(401);
+  delete update.oldPassword;
+  console.log("updated value is", update);
+  const updated = await User.findByIdAndUpdate(id, update, {new: true}).catch((err) => res.status(400).send(err));
+  res.send(updated);
+});
+
 
 user_Router.delete("/:id",authenticate, async (req, res) => {
   if(!req.user.isAdmin){

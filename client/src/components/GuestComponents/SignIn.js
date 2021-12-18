@@ -1,23 +1,33 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import "./Guest.css";
 import axios from "axios";
 
-
 export class SignIn extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            email:"",
-            password:"",
-            loggedIn:false
-        }
-    }
-
-    onChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      password: "",
+      loggedIn: false,
+      showMessage: false,
     };
-    onSubmit = e => {
-        
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.state.showMessage) console.log("show message");
+    if (this.state.showMessage && !prevProps.showMessage) {
+      setTimeout(() => {
+        this.setState({ showMessage: false });
+        console.log("stop Showing message");
+      }, 3000);
+    }
+  }
+
+  onChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  onSubmit = (e) => {
     e.preventDefault();
     const data = this.state;
     axios
@@ -29,28 +39,27 @@ export class SignIn extends Component {
             localStorage.setItem("user",JSON.stringify(res.data.user));
             this.setState({email:"", password:"", loggedIn:true});
             if(JSON.parse(localStorage.getItem("user")).isAdmin)
-            window.location.href="http://localhost:3000";
+            this.props.history.push('/');
             else {
             if(localStorage.getItem("path")){
-            window.location.href= localStorage.getItem("path");
+            this.props.history.push(localStorage.getItem("path").substring(21));
             }
             else
-            window.location.href="http://localhost:3000";
-            }
+            this.props.history.push('/');
+            }}
+        else {this.setState({ showMessage: true });
         }
-        else{        
-          alert(res.data.message);
-    }
-    })
-      .catch(err => {
-          console.log(err);
-      });       
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
-   onClick = ()=>{this.props.history.push({pathname:"/sign_up"});};
+  onClick = () => {
+    this.props.history.push({ pathname: "/sign_up" });
+  };
 
     render() {
         if(localStorage.getItem("user")){
-            this.props.history.push('/');
             return <p></p>;
         }
 
@@ -87,7 +96,7 @@ export class SignIn extends Component {
 <footer>
 	<p>
 		Created by <i class="fa fa-heart"></i> 
-		<a>Borto2an Airline</a>
+		<a href="/">Borto2an Airline</a>
 	</p>
 </footer>
 </>
@@ -95,4 +104,4 @@ export class SignIn extends Component {
     }
 }
 
-export default SignIn
+export default SignIn;

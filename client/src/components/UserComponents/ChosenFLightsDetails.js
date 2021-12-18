@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./ChosenFlightsDetailsCSS.css";
 import Button from "../Button.js";
+import { useHistory } from "react-router-dom";
 export default function ChosenFLightsDetails({
   firstFlight,
   secondFlight,
@@ -17,6 +18,7 @@ export default function ChosenFLightsDetails({
   const [flight1, setFlight1] = useState(getDefault());
   const [flight2, setFlight2] = useState(getDefault());
   const [index, setIndex] = useState(0);
+  const history = useHistory();
   const onClick = () => {
     if (index) {
       const data = {
@@ -32,9 +34,10 @@ export default function ChosenFLightsDetails({
         duration2: secondFlight.duration,
       };
       localStorage.setItem("flightSelectionData", JSON.stringify(data));
-      localStorage.removeItem("reservationSummary");
+      localStorage.setItem("reservationSummary",null);
       localStorage.setItem("path", "http://localhost:3000/select_seats");
-      window.location.href = "/select_seats";
+      window.dispatchEvent( new Event('storage') );
+      history.push("/select_seats");
     }
   };
 
