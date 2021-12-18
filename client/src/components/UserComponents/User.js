@@ -48,7 +48,10 @@ class User extends Component {
     changePassword = () => {
         this.props.history.push({pathname:'/change_password',state:this.state.user});
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9c17ccfe2dcf6b75275d7c2195b729615026d1a4
 
   render() {
       if(!localStorage.getItem("user")){
@@ -112,6 +115,10 @@ class User extends Component {
                 </>
                 }
                 
+                </div>
+
+                </Stack>
+
                 </div>
 
                 </Stack>

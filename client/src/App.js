@@ -25,7 +25,6 @@ import SignUp from "./components/GuestComponents/SignUp";
 import UpdateUser from "./components/UserComponents/UpdateUser";
 import ChangePassword from "./components/UserComponents/ChangePassword";
 
-
 function App() {
   return (
     <>
