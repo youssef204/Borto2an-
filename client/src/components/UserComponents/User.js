@@ -33,7 +33,8 @@ class User extends Component {
             localStorage.removeItem('selectedSeats');
             localStorage.removeItem('searchResultData');
             localStorage.removeItem('path');
-            window.location.href="http://localhost:3000";
+            window.dispatchEvent( new Event('storage') );
+            this.props.history.push('/');
         })
         .catch(err => console.log(err));    
     };
@@ -100,11 +101,15 @@ class User extends Component {
           First Name:
                 <input className="profile-input"  type="text"  value={this.state.user.firstName}  name = "firstName" onChange={this.onChange} />
                 </div>
-               <div>
             Last Name:
                 <input   className="profile-input" type="text"  value={this.state.user.lastName} name = "lastName" onChange={this.onChange} />
-                </div>
+                
+                {this.state.user.isAdmin?<></>:
+                <>passport Number:
 
+                <input  className="profile-input" type="text"  value={this.state.user.passportNumber} name = "passportNumber" onChange={this.onChange}  />
+                </>
+                }
                 </Stack>
 
                 <Stack
@@ -140,9 +145,12 @@ class User extends Component {
             <div>
           <button style={{width:"150%" , marginLeft:"30px"}} inline="true" onClick={this.logout}>Log out</button>
           </div>
+          {this.state.user.isAdmin?<></>:
           <div>
+          
           <button style={{width:"100%" , marginLeft:"0px"}} inline = "true" onClick={this.showReservations}>Show my reservations</button>
           </div>
+          }
           </Stack>
           <Stack
         spacing={20}

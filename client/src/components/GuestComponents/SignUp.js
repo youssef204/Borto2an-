@@ -140,15 +140,15 @@ export class SignUp extends Component {
           </div>
         </div>
 
-        <footer>
-          <p>
-            Created by <i class="fa fa-heart"></i>
-            <a>Borto2an Airline</a>
-          </p>
-        </footer>
-      </>
-    );
-  }
+<footer>
+	<p>
+		Created by <i class="fa fa-heart"></i> 
+		<a href="/">Borto2an Airline</a>
+	</p>
+</footer>
+</>
+        )
+    }
 }
 
 export default SignUp;
