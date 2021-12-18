@@ -10,10 +10,21 @@ class ChangePassword extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-  //      open : false,
+      showMessage: false ,
+      error : '' ,
       updated:  JSON.parse(localStorage.getItem('user')),
       _id: -1
     };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.state.showMessage) console.log("show message");
+    if (this.state.showMessage && !prevProps.showMessage) {
+      setTimeout(() => {
+        this.setState({ showMessage: false });
+        console.log("stop Showing message");
+      }, 3000);
+    }
   }
   componentDidMount() {
     const userData = localStorage.getItem('user');
@@ -32,15 +43,19 @@ class ChangePassword extends React.Component {
   onSubmit = (e) => {
     e.preventDefault();
     if(!this.state.updated.oldPassword || !this.state.updated.newPassword || !this.state.updated.newPasswordConfirm){
-        alert("Please fill in all the fields below")
+      this.setState({ showMessage: true ,
+        error :"Please Fill all of the fields"});
         return;
     }
-    // if(this.state.updated.oldPassword !== this.state.updated.password){
-    //     alert("Wrong Password!")
-    //     return;
-    // }
+    if(this.state.updated.oldPassword !== this.state.updated.password){
+      this.setState({ showMessage: true ,
+        error :"Wrong Password!"});
+        return;
+    }
     if(this.state.updated.newPassword !== this.state.updated.newPasswordConfirm){
-        alert("Confirmation Password must match the New Password")
+      this.setState({ showMessage: true ,
+        error :"Confirmation Password must match the New Password"});
+    //    alert("Confirmation Password must match the New Password")
         return;
     }
     const savedPassword = this.state.updated.newPassword;
@@ -54,17 +69,26 @@ class ChangePassword extends React.Component {
     };
     console.log(data);
     axios
-      .put("http://localhost:8000/api/user/password", data, {
+      .put("http://localhost:8000/api/user", data, {
           headers:{"authorization":"Bearer "+localStorage.getItem("token")}
         })
       .then(res => {localStorage.setItem('user',JSON.stringify(res.data));window.location.href='/user';
-      alert("Password Updated Successfully")})
+      this.setState({ showMessage: true ,
+        error :"updated successfully"});
+   //   alert("updated successfully")
+  })
       .catch(err => {
           if(err.response){
-          if(err.response.status === 401)
-          alert("Wrong Password!")
-          else
-         alert("Update failed! Data Error!!")
+          if(err.response.status === 401){
+            this.setState({ showMessage: true ,
+              error :"Wrong Password!"});
+       //   alert("Wrong Password!")
+          }
+          else{
+            this.setState({ showMessage: true ,
+              error :"Update failed! Data Error!!"});
+        // alert("Update failed! Data Error!!")
+          }
           }
          console.log(err);
       });
@@ -84,8 +108,13 @@ class ChangePassword extends React.Component {
       <form className="ProfileForm-container" action="#" noValidate onSubmit={this.onSubmit}>
         <h2 style={{
             marginTop:"50px"
-        }}>Change Your Password </h2>
+        }}>Change Your Password </h2>    
         <br></br>
+        {this.state.showMessage ? this.state.error === 'updated successfully' ? (
+                <label id="signSuccessMessage">{this.state.error}</label>
+              ) : <label id="signErrorMessage">{this.state.error}</label> : (
+                <br/>
+              )}
         Old Password 
               <input  className="profile-input" style={{marginBottom:"20px" , width:"80%"}} type="password"   name = "oldPassword"  onChange={this.onChange} />   
         New Password 
