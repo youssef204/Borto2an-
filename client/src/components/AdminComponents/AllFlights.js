@@ -1,43 +1,49 @@
-import React from 'react'
-import axios from 'axios';
-import Flight from './Flight';
-import { Component } from 'react';
+import React from "react";
+import axios from "axios";
+
+import Box from "@mui/material/Box";
+import Skeleton from "@mui/material/Skeleton";
+
+import Flight from "./Flight";
+import { Component } from "react";
 
 class AllFlights extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            flights: []
-        }
-    }
-
-    componentDidMount() {
-        axios
-            .get('http://localhost:8000/api/flights/showAllflights',{
-              headers:{"authorization":"Bearer "+localStorage.getItem("token")}
-            })
-            .then(res => {
-                console.log(res.msg);
-                this.setState(
-                    {
-                        flights: res.data
-                    }
-                )
-          //      console.log(this.state.flights);
-            })
-            .catch(err => {
-                console.log(err);
-            });
-            
+  constructor(props) {
+    super(props);
+    this.state = {
+      flights: [],
+      loading: true,
+      minimumTime: false,
     };
+  }
 
-    onChange = flightNumber => {
-      console.log(flightNumber); 
-      this.props.history.push({
-        pathname:"/flight_details",state:{flightNumber}
+  componentDidMount() {
+    axios
+      .get("http://localhost:8000/api/flights/showAllflights", {
+        headers: { authorization: "Bearer " + localStorage.getItem("token") },
+      })
+      .then((res) => {
+        this.setState({
+          flights: res.data,
+          loading: false,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    };
-  
+    setTimeout(() => {
+      this.setState({ minimumTime: true });
+    }, 1000);
+    console.log("here");
+  }
+
+  onChange = (flightNumber) => {
+    console.log(flightNumber);
+    this.props.history.push({
+      pathname: "/flight_details",
+      state: { flightNumber },
+    });
+  };
 
   render() {
     let flightlist;
@@ -56,23 +62,38 @@ class AllFlights extends Component {
         />
       ));
     }
+    const loadBody = (
+      <Box
+        sx={{
+          width: "80%",
+          margin: "auto",
+          marginTop: 5,
+          marginBottom: 5,
+        }}
+      >
+        <Skeleton className="skeleton" />
+        <Skeleton animation="wave" />
+        <Skeleton animation={false} />
+      </Box>
+    );
+    let tableBody =
+      this.state.minimumTime && !this.state.loading ? flightlist : loadBody;
 
     return (
       <section>
         <div class="tbl-header">
           <table>
-              <th>Flight Number</th>
-              <th>Departure Airport</th>
-              <th>Arrival Airport</th>
-              <th>Departure Time</th>
-              <th>Arrival Time</th>
-              <th>Show all details</th>
-
+            <th>Flight Number</th>
+            <th>Departure Airport</th>
+            <th>Arrival Airport</th>
+            <th>Departure Time</th>
+            <th>Arrival Time</th>
+            <th>Show all details</th>
           </table>
           <div class="tbl-content">
-    <table cellpadding="0" cellspacing="0" border="0">
-          {flightlist}
-          </table>
+            <table cellPadding="0" cellSpacing="0" border="0">
+              {tableBody}
+            </table>
           </div>
         </div>
       </section>
