@@ -131,22 +131,6 @@ user_Router.put("/password", authenticate , async (req, res) => {
   const updated = await User.findByIdAndUpdate(id, {password:new_hashedPassword}, {new: true}).catch((err) => res.status(400).send(err));
   res.send(updated);
   }
-  let oldpassUser = '';
-  console.log(update);
-  if (!id) {res.sendStatus(422); console.log(id);}
-  try{
-   oldpassUser = await User.findById(id);
-  console.log("user data " , oldpassUser);
-  }
-  catch{
-    console.log("mafessh user kdaaa");
-  }
-  if(oldpassUser.password !== update.oldPassword)
-  res.sendStatus(401);
-  delete update.oldPassword;
-  console.log("updated value is", update);
-  const updated = await User.findByIdAndUpdate(id, update, {new: true}).catch((err) => res.status(400).send(err));
-  res.send(updated);
 });
 
 
