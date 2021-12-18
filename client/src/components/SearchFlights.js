@@ -7,24 +7,13 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Stack from "@mui/material/Stack";
-import FilledTextField from "./FilledTextField";
 import OutlinedTextField from "./OutlinedTextField";
 import Button from "./Button";
 import Calendar from "./Calendar";
 import Box from "@mui/material/Box";
 import { TextField } from "@mui/material";
-import { Popover } from "@mui/material";
-import { InputLabel } from "@mui/material";
-import setHours from "date-fns/setHours";
-import getHours from "date-fns/getHours";
 
 class SearchFlights extends React.Component {
-  //selectedArrday;
-  //selectedDepday;
-  //chosenCabin;
-  // adultNumber;
-  // childNumber;
-  //numberOfSelecetedInputs = [0, 0, 0, 0, 0, 0];
   constructor() {
     super();
     if (
@@ -48,6 +37,15 @@ class SearchFlights extends React.Component {
         adultNumber: 0,
         childNumber: 0,
       };
+  }
+
+  componentDidMount(){
+    localStorage.removeItem("searchResultData");
+    localStorage.removeItem("flightSelectionData");
+    localStorage.removeItem("reservationSummary");
+    localStorage.removeItem("selectedSeats");
+    localStorage.removeItem("path");
+    window.dispatchEvent( new Event('storage') );
   }
 
   onChange = (e) => {
@@ -213,14 +211,14 @@ class SearchFlights extends React.Component {
       from: this.state.departure.airport,
       to: this.state.arrival.airport,
     };
-    console.log("state Data ", stateData);
+
     localStorage.setItem("searchResultData", JSON.stringify(stateData));
     localStorage.removeItem("flightSelectionData");
     localStorage.removeItem("reservationSummary");
     console.log(JSON.parse(localStorage.getItem("searchResultData")));
-    //this.props.history.push('/flight_selection');
-    window.location.href = "/flight_selection";
+    this.props.history.push('/flight_selection');
     localStorage.setItem("path", "http://localhost:3000/flight_selection");
+    window.dispatchEvent( new Event('storage') );
   };
 
   filterData(cabin, unfilteredData) {

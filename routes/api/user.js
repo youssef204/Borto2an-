@@ -115,6 +115,7 @@ user_Router.put("/", authenticate , async (req, res) => {
   res.send(updated);
 });
 
+<<<<<<< HEAD
 user_Router.put("/password", authenticate , async (req, res) => {
   const id = req.body._id;
   const update = req.body.update;
@@ -132,6 +133,28 @@ user_Router.put("/password", authenticate , async (req, res) => {
   res.send(updated);
   }
 });
+=======
+// user_Router.put("/password", authenticate , async (req, res) => {
+//   const id = req.body._id;
+//   const update = req.body.update;
+//   let oldpassUser = '';
+//   console.log(update);
+//   if (!id) {res.sendStatus(422); console.log(id);}
+//   try{
+//    oldpassUser = await User.findById(id);
+//   console.log("user data " , oldpassUser);
+//   }
+//   catch{
+//     console.log("mafessh user kdaaa");
+//   }
+//   if(oldpassUser.password !== update.oldPassword)
+//   res.sendStatus(401);
+//   delete update.oldPassword;
+//   console.log("updated value is", update);
+//   const updated = await User.findByIdAndUpdate(id, update, {new: true}).catch((err) => res.status(400).send(err));
+//   res.send(updated);
+// });
+>>>>>>> f5863ec85a1b57ec8af13b83fafdae30ecbad636
 
 
 user_Router.delete("/:id",authenticate, async (req, res) => {

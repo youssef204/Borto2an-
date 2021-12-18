@@ -4,6 +4,7 @@ import Logo from '../Logo/Logo';
 import {NavLink as Link,useLocation} from 'react-router-dom';
 
 function NavigationBar({user=JSON.parse(localStorage.getItem("user"))}) {
+  
 
   let path = useLocation().pathname; 
 
@@ -12,34 +13,36 @@ function NavigationBar({user=JSON.parse(localStorage.getItem("user"))}) {
   const [reservation,setReservation] = useState(0);
 
   React.useEffect(() => {
-    async function init(){
-      const data = await localStorage.getItem('searchResultData');
-      setSearch(JSON.parse(data));
-    }
-    init();
+      window.addEventListener('storage', () => {
+        setSearch(JSON.parse(localStorage.getItem('searchResultData'))); 
+      });
   },[]);
 
   React.useEffect(() => {
-    async function init(){
-      const data = await localStorage.getItem('flightSelectionData');
-      setFlightSelection(JSON.parse(data));
-    }
-    init();
+      window.addEventListener('storage', () => {
+        setFlightSelection(JSON.parse(localStorage.getItem('flightSelectionData')));   
+      });
   },[]);
 
   React.useEffect(() => {
-    async function init(){
-      const data = await localStorage.getItem('reservationSummary');
-      setReservation(JSON.parse(data));
-    }
-    init();
+      window.addEventListener('storage', () => {
+        setReservation(JSON.parse(localStorage.getItem('reservationSummary')));   
+      });
+  },[]);
+
+  React.useEffect(()=>{
+      setSearch(JSON.parse(localStorage.getItem('searchResultData'))); 
+      setFlightSelection(JSON.parse(localStorage.getItem('flightSelectionData')));
+      setReservation(JSON.parse(localStorage.getItem('reservationSummary')));
   },[]);
 
   const resetJourney = ()=>{
-    window.location.href="/";
     localStorage.removeItem("searchResultData");
     localStorage.removeItem("flightSelectionData");
     localStorage.removeItem("reservationSummary");
+    localStorage.removeItem("selectedSeats");
+    localStorage.removeItem("path");
+    window.dispatchEvent( new Event('storage') );
   }
 
   const userLabel = 

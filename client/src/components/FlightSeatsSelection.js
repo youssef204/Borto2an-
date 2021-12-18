@@ -12,6 +12,12 @@ class FlightSeatsSelection extends React.Component {
     this.setState({ [key]: seats });
   };
 
+  componentDidMount(){
+    localStorage.removeItem("reservationSummary");
+    localStorage.removeItem("selectedSeats");
+    window.dispatchEvent( new Event('storage') );
+  }
+
   isAllChosen() {
     const totalSeats =
       +JSON.parse(localStorage.getItem("flightSelectionData")).adultNumber +
@@ -110,7 +116,8 @@ class FlightSeatsSelection extends React.Component {
                     "path",
                     "http://localhost:3000/trip_summary"
                   );
-                  window.location.href = "http://localhost:3000/trip_summary";
+                  window.dispatchEvent( new Event('storage') );
+                  this.props.history.push("/trip_summary");
                 }}
                 width="250px"
                 height="60px"
