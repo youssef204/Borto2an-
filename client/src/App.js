@@ -24,11 +24,6 @@ import SignIn from "./components/GuestComponents/SignIn";
 import SignUp from "./components/GuestComponents/SignUp";
 import UpdateUser from "./components/UserComponents/UpdateUser";
 import ChangePassword from "./components/UserComponents/ChangePassword";
-<<<<<<< HEAD
-=======
-
->>>>>>> f5863ec85a1b57ec8af13b83fafdae30ecbad636
-
 function App() {
 
   return (

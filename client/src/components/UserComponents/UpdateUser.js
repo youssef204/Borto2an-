@@ -52,11 +52,7 @@ class UpdateUser extends React.Component {
       .put("http://localhost:8000/api/user", data, {
           headers:{"authorization":"Bearer "+localStorage.getItem("token")}
         })
-<<<<<<< HEAD
-      .then(res => {localStorage.setItem('user',JSON.stringify(res.data));window.location.href='/user';
-=======
       .then(res => {localStorage.setItem('user',JSON.stringify(res.data));window.dispatchEvent( new Event('storage') );this.props.histor.push('/user');
->>>>>>> f5863ec85a1b57ec8af13b83fafdae30ecbad636
       this.setState({ showMessage: true ,
         error :"updated successfully"});
      // alert("updated successfully")
@@ -83,9 +79,12 @@ class UpdateUser extends React.Component {
               <input  className="profile-input" type="text"   name = "firstName" value = {this.state.updated.firstName} onChange={this.onChange} />   
         Last Name : 
               <input  className="profile-input" type="text"   value = {this.state.updated.lastName} name = "lastName" onChange={this.onChange} />
-
+        {this.state.updated.isAdmin?<></>:
+        <>
         Passport Number:
               <input  className="profile-input" type="text"  value = {this.state.updated.passportNumber} name = "passportNumber" onChange={this.onChange}  />
+        </>
+        }
         Email:
               <input  className="profile-input" type="email"  value = {this.state.updated.email}  name = "email" onChange={this.onChange}/>
         User Name:
