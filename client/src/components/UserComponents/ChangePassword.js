@@ -71,10 +71,11 @@ class ChangePassword extends React.Component {
       .put("http://localhost:8000/api/user/password", data, {
           headers:{"authorization":"Bearer "+localStorage.getItem("token")}
         })
-      .then(res => {localStorage.setItem('user',JSON.stringify(res.data));this.props.history.push('/user');
+      .then(res => {this.setState({ showMessage: true ,
+        error :"updated successfully"})
+        localStorage.setItem('user',JSON.stringify(res.data));this.props.history.push('/user');
       window.dispatchEvent( new Event('storage') );
-      this.setState({ showMessage: true ,
-        error :"updated successfully"});
+      ;
    //   alert("updated successfully")
   })
       .catch(err => {

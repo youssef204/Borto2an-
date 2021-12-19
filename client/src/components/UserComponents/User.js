@@ -92,21 +92,21 @@ class User extends Component {
                 </div>}
                 </Stack>
           <Stack
-           spacing={2}
+           spacing={0}
            direction="row"
            style={{
                marginBottom:"8px",
                justifyContent : "space-around"
            }}>
                <div >
-                 <div>
           First Name:
-                <input className="profile-input"  type="text"  value={this.state.user.firstName}  name = "firstName" onChange={this.onChange} />
+                   <div>
+                <input className="profile-input" style={{width:"100%"}} type="text"  value={this.state.user.firstName}  name = "firstName" onChange={this.onChange} />
                 </div></div>
                 <div>
             Last Name:
             <div>
-            <input className="profile-input"  type="text"  value={this.state.user.lastName}  name = "lastName" onChange={this.onChange} />                
+            <input className="profile-input" style={{width:"100%"}}  type="text"  value={this.state.user.lastName}  name = "lastName" onChange={this.onChange} />                
             </div></div>
             </Stack>
 
