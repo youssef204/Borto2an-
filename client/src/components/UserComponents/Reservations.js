@@ -1,17 +1,25 @@
 import React from 'react';
 import Reservation from './Reservation';
 import { Component } from 'react';
+import Box from "@mui/material/Box";
+import Skeleton from "@mui/material/Skeleton";
 import axios from 'axios';
 
 class Reservations extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            reservations: []
+            reservations: [],
+            loading : true,
         }
     }
 
     componentDidMount() {
+      setTimeout(() => {
+        this.setState({
+          loading : false
+        });
+      }, 1000);
         axios
         .get("http://localhost:8000/api/reservations/", {
             headers:{"authorization":"Bearer "+localStorage.getItem("token")},
@@ -30,6 +38,7 @@ class Reservations extends Component {
     } else {
       reservationList = this.state.reservations.map((reservation) => <Reservation Reservation={reservation}/>);
     }
+    if(!this.state.loading){
     if(this.state.reservations.length!=0)
     return (
       <section>
@@ -54,6 +63,18 @@ class Reservations extends Component {
       </section>
     );
     else return reservationList;
+    }
+    else return (
+      <>
+      <Box
+        sx={{ width: "80%", margin: "auto", marginTop: 5, marginBottom: 5 }}
+      >
+        <Skeleton className="skeleton" />
+        <Skeleton animation="wave" />
+        <Skeleton animation={false} />
+      </Box>
+    </>
+    )
   }
 }
 
