@@ -91,7 +91,6 @@ class TripSummary extends React.Component {
       "reservationSummary",
       JSON.stringify(reservationSummary)
     );
-    window.dispatchEvent( new Event('storage') );
   }
   //TODO: create pay button
   onClickPay = (e) =>{
@@ -122,14 +121,17 @@ class TripSummary extends React.Component {
         console.log("result is ", res);
         window.location.href = res.data.url;
       })
-        .then((res) => {
-          console.log("result is ", res);
-          this.props.history.push("/reservation_summary");
-        })
-        .catch((e) => {
-          console.log(e.response);
-        });
-    } else this.props.history.push("/sign_in");
+      .catch((e) => {
+        console.log(e.response);
+      });
+    } else window.location.href = "/sign_in";
+
+  }
+
+  onClickPaid = (e) => {
+    if (JSON.parse(localStorage.getItem("user"))) {
+      window.location.href = "/reservation_summary";
+    } else window.location.href = "/sign_in";
   };
 
   render() {
