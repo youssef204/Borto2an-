@@ -66,7 +66,7 @@ function NavigationBar({user=JSON.parse(localStorage.getItem("user"))}) {
   <>
   <li style={{float:'right'}} className="NavBar">
         <Link to="/user" exact className="NavBar">
-          {user.firstName+" "+user.lastName}
+          {user.userName}
         </Link>
       </li>
   </>;

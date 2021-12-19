@@ -47,15 +47,14 @@ class ChangePassword extends React.Component {
         error :"Please Fill all of the fields"});
         return;
     }
-    if(this.state.updated.oldPassword !== this.state.updated.password){
-      this.setState({ showMessage: true ,
-        error :"Wrong Password!"});
-        return;
-    }
+    // if(this.state.updated.oldPassword !== this.state.updated.password){
+    //   this.setState({ showMessage: true ,
+    //     error :"Wrong Password!"});
+    //     return;
+    // }
     if(this.state.updated.newPassword !== this.state.updated.newPasswordConfirm){
       this.setState({ showMessage: true ,
         error :"Confirmation Password must match the New Password"});
-    //    alert("Confirmation Password must match the New Password")
         return;
     }
     const savedPassword = this.state.updated.newPassword;
@@ -67,12 +66,13 @@ class ChangePassword extends React.Component {
          oldPassword : this.state.updated.oldPassword
       }
     };
-    console.log(data);
+    //console.log(data);
     axios
-      .put("http://localhost:8000/api/user", data, {
+      .put("http://localhost:8000/api/user/password", data, {
           headers:{"authorization":"Bearer "+localStorage.getItem("token")}
         })
-      .then(res => {localStorage.setItem('user',JSON.stringify(res.data));window.location.href='/user';
+      .then(res => {localStorage.setItem('user',JSON.stringify(res.data));this.props.history.push('/user');
+      window.dispatchEvent( new Event('storage') );
       this.setState({ showMessage: true ,
         error :"updated successfully"});
    //   alert("updated successfully")
