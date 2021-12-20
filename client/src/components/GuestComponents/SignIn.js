@@ -10,6 +10,7 @@ export class SignIn extends Component {
       password: "",
       loggedIn: false,
       showMessage: false,
+      error:''
     };
   }
 
@@ -47,7 +48,8 @@ export class SignIn extends Component {
             else
             this.props.history.push('/');
             }}
-        else {this.setState({ showMessage: true });
+        else {this.setState({ showMessage: true ,
+        error : res.data.message});
         }
       })
       .catch((err) => {
@@ -76,6 +78,11 @@ export class SignIn extends Component {
 				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
 				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 			</div>
+      {this.state.showMessage ? (
+                <label id="signErrorMessage">{this.state.error}</label>
+              ) : (
+                <br/>
+              )}
             <input type="email"  placeholder="Enter email"  name = "email" onChange={this.onChange}/>
             <input type="password"  placeholder="Enter password" name = "password" onChange={this.onChange} />
 			<a href="#">Forgot your password?</a>

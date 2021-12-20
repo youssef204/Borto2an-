@@ -74,11 +74,11 @@ componentDidMount(){
   window.dispatchEvent( new Event('storage') );
 }
 
-onShowReservations=()=>{
+onReturnToHome=()=>{
     this.props.history.push('/');
 }
     
-onReturnToHome=()=>{
+onShowReservations=()=>{
   this.props.history.push("/reservations");
 }
 
@@ -103,7 +103,8 @@ onReturnToHome=()=>{
               borderColor="#a9a9a9"
               sx={{ p: 5 }}
               style={{
-                backgroundColor: "#ffffff"
+                backgroundColor: "#ffffff",
+                width : "40%"
               }}
             >
               <Stack style={{ margin: "2px" }}>
@@ -119,11 +120,20 @@ onReturnToHome=()=>{
                 </div>
               </Stack>
             <hr/>
+            <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "left",
+            }}
+          >
+            <div>
             <Stack style={{ margin: "2px" }}>
                 <div
                   style={{
                     display: "flex",
-                    justifyContent: "space-around"
+                    justifyContent: "space-around",
+                    marginRight:"20px"
                   }}
                 >
                   <label style={{ fontSize: "16px" , fontWeight:"16"}}>
@@ -132,16 +142,7 @@ onReturnToHome=()=>{
                 </div>
               </Stack>
             <br/>
-            <div
-                  style={{
-                    display: "flex",
-                  }}
-                >
-                  <div
-                  style={{
-                    display: "flex",
-                    alignContent: "flex-start",
-                  }}>
+            <div>
             <br/>Flight Number: {Reservation.flight1.flightNumber}
             <br/>From Airport: {Reservation.flight1.departure.airport}
             <br/>From Terminal: {Reservation.flight1.departure.terminal}
@@ -165,11 +166,12 @@ onReturnToHome=()=>{
             </div>
             </div>
             <hr/>
+            <div>
             <Stack style={{ margin: "2px" }}>
                 <div
                   style={{
                     display: "flex",
-                    justifyContent: "space-around"
+                    justifyContent: "space-around",
                   }}
                 >
                   <label style={{ fontSize: "16px" , fontWeight:"16"}}>
@@ -199,6 +201,9 @@ onReturnToHome=()=>{
             <br/>Number of Adults: {Reservation.Reservation.returnFlight.noAdults}
             <br/>Number of Children: {Reservation.Reservation.returnFlight.noChildren}
             <br/> <br/>
+            </div>
+            </div>
+            <hr/>
             <Stack style={{ margin: "2px" }}>
                 <div
                   style={{
@@ -232,11 +237,13 @@ onReturnToHome=()=>{
                   }}
                 >
 
-                  <Button
+<button  onClick={this.onShowReservations}>Show All Reservations</button>
+                  {/* <Button
                   width={150}
                   index={2}
                   label="Return To Home Page"
                   onClick={this.onShowReservations}
+
                   >
                   </Button>
                   <Button
@@ -245,12 +252,10 @@ onReturnToHome=()=>{
                   label="Show All Reservations"
                   onClick={this.onReturnToHome}
                   >
-                  </Button>
+                  </Button> */}
                 </div>
               </Stack>
             
-        <br/>
-        <br/>
         </Box>
         </div>
         <br/>

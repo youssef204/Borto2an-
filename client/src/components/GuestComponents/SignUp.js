@@ -75,16 +75,15 @@ export class SignUp extends Component {
     <div class="form-container sign-up-container">
 		<form action="#" noValidate onSubmit={this.onSubmit}>
 			<h2 style={{marginTop:"40px"}}>Create Account</h2>
-			<div class="social-container">
+			{/* <div class="social-container">
 				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
 				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
 				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-			</div>
+			</div> */}
       {this.state.showMessage ? (
                 <label id="signErrorMessage">{this.state.error}</label>
               ) : (
-                <div>
-                  </div>
+                <br/>
               )}
       <Stack
                       spacing={2}

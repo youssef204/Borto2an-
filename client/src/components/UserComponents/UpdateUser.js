@@ -52,9 +52,13 @@ class UpdateUser extends React.Component {
       .put("http://localhost:8000/api/user", data, {
           headers:{"authorization":"Bearer "+localStorage.getItem("token")}
         })
-      .then(res => {localStorage.setItem('user',JSON.stringify(res.data));window.dispatchEvent( new Event('storage') );this.props.history.push('/user');
+      .then(res => {localStorage.setItem('user',JSON.stringify(res.data));
       this.setState({ showMessage: true ,
         error :"updated successfully"});
+        setTime
+      window.dispatchEvent( new Event('storage') );
+      this.props.history.push('/user');
+
      // alert("updated successfully")
     })
       .catch(err => 
