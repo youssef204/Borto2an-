@@ -91,6 +91,7 @@ class TripSummary extends React.Component {
       "reservationSummary",
       JSON.stringify(reservationSummary)
     );
+    window.dispatchEvent( new Event('storage') );
   }
   //TODO: create pay button
   onClickPay = (e) =>{
