@@ -128,7 +128,24 @@ reservation_router.post("/", authenticate , async (req, res) => {
         from: 'borto2an5@gmail.com',
         to: email,
         subject: 'Created reservation',
-        text: 'Your reservation was successfully created and '+reservation.price+' L.E. amount was deducted from your credit card!!'
+        text: 'Your reservation was successfully created and '+reservation.price+' L.E. amount was deducted from your credit card!!\n\n'+
+        "Departure Flight Details:\n"+
+        "Flight Number: "+departureFlight.flightNumber+"\n"+
+        "From: "+departureFlight.departure.airport+"\n"+
+        "Airline: "+departureFlight.airline+'\n'+
+        "Selected Seats: "+reservation.departureFlight.seats+"\n"+
+        "Cabin: "+reservation.departureFlight.cabin+"\n\n"+
+
+        "Return Flight Details:\n"+
+        "Flight Number: "+returnFlight.flightNumber+"\n"+
+        "To: "+returnFlight.departure.airport+"\n"+
+        "Airline: "+returnFlight.airline+'\n'+
+        "Selected Seats: "+reservation.returnFlight.seats+"\n"+
+        "Cabin: "+reservation.returnFlight.cabin+"\n\n"+
+        reservation.returnFlight.noAdults+" Adults & "+reservation.returnFlight.noChildren+" Children on the ticket"+"\n \n"+
+
+        "Thank you for choosing Borto2an!!"
+
       };
       transporter.sendMail(mailOptions, function(error, info){
       if (error) {
