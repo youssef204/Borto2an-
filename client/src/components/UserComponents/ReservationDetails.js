@@ -34,6 +34,15 @@ class ReservationDetails extends React.Component {
         .catch(err => console.log(err));
     };
 
+    const sendItinerary=()=>{
+      axios.
+      get(`http://localhost:8000/api/reservations/sendItinerary/${Reservation._id}`, {
+          headers:{"authorization":"Bearer "+localStorage.getItem("token")},
+      })
+      .then(res => {alert("An email with reservtion itinerary was sent to you."); this.props.history.push("/");})
+      .catch(err => console.log(err));
+  };
+
     const handleClickOpen = () => {
       this.setState({ open: true });
     };
@@ -86,6 +95,7 @@ class ReservationDetails extends React.Component {
                     justifyContent: "center"
                   }}>
             <button onClick={handleClickOpen}>Delete</button>
+            <button onClick={sendItinerary}>Email Itinerary</button>
             </div>
             </Box>
             </div>

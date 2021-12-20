@@ -15,6 +15,66 @@ reservation_router.get("/", authenticate , function (req, res, next) {
     .catch((err) => res.status(404).json({ msg: "No reservations are found" }));
 });
 
+const sendEmail = async (userId, subject, body)=>{
+  const User = require('../../models/User');
+  const user = await User.findById(userId);
+  const email = user.email;
+  const nodeMailer = require('nodemailer');
+  const dotenv = require('dotenv');
+  dotenv.config();
+  const transporter = nodeMailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'borto2an5@gmail.com',
+      pass: process.env.BORTO_PW
+    }
+  });
+  const mailOptions = {
+    from: 'borto2an5@gmail.com',
+    to: email,
+    subject: subject,
+    text: body
+
+  };
+  transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Email sent: ' + info.response);
+  }
+  });
+}
+
+reservation_router.get("/sendItinerary/:id", authenticate , async (req, res) => {
+  const reservation = await Reservation.findByIdAndDelete(req.params.id);
+
+  res.send(reservation);
+
+  const Flight = require("../../models/Flight");
+  const departureFlight = await Flight.findById(reservation.departureFlight.flightId);
+  const returnFlight = await Flight.findById(reservation.returnFlight.flightId);
+
+  const emailBody = 'This is an itinerary of your reservation sent upon your request.\nThe reservation price is '+reservation.price+'L.E.\n\n'+
+      "Departure Flight Details:\n"+
+      "Flight Number: "+departureFlight.flightNumber+"\n"+
+      "From: "+departureFlight.departure.airport+"\n"+
+      "Airline: "+departureFlight.airline+'\n'+
+      "Selected Seats: "+reservation.departureFlight.seats+"\n"+
+      "Cabin: "+reservation.departureFlight.cabin+"\n\n"+
+
+      "Return Flight Details:\n"+
+      "Flight Number: "+returnFlight.flightNumber+"\n"+
+      "To: "+returnFlight.departure.airport+"\n"+
+      "Airline: "+returnFlight.airline+'\n'+
+      "Selected Seats: "+reservation.returnFlight.seats+"\n"+
+      "Cabin: "+reservation.returnFlight.cabin+"\n\n"+
+      reservation.returnFlight.noAdults+" Adults & "+reservation.returnFlight.noChildren+" Children on the ticket"+"\n \n"+
+
+      "Thank you for choosing Borto2an!!";
+
+  await sendEmail(reservation.userId, 'Reservation Itinerary',emailBody );
+});
+
 deleteSeats = (flight, seats, cabinName) =>{
   const cabin = flight[cabinName+'Cabin'];
   cabin.takenSeats = cabin.takenSeats.filter(seat => !seats.includes(seat));
@@ -36,33 +96,9 @@ reservation_router.delete("/:id", authenticate , async (req, res) => {
       await departureFlight.save();
       await returnFlight.save(); 
 
-      const userId = reservation.userId;
-      const User = require('../../models/User');
-      const user = await User.findById(userId);
-      const email = user.email;
-      const nodeMailer = require('nodemailer');
-      const dotenv = require('dotenv');
-      dotenv.config();
-      const transporter = nodeMailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: 'borto2an5@gmail.com',
-          pass: process.env.BORTO_PW
-        }
-      });
-      const mailOptions = {
-        from: 'borto2an5@gmail.com',
-        to: email,
-        subject: 'Cancelled reservation',
-        text: 'Your reservation was successfully cancelled and '+reservation.price+' L.E. amount was sent to your credit card!!'
-      };
-      transporter.sendMail(mailOptions, function(error, info){
-      if (error) {
-        console.log(error);
-      } else {
-        console.log('Email sent: ' + info.response);
-      }
-      });
+      const emailBody = 'Your reservation was successfully cancelled and '+reservation.price+' L.E. amount was sent to your credit card!!';
+
+      await sendEmail(reservation.userId, 'Cancelled reservation', emailBody);
     }
     else
       res.status(404).json({ msg: `No Reservation with id ${req.params.id} found` });
@@ -109,51 +145,26 @@ reservation_router.post("/", authenticate , async (req, res) => {
 
     Reservation.create(reservation)
     .then(async (result) => {res.send(result);
-    
-      const userId = reservation.userId;
-      const User = require('../../models/User');
-      const user = await User.findById(userId);
-      const email = user.email;
-      const nodeMailer = require('nodemailer');
-      const dotenv = require('dotenv');
-      dotenv.config();
-      const transporter = nodeMailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: 'borto2an5@gmail.com',
-          pass: process.env.BORTO_PW
-        }
-      });
-      const mailOptions = {
-        from: 'borto2an5@gmail.com',
-        to: email,
-        subject: 'Created reservation',
-        text: 'Your reservation was successfully created and '+reservation.price+' L.E. amount was deducted from your credit card!!\n\n'+
-        "Departure Flight Details:\n"+
-        "Flight Number: "+departureFlight.flightNumber+"\n"+
-        "From: "+departureFlight.departure.airport+"\n"+
-        "Airline: "+departureFlight.airline+'\n'+
-        "Selected Seats: "+reservation.departureFlight.seats+"\n"+
-        "Cabin: "+reservation.departureFlight.cabin+"\n\n"+
+      const emailBody = 'Your reservation was successfully created and '+reservation.price+' L.E. amount was deducted from your credit card!!\n\n'+
+      "Departure Flight Details:\n"+
+      "Flight Number: "+departureFlight.flightNumber+"\n"+
+      "From: "+departureFlight.departure.airport+"\n"+
+      "Airline: "+departureFlight.airline+'\n'+
+      "Selected Seats: "+reservation.departureFlight.seats+"\n"+
+      "Cabin: "+reservation.departureFlight.cabin+"\n\n"+
 
-        "Return Flight Details:\n"+
-        "Flight Number: "+returnFlight.flightNumber+"\n"+
-        "To: "+returnFlight.departure.airport+"\n"+
-        "Airline: "+returnFlight.airline+'\n'+
-        "Selected Seats: "+reservation.returnFlight.seats+"\n"+
-        "Cabin: "+reservation.returnFlight.cabin+"\n\n"+
-        reservation.returnFlight.noAdults+" Adults & "+reservation.returnFlight.noChildren+" Children on the ticket"+"\n \n"+
+      "Return Flight Details:\n"+
+      "Flight Number: "+returnFlight.flightNumber+"\n"+
+      "To: "+returnFlight.departure.airport+"\n"+
+      "Airline: "+returnFlight.airline+'\n'+
+      "Selected Seats: "+reservation.returnFlight.seats+"\n"+
+      "Cabin: "+reservation.returnFlight.cabin+"\n\n"+
+      reservation.returnFlight.noAdults+" Adults & "+reservation.returnFlight.noChildren+" Children on the ticket"+"\n \n"+
 
-        "Thank you for choosing Borto2an!!"
+      "Thank you for choosing Borto2an!!";
 
-      };
-      transporter.sendMail(mailOptions, function(error, info){
-      if (error) {
-        console.log(error);
-      } else {
-        console.log('Email sent: ' + info.response);
-      }
-      });
+
+      await sendEmail(reservation.userId, 'Created Reservation', emailBody);
 
     })
     .catch(err => {res.status(400).send(err)});
