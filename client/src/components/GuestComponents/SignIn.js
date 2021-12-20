@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Guest.css";
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 export class SignIn extends Component {
   constructor(props) {
@@ -103,7 +104,7 @@ export class SignIn extends Component {
 <footer>
 	<p>
 		Created by <i class="fa fa-heart"></i> 
-		<a href="/">Borto2an Airline</a>
+		<Link to="/">Borto2an Airline</Link>
 	</p>
 </footer>
 </>
