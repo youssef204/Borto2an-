@@ -39,13 +39,13 @@ class SearchFlights extends React.Component {
       };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     localStorage.removeItem("searchResultData");
     localStorage.removeItem("flightSelectionData");
     localStorage.removeItem("reservationSummary");
     localStorage.removeItem("selectedSeats");
     localStorage.removeItem("path");
-    window.dispatchEvent( new Event('storage') );
+    window.dispatchEvent(new Event("storage"));
   }
 
   onChange = (e) => {
@@ -216,9 +216,9 @@ class SearchFlights extends React.Component {
     localStorage.removeItem("flightSelectionData");
     localStorage.removeItem("reservationSummary");
     console.log(JSON.parse(localStorage.getItem("searchResultData")));
-    this.props.history.push('/flight_selection');
+    this.props.history.push("/flight_selection");
     localStorage.setItem("path", "http://localhost:3000/flight_selection");
-    window.dispatchEvent( new Event('storage') );
+    window.dispatchEvent(new Event("storage"));
   };
 
   filterData(cabin, unfilteredData) {
@@ -411,11 +411,13 @@ class SearchFlights extends React.Component {
             justifyContent: "center",
             alignItems: "center",
             height: "100vh",
+            backgroundImage: "url('search.jpg')",
+            backgroundSize: "100% 100%",
           }}
         >
           <Box
             component="span"
-            style={{ background: "#fff" }}
+            style={{ background: "#ffffffe0" }}
             border={2}
             borderRadius={10}
             borderLeft={2}
