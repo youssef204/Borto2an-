@@ -73,7 +73,7 @@ function NavigationBar({user=JSON.parse(localStorage.getItem("user"))}) {
 
 
 
-  if(path=="/sign_in"||path=="/sign_up")
+  if(path=="/sign_in"||path=="/sign_up"||path=="/forgot_password")
   return <></>;
 
   if(user&&user.isAdmin)

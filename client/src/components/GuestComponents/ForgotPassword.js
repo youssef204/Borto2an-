@@ -3,15 +3,11 @@ import "./Guest.css";
 import axios from "axios";
 import {Link} from "react-router-dom";
 
-export class SignIn extends Component {
+export class ForgotPassword extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      password: "",
-      loggedIn: false,
-      showMessage: false,
-      error:''
+      email: ""
     };
   }
 
@@ -33,30 +29,14 @@ export class SignIn extends Component {
     e.preventDefault();
     const data = this.state;
     axios
-      .post('http://localhost:8000/api/user/auth/login',data)
+      .post('http://localhost:8000/api/user/auth/reset', data)
       .then(res => {
-        if(res.data.auth){
-            localStorage.setItem("token",res.data.token);
-            localStorage.setItem("refreshToken",res.data.refreshToken);
-            localStorage.setItem("user",JSON.stringify(res.data.user));
-            this.setState({email:"", password:"", loggedIn:true});
-            if(JSON.parse(localStorage.getItem("user")).isAdmin)
-            this.props.history.push('/');
-            else {
-            if(localStorage.getItem("path")){
-            this.props.history.push(localStorage.getItem("path").substring(21));
-            }
-            else
-            this.props.history.push('/');
-            }}
-        else {this.setState({ showMessage: true ,
-        error : res.data.message});
-        }
+        alert("A new Password was sent to your email, use it to login.");
+        this.props.history.push("/sign_in");
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(e=>{alert("This email belongs to no user!");});
   };
+
   onClick = () => {
     this.props.history.push({ pathname: "/sign_up" });
   };
@@ -72,16 +52,14 @@ render() {
 <div class="container" id="container">
 	<div class="form-container sign-in-container">
 		<form action="#" noValidate onSubmit = {this.onSubmit}>
-			<h1>Sign in</h1>
+			<h1>Forgot your Password?</h1>
       {this.state.showMessage ? (
                 <label id="signErrorMessage">{this.state.error}</label>
               ) : (
                 <br/>
               )}
-            <input type="email"  placeholder="Enter email"  name = "email" onChange={this.onChange}/>
-            <input type="password"  placeholder="Enter password" name = "password" onChange={this.onChange} />
-			<Link to="/forgot_password">Forgot your password?</Link>
-			<button>Sign In</button>
+            <input type="email"  placeholder="Enter email"  name ="email" onChange={this.onChange}/>
+			<button>Email New Password</button>
 		</form>
 	</div>
 	<div class="overlay-container">
@@ -106,4 +84,4 @@ render() {
     }
 }
 
-export default SignIn;
+export default ForgotPassword;
