@@ -122,7 +122,7 @@ user_Router.put("/password", authenticate , async (req, res) => {
   if (!id) {res.sendStatus(422);}
    oldpassUser = await User.findById(id);
    const new_hashedPassword = bcrypt.hashSync(update.password,10);
-  console.log("user data " , oldpassUser);
+  //console.log("user data " , oldpassUser);
   const compare = await bcrypt.compare(update.oldPassword,oldpassUser.password);
   if(!compare)
   res.sendStatus(401);
