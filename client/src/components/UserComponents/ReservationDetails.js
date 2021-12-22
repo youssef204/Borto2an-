@@ -135,7 +135,7 @@ class ReservationDetails extends React.Component {
 
             <Dialog
               open={this.state.openUpdate}
-              onClose={handleClickOpenUpdate}
+              onClose={handleCloseUpdate}
               aria-labelledby="alert-dialog-title"
               aria-describedby="alert-dialog-description"
             >
@@ -148,7 +148,7 @@ class ReservationDetails extends React.Component {
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
-                <Button onClick={handleClose}>Cancel</Button>
+                <Button onClick={handleCloseUpdate}>Cancel</Button>
                 <Button onClick={UpdateReservation} autoFocus>
                   Update
                 </Button>

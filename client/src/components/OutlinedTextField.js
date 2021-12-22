@@ -10,6 +10,7 @@ export default function OutlinedTextField({
   value,
   name,
   type,
+  disabled
 }) {
   return (
     <TextField
@@ -23,6 +24,7 @@ export default function OutlinedTextField({
       InputLabelProps={{ style: { fontSize: fontsize } }}
       onChange={onChange}
       value={value}
+      disabled={disabled}
     />
   );
 }
