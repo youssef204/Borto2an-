@@ -489,7 +489,7 @@ class SearchFlights extends React.Component {
                 ></Calendar>
               </Stack>
               <FormControl component="fieldset">
-                <FormLabel component="legend">Choose your Cabin*</FormLabel>
+                <FormLabel component="legend">Choose your Cabin</FormLabel>
                 <RadioGroup
                   aria-label="cabin"
                   name="radio-buttons-group"

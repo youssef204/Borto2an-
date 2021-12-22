@@ -16,7 +16,8 @@ class ReservationDetails extends React.Component {
     constructor(props) {
     super(props);
     this.state = {
-      open: false
+      open: false , 
+      openUpdate:false 
     };
     }
   
@@ -46,9 +47,19 @@ class ReservationDetails extends React.Component {
     const handleClickOpen = () => {
       this.setState({ open: true });
     };
+    const handleClickOpenUpdate = () => {
+      this.setState({ openUpdate: true });
+    };
+    const handleCloseUpdate = () => {
+      this.setState({ openUpdate: false });
+    };
     const handleClose = () => {
       this.setState({ open: false });
     };
+    const UpdateReservation=()=>{
+      localStorage.setItem('EditedReservation',JSON.stringify(Reservation));
+      this.props.history.push("/");
+    }
 
     return (
         <>       
@@ -96,6 +107,7 @@ class ReservationDetails extends React.Component {
                   }}>
             <button onClick={handleClickOpen}>Delete</button>
             <button onClick={sendItinerary}>Email Itinerary</button>
+            <button onClick={handleClickOpenUpdate}>Update Reservation</button>
             </div>
             </Box>
             </div>
@@ -117,6 +129,28 @@ class ReservationDetails extends React.Component {
                 <Button onClick={handleClose}>Cancel</Button>
                 <Button onClick={onClick} autoFocus>
                   Delete
+                </Button>
+              </DialogActions>
+            </Dialog>
+
+            <Dialog
+              open={this.state.openUpdate}
+              onClose={handleClickOpenUpdate}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogTitle id="alert-dialog-title">
+                {"Are you sure you want to update your reservation?"}
+              </DialogTitle>
+              <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                  You will be directed to change this reservation 
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose}>Cancel</Button>
+                <Button onClick={UpdateReservation} autoFocus>
+                  Update
                 </Button>
               </DialogActions>
             </Dialog>
