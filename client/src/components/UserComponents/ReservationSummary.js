@@ -85,7 +85,10 @@ onShowReservations=()=>{
   render(){
       const Reservation = this.state.flightsWithReservation;
     return (
-      <div>
+      <div
+      style={{backgroundImage: `url("https://i.pinimg.com/originals/48/7b/c1/487bc14012c5b2ceac9a29d8ed6406dd.jpg")` 
+    }}
+      >
         <br/>
       <div
             style={{
@@ -103,7 +106,7 @@ onShowReservations=()=>{
               borderColor="#a9a9a9"
               sx={{ p: 5 }}
               style={{
-                backgroundColor: "#ffffff",
+                backgroundColor:  "rgba(255, 255, 255, 0.4)",
                 width : "40%"
               }}
             >

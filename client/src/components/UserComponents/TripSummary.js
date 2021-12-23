@@ -529,7 +529,10 @@ class TripSummary extends React.Component {
     };
 
     return (
-      <>
+      <div
+      style={{backgroundImage: `url("https://i.pinimg.com/originals/48/7b/c1/487bc14012c5b2ceac9a29d8ed6406dd.jpg")` 
+    }}
+      >
           <Stack>
             <br />
             <br />
@@ -549,7 +552,7 @@ class TripSummary extends React.Component {
                 borderColor="#a9a9a9"
                 sx={{ p: 1 }}
                 style={{
-                  backgroundColor : "#ffffff"
+                  backgroundColor : "rgba(255, 255, 255, 0.4)"
                 }}
               >
                 <Stack spacing={0.5}>
@@ -760,7 +763,7 @@ class TripSummary extends React.Component {
                 borderColor="#a9a9a9"
                 sx={{ p: 1 }}
                 style = {{
-                  backgroundColor : "#ffffff"
+                  backgroundColor :"rgba(255, 255, 255, 0.4)"
                 }}
               >
                 <Stack spacing={0.5}>
@@ -1139,7 +1142,7 @@ class TripSummary extends React.Component {
       </DialogActions>
     </Dialog>
   }
-      </>
+      </div>
     );
   }
 }
