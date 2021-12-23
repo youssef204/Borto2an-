@@ -59,6 +59,20 @@ airplaneModel_router.delete("/:id",authenticate ,  async (req, res) => {
   }
 });
 
+
+airplaneModel_router.get("/:id",authenticate ,  async (req, res) => {
+  console.log("here here");
+  try {
+    const airplaneModel = await AirplaneModel.findById(req.params.id);
+    if (airplaneModel) res.send(airplaneModel);
+    else
+      res.status(404).json({ msg: `No AirplaneModel with id ${req.params.id} found` });
+  } catch (e) {
+    console.log(e);
+    res.status(404).json({ msg: `${req.params.id} is not a correct id` });
+  }
+});
+
 airplaneModel_router.post("/",authenticate , async (req, res) => {
   if(!req.user.isAdmin){
     return res.sendStatus(401);

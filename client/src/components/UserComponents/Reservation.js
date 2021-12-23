@@ -11,7 +11,6 @@ import Button from '@mui/material/Button';
 
 
 function Reservation({Reservation}) {
-  console.log(Reservation);
 
   const history = useHistory();
 
