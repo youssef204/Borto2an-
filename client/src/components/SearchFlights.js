@@ -49,8 +49,8 @@ class SearchFlights extends React.Component {
     if(EditedReservation){
       this.state.departure.airport = EditedReservation.departureFlight.flightId.departure.airport;
       this.state.arrival.airport = EditedReservation.returnFlight.flightId.departure.airport;
-      this.state.departure.time = EditedReservation.departureFlight.flightId.departure.time;
-      this.state.arrival.time = EditedReservation.returnFlight.flightId.arrival.time;
+      this.state.departure.time = new Date(EditedReservation.departureFlight.flightId.departure.time).getTime();
+      this.state.arrival.time = new Date(EditedReservation.returnFlight.flightId.arrival.time).getTime();
       this.state.adultNumber = parseInt(EditedReservation.departureFlight.noAdults);
       this.state.childNumber = parseInt(EditedReservation.departureFlight.noChildren);
       this.setState(this.state);
@@ -166,7 +166,7 @@ class SearchFlights extends React.Component {
   };
 
   onSubmit = async (e, state) => {
-    //if (!this.validateInput()) return;
+    if (!this.validateInput()) return;
     e.preventDefault();
 
     const data = this.getNonEmptyFields(state);
@@ -547,7 +547,7 @@ class SearchFlights extends React.Component {
               <Stack spacing={5}>
                 <Button
                   label="Search"
-                  index={this.validateInput() || EditedReservation ? 1 : 0} //{this.numberOfSelecetedInputs.includes(0) ? 0 : 1}
+                  index={this.validateInput() ? 1 : 0} //{this.numberOfSelecetedInputs.includes(0) ? 0 : 1}
                   width={70}
                   height={40}
                   onClick={(e) => this.onSubmit(e, this.state)}
