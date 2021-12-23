@@ -531,15 +531,6 @@ class TripSummary extends React.Component {
 
     return (
       <>
-        <Box
-          component="span"
-          border={2}
-          borderRadius={10}
-          borderLeft={2}
-          borderRight={2}
-          borderColor="#a9a9a9"
-          sx={{ p: 1 }}
-        >
           <Stack>
             <br />
             <br />
@@ -727,7 +718,7 @@ class TripSummary extends React.Component {
                       fontWeight: "bold",
                       alignSelf: "center",
                       justifyContent: "center",
-                      marginBottom : "5x"
+                      marginBottom : "10x"
                     }}
                   >
                  Price :  {this.state.price1}
@@ -740,7 +731,7 @@ class TripSummary extends React.Component {
                         fontWeight: "bold",
                         alignSelf: "center",
                         justifyContent: "center",
-                        marginBottom : "5x"
+                        marginBottom : "10x"
                       }}
                     >
                    Amount to be refunded :  {+this.state.editiableprice1 - +this.state.price1.split(" ")[0]} L.E
@@ -753,7 +744,7 @@ class TripSummary extends React.Component {
                      fontWeight: "bold",
                      alignSelf: "center",
                      justifyContent: "center",
-                     marginBottom : "5x"
+                     marginBottom : "10x"
                    }}
                  >
                 Amount to be paid : {(+this.state.price1.split(" ")[0]) - (this.state.editiableprice1)} L.E
@@ -937,7 +928,7 @@ class TripSummary extends React.Component {
                       fontWeight: "bold",
                       alignSelf: "center",
                       justifyContent: "center",
-                      marginBottom : "5x"
+                      marginBottom : "10x"
                     }}
                   >
                  Price : {this.state.price2}
@@ -949,7 +940,7 @@ class TripSummary extends React.Component {
                         fontWeight: "bold",
                         alignSelf: "center",
                         justifyContent: "center",
-                        marginBottom : "5x"
+                        marginBottom : "10x"
                       }}
                     >
                    Amount to be refunded : {+this.state.editiableprice2 - +this.state.price2.split(" ")[0]} L.E
@@ -960,7 +951,7 @@ class TripSummary extends React.Component {
                      fontWeight: "bold",
                      alignSelf: "center",
                      justifyContent: "center",
-                     marginBottom : "5x"
+                     marginBottom : "10x"
                    }}
                  >
                 Amount to be paid : {+this.state.price2.split(" ")[0] - +this.state.editiableprice2} L.E
@@ -1026,12 +1017,12 @@ class TripSummary extends React.Component {
           <div
             style={{
               width: "100%",
-              height: "75px",
+              height: "85px",
               backgroundColor: "rgba(20, 20, 20, 0.9)",
               marginBottom : "-30px"
             }}
           >
-            <div style={{ marginLeft: "70%", paddingTop: "20px" }}>
+            <div style={{ marginLeft: "70%", paddingTop: "25px" }}>
               <Button
                 label= {this.state.edited ? "Update Reservation" : "Place Reservation"}
                 index={1}
@@ -1041,7 +1032,6 @@ class TripSummary extends React.Component {
               ></Button>
             </div>
           </div>
-        </Box>
          {//case it is not an edit ----------------------------------------
          }
         {!this.state.edited ?
