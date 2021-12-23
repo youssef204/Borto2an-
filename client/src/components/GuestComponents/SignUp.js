@@ -53,7 +53,7 @@ export class SignUp extends Component {
           }
           else if(err.response.status === 500){
             this.setState({ showMessage: true ,
-              error :"Email and User Name must be unique"});
+              error :"Email must be unique"});
       //    alert("Email and User Name must be unique");
           }
         }

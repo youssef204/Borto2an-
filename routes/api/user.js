@@ -110,7 +110,14 @@ user_Router.put("/", authenticate , async (req, res) => {
   const id = req.body._id;
   const update = req.body.update;
   console.log(update);
-  if (!id || !isValidUpdate(update)) {res.sendStatus(422); console.log(id);}
+  if (!id || !isValidUpdate(update))
+    {
+      if(!isValidEmail(update.email))
+      res.sendStatus(401); 
+      else 
+      res.sendStatus(422)
+      console.log(id);
+    }
   const updated = await User.findByIdAndUpdate(id, update, {new: true}).catch((err) => res.status(400).send(err));
   res.send(updated);
 });
