@@ -35,7 +35,7 @@ class SearchFlights extends React.Component {
         },
         chosenCabin: undefined,
         adultNumber: 0,
-        childNumber: 0,
+        childNumber: 0
       };
   }
 
@@ -45,6 +45,16 @@ class SearchFlights extends React.Component {
     localStorage.removeItem("reservationSummary");
     localStorage.removeItem("selectedSeats");
     localStorage.removeItem("path");
+    let EditedReservation = JSON.parse(localStorage.getItem('EditedReservation'));
+    if(EditedReservation){
+      this.state.departure.airport = EditedReservation.departureFlight.flightId.departure.airport;
+      this.state.arrival.airport = EditedReservation.returnFlight.flightId.departure.airport;
+      this.state.departure.time = EditedReservation.departureFlight.flightId.departure.time;
+      this.state.arrival.time = EditedReservation.returnFlight.flightId.arrival.time;
+      this.state.adultNumber = parseInt(EditedReservation.departureFlight.noAdults);
+      this.state.childNumber = parseInt(EditedReservation.departureFlight.noChildren);
+      this.setState(this.state);
+    }
     window.dispatchEvent(new Event("storage"));
   }
 
@@ -83,8 +93,6 @@ class SearchFlights extends React.Component {
         airport: e.target.value,
       },
     }));
-    console.log(this.state);
-    //this.render();
   };
 
   onChangeTo = (e) => {
@@ -94,7 +102,6 @@ class SearchFlights extends React.Component {
         airport: e.target.value,
       },
     }));
-    //this.render();
   };
 
   onChangeDepTime = (date) => {
@@ -104,9 +111,6 @@ class SearchFlights extends React.Component {
         time: date,
       },
     }));
-    // console.log(this.selectedDepday);
-    //this.render();
-    //console.log(this.state);
   };
 
   onChangeArrTime = (date) => {
@@ -303,6 +307,7 @@ class SearchFlights extends React.Component {
   };
 
   render() {
+    let EditedReservation = localStorage.getItem('EditedReservation');
     if (
       JSON.parse(localStorage.getItem("user")) &&
       JSON.parse(localStorage.getItem("user"))["isAdmin"]
@@ -437,6 +442,7 @@ class SearchFlights extends React.Component {
                   fontsize={18}
                   value={this.state.departure.airport}
                   onChange={this.onChangeFrom}
+                  disabled={EditedReservation}
                 ></OutlinedTextField>
                 {this.state.departure.airport &&
                 this.state.arrival.airport !== undefined &&
@@ -457,6 +463,7 @@ class SearchFlights extends React.Component {
                     fontsize={18}
                     onChange={this.onChangeTo}
                     value={this.state.arrival.airport}
+                    disabled={EditedReservation}
                   />
                 )}
               </Stack>
@@ -520,6 +527,7 @@ class SearchFlights extends React.Component {
                     type="number"
                     max="9"
                     min="1"
+                    value={this.state.adultNumber}
                     onInvalid={this.invalid}
                     onChange={this.onChangeAdult}
                   />
@@ -531,6 +539,7 @@ class SearchFlights extends React.Component {
                     type="number"
                     max="5"
                     min="0"
+                    value={this.state.childNumber}
                     onChange={this.onChangeChild}
                   />
                 </div>
