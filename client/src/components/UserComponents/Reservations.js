@@ -1,9 +1,22 @@
-import React from 'react';
-import Reservation from './Reservation';
+import * as React from 'react';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
 import { Component } from 'react';
 import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
 import axios from 'axios';
+import Reservation from './Reservation';
+
 
 class Reservations extends Component {
     constructor(props) {
@@ -39,32 +52,38 @@ class Reservations extends Component {
       reservationList = this.state.reservations.map((reservation) => <Reservation Reservation={reservation}/>);
     }
     if(!this.state.loading){
-    if(this.state.reservations.length!=0)
+    if(this.state.reservations.length!=0){
     return (
-      <section>
-      <div class="tbl-header">
-        <table>
-              <th>Price</th>
-
-              <th>From</th>
-              <th>At</th>
-
-              <th>To</th>
-              <th>At</th>
-              <th> Show Details</th>
-              </table>
-              <div class="tbl-content">
-  <table cellpadding="0" cellspacing="0" border="0">
-
-            {reservationList}
-            </table>
-        </div>
-        </div>
-      </section>
-    );
-    else return reservationList;
-    }
-    else return (
+      <Card style={{backgroundColor:"rgb(0,0,0"}} >
+      
+        <h2 style={{color:"rgb(255,255,255)"}}>All Reservations</h2>
+         
+    <TableContainer style = {{marginTop:"10px"}} component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow >
+            <TableCell align="center"style={{fontWeight:"bold"}} >Price</TableCell>
+            <TableCell align="center"  style={{fontWeight:"bold"}}>From &nbsp;</TableCell>
+            <TableCell align="center"  style={{fontWeight:"bold"}}>At&nbsp;</TableCell>
+            <TableCell align="center"  style={{fontWeight:"bold"}}>To&nbsp;</TableCell>
+            <TableCell align="center"  style={{fontWeight:"bold"}}>At&nbsp;</TableCell>
+            <TableCell align="center"  style={{fontWeight:"bold"}}>Show Details&nbsp;</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+        {reservationList}
+        </TableBody>
+      </Table>
+    </TableContainer>
+    </Card>)
+  }
+  else{
+    return reservationList
+  }
+}
+    
+          
+    else{ return (
       <>
       <Box
         sx={{ width: "80%", margin: "auto", marginTop: 5, marginBottom: 5 }}
@@ -76,6 +95,7 @@ class Reservations extends Component {
     </>
     )
   }
+}
 }
 
 export default Reservations;

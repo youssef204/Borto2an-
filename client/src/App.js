@@ -22,11 +22,9 @@ import TripSummary from "./components/UserComponents/TripSummary";
 import ReservationSummary from "./components/UserComponents/ReservationSummary";
 import SignIn from "./components/GuestComponents/SignIn";
 import SignUp from "./components/GuestComponents/SignUp";
-import ForgotPassword from "./components/GuestComponents/ForgotPassword";
 import UpdateUser from "./components/UserComponents/UpdateUser";
 import ChangePassword from "./components/UserComponents/ChangePassword";
 function App() {
-
   return (
     <>
       <Router>
@@ -36,7 +34,6 @@ function App() {
             {/* guest  */}
             <Route exact path="/Sign_up" component={SignUp} />
             <Route exact path="/Sign_in" component={SignIn} />
-            <Route exact path="/forgot_password" component={ForgotPassword} />
 
             {/* all */}
             <Route exact path="/" component={SearchFlights} />
