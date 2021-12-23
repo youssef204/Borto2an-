@@ -24,8 +24,7 @@ class ReservationDetails extends React.Component {
   
   render(){
 
-    const Reservation = this.props.history.location.state;
-    console.log(Reservation);
+    let Reservation = this.props.history.location.state;
     const onClick=()=>{
         axios.
         delete(`http://localhost:8000/api/reservations/${Reservation._id}`, {
@@ -57,8 +56,30 @@ class ReservationDetails extends React.Component {
       this.setState({ open: false });
     };
     const UpdateReservation=()=>{
-      localStorage.setItem('EditedReservation',JSON.stringify(Reservation));
-      this.props.history.push("/");
+      let  AirplaneModelDeparture  ; 
+      let  AirplaneModelReturn ; 
+  axios.
+        get(`http://localhost:8000/api/airplaneModel/${Reservation.departureFlight.flightId.airplaneModelID}`, {
+            headers:{"authorization":"Bearer "+localStorage.getItem("token")},
+        })
+        .then(res =>{
+          console.log(res.data);
+          AirplaneModelDeparture = res.data ; 
+        axios.
+        get(`http://localhost:8000/api/airplaneModel/${Reservation.returnFlight.flightId.airplaneModelID}`, {
+            headers:{"authorization":"Bearer "+localStorage.getItem("token")},
+        })
+        .then(res =>{
+          AirplaneModelReturn = res.data ; 
+          Reservation.airplaneModeDeparture = AirplaneModelDeparture ; 
+          Reservation.airplaneModeReturn = AirplaneModelReturn ; 
+        localStorage.setItem('EditedReservation',JSON.stringify(Reservation));
+        this.props.history.push("/");
+        }
+          ) 
+        .catch(err => console.log(err));
+      }
+        ).catch(err => console.log(err))
     }
 
     return (
