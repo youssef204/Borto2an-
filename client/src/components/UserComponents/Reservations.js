@@ -54,25 +54,20 @@ class Reservations extends Component {
     if(!this.state.loading){
     if(this.state.reservations.length!=0){
     return (
-      <Card >
-        <h2>All Reservations</h2>
-      <CardMedia
-        component="img"
-        alt="Flight Reservations"
-        text = "Flight"
-        height="280"
-        image="https://media.cntraveler.com/photos/5bd21d6b90ea376266cc61fb/master/w_1600%2Cc_limit/CNT_Intel_Jetblue_T.M.%2520Detwiler_102418.jpg"
-      />      
+      <Card style={{backgroundColor:"rgb(0,0,0"}} >
+      
+        <h2 style={{color:"rgb(255,255,255)"}}>All Reservations</h2>
+         
     <TableContainer style = {{marginTop:"10px"}} component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
-          <TableRow>
-            <TableCell>Price</TableCell>
-            <TableCell align="center">From</TableCell>
-            <TableCell align="center">At&nbsp;</TableCell>
-            <TableCell align="center">To&nbsp;</TableCell>
-            <TableCell align="center">At&nbsp;</TableCell>
-            <TableCell align="center">Show Details&nbsp;</TableCell>
+          <TableRow >
+            <TableCell align="center"style={{fontWeight:"bold"}} >Price</TableCell>
+            <TableCell align="center"  style={{fontWeight:"bold"}}>From &nbsp;</TableCell>
+            <TableCell align="center"  style={{fontWeight:"bold"}}>At&nbsp;</TableCell>
+            <TableCell align="center"  style={{fontWeight:"bold"}}>To&nbsp;</TableCell>
+            <TableCell align="center"  style={{fontWeight:"bold"}}>At&nbsp;</TableCell>
+            <TableCell align="center"  style={{fontWeight:"bold"}}>Show Details&nbsp;</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

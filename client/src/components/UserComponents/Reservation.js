@@ -21,7 +21,7 @@ function Reservation({Reservation}) {
     <>
 
 <TableRow>
-              <TableCell align="left">{Reservation.price}</TableCell>
+              <TableCell align="center">{Reservation.price}</TableCell>
               <TableCell align="center">{Reservation.departureFlight.flightId.departure.airport}</TableCell>
               <TableCell align="center">{Reservation.departureFlight.flightId.departure.time.substring(0,10)+" at "+Reservation.departureFlight.flightId.departure.time.substring(11,16)}</TableCell>
               <TableCell align="center"> {Reservation.returnFlight.flightId.departure.airport}</TableCell>
