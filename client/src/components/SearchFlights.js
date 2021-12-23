@@ -166,7 +166,7 @@ class SearchFlights extends React.Component {
   };
 
   onSubmit = async (e, state) => {
-    if (!this.validateInput()) return;
+    //if (!this.validateInput()) return;
     e.preventDefault();
 
     const data = this.getNonEmptyFields(state);
@@ -283,7 +283,7 @@ class SearchFlights extends React.Component {
 
   validateInput = () => {
     if (!this.state.departure.airport) {
-      console.log("dep problem");
+      console.log(this.state.departure.airport);
       return false;
     }
     if (!this.state.arrival.airport) {
@@ -294,11 +294,11 @@ class SearchFlights extends React.Component {
       console.log("adult problem");
       return false;
     }
-    if (!this.state.departure.time || isNaN(this.state.departure.time)) {
-      console.log("dep time problem");
+    if (this.state.departure.time == null|| isNaN(this.state.departure.time)) {
+      console.log(this.state.departure.time);
       return false;
     }
-    if (!this.state.arrival.time || isNaN(this.state.arrival.time)) {
+    if (this.state.arrival.time == null || isNaN(this.state.arrival.time)) {
       console.log("arr time problem");
       return false;
     }
@@ -547,7 +547,7 @@ class SearchFlights extends React.Component {
               <Stack spacing={5}>
                 <Button
                   label="Search"
-                  index={this.validateInput() ? 1 : 0} //{this.numberOfSelecetedInputs.includes(0) ? 0 : 1}
+                  index={this.validateInput() || EditedReservation ? 1 : 0} //{this.numberOfSelecetedInputs.includes(0) ? 0 : 1}
                   width={70}
                   height={40}
                   onClick={(e) => this.onSubmit(e, this.state)}

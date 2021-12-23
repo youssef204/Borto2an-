@@ -67,10 +67,12 @@ postReservation = () => {
 }
 componentDidMount(){
   this.postReservation();
+  // console.log(localStorage);
   localStorage.removeItem('reservationSummary');
   localStorage.removeItem('searchResultData');
   localStorage.removeItem('selectedSeats');
   localStorage.removeItem('flightSelectionData');
+  localStorage.removeItem('EditedReservation');
   window.dispatchEvent( new Event('storage') );
 }
 

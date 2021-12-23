@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 class SeatSelection extends React.Component {
   state = {
     loading: false,
-    selectedSeats: [],
+    selectedSeats: this.props.selectedSeats,
   };
 
   remainingSeats = () => {
@@ -19,7 +19,7 @@ class SeatSelection extends React.Component {
       },
       async () => {
         //await new Promise((resolve) => setTimeout(resolve, 0));
-        console.log(`Added seat ${number}, row ${row}, id ${id}`);
+        // console.log(`Added seat ${number}, row ${row}, id ${id}`);
         const newTooltip = `tooltip for id-${id} added by callback`;
         addCb(row, number, id);
         const selectedSeats = [...this.state.selectedSeats];
@@ -37,7 +37,7 @@ class SeatSelection extends React.Component {
       },
       async () => {
         //await new Promise((resolve) => setTimeout(resolve, 1500));
-        console.log(`Removed seat ${number}, row ${row}, id ${id}`);
+        // console.log(`Removed seat ${number}, row ${row}, id ${id}`);
         // A value of null will reset the tooltip to the original while '' will hide the tooltip
         const newTooltip = ["A", "B", "C"].includes(row) ? null : "";
         removeCb(row, number);
@@ -67,23 +67,27 @@ class SeatSelection extends React.Component {
       cols = airplaneModel.firstClassColumns;
       takenSeats = this.props.flight.firstCabin.takenSeats;
     }
+    if(this.props.reservation){
+      takenSeats = takenSeats.filter(seat => !this.props.reservation.seats.includes(seat));
+    }
     return { rows, cols, takenSeats };
   };
   buildSeatsArray = () => {
-    console.log(this.getSeatsInfo());
     const { rows, cols, takenSeats } = this.getSeatsInfo();
     const seats = [];
     for (let i = 0, id = 1; i < rows; i++) {
       const row = [];
       for (let j = 0; j < cols; j++, id++) {
-        const isReserved = takenSeats.includes(id);
+        const isSelected = this.props.selectedSeats.includes(id);
+        const isReserved = !isSelected && takenSeats.includes(id);
         const tooltip = isReserved ? "Seat Taken" : "Seat Available";
         // add space at the middle of the plane representing aisle
         if (j === ~~(cols / 2)) row.push(null);
         const seat = {
           id: id,
           number: id,
-          isReserved: isReserved,
+          isReserved,
+          isSelected,
           // tooltip: tooltip,
         };
         row.push(seat);
@@ -93,22 +97,28 @@ class SeatSelection extends React.Component {
     return seats;
   };
 
+  getSelectionGuideText(){
+    const rem = this.remainingSeats();
+    if( rem === 0)
+      return "Select chosen seat to deselect.";
+    if(rem < 0)
+      return `Deselect ${-rem} seat${rem===-1?"":"s"}`;
+    else
+    return `Select ${rem} seat${rem===1?"":"s"}`;
+  }
+
   render() {
     const seats = this.buildSeatsArray();
     const { loading } = this.state;
     return (
       <div>
-        {this.remainingSeats() == 0 ? (
-          <h2>Select chosen seat to deselect.</h2>
-        ) : (
-          <h2>{`Choose ${this.remainingSeats()} more seats.`}</h2>
-        )}
+        <h2>{this.getSelectionGuideText()}</h2>
         <div style={{ margin: "20px" }}>
           <SeatPicker
             addSeatCallback={this.addSeatCallback}
             removeSeatCallback={this.removeSeatCallback}
             rows={seats}
-            maxReservableSeats={this.props.numberOfSeats}
+            maxReservableSeats={this.props.maxSelectableSeats}
             alpha
             visible
             selectedByDefault
