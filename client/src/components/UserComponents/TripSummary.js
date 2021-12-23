@@ -517,7 +517,8 @@ class TripSummary extends React.Component {
   }
 
   onClickRefund = (e) => {
-    //email to confirm refunding the money 
+    // TODO:email to confirm refunding the money 
+    window.location.href = "/reservation_summary";
   }
 
   render() {

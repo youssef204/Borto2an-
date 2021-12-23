@@ -8,6 +8,30 @@ class FlightSeatsSelection extends React.Component {
     departureSeats: [],
     arrivalSeats: [],
   };
+  constructor(){
+    super();
+    
+    const selected = JSON.parse(localStorage.getItem("flightSelectionData"))
+    this.state.maxSelectableSeats1 =  +selected.adultNumber + +selected.childNumber;
+    this.state.maxSelectableSeats2 =  this.state.maxSelectableSeats1;
+    if(localStorage.getItem("EditedReservation")){
+      const reservation = JSON.parse(localStorage.getItem("EditedReservation"));
+      if(reservation.departureFlight.flightId._id === selected.flight1._id && reservation.departureFlight.cabin === selected.chosenCabin1){
+        this.state.departureSeats = reservation.departureFlight.seats;
+        this.state.departureReservation = reservation.departureFlight;
+        this.state.maxSelectableSeats1 = Math.max(this.state.maxSelectableSeats1, reservation.departureFlight.seats.length);
+      }
+      if(reservation.returnFlight.flightId._id === selected.flight2._id && reservation.returnFlight.cabin === selected.chosenCabin2){
+        this.state.arrivalSeats = reservation.returnFlight.seats;
+        this.state.arrivalReservation = reservation.returnFlight;
+        this.state.maxSelectableSeats2 = Math.max(this.state.maxSelectableSeats2, reservation.returnFlight.seats.length);
+      }
+
+      
+      
+    }
+  }
+
   updateSeats = (key, seats) => {
     this.setState({ [key]: seats });
   };
@@ -16,25 +40,36 @@ class FlightSeatsSelection extends React.Component {
     localStorage.removeItem("reservationSummary");
     localStorage.removeItem("selectedSeats");
     window.dispatchEvent( new Event('storage') );
+    console.log(this.state);
+    console.log(JSON.parse(localStorage.getItem("EditedReservation")));
+    console.log(JSON.parse(localStorage.getItem("flightSelectionData")));
   }
 
   isAllChosen() {
     const totalSeats =
       +JSON.parse(localStorage.getItem("flightSelectionData")).adultNumber +
       +JSON.parse(localStorage.getItem("flightSelectionData")).childNumber;
-    console.log(
-      totalSeats === this.state.departureSeats.length &&
-        totalSeats === this.state.arrivalSeats.length,
-      "Seats",
-      totalSeats,
-      this.state.arrivalSeats.length
-    );
     return (
       totalSeats === this.state.departureSeats.length &&
       totalSeats === this.state.arrivalSeats.length
     );
   }
 
+  getDepartureReservation(){
+    if(localStorage.getItem("EditedReservation")){
+      const reservation = JSON.parse(localStorage.getItem("EditedReservation"));
+      if(reservation.departureFlight.flightId._id === selected.flight1._id)
+        return reservation.departureFlight;
+    }
+  }
+
+  getArrivalReservation(){
+    if(localStorage.getItem("EditedReservation")){
+      const reservation = JSON.parse(localStorage.getItem("EditedReservation"));
+      if(reservation.returnFlight.flightId._id === selected.flight2._id)
+        return reservation.returnFlight;
+    }
+  }
   render() {
     const { departureSeats, arrivalSeats } = this.state;
     const allChosen = this.isAllChosen();
@@ -43,16 +78,20 @@ class FlightSeatsSelection extends React.Component {
       numberOfSeats:
         +JSON.parse(localStorage.getItem("flightSelectionData")).adultNumber +
         +JSON.parse(localStorage.getItem("flightSelectionData")).childNumber,
+      maxSelectableSeats: this.state.maxSelectableSeats1,
       chosenCabin: JSON.parse(localStorage.getItem("flightSelectionData"))
         .chosenCabin1,
+        selectedSeats: this.state.departureSeats || []
     };
     const arrival = {
       flight: JSON.parse(localStorage.getItem("flightSelectionData")).flight2,
       numberOfSeats:
         +JSON.parse(localStorage.getItem("flightSelectionData")).adultNumber +
         +JSON.parse(localStorage.getItem("flightSelectionData")).childNumber,
+      maxSelectableSeats: this.state.maxSelectableSeats2,
       chosenCabin: JSON.parse(localStorage.getItem("flightSelectionData"))
         .chosenCabin2,
+        selectedSeats: this.state.arrivalSeats || []
     };
     return (
       <>
@@ -80,6 +119,7 @@ class FlightSeatsSelection extends React.Component {
                 onUpdateSeats={(seats) => {
                   this.updateSeats("departureSeats", seats);
                 }}
+                reservation = {this.state.departureReservation}
               />
             </div>
             <div className="seatElementText">
@@ -94,6 +134,7 @@ class FlightSeatsSelection extends React.Component {
                 onUpdateSeats={(seats) => {
                   this.updateSeats("arrivalSeats", seats);
                 }}
+                reservation = {this.state.arrivalReservation}
               />
             </div>
           </div>
