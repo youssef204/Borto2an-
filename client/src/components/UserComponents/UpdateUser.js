@@ -36,7 +36,7 @@ class UpdateUser extends React.Component {
     this.setState({ updated: newUpdate });
   };
 
-  onSubmit = (e) => {
+  onSubmit = (e)  => {
     e.preventDefault();
     const update = this.state.updated;
     // if('password' in update && update['password']==='')
@@ -53,17 +53,35 @@ class UpdateUser extends React.Component {
           headers:{"authorization":"Bearer "+localStorage.getItem("token")}
         })
       .then(res => {localStorage.setItem('user',JSON.stringify(res.data));
-      this.setState({ showMessage: true ,
+       this.setState({ showMessage: true ,
         error :"updated successfully"});
-        setTime
       window.dispatchEvent( new Event('storage') );
       this.props.history.push('/user');
 
      // alert("updated successfully")
     })
-      .catch(err => 
-        this.setState({ showMessage: true ,
-          error :"update failed !! Data Error"}));
+      .catch(err => {
+        if(err.response){
+          if(err.response.status === 422){
+            this.setState({ showMessage: true ,
+              error :"Please Fill all of the fields"});
+      //    alert("Please Fill all of the fields");
+          }
+         else          
+            if(err.response.status === 401){
+            this.setState({ showMessage: true ,
+            error : "Please enter a valid email format" });
+       //   alert("Please enter a valid email format");
+          }
+          else if(err.response.status === 400){
+            this.setState({ showMessage: true ,
+              error :"Email must be unique"});
+      //    alert("Email and User Name must be unique");
+          }
+        }
+        }
+        );
+        
   };
 
   render() {
