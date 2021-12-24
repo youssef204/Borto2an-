@@ -8,6 +8,11 @@ class ReservationSummary extends React.Component {
 
     constructor(props) {
     super(props);
+    if(!localStorage.getItem("reservationSummary") || !localStorage.getItem("flightSelectionData") || !localStorage.getItem("selectedSeats")){
+      //some required item is not found
+      this.clearStorage();
+      window.location.href = "/";
+    }
     const Reservation = JSON.parse(
       localStorage.getItem("reservationSummary")
     );
@@ -49,7 +54,26 @@ postReservation = () => {
     reservationSummary["userId"] = JSON.parse(
       localStorage.getItem("user")
     )._id;
-
+    const oldReservation = JSON.parse(localStorage.getItem('EditedReservation'));
+    if(oldReservation){
+      //update old reservation
+      axios({
+        method: "put",
+        url: "http://localhost:8000/api/reservations",
+        headers: { authorization: "Bearer " + localStorage.getItem("token") },
+        data: {
+          newReservation: reservationSummary,
+          oldReservation: oldReservation
+        }
+      })
+        .then((res) => {
+          console.log("result is ", res);
+        })
+        .catch((e) => {
+          console.log(e.response);
+        });
+    }else{
+      // create a new reservation
     axios({
       method: "post",
       url: "http://localhost:8000/api/reservations",
@@ -63,11 +87,17 @@ postReservation = () => {
       .catch((e) => {
         console.log(e.response);
       });
+    }
   } else window.location.href = "/sign_in";
 }
 componentDidMount(){
   this.postReservation();
-  // console.log(localStorage);
+  // console.log(JSON.parse(localStorage.getItem('reservationSummary')));
+  // console.log(JSON.parse(localStorage.getItem('EditedReservation')));
+  this.clearStorage();
+}
+
+clearStorage = ()=>{
   localStorage.removeItem('reservationSummary');
   localStorage.removeItem('searchResultData');
   localStorage.removeItem('selectedSeats');
