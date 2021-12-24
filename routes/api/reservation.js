@@ -46,7 +46,7 @@ const sendEmail = async (userId, subject, body)=>{
 }
 
 reservation_router.get("/sendItinerary/:id", authenticate , async (req, res) => {
-  const reservation = await Reservation.findByIdAndDelete(req.params.id);
+  const reservation = await Reservation.findById(req.params.id);
 
   res.send(reservation);
 

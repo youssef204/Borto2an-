@@ -8,6 +8,10 @@ class ReservationSummary extends React.Component {
 
     constructor(props) {
     super(props);
+
+    if(!localStorage.getItem("reservationSummary")||!localStorage.getItem("flightSelectionData")||!localStorage.getItem("selectedSeats"))
+      return;
+
     const Reservation = JSON.parse(
       localStorage.getItem("reservationSummary")
     );
@@ -30,13 +34,6 @@ class ReservationSummary extends React.Component {
       flightsWithReservation
     }
     }
-
-  render(){
-    if(!localStorage.getItem("reservationSummary")){
-        return this.props.history.push("/");
-    }
-      const Reservation = this.state.Reservation;
-  }
 
 postReservation = () => {
   if (JSON.parse(localStorage.getItem("user"))) {
@@ -66,8 +63,11 @@ postReservation = () => {
   } else window.location.href = "/sign_in";
 }
 componentDidMount(){
+  if(!localStorage.getItem("reservationSummary")||!localStorage.getItem("flightSelectionData")||!localStorage.getItem("selectedSeats")){
+    this.props.history.push("/");
+    return;
+  }
   this.postReservation();
-  // console.log(localStorage);
   localStorage.removeItem('reservationSummary');
   localStorage.removeItem('searchResultData');
   localStorage.removeItem('selectedSeats');
@@ -85,6 +85,12 @@ onShowReservations=()=>{
 }
 
   render(){
+    if(!localStorage.getItem("reservationSummary")||!localStorage.getItem("flightSelectionData")||!localStorage.getItem("selectedSeats")){
+      this.props.history.push("/");
+      return <></> ;
+    }
+
+
       const Reservation = this.state.flightsWithReservation;
     return (
       <div
