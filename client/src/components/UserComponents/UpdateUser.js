@@ -1,6 +1,21 @@
 import axios from "axios";
 import React from "react";
+import { Component } from 'react';
 import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button" 
+import Avatar from '@mui/material/Avatar';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+const theme = createTheme();
+
 class UpdateUser extends React.Component {
   constructor(props) {
     super(props);
@@ -88,39 +103,110 @@ class UpdateUser extends React.Component {
     return (
       <>
       <br></br> 
-      <div class="profile-container" >
-      <form className="ProfileForm-container" action="#" noValidate onSubmit={this.onSubmit}>
-        <h2>Update Personal Information </h2>
-        <br></br>
-        {this.state.showMessage ? this.state.error === 'updated successfully' ? (
+      <h2 style={{
+              marginBottom : "20px",
+              marginTop: "20px"
+          }}>Update Data </h2>
+      {this.state.showMessage ? this.state.error === 'updated successfully' ? (
                 <label id="signSuccessMessage">{this.state.error}</label>
               ) : <label id="signErrorMessage">{this.state.error}</label> : (
                 <br/>
               )}
-        First Name : 
-              <input  className="profile-input" type="text"   name = "firstName" value = {this.state.updated.firstName} onChange={this.onChange} />   
-        Last Name : 
-              <input  className="profile-input" type="text"   value = {this.state.updated.lastName} name = "lastName" onChange={this.onChange} />
-        {this.state.updated.isAdmin?<></>:
-        <>
-        Passport Number:
-              <input  className="profile-input" type="text"  value = {this.state.updated.passportNumber} name = "passportNumber" onChange={this.onChange}  />
-        </>
-        }
-        Email:
-              <input  className="profile-input" type="email"  value = {this.state.updated.email}  name = "email" onChange={this.onChange}/>
-        User Name:
-              <input  className="profile-input" type="text" value = {this.state.updated.userName} name = "userName" onChange={this.onChange} />
-        Home Address:
-              <input  className="profile-input" type="text" value = {this.state.updated.homeAddress} name = "homeAddress" onChange={this.onChange} />
-        Country Code:
-              <input  className="profile-input" id="telephoneNumber" type="number" value = {this.state.updated.countryCode} name = "countryCode" onChange={this.onChange} />
-        Mobile Number:
-              <input  className="profile-input"id="telephoneNumber"  type="number" value = {this.state.updated.telephoneNumber} name = "telephoneNumber" onChange={this.onChange} />
-        <button>Update Info</button>
-        </form>
-        </div>
-        <br></br>
+      <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+      <Box component="form" sx={{ mt: 3 }}  noValidate onSubmit={this.onSubmit}>
+            <Grid container spacing={2}>
+            <Grid item xs={10} sm={6}>
+                <TextField
+                type="text"  value={this.state.updated.firstName} name = "firstName" onChange={this.onChange}
+                  fullWidth
+                  label="First Name"
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  type="text"  value={this.state.updated.lastName} name = "firstName" onChange={this.onChange}
+                  fullWidth
+                  label="Last Name"
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  type="email"  value={this.state.updated.email}  name = "email" onChange={this.onChange}
+                  fullWidth
+                  label="Email"
+                  autoFocus
+                />
+              </Grid>
+
+             <Grid item xs={12}>
+             <TextField
+               type="number"  value={this.state.updated.passportNumber}  name = "passportNumber" onChange={this.onChange}
+               fullWidth
+               label="passportNumber"
+               autoFocus
+             />
+           </Grid>
+            
+            
+
+            <Grid item xs={12}>
+             <TextField
+               type="text"  value={this.state.updated.homeAddress}  name = "homeAddress" onChange={this.onChange}
+               fullWidth
+               label="Home Address"
+               autoFocus
+             />
+           </Grid>
+
+           <Grid item xs={12}>
+             <TextField
+               type="number"  value={this.state.updated.telephoneNumber} name = "telephoneNumber" onChange={this.onChange} 
+               fullWidth
+               label="Mobile Number"
+               autoFocus
+               readonly
+             />
+           </Grid>
+
+           <Grid item xs={12}>
+             <TextField
+               type="number"  value={this.state.updated.countryCode} name = "countryCode" onChange={this.onChange}
+               fullWidth
+               label="Country Code"
+               autoFocus
+               readonly
+             />
+           </Grid>
+
+            </Grid>
+              <Button
+              type = "submit"
+              variant="contained"
+              
+              sx={{margin:"auto", mt: 3, mb: 2 ,backgroundColor:"#ee0000"}}
+            
+            >
+              Update Data
+            </Button>
+
+          
+              
+          </Box>
+          </Box>
+      </Container>
+    </ThemeProvider>
         </>
     );
   }

@@ -30,6 +30,7 @@ export class SignIn extends Component {
   };
 
   onSubmit = (e) => {
+    localStorage.setItem("profilepicUrl","profile.jpg")
     e.preventDefault();
     const data = this.state;
     axios
