@@ -4,19 +4,20 @@ import "./Footer.css"
 function Footer() {
     return (
         <>
-  <footer class="footer">
-    {/* <div class="waves">
+  <footer class="mainFooter">
+    <div class="waves">
       <div class="wave" id="wave1"></div>
       <div class="wave" id="wave2"></div>
       <div class="wave" id="wave3"></div>
       <div class="wave" id="wave4"></div>
-    </div> */}
+    </div>
+    <div class="contributors">Contributors</div>
     <ul class="menu">
-      <li class="menu__item"><a class="menu__link" href="#">Home</a></li>
-      <li class="menu__item"><a class="menu__link" href="#">About</a></li>
-      <li class="menu__item"><a class="menu__link" href="#">Services</a></li>
-      <li class="menu__item"><a class="menu__link" href="#">Team</a></li>
-      <li class="menu__item"><a class="menu__link" href="#">Contact</a></li>
+      <li class="menu__item"><a class="menu__link" href="https://github.com/HeshamMoneer" target="_blank">Hesham Moneer</a></li>
+      <li class="menu__item"><a class="menu__link" href="https://github.com/PeterFahmi" target="_blank">Peter Fahmi</a></li>
+      <li class="menu__item"><a class="menu__link" href="https://github.com/mohamedeshiba" target="_blank">Mohamed Eshiba</a></li>
+      <li class="menu__item"><a class="menu__link" href="https://github.com/omarkhair" target="_blank">Omar Khair</a></li>
+      <li class="menu__item"><a class="menu__link" href="https://github.com/youssef204" target="_blank">Youssef Amin</a></li>
 
     </ul>
     <p>&copy;2022 Borto2an | All Rights Reserved</p>
@@ -27,4 +28,4 @@ function Footer() {
     )
 }
 
-export default Footer
+export default Footer;
