@@ -4,45 +4,56 @@ import Button from "./Button.js";
 import "./FlightSeatsSelection.css";
 
 class FlightSeatsSelection extends React.Component {
-
-  
   state = {
     departureSeats: [],
     arrivalSeats: [],
   };
-  constructor(props){
+  constructor(props) {
     super(props);
-    
-    const selected = JSON.parse(localStorage.getItem("flightSelectionData"));
-    if(selected){
-    this.state.maxSelectableSeats1 =  +selected.adultNumber + +selected.childNumber;
-    this.state.maxSelectableSeats2 =  this.state.maxSelectableSeats1;
-    if(localStorage.getItem("EditedReservation")){
-      const reservation = JSON.parse(localStorage.getItem("EditedReservation"));
-      if(reservation.departureFlight.flightId._id === selected.flight1._id && reservation.departureFlight.cabin === selected.chosenCabin1){
-        this.state.departureSeats = reservation.departureFlight.seats;
-        this.state.departureReservation = reservation.departureFlight;
-        this.state.maxSelectableSeats1 = Math.max(this.state.maxSelectableSeats1, reservation.departureFlight.seats.length);
-      }
-      if(reservation.returnFlight.flightId._id === selected.flight2._id && reservation.returnFlight.cabin === selected.chosenCabin2){
-        this.state.arrivalSeats = reservation.returnFlight.seats;
-        this.state.arrivalReservation = reservation.returnFlight;
-        this.state.maxSelectableSeats2 = Math.max(this.state.maxSelectableSeats2, reservation.returnFlight.seats.length);
-      }
 
-      
-      
-    }}
+    const selected = JSON.parse(localStorage.getItem("flightSelectionData"));
+    if (selected) {
+      this.state.maxSelectableSeats1 =
+        +selected.adultNumber + +selected.childNumber;
+      this.state.maxSelectableSeats2 = this.state.maxSelectableSeats1;
+      if (localStorage.getItem("EditedReservation")) {
+        const reservation = JSON.parse(
+          localStorage.getItem("EditedReservation")
+        );
+        if (
+          reservation.departureFlight.flightId._id === selected.flight1._id &&
+          reservation.departureFlight.cabin === selected.chosenCabin1
+        ) {
+          this.state.departureSeats = reservation.departureFlight.seats;
+          this.state.departureReservation = reservation.departureFlight;
+          this.state.maxSelectableSeats1 = Math.max(
+            this.state.maxSelectableSeats1,
+            reservation.departureFlight.seats.length
+          );
+        }
+        if (
+          reservation.returnFlight.flightId._id === selected.flight2._id &&
+          reservation.returnFlight.cabin === selected.chosenCabin2
+        ) {
+          this.state.arrivalSeats = reservation.returnFlight.seats;
+          this.state.arrivalReservation = reservation.returnFlight;
+          this.state.maxSelectableSeats2 = Math.max(
+            this.state.maxSelectableSeats2,
+            reservation.returnFlight.seats.length
+          );
+        }
+      }
+    }
   }
 
   updateSeats = (key, seats) => {
     this.setState({ [key]: seats });
   };
 
-  componentDidMount(){
+  componentDidMount() {
     localStorage.removeItem("reservationSummary");
     localStorage.removeItem("selectedSeats");
-    window.dispatchEvent( new Event('storage') );
+    window.dispatchEvent(new Event("storage"));
     console.log(this.state);
     console.log(JSON.parse(localStorage.getItem("EditedReservation")));
     console.log(JSON.parse(localStorage.getItem("flightSelectionData")));
@@ -58,25 +69,24 @@ class FlightSeatsSelection extends React.Component {
     );
   }
 
-  getDepartureReservation(){
-    if(localStorage.getItem("EditedReservation")){
+  getDepartureReservation() {
+    if (localStorage.getItem("EditedReservation")) {
       const reservation = JSON.parse(localStorage.getItem("EditedReservation"));
-      if(reservation.departureFlight.flightId._id === selected.flight1._id)
+      if (reservation.departureFlight.flightId._id === selected.flight1._id)
         return reservation.departureFlight;
     }
   }
 
-  getArrivalReservation(){
-    if(localStorage.getItem("EditedReservation")){
+  getArrivalReservation() {
+    if (localStorage.getItem("EditedReservation")) {
       const reservation = JSON.parse(localStorage.getItem("EditedReservation"));
-      if(reservation.returnFlight.flightId._id === selected.flight2._id)
+      if (reservation.returnFlight.flightId._id === selected.flight2._id)
         return reservation.returnFlight;
     }
   }
   render() {
-
-    if(!localStorage.getItem("flightSelectionData")){
-      this.props.history.push('/flight_selection');
+    if (!localStorage.getItem("flightSelectionData")) {
+      this.props.history.push("/flight_selection");
       return <></>;
     }
 
@@ -90,7 +100,7 @@ class FlightSeatsSelection extends React.Component {
       maxSelectableSeats: this.state.maxSelectableSeats1,
       chosenCabin: JSON.parse(localStorage.getItem("flightSelectionData"))
         .chosenCabin1,
-        selectedSeats: this.state.departureSeats || []
+      selectedSeats: this.state.departureSeats || [],
     };
     const arrival = {
       flight: JSON.parse(localStorage.getItem("flightSelectionData")).flight2,
@@ -100,7 +110,7 @@ class FlightSeatsSelection extends React.Component {
       maxSelectableSeats: this.state.maxSelectableSeats2,
       chosenCabin: JSON.parse(localStorage.getItem("flightSelectionData"))
         .chosenCabin2,
-        selectedSeats: this.state.arrivalSeats || []
+      selectedSeats: this.state.arrivalSeats || [],
     };
     return (
       <>
@@ -128,7 +138,7 @@ class FlightSeatsSelection extends React.Component {
                 onUpdateSeats={(seats) => {
                   this.updateSeats("departureSeats", seats);
                 }}
-                reservation = {this.state.departureReservation}
+                reservation={this.state.departureReservation}
               />
             </div>
             <div className="seatElementText">
@@ -143,13 +153,13 @@ class FlightSeatsSelection extends React.Component {
                 onUpdateSeats={(seats) => {
                   this.updateSeats("arrivalSeats", seats);
                 }}
-                reservation = {this.state.arrivalReservation}
+                reservation={this.state.arrivalReservation}
               />
             </div>
           </div>
           <div id="seatButton" className="seat-wrap">
             {/* <img class="seat-bg" src="seats.jpg" width="700px" height="50px" /> */}
-            <div style={{ marginLeft: "70%", marginTop: "30px" }}>
+            <div style={{ marginLeft: "70%", marginTop: "20px" }}>
               <Button
                 variant="contained"
                 index={this.isAllChosen() == 1 ? 1 : 0}
@@ -166,7 +176,7 @@ class FlightSeatsSelection extends React.Component {
                     "path",
                     "http://localhost:3000/trip_summary"
                   );
-                  window.dispatchEvent( new Event('storage') );
+                  window.dispatchEvent(new Event("storage"));
                   this.props.history.push("/trip_summary");
                 }}
                 width="250px"
