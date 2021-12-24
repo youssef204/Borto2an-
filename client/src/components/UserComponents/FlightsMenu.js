@@ -16,13 +16,14 @@ export default function FlightsMenu({ flights, chosen, from, to, onSelect }) {
   //console.log("state", { flights, chosen, to, from });
   const updateContent = () => {
     return flightArr?.map((f) => {
-      if (flightChosen && flightChosen.flightNumber === f.flightNumber) {
+      if (flightChosen && flightChosen.flight.flightNumber === f.flightNumber) {
         //console.log("found");
         return (
           <FlightComponent
             flight={f}
             onSelect={onSelectCabin}
             chosenFlight={true}
+            chosenCabin={flightChosen.name}
           />
         );
       } else {
