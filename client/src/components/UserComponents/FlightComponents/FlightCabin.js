@@ -153,10 +153,10 @@ export default function FlightCabin({
                 }
                 sx={{
                   color: "#222222",
-                  background:
-                    value == 1
-                      ? "linear-gradient(to bottom, #ffffff, rgba(200,150,0,0.2))"
-                      : "white",
+                  // background:
+                  //   value == 1
+                  //     ? "linear-gradient(to bottom, #ffffff, rgba(200,150,0,0.2))"
+                  //     : "white",
                 }}
               />
               <Tab
