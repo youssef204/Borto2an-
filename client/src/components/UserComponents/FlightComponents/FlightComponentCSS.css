@@ -1,3 +1,6 @@
+.FlightComponent {
+  min-height: 210px;
+}
 .flex-Container-Row {
   display: flex;
   flex-direction: row;
@@ -73,7 +76,7 @@ img {
 }
 
 .prices {
-  width: 40%;
+  width: 35%;
   min-height: 80px;
   background-color: white;
   margin-right: 10px;
