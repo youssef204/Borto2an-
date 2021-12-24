@@ -14,50 +14,29 @@ function FlightComponent(probs) {
   //const [flight, setFlight] = useState(probs.flight); //"61a59b84b407eba753da9c9a");
   const [details, setDetails] = useState(probs.flight); //getDetails(id));
   const [loading, setLoading] = useState(true);
-  const [chosen, setChosen] = useState(probs.chosenFlight);
   const [duration, setDuration] = useState(calculateDuration(details));
-
+  const [chosen, setChosen] = useState(probs.chosenFlight);
   //console.log("duration", duration);
   const onSelect = (cabin, name) => {
     probs.onSelect(details, cabin, name, duration);
   };
-
-  let selected = <></>;
-
-  //console.log(onSelect);
+  useEffect(() => {
+    setChosen(probs.chosenFlight);
+  }, [probs]);
   useEffect(async () => {
     //console.log("details are ", details);
     //console.log("probid is ", probsId.id);
-    setChosen(probs.chosenFlight);
     setTimeout(() => {
       setLoading(false);
     }, 1000);
+
+    //console.log("flightComponentprobs", chosen);
     //console.log(details.departure.airport);
     //console.log(details);
   }, []);
 
-  console.log("chosen", chosen, probs.chosenFlight);
+  //console.log("chosen", chosen, probs.chosenFlight);
 
-  useEffect(() => {
-    console.log("probs of comp changed");
-    setChosen(probs.chosenFlight);
-  }, probs);
-  useEffect(() => {
-    if (chosen) {
-      selected = (
-        <div
-          style={{ width: "3%", height: "100", background: "#000000" }}
-        ></div>
-      );
-    } else {
-      selected = (
-        <div
-          style={{ width: "3%", height: "100", background: "#ff0000" }}
-        ></div>
-      );
-    }
-    console.log(chosen, selected);
-  }, [chosen]);
   if (loading) {
     return (
       <>
@@ -95,8 +74,23 @@ function FlightComponent(probs) {
         ></link> */}
 
         <div>
-          <div className="shadow p-3 m-3 bg-white rounded flex-Container-Row">
-            {selected}
+          <div className="shadow p-3 m-3 bg-white rounded flex-Container-Row FlightComponent">
+            {chosen ? (
+              <div
+                style={{
+                  marginLeft: "-62px",
+                  marginRight: "31px",
+                  marginBottom: "-15px",
+                  marginTop: "-15px",
+                  minWidth: "30px",
+                  minHeight: "210px",
+                  height: "100%",
+                  backgroundColor: "#2e7d32",
+                }}
+              ></div>
+            ) : (
+              <></>
+            )}
             {/**airline +airplane model+flightNumber */}
             <FlightAirplane details={details} />
             {/** departure arrival airport terminal date  */}
@@ -190,7 +184,7 @@ function getDurationSplit(duration) {
   });
 }
 const calculateDuration = (details) => {
-  console.log("details", details.arrival.time);
+  //console.log("details", details.arrival.time);
   const diff =
     new Date(details.arrival.time) - new Date(details.departure.time);
   var unitmapping = {

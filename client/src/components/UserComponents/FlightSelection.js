@@ -9,8 +9,11 @@ function getFromLocalStorage(itemName) {
   //console.log("search results", searchResults);
   return requiredItem;
 }
-function reform(reservedFlight) {
+function reform(reservedFlight, model) {
   const cabin = reservedFlight.flightId[reservedFlight.cabin + "Cabin"];
+  //console.log("reservedFlight.flightId", reservedFlight);
+  reservedFlight.flightId["airplaneModelID"] = model;
+
   let result = {
     flight: reservedFlight.flightId,
     name: reservedFlight.cabin,
@@ -51,14 +54,16 @@ export default function FlightSelection() {
     const EditedReservation = JSON.parse(
       localStorage.getItem("EditedReservation")
     );
-    //console.log(EditedReservation);
+    //console.log("EditedReservation", EditedReservation);
     if (EditedReservation) {
       const firstFlightFromReservation = reform(
-        EditedReservation.departureFlight
+        EditedReservation.departureFlight,
+        EditedReservation.airplaneModeDeparture
       );
 
       const secondFlightFromReservation = reform(
-        EditedReservation.returnFlight
+        EditedReservation.returnFlight,
+        EditedReservation.airplaneModeReturn
       );
       setFirstFlight(firstFlightFromReservation);
       setSecondFlight(secondFlightFromReservation);
