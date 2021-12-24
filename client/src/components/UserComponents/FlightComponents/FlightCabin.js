@@ -9,8 +9,10 @@ import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 
-export default function FlightCabin({ economy, business, first, onSelect }) {
-  const [value, setValue] = useState("1");
+export default function FlightCabin({ economy, business, first, airplane ,  totalNumber , onSelect }) {
+  const [value, setValue] = airplane.economyRows * airplane.economyColumns - economy.takenSeats.length >= totalNumber ? useState("1")
+  :airplane.businessRows * airplane.businessColumns - business.takenSeats.length >= totalNumber ? useState("2") 
+  : useState("3");
   const [open, setOpen] = useState(false);
 
   const handleChange = (event, newValue) => {
@@ -21,16 +23,22 @@ export default function FlightCabin({ economy, business, first, onSelect }) {
   });
   const onClick = (number) => {
     if (number == 1) {
+      if(airplane.economyRows * airplane.economyColumns - economy.takenSeats.length >= totalNumber){
       onSelect(economy, "economy");
       setOpen(true);
+      }
     } else if (number == 2) {
+      if(airplane.businessRows * airplane.businessColumns - business.takenSeats.length >= totalNumber){
       //business
       onSelect(business, "business");
       setOpen(true);
+      }
     } else {
+      if(airplane.firstClassRows * airplane.firstClassColumns - first.takenSeats.length >= totalNumber){
       //first
       onSelect(first, "first");
       setOpen(true);
+      }
     }
   };
 
@@ -73,7 +81,8 @@ export default function FlightCabin({ economy, business, first, onSelect }) {
   return (
     <>
       <Box sx={{ width: "90%", typography: "body1" }}>
-        <TabContext value={value} sx={{ width: "10px" }}>
+        <TabContext
+         value={value} sx={{ width: "10px" }}>
           <Box
             sx={{
               borderBottom: 1,
@@ -85,6 +94,7 @@ export default function FlightCabin({ economy, business, first, onSelect }) {
               <Tab
                 label="Economy"
                 value="1"
+                disabled = {airplane.economyRows * airplane.economyColumns - economy.takenSeats.length < totalNumber}
                 sx={{
                   color: "#222222",
                   background:
@@ -96,6 +106,7 @@ export default function FlightCabin({ economy, business, first, onSelect }) {
               <Tab
                 label="Business"
                 value="2"
+                disabled = {airplane.businessRows * airplane.businessColumns - business.takenSeats.length < totalNumber}
                 sx={{
                   //background:  "linear-gradient(to bottom, #ffffff, rgba(200,200,50,0.2))",
                   color: "#222222",
@@ -106,6 +117,7 @@ export default function FlightCabin({ economy, business, first, onSelect }) {
               <Tab
                 label="First"
                 value="3"
+                disabled = {airplane.firstClassRows * airplane.firstClassColumns - first.takenSeats.length < totalNumber}
                 sx={{
                   //background:"linear-gradient(to bottom, #ffffff,rgba(2500,100,50,0.2))",
                   color: "#222222",

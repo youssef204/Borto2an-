@@ -187,8 +187,20 @@ class SearchFlights extends React.Component {
     // .then((res) => {
     // go to search results component with the data
 
-    let sentData = this.filterData(this.state.chosenCabin, res);
-
+    // let sentData = this.filterData(this.state.chosenCabin, res);
+    let sentData = res.data;
+    sentData = this.filterDataByDate(
+      this.state.departure.time,
+      this.state.arrival.time,
+      sentData
+      )
+      console.log("cabin choosen " , this.state.chosenCabin);
+     sentData = sentData.filter((entry) => {
+   return (+this.state.adultNumber + +this.state.childNumber <= +entry["airplaneModelID"].economyRows * +entry["airplaneModelID"].economyColumns - +entry.economyCabin.takenSeats.length
+        || +this.state.adultNumber + +this.state.childNumber <= +entry["airplaneModelID"].businessRows * +entry["airplaneModelID"].businessColumns - +entry.businessCabin.takenSeats.length
+        || +this.state.adultNumber + +this.state.childNumber <= +entry["airplaneModelID"].firstClassRows * +entry["airplaneModelID"].firstClassColumns - +entry.firstCabin.takenSeats.length
+        )
+    })
     let paramsDataReturn = {
       "departure.airport": data["arrival"]["airport"],
       //"departure.time": data["arrival"]["time"],
@@ -202,7 +214,19 @@ class SearchFlights extends React.Component {
       headers: { authorization: "Bearer " + localStorage.getItem("token") },
       params: paramsDataReturn,
     });
-    let returnData = this.filterData(this.state.chosenCabin, res);
+   // let returnData = this.filterData(this.state.chosenCabin, res);
+   let returnData = res.data;
+   returnData = this.filterDataByDate(
+    this.state.departure.time,
+    this.state.arrival.time,
+    returnData
+    )
+    returnData = returnData.filter((entry) => {
+      return (+this.state.adultNumber + +this.state.childNumber <= +entry["airplaneModelID"].economyRows * +entry["airplaneModelID"].economyColumns - +entry.economyCabin.takenSeats.length
+           || +this.state.adultNumber + +this.state.childNumber <= +entry["airplaneModelID"].businessRows * +entry["airplaneModelID"].businessColumns - +entry.businessCabin.takenSeats.length
+           || +this.state.adultNumber + +this.state.childNumber <= +entry["airplaneModelID"].firstClassRows * +entry["airplaneModelID"].firstClassColumns - +entry.firstCabin.takenSeats.length
+           )
+       })
     console.log("sentData are", sentData);
     console.log("returnData are", returnData);
 
@@ -229,18 +253,26 @@ class SearchFlights extends React.Component {
     console.log("timing ", typeof this.state.departure.time);
     let totalSeats = +this.state.childNumber + +this.state.adultNumber;
     let ans = unfilteredData.data.filter((entry) => entry[cabin] !== null);
-    ans.filter(
+    let rows = cabin === "economyCabin" ? "economyRows" : cabin === "businessCabin" ? "businessRows" : "firstClassRows";
+    let columns = cabin === "economyCabin" ? "economyColumns" : cabin === "businessCabin" ? "businessColumns" : "firstClassColumns";
+    console.log("result iissssssss " , ans[0]["airplaneModelID"][rows] *
+    ans[0]["airplaneModelID"][columns] -
+    ans[0][cabin]["takenSeats"].length);
+    console.log("totalll nummmmm " , totalSeats );
+     ans.filter(
       (entry) =>
-        totalSeats <=
-        entry["airplaneModelID"]["economyRows"] *
-          entry["airplaneModelID"]["economyColumns"] -
-          entry["economyCabin"]["takenSeats"].length
+       { 
+         return (totalSeats <=
+        entry["airplaneModelID"][rows] *
+          entry["airplaneModelID"][columns] -
+          entry[cabin]["takenSeats"].length)
+       }
     );
-    ans = this.filterDataByDate(
-      this.state.departure.time,
-      this.state.arrival.time,
-      ans
-    );
+    // ans = this.filterDataByDate(
+    //   this.state.departure.time,
+    //   this.state.arrival.time,
+    //   ans
+    // );
     return ans;
   }
 
@@ -248,8 +280,8 @@ class SearchFlights extends React.Component {
     // console.log("timing ", typeof this.state.departure.time);
     // console.log("unfiltered", unfilteredData);
     //console.log(new Date(new Date(dep).setHours(0,0,0)));
-    console.log(new Date(unfilteredData[0].arrival.time));
-    console.log(new Date(arr));
+    // console.log(new Date(unfilteredData[0].arrival.time));
+    // console.log(new Date(arr));
 
     const ans = unfilteredData.filter((e) => {
       return (

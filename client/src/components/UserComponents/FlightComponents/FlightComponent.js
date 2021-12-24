@@ -58,6 +58,8 @@ export default function FlightComponent(probs) {
     //console.log(details.departure.airport);
     //console.log(details);
   }, []);
+
+
   if (loading) {
     return (
       <>
@@ -77,6 +79,14 @@ export default function FlightComponent(probs) {
       </>
     );
   } else {
+    // const economy=details.economyCabin;
+    // const business=details.businessCabin;
+    // const first=details.firstCabin;
+    // const airplane =details.airplaneModelID;
+    // const totalNumber = +JSON.parse(localStorage.getItem("searchResultData")).adultNumber + +JSON.parse(localStorage.getItem("searchResultData")).childNumber;
+    // if(!(airplane.economyRows * airplane.economyColumns - economy.takenSeats.length < totalNumber 
+    //   && airplane.businessRows * airplane.businessColumns - business.takenSeats.length < totalNumber 
+    //   && airplane.firstClassRows * airplane.firstClassColumns - first.takenSeats.length < totalNumber)){
     return (
       <>
         {/* <link
@@ -85,6 +95,7 @@ export default function FlightComponent(probs) {
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
           crossOrigin="anonymous"
         ></link> */}
+
         <div>
           <div className="shadow p-3 m-3 bg-white rounded flex-Container-Row">
             {/**airline +airplane model+flightNumber */}
@@ -136,6 +147,8 @@ export default function FlightComponent(probs) {
                 economy={details.economyCabin}
                 business={details.businessCabin}
                 first={details.firstCabin}
+                airplane = {details.airplaneModelID}
+                totalNumber = {+JSON.parse(localStorage.getItem("searchResultData")).adultNumber + +JSON.parse(localStorage.getItem("searchResultData")).childNumber}
                 onSelect={onSelect}
               />
             </div>
@@ -143,7 +156,10 @@ export default function FlightComponent(probs) {
         </div>
       </>
     );
-  }
+  //}
+  //else 
+  //return(<div></div>);
+}
 }
 
 async function getDetails(id) {
