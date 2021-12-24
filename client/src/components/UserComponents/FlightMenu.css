@@ -7,9 +7,11 @@
   margin-top: 5%;
 }
 .settings {
-  height: 50px;
+  height: 130px;
   width: 100%;
-  background-color: darkblue;
+  background-color: #ff416c;
+  overflow: hidden;
+  position: relative;
 }
 .flightMenuContainer {
   width: 100%;
@@ -25,4 +27,19 @@
   margin: auto;
   padding-left: 10px;
   padding-top: 5px;
+}
+.flightTitleText {
+  padding-left: 3%;
+  padding-top: 2%;
+  color: rgb(230, 230, 230);
+  font: 55px Montserrat;
+}
+.flight-bg {
+  mask-image: linear-gradient(to left, rgba(0, 0, 1, 1), rgba(0, 0, 1, 0));
+  opacity: 1;
+  position: absolute;
+  left: 200px;
+  top: -160px;
+  width: 100%;
+  height: auto;
 }
