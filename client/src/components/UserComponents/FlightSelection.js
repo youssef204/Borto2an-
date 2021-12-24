@@ -99,7 +99,7 @@ export default function FlightSelection() {
           onSelect={onFirstFlightSelect}
           from={from}
           to={to}
-          chosen={firstFlight?.flight}
+          chosen={firstFlight}
         />
       }
 
@@ -108,7 +108,7 @@ export default function FlightSelection() {
         onSelect={onSecondFlightSelect}
         from={to}
         to={from}
-        chosen={secondFlight?.flight}
+        chosen={secondFlight}
       />
 
       <ChosenFLightsDetails
