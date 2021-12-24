@@ -34,9 +34,9 @@ export default function ChosenFLightsDetails({
         duration2: secondFlight.duration,
       };
       localStorage.setItem("flightSelectionData", JSON.stringify(data));
-      localStorage.setItem("reservationSummary",null);
+      localStorage.setItem("reservationSummary", null);
       localStorage.setItem("path", "http://localhost:3000/select_seats");
-      window.dispatchEvent( new Event('storage') );
+      window.dispatchEvent(new Event("storage"));
       history.push("/select_seats");
     }
   };
@@ -52,14 +52,17 @@ export default function ChosenFLightsDetails({
   const getFlightHTML = (flight) => {
     return (
       <div className="planeContainer flex-row d-flex">
-        <div style={{ margin: "auto" }}>
-          <label>{flight.flight.airplaneModelID.name}</label>
+        <div style={{ margin: "auto", fontSize: "25px" }}>
+          <label>Flight No. {flight.flight.flightNumber}</label>
+          <br />
+          <sub>
+            {flight.flight.airplaneModelID.name.charAt(0).toUpperCase() +
+              flight.flight.airplaneModelID.name.substring(1)}
+          </sub>
           <br />
           <label>
-            <sub>Flight No.</sub> {flight.flight.flightNumber}
+            {flight.name.charAt(0).toUpperCase() + flight.name.substring(1)}
           </label>
-          <br />
-          <sub>{flight.name}</sub>
         </div>
         <div style={{ margin: "auto" }}>
           <img src="egyptair.png" width="40" height="40" />
