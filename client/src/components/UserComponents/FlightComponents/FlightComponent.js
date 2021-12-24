@@ -10,54 +10,33 @@ import FlightAirplane from "./FlightAirplane";
 import { getHours, getMinutes } from "@mui/lab/ClockPicker/shared";
 import { textAlign } from "@mui/system";
 
-export default function FlightComponent(probs) {
+function FlightComponent(probs) {
   //const [flight, setFlight] = useState(probs.flight); //"61a59b84b407eba753da9c9a");
   const [details, setDetails] = useState(probs.flight); //getDetails(id));
   const [loading, setLoading] = useState(true);
-
-  const calculateDuration = (details) => {
-    console.log("details", details.arrival.time);
-    const diff =
-      new Date(details.arrival.time) - new Date(details.departure.time);
-    var unitmapping = {
-      days: 24 * 60 * 60 * 1000,
-      hours: 60 * 60 * 1000,
-      minutes: 60 * 1000,
-      seconds: 1000,
-    };
-    const days =
-      Math.floor(diff / unitmapping.days) == 0
-        ? ""
-        : Math.floor(diff / unitmapping.days) + " days ";
-    const hours =
-      Math.floor((diff % unitmapping.days) / unitmapping.hours) == 0
-        ? ""
-        : Math.floor((diff % unitmapping.days) / unitmapping.hours) + " hours ";
-    const minutes =
-      Math.floor((diff % unitmapping.hours) / unitmapping.minutes) == 0
-        ? ""
-        : Math.floor((diff % unitmapping.hours) / unitmapping.minutes) +
-          " minutes";
-    return days + hours + minutes;
-  };
-
   const [duration, setDuration] = useState(calculateDuration(details));
-
+  const [chosen, setChosen] = useState(probs.chosenFlight);
   //console.log("duration", duration);
   const onSelect = (cabin, name) => {
     probs.onSelect(details, cabin, name, duration);
   };
-  //console.log(onSelect);
+  useEffect(() => {
+    setChosen(probs.chosenFlight);
+  }, [probs]);
   useEffect(async () => {
     //console.log("details are ", details);
     //console.log("probid is ", probsId.id);
-
     setTimeout(() => {
       setLoading(false);
     }, 1000);
+
+    //console.log("flightComponentprobs", chosen);
     //console.log(details.departure.airport);
     //console.log(details);
   }, []);
+
+  //console.log("chosen", chosen, probs.chosenFlight);
+
   if (loading) {
     return (
       <>
@@ -77,6 +56,14 @@ export default function FlightComponent(probs) {
       </>
     );
   } else {
+    // const economy=details.economyCabin;
+    // const business=details.businessCabin;
+    // const first=details.firstCabin;
+    // const airplane =details.airplaneModelID;
+    // const totalNumber = +JSON.parse(localStorage.getItem("searchResultData")).adultNumber + +JSON.parse(localStorage.getItem("searchResultData")).childNumber;
+    // if(!(airplane.economyRows * airplane.economyColumns - economy.takenSeats.length < totalNumber
+    //   && airplane.businessRows * airplane.businessColumns - business.takenSeats.length < totalNumber
+    //   && airplane.firstClassRows * airplane.firstClassColumns - first.takenSeats.length < totalNumber)){
     return (
       <>
         {/* <link
@@ -85,8 +72,25 @@ export default function FlightComponent(probs) {
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
           crossOrigin="anonymous"
         ></link> */}
+
         <div>
-          <div className="shadow p-3 m-3 bg-white rounded flex-Container-Row">
+          <div className="shadow p-3 m-3 bg-white rounded flex-Container-Row FlightComponent">
+            {chosen ? (
+              <div
+                style={{
+                  marginLeft: "-62px",
+                  marginRight: "31px",
+                  marginBottom: "-15px",
+                  marginTop: "-15px",
+                  minWidth: "30px",
+                  minHeight: "210px",
+                  height: "100%",
+                  backgroundColor: "#2e7d32",
+                }}
+              ></div>
+            ) : (
+              <></>
+            )}
             {/**airline +airplane model+flightNumber */}
             <FlightAirplane details={details} />
             {/** departure arrival airport terminal date  */}
@@ -136,6 +140,13 @@ export default function FlightComponent(probs) {
                 economy={details.economyCabin}
                 business={details.businessCabin}
                 first={details.firstCabin}
+                airplane={details.airplaneModelID}
+                totalNumber={
+                  +JSON.parse(localStorage.getItem("searchResultData"))
+                    .adultNumber +
+                  +JSON.parse(localStorage.getItem("searchResultData"))
+                    .childNumber
+                }
                 onSelect={onSelect}
               />
             </div>
@@ -143,6 +154,9 @@ export default function FlightComponent(probs) {
         </div>
       </>
     );
+    //}
+    //else
+    //return(<div></div>);
   }
 }
 
@@ -169,3 +183,29 @@ function getDurationSplit(duration) {
     return item;
   });
 }
+const calculateDuration = (details) => {
+  //console.log("details", details.arrival.time);
+  const diff =
+    new Date(details.arrival.time) - new Date(details.departure.time);
+  var unitmapping = {
+    days: 24 * 60 * 60 * 1000,
+    hours: 60 * 60 * 1000,
+    minutes: 60 * 1000,
+    seconds: 1000,
+  };
+  const days =
+    Math.floor(diff / unitmapping.days) == 0
+      ? ""
+      : Math.floor(diff / unitmapping.days) + " days ";
+  const hours =
+    Math.floor((diff % unitmapping.days) / unitmapping.hours) == 0
+      ? ""
+      : Math.floor((diff % unitmapping.days) / unitmapping.hours) + " hours ";
+  const minutes =
+    Math.floor((diff % unitmapping.hours) / unitmapping.minutes) == 0
+      ? ""
+      : Math.floor((diff % unitmapping.hours) / unitmapping.minutes) +
+        " minutes";
+  return days + hours + minutes;
+};
+export { FlightComponent, calculateDuration };

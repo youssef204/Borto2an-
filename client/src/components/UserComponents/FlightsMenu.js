@@ -1,31 +1,62 @@
 import React, { useState, useEffect } from "react";
-import FlightComponent from "./FlightComponents/FlightComponent";
+import { FlightComponent } from "./FlightComponents/FlightComponent";
 
 import "./FlightMenu.css";
 
-export default function FlightsMenu(probs) {
-  const [flightArr, setflightArr] = useState(probs.flights);
-  const [flightChosen, setFlightChosen] = useState(undefined);
-  const [from, setFrom] = useState(probs.from);
-  const [to, setTo] = useState(probs.to);
+export default function FlightsMenu({ flights, chosen, from, to, onSelect }) {
+  //console.log({ flights });
+  const [flightArr, setflightArr] = useState(flights);
+  const [flightChosen, setFlightChosen] = useState(chosen);
+  const [fromTitle, setTitle] = useState(from);
+  const [toTitle, setToTitle] = useState(to);
 
-  //console.log(probs);
-
-  const onSelect = (flight, cabin, name, duration) => {
-    setFlightChosen({ flight, cabin, name, duration });
-    //console.log(flightChosen);
+  const onSelectCabin = (flight, cabin, name, duration) => {
+    onSelect({ flight, cabin, name, duration });
   };
+  //console.log("state", { flights, chosen, to, from });
+  const updateContent = () => {
+    return flightArr?.map((f) => {
+      if (flightChosen && flightChosen.flightNumber === f.flightNumber) {
+        //console.log("found");
+        return (
+          <FlightComponent
+            flight={f}
+            onSelect={onSelectCabin}
+            chosenFlight={true}
+          />
+        );
+      } else {
+        return (
+          <FlightComponent
+            flight={f}
+            onSelect={onSelectCabin}
+            chosenFlight={false}
+          />
+        );
+      }
+    });
+  };
+  let content = updateContent();
+
+  // console.log("probs", probs);
+  //console.log("flight in menu ", flightChosen, flightChosen?.flightNumber);
 
   useEffect(() => {
-    probs.onSelect(flightChosen);
-  }, [flightChosen]);
+    setflightArr(flights);
+    setFlightChosen(chosen);
+    setTitle(from);
+    setToTitle(to);
+    //console.log("flightChosen in menu", flightChosen);
+    content = updateContent();
+  }, [flights, chosen, from, to]);
+
   // if (flightArr.length === 0)
   //   return (
   //     <>
   //       <div>No Flights</div>
   //     </>
   //   );
-  console.log("flightArr", flightArr);
+  //console.log("flightArr", flightArr);
 
   return (
     <>
@@ -38,11 +69,11 @@ export default function FlightsMenu(probs) {
       <div className="list ">
         <div className="settings d-flex flex-row">
           <div className="text-holder">
-            Flights from {from} to {to}
+            Flights from {fromTitle} to {toTitle}
           </div>
         </div>
         <div className="flightMenuContainer p-auto">
-          {flightArr.length === 0 && (
+          {flightArr && flightArr.length === 0 && (
             <label
               style={{
                 margin: "2% 37%",
@@ -53,10 +84,7 @@ export default function FlightsMenu(probs) {
               No flights are found
             </label>
           )}
-          {flightArr.map((f) => {
-            //console.log(f._id);
-            return <FlightComponent flight={f} onSelect={onSelect} />;
-          })}
+          {content}
         </div>
       </div>
     </>
