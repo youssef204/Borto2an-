@@ -12,6 +12,7 @@ import Button from "./Button";
 import Calendar from "./Calendar";
 import Box from "@mui/material/Box";
 import { TextField } from "@mui/material";
+import Footer from './Footer/Footer'
 
 class SearchFlights extends React.Component {
   constructor() {
@@ -484,6 +485,7 @@ class SearchFlights extends React.Component {
       );
     } else {
       return (
+        <>
         <div
           style={{
             display: "flex",
@@ -630,6 +632,8 @@ class SearchFlights extends React.Component {
             </Stack>
           </Box>
         </div>
+        <Footer/>
+        </>
       );
     }
   }
