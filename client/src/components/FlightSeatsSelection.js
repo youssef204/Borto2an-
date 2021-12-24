@@ -4,14 +4,17 @@ import Button from "./Button.js";
 import "./FlightSeatsSelection.css";
 
 class FlightSeatsSelection extends React.Component {
+
+  
   state = {
     departureSeats: [],
     arrivalSeats: [],
   };
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     
-    const selected = JSON.parse(localStorage.getItem("flightSelectionData"))
+    const selected = JSON.parse(localStorage.getItem("flightSelectionData"));
+    if(selected){
     this.state.maxSelectableSeats1 =  +selected.adultNumber + +selected.childNumber;
     this.state.maxSelectableSeats2 =  this.state.maxSelectableSeats1;
     if(localStorage.getItem("EditedReservation")){
@@ -29,7 +32,7 @@ class FlightSeatsSelection extends React.Component {
 
       
       
-    }
+    }}
   }
 
   updateSeats = (key, seats) => {
@@ -71,6 +74,12 @@ class FlightSeatsSelection extends React.Component {
     }
   }
   render() {
+
+    if(!localStorage.getItem("flightSelectionData")){
+      this.props.history.push('/flight_selection');
+      return <></>;
+    }
+
     const { departureSeats, arrivalSeats } = this.state;
     const allChosen = this.isAllChosen();
     const departure = {

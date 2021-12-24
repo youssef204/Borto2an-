@@ -170,7 +170,7 @@ async function sendReservationUpdateEmail(newReservation, oldReservation){
     emailBody = 'Your reservation was successfully updated. There is no price difference.\n\n'
 
   emailBody += "New Reservation " + await getEmailTextOfReservation(newReservation)+ "\n" 
-  + "Old Reservation"+ await getEmailTextOfReservation(oldReservation)+ "\n\n";
+  + "Old Reservation "+ await getEmailTextOfReservation(oldReservation)+ "\n\n";
   + "Thank you for choosing Borto2an!!";
 
   await sendEmail(newReservation.userId, 'Reservation Updated', emailBody);

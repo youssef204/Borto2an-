@@ -36,13 +36,6 @@ class ReservationSummary extends React.Component {
     }
     }
 
-  render(){
-    if(!localStorage.getItem("reservationSummary")){
-        return this.props.history.push("/");
-    }
-      const Reservation = this.state.Reservation;
-  }
-
 postReservation = () => {
   if (JSON.parse(localStorage.getItem("user"))) {
     const reservationSummary = JSON.parse(
@@ -91,6 +84,10 @@ postReservation = () => {
   } else window.location.href = "/sign_in";
 }
 componentDidMount(){
+  if(!localStorage.getItem("reservationSummary")||!localStorage.getItem("flightSelectionData")||!localStorage.getItem("selectedSeats")){
+    this.props.history.push("/");
+    return;
+  }
   this.postReservation();
   // console.log(JSON.parse(localStorage.getItem('reservationSummary')));
   // console.log(JSON.parse(localStorage.getItem('EditedReservation')));
@@ -115,6 +112,12 @@ onShowReservations=()=>{
 }
 
   render(){
+    if(!localStorage.getItem("reservationSummary")||!localStorage.getItem("flightSelectionData")||!localStorage.getItem("selectedSeats")){
+      this.props.history.push("/");
+      return <></> ;
+    }
+
+
       const Reservation = this.state.flightsWithReservation;
     return (
       <div

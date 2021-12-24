@@ -28,8 +28,10 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 }));
 
 class TripSummary extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    if(!localStorage.getItem("flightSelectionData")||!localStorage.getItem("selectedSeats"))
+      return;
     this.state = {
       open: false,
     };
@@ -54,6 +56,9 @@ class TripSummary extends React.Component {
   }
 
   componentDidMount() {
+    if(!localStorage.getItem("flightSelectionData")||!localStorage.getItem("selectedSeats"))
+      return;
+
     if(JSON.parse(localStorage.getItem("EditedReservation")))
     //if(this.state.Reservation !== null)
     {
@@ -183,6 +188,12 @@ class TripSummary extends React.Component {
   }
 
   render() {
+    if(!localStorage.getItem("flightSelectionData")||!localStorage.getItem("selectedSeats")){
+      this.props.history.push('/select_seats');
+      return<></>;
+    }
+
+
     const handleClickOpen = () => {
       this.setState({ open: true });
     };
