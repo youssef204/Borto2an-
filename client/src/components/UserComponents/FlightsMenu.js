@@ -68,11 +68,13 @@ export default function FlightsMenu({ flights, chosen, from, to, onSelect }) {
         crossOrigin="anonymous"
       ></link> */}
       <div className="list ">
-        <div className="settings d-flex flex-row">
-          <div className="text-holder">
+        <div className="settings">
+          <div class="flightTitleText">
             Flights from {fromTitle} to {toTitle}
           </div>
+          <img class="flight-bg" src="departure.jpg" />
         </div>
+
         <div className="flightMenuContainer p-auto">
           {flightArr && flightArr.length === 0 && (
             <label
