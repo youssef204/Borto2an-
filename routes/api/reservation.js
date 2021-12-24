@@ -3,7 +3,7 @@ const express = require("express");
 const reservation_router = express.Router();
 const Reservation = require("../../models/Reservation");
 const authenticate = require("./Authentication");
-
+const Flight = require("../../models/Flight");
 
 //get reservations by access token
 reservation_router.get("/", authenticate , function (req, res, next) {
@@ -46,33 +46,17 @@ const sendEmail = async (userId, subject, body)=>{
 }
 
 reservation_router.get("/sendItinerary/:id", authenticate , async (req, res) => {
+  try{
   const reservation = await Reservation.findById(req.params.id);
+  const emailBody = 'This is an itinerary of your reservation sent upon your request.\n\n'+
+  (await getEmailTextOfReservation(reservation))
+  + "Thank you for choosing Borto2an!!";
 
+  await sendEmail(reservation.userId, 'Reservation Itinerary',emailBody);
   res.send(reservation);
-
-  const Flight = require("../../models/Flight");
-  const departureFlight = await Flight.findById(reservation.departureFlight.flightId);
-  const returnFlight = await Flight.findById(reservation.returnFlight.flightId);
-
-  const emailBody = 'This is an itinerary of your reservation sent upon your request.\nThe reservation price is '+reservation.price+'L.E.\n\n'+
-      "Departure Flight Details:\n"+
-      "Flight Number: "+departureFlight.flightNumber+"\n"+
-      "From: "+departureFlight.departure.airport+"\n"+
-      "Airline: "+departureFlight.airline+'\n'+
-      "Selected Seats: "+reservation.departureFlight.seats+"\n"+
-      "Cabin: "+reservation.departureFlight.cabin+"\n\n"+
-
-      "Return Flight Details:\n"+
-      "Flight Number: "+returnFlight.flightNumber+"\n"+
-      "To: "+returnFlight.departure.airport+"\n"+
-      "Airline: "+returnFlight.airline+'\n'+
-      "Selected Seats: "+reservation.returnFlight.seats+"\n"+
-      "Cabin: "+reservation.returnFlight.cabin+"\n\n"+
-      reservation.returnFlight.noAdults+" Adults & "+reservation.returnFlight.noChildren+" Children on the ticket"+"\n \n"+
-
-      "Thank you for choosing Borto2an!!";
-
-  await sendEmail(reservation.userId, 'Reservation Itinerary',emailBody );
+  }catch(e){
+    res.status(400).send(e);
+  }
 });
 
 deleteSeats = (flight, seats, cabinName) =>{
@@ -82,20 +66,9 @@ deleteSeats = (flight, seats, cabinName) =>{
 
 reservation_router.delete("/:id", authenticate , async (req, res) => {
   try {
-    const reservation = await Reservation.findByIdAndDelete(req.params.id);
+    const reservation = await deleteReservation(req.params.id);
     if (reservation){
       res.send(reservation);
-
-      const Flight = require("../../models/Flight");
-      const departureFlight = await Flight.findById(reservation.departureFlight.flightId);
-      const returnFlight = await Flight.findById(reservation.returnFlight.flightId);
-
-      deleteSeats(departureFlight, reservation.departureFlight.seats, reservation.departureFlight.cabin);
-      deleteSeats(returnFlight, reservation.returnFlight.seats, reservation.returnFlight.cabin);
-
-      await departureFlight.save();
-      await returnFlight.save(); 
-
       const emailBody = 'Your reservation was successfully cancelled and '+reservation.price+' L.E. amount was sent to your credit card!!';
 
       await sendEmail(reservation.userId, 'Cancelled reservation', emailBody);
@@ -107,6 +80,21 @@ reservation_router.delete("/:id", authenticate , async (req, res) => {
     res.status(404).json({ msg: `${req.params.id} is not a correct id` });
   }
 });
+
+async function deleteReservation(reservationID){
+  const reservation = await Reservation.findByIdAndDelete(reservationID);
+  if (reservation){
+    const departureFlight = await Flight.findById(reservation.departureFlight.flightId);
+    const returnFlight = await Flight.findById(reservation.returnFlight.flightId);
+
+    deleteSeats(departureFlight, reservation.departureFlight.seats, reservation.departureFlight.cabin);
+    deleteSeats(returnFlight, reservation.returnFlight.seats, reservation.returnFlight.cabin);
+
+    await departureFlight.save();
+    await returnFlight.save();
+  }
+  return reservation;
+}
 
 validateReservationFlights = (flight, seats, cabinName) =>{
   if(!flight || !seats || !cabinName)
@@ -123,16 +111,27 @@ validateReservationFlights = (flight, seats, cabinName) =>{
 reservation_router.post("/", authenticate , async (req, res) => {
   try{
     const reservation = req.body;
-    if(!reservation|| ! ('departureFlight' in reservation) || ! ('returnFlight' in reservation) )
-      throw "reservation not found in the request body";
+    const {createdReservation} = await createReservation(reservation);
 
+      const emailBody = 'Your reservation was successfully created and '+reservation.price+' L.E. was deducted from your credit card!!\n\n'+ (await getEmailTextOfReservation(reservation))
+      + "Thank you for choosing Borto2an!!";
+
+      await sendEmail(reservation.userId, 'Created Reservation', emailBody);
+      res.send(createdReservation);
+  }
+  catch(e){
+    res.status(400).send(e);
+  }
+});
+
+async function createReservation(reservation){
+  if(!reservation|| ! ('departureFlight' in reservation) || ! ('returnFlight' in reservation) )
+      throw "reservation not found in the request body";
     
     const User = require("./../../models/User");
     const user = await User.findById(reservation.userId);
     if(!user)
       throw "no such user exists";
-
-    const Flight = require("../../models/Flight");
 
     const departureFlight = await Flight.findById(reservation.departureFlight.flightId);
     const returnFlight = await Flight.findById(reservation.returnFlight.flightId);
@@ -142,11 +141,47 @@ reservation_router.post("/", authenticate , async (req, res) => {
 
     await departureFlight.save();
     await returnFlight.save();
+    const createdReservation = await Reservation.create(reservation);
+    return {createdReservation, departureFlight, returnFlight};
+}
 
-    Reservation.create(reservation)
-    .then(async (result) => {res.send(result);
-      const emailBody = 'Your reservation was successfully created and '+reservation.price+' L.E. amount was deducted from your credit card!!\n\n'+
-      "Departure Flight Details:\n"+
+
+reservation_router.put("/", authenticate , async (req, res) => {
+  try{
+    const {newReservation, oldReservation} = req.body;
+    await deleteReservation(oldReservation._id);
+    await createReservation(newReservation);
+    await sendReservationUpdateEmail(newReservation, oldReservation);
+    res.json({message:"reservation updated successfully"});
+  }
+  catch(e){
+    res.status(400).send(e);
+  }
+});
+
+async function sendReservationUpdateEmail(newReservation, oldReservation){
+  const priceDiff = newReservation.price - oldReservation.price;
+  let emailBody;
+  if(priceDiff > 0)
+    emailBody = 'Your reservation was successfully updated and '+ priceDiff +' L.E. was deducted from your credit card!!\n\n';
+  else if(priceDiff < 0)
+    emailBody = 'Your reservation was successfully updated and '+ (-priceDiff) +' L.E. was refunded to your credit card!!\n\n';
+  else
+    emailBody = 'Your reservation was successfully updated. There is no price difference.\n\n'
+
+  emailBody += "New Reservation " + await getEmailTextOfReservation(newReservation)+ "\n" 
+  + "Old Reservation "+ await getEmailTextOfReservation(oldReservation)+ "\n\n";
+  + "Thank you for choosing Borto2an!!";
+
+  await sendEmail(newReservation.userId, 'Reservation Updated', emailBody);
+}
+
+async function getEmailTextOfReservation(reservation){
+  const departureFlight = await Flight.findById(reservation.departureFlight.flightId);
+  const returnFlight = await Flight.findById(reservation.returnFlight.flightId);
+
+  return ("Total Price is "+reservation.price+" L.E.\n" +
+    "Departure Flight Details:\n"+
       "Flight Number: "+departureFlight.flightNumber+"\n"+
       "From: "+departureFlight.departure.airport+"\n"+
       "Airline: "+departureFlight.airline+'\n'+
@@ -159,19 +194,6 @@ reservation_router.post("/", authenticate , async (req, res) => {
       "Airline: "+returnFlight.airline+'\n'+
       "Selected Seats: "+reservation.returnFlight.seats+"\n"+
       "Cabin: "+reservation.returnFlight.cabin+"\n\n"+
-      reservation.returnFlight.noAdults+" Adults & "+reservation.returnFlight.noChildren+" Children on the ticket"+"\n \n"+
-
-      "Thank you for choosing Borto2an!!";
-
-
-      await sendEmail(reservation.userId, 'Created Reservation', emailBody);
-
-    })
-    .catch(err => {res.status(400).send(err)});
-  }
-  catch(e){
-    res.status(400).send(e);
-  }
-});
-
+      reservation.returnFlight.noAdults+" Adults & "+reservation.returnFlight.noChildren+" Children on the ticket"+"\n \n");
+}
 module.exports = reservation_router;
