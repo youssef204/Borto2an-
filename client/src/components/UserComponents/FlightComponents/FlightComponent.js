@@ -7,6 +7,7 @@ import "./FlightComponentCSS.css";
 import Dep_ArrComponent from "./Dep_ArrComponent";
 import FlightCabin from "./FlightCabin";
 import FlightAirplane from "./FlightAirplane";
+import FlightComponentSelectedRibbon from "./FlightComponentSelectedRibbon";
 import { getHours, getMinutes } from "@mui/lab/ClockPicker/shared";
 import { textAlign } from "@mui/system";
 
@@ -16,6 +17,7 @@ function FlightComponent(probs) {
   const [loading, setLoading] = useState(true);
   const [duration, setDuration] = useState(calculateDuration(details));
   const [chosen, setChosen] = useState(probs.chosenFlight);
+  const [chosenCabin, setChosenCabin] = useState(probs.chosenCabin);
   //console.log("duration", duration);
   const searchResultData = JSON.parse(localStorage.getItem("searchResultData"));
   const onSelect = (cabin, name) => {
@@ -23,6 +25,8 @@ function FlightComponent(probs) {
   };
   useEffect(() => {
     setChosen(probs.chosenFlight);
+    setChosenCabin(probs.chosenCabin);
+    //console.log("flightComponentprobs", chosen, chosenCabin);
   }, [probs]);
   useEffect(async () => {
     //console.log("details are ", details);
@@ -31,7 +35,6 @@ function FlightComponent(probs) {
       setLoading(false);
     }, 1000);
 
-    //console.log("flightComponentprobs", chosen);
     //console.log(details.departure.airport);
     //console.log(details);
   }, []);
@@ -78,20 +81,9 @@ function FlightComponent(probs) {
         <div>
           <div className="shadow p-3 m-3 bg-white rounded flex-Container-Row FlightComponent">
             {chosen ? (
-              <div
-                style={{
-                  marginLeft: "-62px",
-                  marginRight: "31px",
-                  marginBottom: "-15px",
-                  marginTop: "-15px",
-                  minWidth: "30px",
-                  minHeight: "210px",
-                  height: "100%",
-                  backgroundColor: "#2e7d32",
-                }}
-              ></div>
+              <FlightComponentSelectedRibbon chosen={true} />
             ) : (
-              <></>
+              <FlightComponentSelectedRibbon chosen={false} />
             )}
             {/**airline +airplane model+flightNumber */}
             <FlightAirplane details={details} />
@@ -150,6 +142,7 @@ function FlightComponent(probs) {
                     .childNumber
                 }
                 onSelect={onSelect}
+                chosenCabin={chosenCabin}
               />
             </div>
           </div>
