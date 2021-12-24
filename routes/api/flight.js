@@ -7,6 +7,8 @@ const authenticate = require("./Authentication");
 
 //update flight
 function storeTimeAsIs(dataTmp) {
+  if(!dataTmp.departure.time)
+    return;
   if("departure" in dataTmp)
     if('time' in dataTmp.departure && dataTmp.departure.time.charAt(dataTmp.departure.time.length-1)!='Z')
       dataTmp.departure.time += "Z";
