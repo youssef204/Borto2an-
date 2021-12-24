@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ChosenFLightsDetails from "./ChosenFLightsDetails";
 import FlightsMenu from "./FlightsMenu";
 import { calculateDuration } from "./FlightComponents/FlightComponent";
+import { useHistory } from "react-router-dom";
 
 function getFromLocalStorage(itemName) {
   const searchResults = JSON.parse(localStorage.getItem("searchResultData"));
@@ -25,6 +26,14 @@ function reform(reservedFlight, model) {
 }
 
 export default function FlightSelection() {
+  const history = useHistory();
+
+  if(!JSON.parse(localStorage.getItem("searchResultData"))){
+    history.push('/');
+    return <></>;
+  }
+
+
   const [firstFlightArr, setFirstFlightArr] = useState(
     getFromLocalStorage("sentData")
   );
@@ -78,6 +87,9 @@ export default function FlightSelection() {
     localStorage.removeItem("selectedSeats");
     window.dispatchEvent(new Event("storage"));
   }, [firstFlight, secondFlight]);
+
+  
+
   return (
     <div style={{ paddingBottom: "150px" }}>
       {/*JSON.stringify(firstFlightArr)*/}

@@ -17,6 +17,7 @@ function FlightComponent(probs) {
   const [duration, setDuration] = useState(calculateDuration(details));
   const [chosen, setChosen] = useState(probs.chosenFlight);
   //console.log("duration", duration);
+  const searchResultData = JSON.parse(localStorage.getItem("searchResultData"));
   const onSelect = (cabin, name) => {
     probs.onSelect(details, cabin, name, duration);
   };
@@ -65,6 +66,7 @@ function FlightComponent(probs) {
     //   && airplane.businessRows * airplane.businessColumns - business.takenSeats.length < totalNumber
     //   && airplane.firstClassRows * airplane.firstClassColumns - first.takenSeats.length < totalNumber)){
     return (
+      !searchResultData?<></>:
       <>
         {/* <link
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -142,9 +144,9 @@ function FlightComponent(probs) {
                 first={details.firstCabin}
                 airplane={details.airplaneModelID}
                 totalNumber={
-                  +JSON.parse(localStorage.getItem("searchResultData"))
+                  +searchResultData
                     .adultNumber +
-                  +JSON.parse(localStorage.getItem("searchResultData"))
+                  +searchResultData
                     .childNumber
                 }
                 onSelect={onSelect}
