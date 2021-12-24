@@ -1,31 +1,68 @@
 import React, { useState, useEffect } from "react";
-import FlightComponent from "./FlightComponents/FlightComponent";
+import { FlightComponent } from "./FlightComponents/FlightComponent";
 
 import "./FlightMenu.css";
 
 export default function FlightsMenu(probs) {
   const [flightArr, setflightArr] = useState(probs.flights);
-  const [flightChosen, setFlightChosen] = useState(undefined);
+  const [flightChosen, setFlightChosen] = useState(probs.chosen);
   const [from, setFrom] = useState(probs.from);
   const [to, setTo] = useState(probs.to);
 
-  //console.log(probs);
-
   const onSelect = (flight, cabin, name, duration) => {
-    setFlightChosen({ flight, cabin, name, duration });
-    //console.log(flightChosen);
+    probs.onSelect({ flight, cabin, name, duration });
   };
 
+  let content = flightArr.map((f) => {
+    // console.log("chosen in menu", flightChosen);
+    // console.log("probs.chosen", probs.chosen);
+    if (flightChosen && flightChosen.flightNumber === f.flightNumber) {
+      return (
+        <FlightComponent flight={f} onSelect={onSelect} chosenFlight={true} />
+      );
+    } else {
+      return (
+        <FlightComponent flight={f} onSelect={onSelect} chosenFlight={false} />
+      );
+    }
+  });
+
+  // console.log("probs", probs);
+  console.log("flight in menu ", flightChosen, flightChosen?.flightNumber);
+
   useEffect(() => {
-    probs.onSelect(flightChosen);
+    setFlightChosen(probs.chosen);
+  }, [probs]);
+  useEffect(() => {
+    content = flightArr.map((f) => {
+      console.log(
+        "look",
+        flightChosen && flightChosen.flightNumber === f.flightNumber
+      );
+      if (flightChosen && flightChosen.flightNumber === f.flightNumber) {
+        console.log("hereeeee");
+        return (
+          <FlightComponent flight={f} onSelect={onSelect} chosenFlight={true} />
+        );
+      } else {
+        return (
+          <FlightComponent
+            flight={f}
+            onSelect={onSelect}
+            chosenFlight={false}
+          />
+        );
+      }
+    });
   }, [flightChosen]);
+
   // if (flightArr.length === 0)
   //   return (
   //     <>
   //       <div>No Flights</div>
   //     </>
   //   );
-  console.log("flightArr", flightArr);
+  //console.log("flightArr", flightArr);
 
   return (
     <>
@@ -53,10 +90,7 @@ export default function FlightsMenu(probs) {
               No flights are found
             </label>
           )}
-          {flightArr.map((f) => {
-            //console.log(f._id);
-            return <FlightComponent flight={f} onSelect={onSelect} />;
-          })}
+          {content}
         </div>
       </div>
     </>
