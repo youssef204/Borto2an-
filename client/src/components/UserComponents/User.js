@@ -3,8 +3,7 @@ import { Component } from 'react';
 import axios from 'axios';
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button" 
-import Avatar from '@mui/material/Avatar';
-import CssBaseline from '@mui/material/CssBaseline';
+// import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -13,8 +12,8 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-const theme = createTheme();
+// import { createTheme, ThemeProvider } from '@mui/material/styles';
+// const theme = createTheme();
 
 const ImgUpload =({
   onChange,
@@ -131,6 +130,16 @@ class User extends Component {
     if(this.state.user)
     return (
 <>
+<div className="list " style={{
+  paddingBottom : "100px",
+  width : "50%",
+  marginTop : "50px"
+}}>
+        <div className="settings" style={{
+          justifyContent : "center",
+          alignContent : "center",
+          alignItems : "center"
+        }}>
 <div
           className="TripTitleDiv"
           style={{
@@ -140,12 +149,45 @@ class User extends Component {
           }}
         >
             <div class="TripTitleText">Personal Information</div>
-          <img class="Trip-bg" src="personal.jpg" />
-                
+          <img class="Trip-bg" src="personal.jpg" style = {{
+            left : "420px",
+            opacity : "0.7"
+          }} />
+                </div>
          
         </div>   
-          <br></br>
-    
+        <Box
+                        component="span"
+                        border={2}
+                        borderRadius={4}
+                        borderLeft={1}
+                        borderRight={1}
+                        borderColor="#a9a9a9"
+          sx={{
+            marginBottom:-10,
+            marginTop: -2,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+          style={{
+            backgroundColor: "rgba(255, 255, 255, 1)",
+          }}
+        >
+          <Stack direction="row">
+                    <input  type="image" src="update.png" border="Specify Image Border" style={{height:"60px",width:"65px" , position:"relative", marginTop:10,
+                    marginLeft : "600px",
+         background: "transparent",
+        border: "none"}} onClick={this.updateData}></input>
+                <Button
+              
+              variant="contained"
+              sx={{padding:"5px 5px", mt: 3, mb: 2  ,backgroundColor:"#ee0000"}}
+              onClick = {this.logout}
+            >
+              Logout
+            </Button>
+            </Stack>
           {(active != 'edit')?(
             <Edit onSubmit={this.handleSubmit}>
               <ImgUpload onChange={this.photoUpload} src={imagePreviewUrl}/>
@@ -157,23 +199,11 @@ class User extends Component {
               name={name} 
               status={status}/>)}
 
-      <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: -10,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'left',
-          }}
-        >
-          
-          <Box component="form" sx={{ mt: 3 }}>
+
+          <Box component="form" sx={{}}>
        
-          <input  type="image" src="update.png" border="Specify Image Border" style={{height:"60px",width:"65px" , position:"relative", top:10,
-        left: -220 ,  background: "transparent",
-        border: "none"}} onClick={this.updateData}></input>
+
    
             <Grid container spacing={2}>
               <Grid item xs={10} sm={6}>
@@ -259,15 +289,17 @@ class User extends Component {
             </Grid>
 
             <Grid>
-
-            <Button
-            
-              
+            <Stack style={{
+              display : "flex",
+              justifyContent : "center",
+              alignItems: "center"
+            }}>
+            <Button  
               variant="contained"
               inline = {true}  
-
+              style={{ alignSelf:"center" , justifyContent:"center"}}
               sx={{display:"inline-block"
-                ,padding:"5px 5px", mt: 3, mb: 2 ,backgroundColor:"#ee0000"}}
+                ,padding:"5px 5px", mt: 3, mb:1, mr:1 ,backgroundColor:"#ee0000"}}
               onClick = {this.changePassword}
             >
               Change Password
@@ -282,29 +314,18 @@ class User extends Component {
           variant="contained"
           inline = {true}  
           sx={{
-          padding:"5px 5px", mt: 3, mb: 2 ,backgroundColor:"#ee0000"}}
+          padding:"5px 5px", mt: 3, mb:1,backgroundColor:"#ee0000"}}
           onClick = {this.showReservations}
         >
           Show my reservations
         </Button>          
           }
+          </Stack>
         </Grid>
-
-        
-        <Button
-              
-              variant="contained"
-              sx={{padding:"5px 5px", mt: 3, mb: 2  ,backgroundColor:"#ee0000"}}
-              onClick = {this.logout}
-            >
-              Logout
-            </Button>
-          
           </Box>
-        </Box>
       </Container>
-    </ThemeProvider>
-  
+    </Box>
+  </div>
     </>
   );
     
