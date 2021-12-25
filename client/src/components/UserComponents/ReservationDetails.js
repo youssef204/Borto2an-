@@ -9,6 +9,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { Box } from "@mui/system";
 import { Stack } from "@mui/material";
 import ReservationCommon from "./ReservationCommon";
+import ReservationDetailsTable from "./ReservationDetailsTable";
 
 class ReservationDetails extends React.Component {
   constructor(props) {
@@ -134,7 +135,8 @@ class ReservationDetails extends React.Component {
       }
     };
     return (
-      <div>
+      <>
+      <ReservationDetailsTable Reservation={Reservation}></ReservationDetailsTable>
         <div
           style={{
             display: "flex",
@@ -172,6 +174,7 @@ class ReservationDetails extends React.Component {
 
             <hr />
             <ReservationCommon Reservation={Reservation}></ReservationCommon>
+            
             <div
             style={{
               display: "flex",
@@ -234,7 +237,7 @@ class ReservationDetails extends React.Component {
         </Dialog>
         <br />
         <br />
-      </div>
+      </>
     );
   }
 }
