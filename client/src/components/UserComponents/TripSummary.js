@@ -16,7 +16,7 @@ import "./TripSummaryCSS.css";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 10,
-  width: 140,
+  width: 110,
   borderRadius: 5,
   [`&.${linearProgressClasses.colorPrimary}`]: {
     backgroundColor:
@@ -255,14 +255,22 @@ class TripSummary extends React.Component {
               sx={{ p: 3 }}
               style={{
                 backgroundColor: "rgba(255, 255, 255, 0.4)",
+                height : "70%"
               }}
             >
-              <Stack spacing={0.5}>
+              <Stack direction="row" spacing={8}
+              style={{
+                justifyContent : "space-around"
+              }}>
+                <Stack style={{
+                justifyContent : "space-around",
+                marginLeft : "5px"
+              }}>
                 <img
                   src="takingOff2.png"
-                  width="30%"
-                  height="60%"
-                  style={{ alignSelf: "left", justifyContent: "left" }}
+                  width="100px"
+                  height="120px"
+                  // style={{ alignSelf: "left", justifyContent: "left" }}
                 />
                 <label
                   style={{
@@ -271,18 +279,29 @@ class TripSummary extends React.Component {
                     alignSelf: "center",
                   }}
                 >
-                  Departure Flight (
-                  {this.state.flight1.departure.time.substring(0, 10)})
+                  Departure Flight 
                 </label>
-                <br />
-                <div>
+                </Stack>
+                <Stack spacing={-8} style={{
+                justifyContent : "space-around",
+                marginBottom : "-39px"
+              }}>
+                <label
+                  style={{
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                    alignSelf: "center",
+                  }}
+                >
+                  
+                  {this.state.flight1.departure.time.substring(0, 10)}
+                </label>
                   <Stack
                     spacing={0.5}
                     direction="row"
                     style={{
                       justifyContent: "center",
                       alignItems: "center",
-                      margin: "2px",
                     }}
                   >
                     <label
@@ -305,23 +324,22 @@ class TripSummary extends React.Component {
                       {this.state.flight1.arrival.time.substring(11, 16)}
                     </label>
                   </Stack>
-                </div>
                 <label
                   style={{
-                    fontSize: "18px",
+                    fontSize: "16px",
                     fontWeight: "bold",
                     alignSelf: "center",
                   }}
                 >
                   Duration : {this.state.duration1}
                 </label>
+                </Stack>
               </Stack>
-              <br />
-              <br />
-              <Stack style={{ margin: "2px" }}>
+              <hr/>
+              <Stack>
                 <div
                   style={{
-                    display: "flex",
+                    display : "flex",
                     justifyContent: "space-around",
                   }}
                 >
@@ -340,6 +358,7 @@ class TripSummary extends React.Component {
                   style={{
                     display: "flex",
                     justifyContent: "space-around",
+                    spacing: "50px"
                   }}
                 >
                   <label style={{ fontSize: "14px" }}>
@@ -476,12 +495,19 @@ class TripSummary extends React.Component {
                 backgroundColor: "rgba(255, 255, 255, 0.4)",
               }}
             >
-              <Stack spacing={0.5}>
+                            <Stack direction="row" spacing={8}
+              style={{
+                justifyContent : "space-around"
+              }}>
+                <Stack style={{
+                justifyContent : "space-around",
+                marginLeft : "5px"
+              }}>
                 <img
                   src="takingOff2.png"
-                  width="30%"
-                  height="60%"
-                  style={{ alignSelf: "left", justifyContent: "left" }}
+                  width="100px"
+                  height="120px"
+                  // style={{ alignSelf: "left", justifyContent: "left" }}
                 />
                 <label
                   style={{
@@ -490,18 +516,29 @@ class TripSummary extends React.Component {
                     alignSelf: "center",
                   }}
                 >
-                  Return Flight (
-                  {this.state.flight2.departure.time.substring(0, 10)})
+                  Return Flight 
                 </label>
-                <br />
-                <div>
+                </Stack>
+                <Stack spacing={-8} style={{
+                justifyContent : "space-around",
+                marginBottom : "-39px"
+              }}>
+                <label
+                  style={{
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                    alignSelf: "center",
+                  }}
+                >
+                  
+                  {this.state.flight2.departure.time.substring(0, 10)}
+                </label>
                   <Stack
                     spacing={0.5}
                     direction="row"
                     style={{
                       justifyContent: "center",
                       alignItems: "center",
-                      margin: "2px",
                     }}
                   >
                     <label
@@ -524,19 +561,18 @@ class TripSummary extends React.Component {
                       {this.state.flight2.arrival.time.substring(11, 16)}
                     </label>
                   </Stack>
-                </div>
                 <label
                   style={{
-                    fontSize: "18px",
+                    fontSize: "16px",
                     fontWeight: "bold",
                     alignSelf: "center",
                   }}
                 >
                   Duration : {this.state.duration2}
                 </label>
+                </Stack>
               </Stack>
-              <br />
-              <br />
+              <hr/>
               <Stack style={{ margin: "2px" }}>
                 <div
                   style={{
@@ -690,7 +726,7 @@ class TripSummary extends React.Component {
         <div
           style={{
             width: "100%",
-            height: "85px",
+            height: "86px",
             backgroundColor: "rgba(20, 20, 20, 0.9)",
             marginBottom: "-30px",
           }}
