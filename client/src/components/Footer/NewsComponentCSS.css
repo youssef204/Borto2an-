@@ -1,14 +1,20 @@
 .NewsPart {
-  margin-top: 20px;
+  margin-top: 50px;
+  padding-top: 50px;
   width: 100%;
   min-height: 600px;
   /* background-color: rgba(0, 0, 0, 0.2); */
   color: red;
-  border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+  border-top: 3px solid rgba(0, 0, 0, 0.2);
 }
-.NewsTitle {
-  margin-right: 1050px;
-  padding-top: 2%;
+.NewsPart > label {
+  width: 25%;
+  position: absolute;
   color: #ff416c;
   font: 50px Montserrat;
+  transform: translate(-700px, -90px);
+  background-color: #fff;
+}
+::-webkit-scrollbar {
+  display: none;
 }
