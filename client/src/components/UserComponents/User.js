@@ -2,12 +2,60 @@ import React from 'react'
 import { Component } from 'react';
 import axios from 'axios';
 import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button" 
+import Avatar from '@mui/material/Avatar';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+const theme = createTheme();
+
+const ImgUpload =({
+  onChange,
+  src
+})=>
+  <label htmlFor="photo-upload" className="custom-file-upload fas">
+      <img for="photo-upload" src={src} style={{width:"auto",height:"150px" ,borderRadius: "50%"}}/>
+    <input id="photo-upload" type="file" onChange={onChange}/>  
+  </label>
+const Profile =({
+  onSubmit,
+  src,
+})=>
+    <form onSubmit={onSubmit} style={{marginBottom:"15px"}}>
+          <img for="photo-upload" src={src} style={{width:"auto",height:"150px" ,borderRadius: "50%" , borderColor:"rgb(0,0,0)"}}/>
+          <input  type="image" src="edit.png" border="Specify Image Border" style={{height:"60px",width:"65px" , position:"relative", top:-150,
+        right: -100 ,  background: "transparent",
+        border: "none"}} onClick={onSubmit}></input>
+    </form>
+     
+       
+const Edit =({
+  onSubmit,
+  children,
+})=>
+    <form onSubmit={onSubmit} style={{marginBottom:"15px"}}>
+        {children}
+      <Button type="submit" variant="contained"
+              sx={{ mt: 3, mb: 2 ,backgroundColor:"#ee0000"}}>Change your profile picture </Button>
+    </form>
 
 class User extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: {}
+          file: '',
+      imagePreviewUrl: localStorage.getItem("profilepicUrl"),
+      name:'',
+      status:'',
+      active: 'edit',
+      user: {}
         }
     }
 
@@ -50,140 +98,216 @@ class User extends Component {
         this.props.history.push({pathname:'/change_password',state:this.state.user});
     }
 
+    photoUpload = e =>{
+      e.preventDefault();
+      const reader = new FileReader();
+      const file = e.target.files[0];
+      reader.onloadend = () => {
+        this.setState({
+          file: file,
+          imagePreviewUrl: reader.result
+        });
+        localStorage.setItem("profilepicUrl",reader.result);
+      }
+      reader.readAsDataURL(file);
+    }
+
+    handleSubmit= e =>{
+      e.preventDefault();
+      let activeP = this.state.active === 'edit' ? 'profile' : 'edit';
+      this.setState({
+        active: activeP,
+      })
+    }
   render() {
+    const {imagePreviewUrl, 
+      name, 
+      status, 
+      active} = this.state;
+
       if(!localStorage.getItem("user")){
           return this.props.history.push("/");
       }
     if(this.state.user)
     return (
-        <>
-        <br></br>
-        <div class="profile-container" >
-        <div class= "ProfileForm-container">
-          <h2 style={{
-              marginBottom : "20px",
-              marginTop: "20px"
-          }}>Personal Information </h2>
-          <br></br>
-          <Stack
-                 spacing={2}
-                 direction="row"
-                 style={{
-                     marginBottom:"8px"
-                 }}>
-                <div  style={{paddingLeft:"10px"}}>
-                User Name:
-                  <div>
-                <input  className="profile-input" type="text"  value={this.state.user.userName} name = "userName" onChange={this.onChange}  />
-                  </div>
-                </div> 
-                <div>
-                Email:
-                  <div>
-                <input type="email" className="profile-input"  value={this.state.user.email}  name = "email" onChange={this.onChange}/>
-                  </div>
-                </div>
-                <div>
-                Passport Number:
-                  <div>
-                <input  className="profile-input" type="text"  value={this.state.user.passportNumber} name = "passportNumber" onChange={this.onChange}  />
-                  </div>
-                </div>
-                </Stack>
-          <Stack
-           spacing={2}
-           direction="row"
-           style={{
-               marginBottom:"8px",
-               justifyContent : "space-around"
-           }}>
-               <div >
-          First Name:
-                <input className="profile-input"  type="text"  value={this.state.user.firstName}  name = "firstName" onChange={this.onChange} />
-                </div>
-               <div>
-            Last Name:
-                <input   className="profile-input" type="text"  value={this.state.user.lastName} name = "lastName" onChange={this.onChange} />
-<<<<<<< HEAD
+<>
+<div
+          className="TripTitleDiv"
+          style={{
+            height: "130px",
+            marginBottom: "-20px",
+            paddingBottom: "50px",
+          }}
+        >
+            <div class="TripTitleText">Personal Information</div>
+          <img class="Trip-bg" src="personal.jpg" />
                 
-                {this.state.user.isAdmin?<></>:
-                <>passport Number:
-
-                <input  className="profile-input" type="text"  value={this.state.user.passportNumber} name = "passportNumber" onChange={this.onChange}  />
-                </>
-                }
-                
-                Email:
-=======
-                </div>
-
-                </Stack>
->>>>>>> Sprint3Dev
-
-                <Stack
-                 spacing={2}
-                 direction="row">
-                <div style={{paddingLeft:"10px"}}>
-                Home Address:
-                  <div>
-                <input type="text" className="profile-input"  value={this.state.user.homeAddress}  name = "homeAddress" onChange={this.onChange}/>
-                  </div>
-                </div>
-                <div>
-                Mobile Number:
-                  <div>
-                <input  className="profile-input" type="text"  value={this.state.user.telephoneNumber} name = "telephoneNumber" onChange={this.onChange}  />
-                  </div>
-                </div>
-                <div>
-                Country Code:
-                  <div>
-                <input  className="profile-input" type="text"  value={this.state.user.countryCode} name = "countryCode" onChange={this.onChange}  />
-                  </div>
-                </div> 
-                </Stack>
-                <br></br>
-                <br></br>
-<<<<<<< HEAD
-
-         <div>
-          <button inline="true" onClick={this.logout}>Log out</button>
-          {this.state.user.isAdmin?<></>:
-          <button inline = "true" onClick={this.showReservations}>Show my reservations</button>}
-          <button inline = "true" onClick={this.updateData}>Update my data</button>
-=======
-        <Stack
-        spacing={27}
-        direction="row"
-        style={{
-            marginBottom : "10px"
-        }}>
-            <div>
-          <button style={{width:"150%" , marginLeft:"30px"}} inline="true" onClick={this.logout}>Log out</button>
->>>>>>> Sprint3Dev
-          </div>
-          <div>
-          <button style={{width:"100%" , marginLeft:"0px"}} inline = "true" onClick={this.showReservations}>Show my reservations</button>
-          </div>
-          </Stack>
-          <Stack
-        spacing={20}
-        direction="row">
-          <div >
-          <button style={{width:"115%" , marginLeft:"30px"}}  onClick={this.updateData}>Update my data</button>
-          </div>
-          <div>
-          <button  style={{width:"115%" , marginLeft:"0px"}} onClick={this.changePassword}>Change Password</button>
-          </div>
-          </Stack>
-
-          </div>
-          </div>
+         
+        </div>   
           <br></br>
-          </>
+    
+          {(active != 'edit')?(
+            <Edit onSubmit={this.handleSubmit}>
+              <ImgUpload onChange={this.photoUpload} src={imagePreviewUrl}/>
+            </Edit>
+          ):(
+            <Profile 
+              onSubmit={this.handleSubmit} 
+              src={imagePreviewUrl} 
+              name={name} 
+              status={status}/>)}
 
-    );
-    else return <p/>;
+      <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: -10,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'left',
+          }}
+        >
+          
+          <Box component="form" sx={{ mt: 3 }}>
+       
+          <input  type="image" src="update.png" border="Specify Image Border" style={{height:"60px",width:"65px" , position:"relative", top:10,
+        left: -220 ,  background: "transparent",
+        border: "none"}} onClick={this.updateData}></input>
+   
+            <Grid container spacing={2}>
+              <Grid item xs={10} sm={6}>
+                <TextField
+                type="text"  value={this.state.user.firstName} name = "firstName" onChange={this.onChange}
+                  fullWidth
+                  label="First Name"
+                  InputProps={{
+                    readOnly: true,
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  type="text"  value={this.state.user.lastName} name = "firstName" onChange={this.onChange}
+                  fullWidth
+                  label="Last Name"
+                  InputProps={{
+                    readOnly: true,
+                  }}
+                  
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  type="email"  value={this.state.user.email}  name = "email" onChange={this.onChange}
+                  fullWidth
+                  label="Email"
+                  InputProps={{
+                    readOnly: true,
+                  }}
+                  
+                />
+              </Grid>
+
+            {this.state.user.isAdmin?<></>:
+             <Grid item xs={12}>
+             <TextField
+               type="number"  value={this.state.user.passportNumber}  name = "passportNumber" onChange={this.onChange}
+               fullWidth
+               label="passportNumber"
+               InputProps={{
+                readOnly: true,
+              }}
+             />
+           </Grid>
+            
+            }
+
+            <Grid item xs={12}>
+             <TextField
+               type="text"  value={this.state.user.homeAddress}  name = "homeAddress" onChange={this.onChange}
+               fullWidth
+               label="Home Address"
+               InputProps={{
+                readOnly: true,
+              }}
+             />
+           </Grid>
+
+           <Grid item xs={12}>
+             <TextField
+               type="number"  value={this.state.user.telephoneNumber} name = "telephoneNumber" onChange={this.onChange} 
+               fullWidth
+               label="Mobile Number"
+               InputProps={{
+                readOnly: true,
+              }}
+             />
+           </Grid>
+
+           <Grid item xs={12}>
+             <TextField
+               type="number"  value={this.state.user.countryCode} name = "countryCode" onChange={this.onChange}
+               fullWidth
+               label="Country Code"
+               InputProps={{
+                readOnly: true,
+              }}
+             />
+           </Grid>
+
+            </Grid>
+
+            <Grid>
+
+            <Button
+            
+              
+              variant="contained"
+              inline = {true}  
+
+              sx={{display:"inline-block"
+                ,padding:"5px 5px", mt: 3, mb: 2 ,backgroundColor:"#ee0000"}}
+              onClick = {this.changePassword}
+            >
+              Change Password
+            </Button>
+
+
+
+            {this.state.user.isAdmin?<></>:
+          
+          <Button
+          
+          variant="contained"
+          inline = {true}  
+          sx={{
+          padding:"5px 5px", mt: 3, mb: 2 ,backgroundColor:"#ee0000"}}
+          onClick = {this.showReservations}
+        >
+          Show my reservations
+        </Button>          
+          }
+        </Grid>
+
+        
+        <Button
+              
+              variant="contained"
+              sx={{padding:"5px 5px", mt: 3, mb: 2  ,backgroundColor:"#ee0000"}}
+              onClick = {this.logout}
+            >
+              Logout
+            </Button>
+          
+          </Box>
+        </Box>
+      </Container>
+    </ThemeProvider>
+  
+    </>
+  );
+    
   }
 }
 

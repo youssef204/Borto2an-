@@ -88,7 +88,7 @@ user_Router.post("/register", async(req, res) => {
     user
       .save()
       .then(() => {
-        res.send("added");
+        res.send("New user registered Successfully");
       })
       .catch((err) => {
         if (err) {
@@ -110,7 +110,14 @@ user_Router.put("/", authenticate , async (req, res) => {
   const id = req.body._id;
   const update = req.body.update;
   console.log(update);
-  if (!id || !isValidUpdate(update)) {res.sendStatus(422); console.log(id);}
+  if (!id || !isValidUpdate(update))
+    {
+      if(!isValidEmail(update.email))
+      res.sendStatus(401); 
+      else 
+      res.sendStatus(422)
+      console.log(id);
+    }
   const updated = await User.findByIdAndUpdate(id, update, {new: true}).catch((err) => res.status(400).send(err));
   res.send(updated);
 });
@@ -118,22 +125,19 @@ user_Router.put("/", authenticate , async (req, res) => {
 user_Router.put("/password", authenticate , async (req, res) => {
   const id = req.body._id;
   const update = req.body.update;
-  let oldpassUser = '';
-  console.log(update);
-  if (!id) {res.sendStatus(422); console.log(id);}
-  try{
+  let oldpassUser;
+  if (!id) {res.sendStatus(422);}
    oldpassUser = await User.findById(id);
-  console.log("user data " , oldpassUser);
-  }
-  catch{
-    console.log("mafessh user kdaaa");
-  }
-  if(oldpassUser.password !== update.oldPassword)
+   const new_hashedPassword = bcrypt.hashSync(update.password,10);
+  //console.log("user data " , oldpassUser);
+  const compare = await bcrypt.compare(update.oldPassword,oldpassUser.password);
+  if(!compare)
   res.sendStatus(401);
-  delete update.oldPassword;
+  else{
   console.log("updated value is", update);
-  const updated = await User.findByIdAndUpdate(id, update, {new: true}).catch((err) => res.status(400).send(err));
+  const updated = await User.findByIdAndUpdate(id, {password:new_hashedPassword}, {new: true}).catch((err) => res.status(400).send(err));
   res.send(updated);
+  }
 });
 
 

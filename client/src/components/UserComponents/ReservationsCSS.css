@@ -1,0 +1,54 @@
+.reservationTitleDiv {
+  height: 120px;
+  width: 100%;
+  background-color: #ff416c;
+  overflow: hidden;
+  position: relative;
+}
+.reservationTitleText {
+  padding-left: 3%;
+  padding-top: 2%;
+  color: rgb(230, 230, 230);
+  font: 50px Montserrat;
+}
+.reservationSubTitleText {
+  padding-left: 3.5%;
+  /* padding-top: 2%; */
+  color: rgb(230, 230, 230);
+  font: 20px Montserrat;
+}
+.reservation-bg {
+  mask-image: linear-gradient(to left, rgba(0, 0, 1, 0.9), rgba(0, 0, 1, 0));
+  opacity: 1;
+  position: absolute;
+  left: 400px;
+  top: -160px;
+  width: 70%;
+  height: 400%;
+}
+
+#seatButton {
+  position: fixed;
+  bottom: 0;
+  height: 100px !important;
+  width: 100% !important;
+  background-color: rgba(20, 20, 20, 0.9);
+  z-index: 10;
+}
+.seat-wrap {
+  overflow: hidden;
+  position: relative;
+  white-space:nowrap
+}
+
+.footerButtonMargin {
+  margin: 0px 5px;
+}
+
+.message {
+  color: rgb(255, 255, 255);
+  font: 22px Montserrat;
+  margin: 40px 0px 0px 40px;
+  position: absolute;
+  z-index: 2;
+}

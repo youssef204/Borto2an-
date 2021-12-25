@@ -45,6 +45,12 @@ function NavigationBar({user=JSON.parse(localStorage.getItem("user"))}) {
     window.dispatchEvent( new Event('storage') );
   }
 
+  const discardUpdating = () =>{
+    localStorage.removeItem("EditedReservation");
+    window.dispatchEvent( new Event('storage') );
+    window.location.href = '/';
+  }
+
   const userLabel = 
   (!user)?  
   <>
@@ -66,14 +72,19 @@ function NavigationBar({user=JSON.parse(localStorage.getItem("user"))}) {
   <>
   <li style={{float:'right'}} className="NavBar">
         <Link to="/user" exact className="NavBar">
-          {user.firstName+" "+user.lastName}
+          {user.userName}
         </Link>
       </li>
+      <li style={{float:'right'}} className="NavBar">
+      {!localStorage.getItem('EditedReservation')?<></>:
+        <Link to="/" onClick={discardUpdating} exact className="NavBar" activeClassName="">
+          Exit updating mode
+        </Link>}</li>
   </>;
 
 
 
-  if(path=="/sign_in"||path=="/sign_up")
+  if(path=="/sign_in"||path=="/sign_up"||path=="/forgot_password")
   return <></>;
 
   if(user&&user.isAdmin)

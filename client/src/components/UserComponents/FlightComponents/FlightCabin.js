@@ -9,8 +9,25 @@ import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 
-export default function FlightCabin({ economy, business, first, onSelect }) {
-  const [value, setValue] = useState("1");
+export default function FlightCabin({
+  economy,
+  business,
+  first,
+  airplane,
+  totalNumber,
+  onSelect,
+  chosenCabin,
+}) {
+  const [value, setValue] =
+    airplane.economyRows * airplane.economyColumns -
+      economy.takenSeats.length >=
+    totalNumber
+      ? useState("1")
+      : airplane.businessRows * airplane.businessColumns -
+          business.takenSeats.length >=
+        totalNumber
+      ? useState("2")
+      : useState("3");
   const [open, setOpen] = useState(false);
 
   const handleChange = (event, newValue) => {
@@ -21,16 +38,34 @@ export default function FlightCabin({ economy, business, first, onSelect }) {
   });
   const onClick = (number) => {
     if (number == 1) {
-      onSelect(economy, "economy");
-      setOpen(true);
+      if (
+        airplane.economyRows * airplane.economyColumns -
+          economy.takenSeats.length >=
+        totalNumber
+      ) {
+        onSelect(economy, "economy");
+        setOpen(true);
+      }
     } else if (number == 2) {
-      //business
-      onSelect(business, "business");
-      setOpen(true);
+      if (
+        airplane.businessRows * airplane.businessColumns -
+          business.takenSeats.length >=
+        totalNumber
+      ) {
+        //business
+        onSelect(business, "business");
+        setOpen(true);
+      }
     } else {
-      //first
-      onSelect(first, "first");
-      setOpen(true);
+      if (
+        airplane.firstClassRows * airplane.firstClassColumns -
+          first.takenSeats.length >=
+        totalNumber
+      ) {
+        //first
+        onSelect(first, "first");
+        setOpen(true);
+      }
     }
   };
 
@@ -42,36 +77,62 @@ export default function FlightCabin({ economy, business, first, onSelect }) {
     setOpen(false);
   };
 
-  const getContentOf = (cabin, number) => {
+  const getContentOf = (cabin, cabinName, number) => {
+    console.log(
+      cabinName,
+      chosenCabin,
+      chosenCabin && chosenCabin === cabinName
+    );
+    const fontSize = "17px";
     return (
-      <div className="flex-Container-Row">
-        <span className="item ">
-          <label className="text-muted">Adult Price: </label>
-          {cabin.adultPrice} <br />
-          <label className="text-muted">Adult Baggage: </label>
-          {cabin.adultBaggage}
-          <br />
+      <div className="flex-Container-Col">
+        <span className="flex-Container-Row" style={{ marginBottom: "7px" }}>
+          <span className="item " style={{ paddingRight: "30px" }}>
+            <label className="text-muted" style={{ fontSize }}>
+              Adult Price:
+            </label>
+            <label style={{ fontSize }}>{cabin.adultPrice}</label>
+            <br />
+            <label className="text-muted" style={{ fontSize }}>
+              Adult Baggage:{"  "}
+            </label>
+            <label style={{ fontSize }}>{cabin.adultBaggage}</label>
+          </span>
+          <span className="item  left-border" style={{ paddingLeft: "30px" }}>
+            <label className="text-muted" style={{ fontSize }}>
+              Child Price:
+            </label>
+            <label style={{ fontSize }}>{cabin.childPrice}</label>
+            <br />
+            <label className="text-muted" style={{ fontSize }}>
+              Child Baggage:{"  "}
+            </label>
+            <label style={{ fontSize }}>{cabin.childBaggage}</label>
+          </span>
         </span>
-        <span className="item  left-border">
-          <label className="text-muted">Child Price: </label> {cabin.childPrice}
-          <br />
-          <label className="text-muted">Child Baggage: </label>
-          {cabin.adultBaggage}
-          <br />
-        </span>
-        <MyButton
-          index="1"
-          width="30%"
-          height="10%"
-          onClick={() => onClick(number)}
-          label="Select Flight"
-        />
+
+        {chosenCabin && chosenCabin === cabinName ? (
+          <MyButton
+            index="0"
+            width="60%"
+            height="10%"
+            label="Cabin is Selected"
+          />
+        ) : (
+          <MyButton
+            index="1"
+            width="60%"
+            height="10%"
+            onClick={() => onClick(number)}
+            label="Select Cabin"
+          />
+        )}
       </div>
     );
   };
 
   return (
-    <>
+    <span style={{ minWidth: "100%", marginLeft: "20%" }}>
       <Box sx={{ width: "90%", typography: "body1" }}>
         <TabContext value={value} sx={{ width: "10px" }}>
           <Box
@@ -85,17 +146,27 @@ export default function FlightCabin({ economy, business, first, onSelect }) {
               <Tab
                 label="Economy"
                 value="1"
+                disabled={
+                  airplane.economyRows * airplane.economyColumns -
+                    economy.takenSeats.length <
+                  totalNumber
+                }
                 sx={{
                   color: "#222222",
-                  background:
-                    value == 1
-                      ? "linear-gradient(to bottom, #ffffff, rgba(200,150,0,0.2))"
-                      : "white",
+                  // background:
+                  //   value == 1
+                  //     ? "linear-gradient(to bottom, #ffffff, rgba(200,150,0,0.2))"
+                  //     : "white",
                 }}
               />
               <Tab
                 label="Business"
                 value="2"
+                disabled={
+                  airplane.businessRows * airplane.businessColumns -
+                    business.takenSeats.length <
+                  totalNumber
+                }
                 sx={{
                   //background:  "linear-gradient(to bottom, #ffffff, rgba(200,200,50,0.2))",
                   color: "#222222",
@@ -106,6 +177,11 @@ export default function FlightCabin({ economy, business, first, onSelect }) {
               <Tab
                 label="First"
                 value="3"
+                disabled={
+                  airplane.firstClassRows * airplane.firstClassColumns -
+                    first.takenSeats.length <
+                  totalNumber
+                }
                 sx={{
                   //background:"linear-gradient(to bottom, #ffffff,rgba(2500,100,50,0.2))",
                   color: "#222222",
@@ -115,33 +191,30 @@ export default function FlightCabin({ economy, business, first, onSelect }) {
           </Box>
           <TabPanel
             value="1"
-            sx={
-              {
-                //background: "linear-gradient(rgba(30,240,32,0.2),white)",
-              }
-            }
+            sx={{
+              padding: "10px",
+              //background: "linear-gradient(rgba(30,240,32,0.2),white)",
+            }}
           >
-            {getContentOf(economy, 1)}
+            {getContentOf(economy, "economy", 1)}
           </TabPanel>
           <TabPanel
             value="2"
-            sx={
-              {
-                //background: "linear-gradient(rgba(200,200,50,0.2),#ffffff)",
-              }
-            }
+            sx={{
+              padding: "10px",
+              //background: "linear-gradient(rgba(200,200,50,0.2),#ffffff)",
+            }}
           >
-            {getContentOf(business, 2)}
+            {getContentOf(business, "business", 2)}
           </TabPanel>
           <TabPanel
             value="3"
-            sx={
-              {
-                // background: "linear-gradient(rgba(250,100,50,0.2),#ffffff)",
-              }
-            }
+            sx={{
+              padding: "10px",
+              // background: "linear-gradient(rgba(250,100,50,0.2),#ffffff)",
+            }}
           >
-            {getContentOf(first, 3)}
+            {getContentOf(first, "first", 3)}
           </TabPanel>
         </TabContext>
       </Box>
@@ -154,6 +227,6 @@ export default function FlightCabin({ economy, business, first, onSelect }) {
           Selected!
         </Alert>
       </Snackbar>
-    </>
+    </span>
   );
 }

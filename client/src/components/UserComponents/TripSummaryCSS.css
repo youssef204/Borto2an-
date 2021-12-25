@@ -1,0 +1,22 @@
+.TripTitleDiv {
+  height: 120px;
+  width: 100%;
+  background-color: #ff416c;
+  overflow: hidden;
+  position: relative;
+}
+.TripTitleText {
+  padding-left: 3%;
+  padding-top: 2%;
+  color: rgb(230, 230, 230);
+  font: 50px Montserrat;
+}
+.Trip-bg {
+  mask-image: linear-gradient(to left, rgba(0, 0, 1, 0.9), rgba(0, 0, 1, 0));
+  opacity: 1;
+  position: absolute;
+  left: 800px;
+  top: -50px;
+  width: 50%;
+  height: 250%;
+}

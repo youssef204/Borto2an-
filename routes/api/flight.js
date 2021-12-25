@@ -7,6 +7,8 @@ const authenticate = require("./Authentication");
 
 //update flight
 function storeTimeAsIs(dataTmp) {
+  if(!dataTmp.departure.time)
+    return;
   if("departure" in dataTmp)
     if('time' in dataTmp.departure && dataTmp.departure.time.charAt(dataTmp.departure.time.length-1)!='Z')
       dataTmp.departure.time += "Z";
@@ -30,6 +32,21 @@ function storeTimeAsIs(dataTmp) {
 //     })
 //     .catch((err) => res.status(404).json({ msg: "No flights are found" }));
 // });
+
+/**
+ * @swagger
+ * /api/flights/:
+ *  get:
+ *    description: An endpoint to search the flights in the database
+ *    parameters:
+ *      - in: query
+ *        description: json indication the exact search criteria for flights
+ *    responses:
+ *      '200':
+ *        description: the requested flights are sent the requester
+ *      '404':
+ *        description: error in the request sent to the database
+ */
 
 flight_router.get("/", function (req, res, next) {
   let queryObj = { ...req.query };
@@ -55,6 +72,20 @@ flight_router.get("/", function (req, res, next) {
     .catch((err) => res.status(404).json({ msg: "No flights are found" }));
 });
 
+/**
+ * @swagger
+ * /api/flights/:
+ *  put:
+ *    description: An endpoint to update a flight in the database. The request body should contain and _id of target flight, and an update JSON that specifies which attributes to update.
+ *    responses:
+ *      '200':
+ *        description: the intended flight is edited successfully
+ *      '401':
+ *        description: the requester is not as admin
+ *      '400':
+ *        description: error in the request sent to the database
+ */
+
 flight_router.put("/", authenticate,(req, res) => {
   if(!req.user.isAdmin)return res.setStatus(401);
   const id = req.body._id;
@@ -68,6 +99,20 @@ flight_router.put("/", authenticate,(req, res) => {
   .catch(err => res.status(400).send(err));
 });
 
+/**
+ * @swagger
+ * /api/flights/showAllflights:
+ *  get:
+ *    description: An endpoint to get all the flights in the database
+ *    responses:
+ *      '401':
+ *        description: the requester is not an admin
+ *      '200':
+ *        description: all flights are returned to the requester
+ *      '404':
+ *        description: error in the request sent to the database
+ */
+
 //read all flights
 flight_router.get("/showAllflights", authenticate , (req, res) => {
   console.log(req.user);
@@ -79,6 +124,23 @@ flight_router.get("/showAllflights", authenticate , (req, res) => {
     })
     .catch((err) => res.status(404).json({ msg: "No flights are found" }));
 });
+
+/**
+ * @swagger
+ * /api/flights/:id:
+ *  delete:
+ *    description: An endpoint to delete a flight in the database.
+ *    parameters:
+ *      - in: path
+ *        description: id of the flight to be deleted
+ *    responses:
+ *      '401':
+ *        description: the requester is not as admin
+ *      '200':
+ *        description: the target flight is deleted from the database
+ *      '404':
+ *        description: error in the request sent to the database
+ */
 
 //delete flight with given ID
 flight_router.delete("/:id", authenticate , async (req, res) => {
@@ -98,6 +160,20 @@ flight_router.delete("/:id", authenticate , async (req, res) => {
     res.status(404).json({ msg: `${req.params.id} is not a correct id` });
   }
 });
+
+/**
+ * @swagger
+ * /api/flights/:
+ *  post:
+ *    description: An endpoint to create a flight in the database. The flight JSON is added in the request body.
+ *    responses:
+ *      '200':
+ *        description: the target flight is added to the database
+ *      '401':
+ *        description: the requester is not an admin
+ *      '400':
+ *        description: error in the request sent to the database
+ */
 
 flight_router.post("/", authenticate , async (req, res) => {
   if(!req.user.isAdmin)return res.setStatus(401);

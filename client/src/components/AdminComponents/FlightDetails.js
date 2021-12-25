@@ -7,6 +7,9 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import { Box, width } from "@mui/system";
+import Stack from "@mui/material/Stack";
+import logo from '../Logo/Logo.png';
 
 class FlightDetails extends React.Component {
   constructor(props) {
@@ -18,6 +21,8 @@ class FlightDetails extends React.Component {
   }
 
   componentDidMount() {
+    if(!this.props.history.location.state)
+    return;
     let curFlightNumber = {
       flightNumber: this.props.history.location.state.flightNumber,
     };
@@ -44,6 +49,10 @@ class FlightDetails extends React.Component {
     }
   }
   render() {
+    if(!this.props.history.location.state){
+    this.props.history.push('/');
+    return <></>;
+    }
     const handleClickOpen = () => {
       this.setState({ open: true });
     };
@@ -79,41 +88,132 @@ class FlightDetails extends React.Component {
       flightlist = "there is no such flight !";
     } else {
       flightlist = flights.map((flight) => (
+        <div
+      style={{backgroundImage: `url("https://i.pinimg.com/originals/48/7b/c1/487bc14012c5b2ceac9a29d8ed6406dd.jpg")` 
+    }}
+      >
+         <Stack>
+            <br />
+            <br />
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-around",
+                alignItems: "left",
+              }}
+            >
+              <Box
+                component="span"
+                border={2}
+                borderRadius={10}
+                borderLeft={2}
+                borderRight={2}
+                borderColor="#a9a9a9"
+                sx={{ p:  5}}
+                style={{
+                  backgroundColor : "rgba(255, 255, 255, 0.85)",
+                  width : "50%",
+                  marginBottom : "10px"
+                }}
+              >
         <div>
+          <div style={{
+            fontSize:"16px",
+            fontWeight: "bold",
+            justifyContent:"space-around",
+          }}>
+                     <Stack direction = "row"
+                     spacing={5}
+                     style={{
+                      justifyContent:"space-around",
+                    }}>
+                      <Stack direction="column" style={{
+                      justifyContent:"space-around",
+                    }}>
+         <img src={logo} className="logo" alt="Logo" width="50px" height="50px"/>
+         <label>
+           Borto2an 
+         </label>
+         <label>
+           Airline 
+         </label>
+         </Stack>
+         <Stack direction="column" style={{
+                      justifyContent:"space-around",
+                    }}>
           Flight Number: {flight.flightNumber}
+          </Stack>
+          <Stack direction="column" style={{
+                      justifyContent:"space-around",
+                    }}>
+          <img
+                    src="takingOff2.png"
+                    width="70px"
+                    height="70px"
+                  />
+          <label style={{
+            marginTop : "-4px"
+          }}>
+            {flight.airplaneModelID.name}
+          </label>
+                  </Stack>
+
+                  </Stack>
+          </div>
           <br/>
           <hr/>
+          <Stack direction="row"
+                       style={{
+                        display: "flex",
+                        justifyContent: "space-around",
+                      }}>
+          <div> 
+          <div style={{
+            fontSize:"14px",
+            fontWeight: "bold",
+            marginBottom: "5px",
+          }}>           
           Departure Details:
+          </div>
           <br/>
           Airport: {flight.departure.airport}
           <br/>
           Terminal: {flight.departure.terminal}
           <br/>
           Time: {flight.departure.time.substring(0, 10)+" at "+flight.departure.time.substring(11, 16)}
-          <br/> <hr/>
+          <br/> 
+          </div> 
+          <div>
+          <div style={{
+            fontSize:"14px",
+            fontWeight: "bold",
+            marginBottom: "5px",
+          }}>        
           Arrival Details:
+          </div>
           <br/>
           Airport: {flight.arrival.airport}
           <br/>
           Terminal: {flight.arrival.terminal}
           <br/>
           Time: {flight.arrival.time.substring(0, 10)+" at "+flight.arrival.time.substring(11, 16)}
-          <br/> <hr/>
-          Airline: {flight.airline}
           <br/>
-          Has transit: {flight.hasTransit?'True':'False'}
-          <br/>
-          Airplane Model: {flight.airplaneModelID?(flight.airplaneModelID.name+ 
-                          " ==> [Economy seats: "+flight.airplaneModelID.economyRows+" × "+flight.airplaneModelID.economyColumns+
-                          "] [Business seats: "+flight.airplaneModelID.businessRows+" × "+flight.airplaneModelID.businessColumns+
-                          "] [First Class seats: "+flight.airplaneModelID.firstClassRows+" × "+flight.airplaneModelID.firstClassColumns+']'):""
-                          }
-          <br/> <hr/>
-
-
+          </div>  
+          </Stack>
+          
+           <hr/>
+          <Stack>
+          <div style={{
+            fontSize:"16px",
+            fontWeight: "bold",
+            justifyContent:"center",
+            alignSelf:"center"
+          }}>
           Economy Cabin Details:
+          </div>
+          </Stack>
           <br/>
-          Taken seats: {flight.economyCabin.takenSeats}
+          Size : {+flight.airplaneModelID.economyRows+" × "+flight.airplaneModelID.economyColumns}
           <br/>
           Adult Price: {flight.economyCabin.adultPrice}
           <br/>
@@ -122,12 +222,29 @@ class FlightDetails extends React.Component {
           Child Price: {flight.economyCabin.childPrice}
           <br/>
           Child Baggage: {flight.economyCabin.childBaggage}
+          <br/>
+          Taken seats: {flight.economyCabin.takenSeats.slice(0, flight.economyCabin.takenSeats.length - 1)
+                      .map((entry) => entry + " , ")}{" "}
+                    {
+                      flight.economyCabin.takenSeats[
+                        flight.economyCabin.takenSeats.length - 1
+                      ]
+                    }
+
           <br/> <hr/>
 
-
-          Business Cabin Details:
+          <Stack>
+          <div style={{
+            fontSize:"16px",
+            fontWeight: "bold",
+            justifyContent:"center",
+            alignSelf:"center"
+          }}>
+                   Business Cabin Details:
+          </div>
+          </Stack>
           <br/>
-          Taken seats: {flight.businessCabin.takenSeats}
+          Size : {+flight.airplaneModelID.businessRows+" × "+flight.airplaneModelID.businessColumns}
           <br/>
           Adult Price: {flight.businessCabin.adultPrice}
           <br/>
@@ -136,12 +253,29 @@ class FlightDetails extends React.Component {
           Child Price: {flight.businessCabin.childPrice}
           <br/>
           Child Baggage: {flight.businessCabin.childBaggage}
-          <br/> <hr/>
-
-
-          First Class Cabin Details:
           <br/>
-          Taken seats: {flight.firstCabin.takenSeats}
+          Taken seats: {flight.businessCabin.takenSeats.slice(0, flight.businessCabin.takenSeats.length - 1)
+                      .map((entry) => entry + " , ")}{" "}
+                    {
+                      flight.businessCabin.takenSeats[
+                        flight.businessCabin.takenSeats.length - 1
+                      ]
+                    }
+          <br/>
+           <hr/>
+
+           <Stack>
+          <div style={{
+            fontSize:"16px",
+            fontWeight: "bold",
+            justifyContent:"center",
+            alignSelf:"center"
+          }}>
+                First Class Cabin Details:
+          </div>
+          </Stack>
+          <br/>
+          Size : {+flight.airplaneModelID.firstClassRows+" × "+flight.airplaneModelID.firstClassColumns}
           <br/>
           Adult Price: {flight.firstCabin.adultPrice}
           <br/>
@@ -150,15 +284,33 @@ class FlightDetails extends React.Component {
           Child Price: {flight.firstCabin.childPrice}
           <br/>
           Child Baggage: {flight.firstCabin.childBaggage}
-
           <br/>
+          
+          Taken seats: {flight.firstCabin.takenSeats.slice(0, flight.firstCabin.takenSeats.length - 1)
+                      .map((entry) => entry + " , ")}{" "}
+                    {
+                      flight.firstCabin.takenSeats[
+                        flight.firstCabin.takenSeats.length - 1
+                      ]
+                    }
           <br/>
-
+           <hr/>
           
           <div>
-          <button onClick={(e) => this.handleClick(e, state)}>Update</button>
+          <div style={{
+            justifyContent:"space-around",
+          }}>
 
-            <button onClick={handleClickOpen}>Delete</button>
+          <Stack direction = "row" style={{
+            justifyContent:"space-around",
+          }}>
+          <button onClick={handleClickOpen}>Delete</button>
+          <button onClick={(e) => this.handleClick(e, state)}>Update</button>
+          </Stack>
+          </div>
+
+
+
             <Dialog
               open={this.state.open}
               onClose={handleClose}
@@ -182,6 +334,10 @@ class FlightDetails extends React.Component {
             </Dialog>
           </div>
         </div>
+        </Box>
+        </div>
+     </Stack>
+     </div>
       ));
     }
 

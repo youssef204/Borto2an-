@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import "./Guest.css";
 import axios from "axios";
 import Stack from "@mui/material/Stack";
+import {Link} from "react-router-dom";
 
 export class SignUp extends Component {
   constructor(props) {
     super(props);
-    this.state = { showMessage: false };
+    this.state = { showMessage: false ,
+    error : '' };
   }
 
   onChange = (e) => {
@@ -39,12 +41,21 @@ export class SignUp extends Component {
       })
       .catch(err => {
         if(err.response){
-          if(err.response.status === 401)
-          alert("Please enter a valid email format");
-          else if(err.response.status === 402)
-          alert("Please Fill all of the fields");
-          else if(err.response.status === 500)
-          alert("Email and User Name must be unique");
+          if(err.response.status === 401){
+            this.setState({ showMessage: true ,
+            error : "Please enter a valid email format" });
+       //   alert("Please enter a valid email format");
+          }
+          else if(err.response.status === 402){
+            this.setState({ showMessage: true ,
+              error :"Please Fill all of the fields"});
+      //    alert("Please Fill all of the fields");
+          }
+          else if(err.response.status === 500){
+            this.setState({ showMessage: true ,
+              error :"Email must be unique"});
+      //    alert("Email and User Name must be unique");
+          }
         }
         else{
           console.log("msh sh8alaaaa");
@@ -65,11 +76,16 @@ export class SignUp extends Component {
     <div class="form-container sign-up-container">
 		<form action="#" noValidate onSubmit={this.onSubmit}>
 			<h2 style={{marginTop:"40px"}}>Create Account</h2>
-			<div class="social-container">
+			{/* <div class="social-container">
 				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
 				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
 				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-			</div>
+			</div> */}
+      {this.state.showMessage ? (
+                <label id="signErrorMessage">{this.state.error}</label>
+              ) : (
+                <br/>
+              )}
       <Stack
                       spacing={2}
                       direction="row">
@@ -127,7 +143,7 @@ export class SignUp extends Component {
 <footer>
 	<p>
 		Created by <i class="fa fa-heart"></i> 
-		<a href="/">Borto2an Airline</a>
+		<Link to="/">Borto2an Airline</Link>
 	</p>
 </footer>
 </>

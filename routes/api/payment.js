@@ -12,8 +12,18 @@ router.post("/create-session", async (req, res)=>{
             success_url: req.body.success_url,
             cancel_url: req.body.cancel_url,
             line_items: [
-                getStripeDetailsFromFlight(req.body.departureFlight, "Departure Flight"),
-                getStripeDetailsFromFlight(req.body.returnFlight, "Return Flight")
+                // getStripeDetailsFromFlight(req.body.departureFlight, "Departure Flight"),
+                // getStripeDetailsFromFlight(req.body.returnFlight, "Return Flight")
+                {
+                    quantity: 1,
+                    price_data:{
+                        currency: "egp",
+                        unit_amount: (+req.body.departureFlight.price + +req.body.returnFlight.price)*100,
+                        product_data:{
+                            name: "Reservation Price"
+                        }
+                    }
+                }
             ]
         });
         
@@ -29,7 +39,7 @@ function getStripeDetailsFromFlight(flightDetails, flightName){
         quantity: 1,
         price_data:{
             currency: "egp",
-            unit_amount: +(flightDetails.price)*100,
+            unit_amount: Math.max(0, +(flightDetails.price)*100),
             product_data:{
                 name: flightName
             }
