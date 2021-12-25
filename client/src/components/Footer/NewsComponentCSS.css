@@ -1,0 +1,14 @@
+.NewsPart {
+  margin: 20px;
+  width: 107%;
+  min-height: 600px;
+  /* background-color: rgba(0, 0, 0, 0.2); */
+  color: red;
+  border-top: 3px solid rgba(0, 0, 0, 0.2);
+}
+.NewsTitle {
+  margin-right: 1050px;
+  padding-top: 2%;
+  color: #ff416c;
+  font: 50px Montserrat;
+}
