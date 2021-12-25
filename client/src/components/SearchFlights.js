@@ -391,6 +391,18 @@ class SearchFlights extends React.Component {
       return (
         <>
           <br></br>
+
+          <div className="list " style={{
+  paddingBottom : "100px",
+  width : "50%",
+  marginTop : "50px"
+}}>
+        <div className="settings" style={{
+          justifyContent : "center",
+          alignContent : "center",
+          alignItems : "center"
+        }}>
+          
           <div
           className="TripTitleDiv"
           style={{
@@ -400,12 +412,34 @@ class SearchFlights extends React.Component {
           }}
         >
             <div class="TripTitleText">Search For Flights</div>
-          <img class="Trip-bg" src="admin.jpg" style={{position:"relative",top:-150}}/>
+          <img class="Trip-bg" src="admin.jpg" style = {{
+            left : "400px",
+            opacity : "0.7",top:-120
+          }}/>
           </div>
+          </div>
+
+          <Box
+                        component="span"
+                        border={2}
+                        borderRadius={4}
+                        borderLeft={1}
+                        borderRight={1}
+                        borderColor="#a9a9a9"
+          sx={{
+            marginBottom:-10,
+            marginTop: -5,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+          style={{
+            backgroundColor: "rgba(255, 255, 255, 1)",
+          }}
+        >
           <br></br>
               <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
         <Box
           sx={{
             display: 'flex',
@@ -573,7 +607,8 @@ class SearchFlights extends React.Component {
         </Box>
       </Container>
     </ThemeProvider>
-          <br></br>
+    </Box>
+    </div>
         </>
       );
     } else {
