@@ -1,8 +1,8 @@
 .mainFooter {
   position: relative;
   width: 100%;
-  background: linear-gradient(#d0cccc, #ffffff);
-  padding: 20px 50px 0 50px;
+  /* background: linear-gradient(#d0cccc, #000, #000, #000); */
+  background-color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -64,7 +64,6 @@
 
 .mainFooter p {
   color: rgba(255, 255, 255, 0.9);
-  margin: 15px 0 50px 0;
   font-size: 1rem;
   font-weight: 300;
 }
@@ -125,8 +124,16 @@
   }
 }
 .FooterText {
-  width: 107%;
+  width: 100%;
+  overflow: hidden;
   background-color: #141414ee;
-  margin-top: 50px;
+
   padding-top: 100px;
+}
+.gradientColor {
+  top: -150px;
+  min-height: 100px;
+  width: 100%;
+  overflow: hidden;
+  background: linear-gradient(#d0cccc, #fff);
 }

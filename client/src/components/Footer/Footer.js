@@ -6,12 +6,13 @@ function Footer() {
   return (
     <>
       <footer class="mainFooter">
-        <div class="waves" style={{ marginBottom: "70px" }}>
+        <div class="waves">
           <div class="wave" id="wave1"></div>
           <div class="wave" id="wave2"></div>
           <div class="wave" id="wave3"></div>
           <div class="wave" id="wave4"></div>
         </div>
+        <div className="gradientColor"></div>
         <NewsComponent title="Popular Trips" />
         <NewsComponent title="On Sell Trips" />
         <div className="FooterText">
