@@ -8,11 +8,11 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Stack from "@mui/material/Stack";
 import OutlinedTextField from "./OutlinedTextField";
-import Button from "./Button";
 import Calendar from "./Calendar";
-import Box from "@mui/material/Box";
-import { TextField, Grid } from "@mui/material";
 import Footer from "./Footer/Footer";
+import { Button , TextField , Grid,Container,ThemeProvider,createTheme,CssBaseline,Box} from "@mui/material";
+
+const theme = createTheme();
 
 class SearchFlights extends React.Component {
   constructor() {
@@ -391,13 +391,31 @@ class SearchFlights extends React.Component {
       return (
         <>
           <br></br>
-          <div className="profile-container">
-            <form
-              className=" ProfileForm-container"
-              noValidate
-              onSubmit={(e) => this.onSubmit2(e, this.state)}
-            >
-              <h2>Search For Flights</h2>
+          <div
+          className="TripTitleDiv"
+          style={{
+            height: "130px",
+            marginBottom: "20px",
+            paddingBottom: "50px",
+          }}
+        >
+            <div class="TripTitleText">Search For Flights</div>
+          <img class="Trip-bg" src="admin.jpg" style={{position:"relative",top:-150}}/>
+          </div>
+          <br></br>
+              <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'left',
+          }}
+        >
+          
+          <Box component="form" sx={{ mt: 3 }} noValidate onSubmit={(e) => this.onSubmit2(e, this.state)}>
+
               <br></br>
               <div>
                 {/* <input
@@ -411,7 +429,7 @@ class SearchFlights extends React.Component {
                   <TextField
                     type="text"
                     name="departure.airport"
-                    placeholder="Departure Airport"
+                    label="Departure Airport"
                     onChange={this.onChange}
                     fullWidth
                   />
@@ -430,9 +448,10 @@ class SearchFlights extends React.Component {
                   <TextField
                     type="text"
                     name="departure.terminal"
-                    placeholder="Departure Terminal"
+                    label="Departure Terminal"
                     onChange={this.onChange}
                     fullWidth
+                    auto
                   />
                 </Grid>
               </div>
@@ -451,9 +470,10 @@ class SearchFlights extends React.Component {
                   <TextField
                     type="text"
                     name="arrival.airport"
-                    placeholder="Arrival Airport"
+                    label="Arrival Airport"
                     onChange={this.onChange}
                     fullWidth
+                    autoFocus
                   />
                 </Grid>
               </div>
@@ -472,9 +492,10 @@ class SearchFlights extends React.Component {
                   <TextField
                     type="text"
                     name="arrival.terminal"
-                    placeholder="Arrival Terminal"
+                    label="Arrival Terminal"
                     onChange={this.onChange}
                     fullWidth
+                    autoFocus
                   />
                 </Grid>
               </div>
@@ -493,9 +514,10 @@ class SearchFlights extends React.Component {
                   <TextField
                     type="number"
                     name="flightNumber"
-                    placeholder="Flight Number"
+                    label="Flight Number"
                     onChange={this.onChange}
                     fullWidth
+                    autoFocus
                   />
                 </Grid>
               </div>
@@ -538,9 +560,21 @@ class SearchFlights extends React.Component {
               </div>
               <br></br>
 
-              <button>Search</button>
-            </form>
-          </div>
+              <Grid>
+              <Button
+              type = "submit"
+              variant="contained"
+              sx={{margin:"auto", mt: 3, mb: 2 ,backgroundColor:"#ee0000"}}
+            
+            >
+              Search 
+            </Button> 
+            </Grid>
+                    
+          </Box>
+        </Box>
+      </Container>
+    </ThemeProvider>
           <br></br>
         </>
       );
