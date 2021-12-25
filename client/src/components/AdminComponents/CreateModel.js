@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { TextField , Grid} from "@mui/material";
 
 class CreateModel extends React.Component {
     constructor(){
@@ -62,7 +63,7 @@ class CreateModel extends React.Component {
               <h2>Create New Model </h2>
               <br></br>
 
-                Model Name:
+                {/* Model Name:
                 <div>
                   <input
                     type='text'
@@ -71,8 +72,18 @@ class CreateModel extends React.Component {
                     value={this.state.name}
                     onChange={this.onChange}
                   />
-                </div>
-                Economy Rows:
+                </div> */}
+                <Grid item xs={12}>
+                  <TextField
+                    type='text'
+                    placeholder='Model Name'
+                    name='name'
+                    onChange={this.onChange}
+                    fullWidth
+                  />
+                 </Grid>
+                 <br/>
+                {/* Economy Rows:
                 <div>
                   <input
                     type='number'
@@ -80,8 +91,18 @@ class CreateModel extends React.Component {
                     value={this.state.economyRows}
                     onChange={this.onChange}
                   />
-                </div>
-                Economy Columns:
+                </div> */}
+                <Grid item xs={12}>
+                  <TextField
+                    type='number'
+                    name='economyRows'
+                    onChange={this.onChange}
+                    placeholder="No. economy rows"
+                    fullWidth
+                  />
+                 </Grid>
+                 <br/>
+                {/* Economy Columns:
                 <div>
                   <input
                     type='number'
@@ -89,8 +110,18 @@ class CreateModel extends React.Component {
                     value={this.state.economyColumns}
                     onChange={this.onChange}
                   />
-                </div>
-                Business Rows:
+                </div> */}
+                <Grid item xs={12}>
+                  <TextField
+                    type='number'
+                    name='economyColumns'
+                    onChange={this.onChange}
+                    placeholder="No. economy columns"
+                    fullWidth
+                  />
+                 </Grid>
+                 <br/>
+                {/* Business Rows:
                 <div>
                   <input
                     type='number'
@@ -98,8 +129,18 @@ class CreateModel extends React.Component {
                     value={this.state.businessRows}
                     onChange={this.onChange}
                   />
-                </div>
-                Business Columns:
+                </div> */}
+                <Grid item xs={12}>
+                  <TextField
+                    type='number'
+                    name='businessRows'
+                    onChange={this.onChange}
+                    placeholder="No. business rows"
+                    fullWidth
+                  />
+                 </Grid>
+                 <br/>
+                {/* Business Columns:
                 <div>
                   <input
                     type='number'
@@ -107,8 +148,18 @@ class CreateModel extends React.Component {
                     value={this.state.businessColumns}
                     onChange={this.onChange}
                   />
-                </div>
-                First Class Rows:
+                </div> */}
+                <Grid item xs={12}>
+                  <TextField
+                    type='number'
+                    name='businessColumns'
+                    onChange={this.onChange}
+                    placeholder="No. business columns"
+                    fullWidth
+                  />
+                 </Grid>
+                 <br/>
+                {/* First Class Rows:
                 <div>
                   <input
                     type='number'
@@ -116,8 +167,18 @@ class CreateModel extends React.Component {
                     value={this.state.firstClassRows}
                     onChange={this.onChange}
                   />
-                </div>
-                First Class Columns:
+                </div> */}
+                <Grid item xs={12}>
+                  <TextField
+                    type='number'
+                    name='firstClassRows'
+                    onChange={this.onChange}
+                    placeholder="No. first class rows"
+                    fullWidth
+                  />
+                 </Grid>
+                 <br/>
+                {/* First Class Columns:
                 <div>
                   <input
                     type='number'
@@ -125,7 +186,17 @@ class CreateModel extends React.Component {
                     value={this.state.firstClassColumns}
                     onChange={this.onChange}
                   />
-                </div>
+                </div> */}
+                <Grid item xs={12}>
+                  <TextField
+                    type='number'
+                    name='firstClassColumns'
+                    onChange={this.onChange}
+                    placeholder="No. first class columns"
+                    fullWidth
+                  />
+                 </Grid>
+                 <br/>
 
                 <button>
                   Create

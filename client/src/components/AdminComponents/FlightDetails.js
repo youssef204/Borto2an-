@@ -21,6 +21,8 @@ class FlightDetails extends React.Component {
   }
 
   componentDidMount() {
+    if(!this.props.history.location.state)
+    return;
     let curFlightNumber = {
       flightNumber: this.props.history.location.state.flightNumber,
     };
@@ -47,6 +49,10 @@ class FlightDetails extends React.Component {
     }
   }
   render() {
+    if(!this.props.history.location.state){
+    this.props.history.push('/');
+    return <></>;
+    }
     const handleClickOpen = () => {
       this.setState({ open: true });
     };
@@ -105,7 +111,7 @@ class FlightDetails extends React.Component {
                 borderColor="#a9a9a9"
                 sx={{ p:  5}}
                 style={{
-                  backgroundColor : "rgba(255, 255, 255, 0.4)",
+                  backgroundColor : "rgba(255, 255, 255, 0.85)",
                   width : "50%",
                   marginBottom : "10px"
                 }}
