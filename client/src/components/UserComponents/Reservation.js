@@ -6,7 +6,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Button from "../Button";
+import Button from "@mui/material/Button";
 
 function Reservation({ Reservation }) {
   const history = useHistory();
@@ -45,13 +45,9 @@ function Reservation({ Reservation }) {
         </TableCell>
         <TableCell align="center">
           {" "}
-          <Button
-            index="1"
-            onClick={onClick}
-            width="200px"
-            height="30px"
-            label="Show all details"
-          />
+          <Button size="small" onClick={onClick} sx={{ color: "#EE0000" }}>
+            Show all details
+          </Button>
         </TableCell>
       </TableRow>
     </>

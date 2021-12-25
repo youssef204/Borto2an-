@@ -67,8 +67,10 @@ class SeatSelection extends React.Component {
       cols = airplaneModel.firstClassColumns;
       takenSeats = this.props.flight.firstCabin.takenSeats;
     }
-    if(this.props.reservation){
-      takenSeats = takenSeats.filter(seat => !this.props.reservation.seats.includes(seat));
+    if (this.props.reservation) {
+      takenSeats = takenSeats.filter(
+        (seat) => !this.props.reservation.seats.includes(seat)
+      );
     }
     return { rows, cols, takenSeats };
   };
@@ -97,14 +99,11 @@ class SeatSelection extends React.Component {
     return seats;
   };
 
-  getSelectionGuideText(){
+  getSelectionGuideText() {
     const rem = this.remainingSeats();
-    if( rem === 0)
-      return "Select chosen seat to deselect.";
-    if(rem < 0)
-      return `Deselect ${-rem} seat${rem===-1?"":"s"}`;
-    else
-    return `Select ${rem} seat${rem===1?"":"s"}`;
+    if (rem === 0) return "Select chosen seat to deselect.";
+    if (rem < 0) return `Deselect ${-rem} seat${rem === -1 ? "" : "s"}`;
+    else return `Select ${rem} seat${rem === 1 ? "" : "s"}`;
   }
 
   render() {
@@ -112,7 +111,15 @@ class SeatSelection extends React.Component {
     const { loading } = this.state;
     return (
       <div>
-        <h2>{this.getSelectionGuideText()}</h2>
+        <label
+          style={{
+            font: "25px Montserrat",
+            width: "100%",
+            textAlign: "center",
+          }}
+        >
+          {this.getSelectionGuideText()}
+        </label>
         <div style={{ margin: "20px" }}>
           <SeatPicker
             addSeatCallback={this.addSeatCallback}
