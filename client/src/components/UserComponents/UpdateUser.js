@@ -51,6 +51,10 @@ class UpdateUser extends React.Component {
     this.setState({ updated: newUpdate });
   };
 
+  onCancel = (e) => {
+    this.props.history.push('/user');
+  };
+
   onSubmit = (e)  => {
     e.preventDefault();
     const update = this.state.updated;
@@ -102,11 +106,18 @@ class UpdateUser extends React.Component {
   render() {
     return (
       <>
-      <br></br> 
-      <h2 style={{
-              marginBottom : "20px",
-              marginTop: "20px"
-          }}>Update Data </h2>
+      <div
+          className="TripTitleDiv"
+          style={{
+            height: "130px",
+            marginBottom: "-20px",
+            paddingBottom: "50px",
+          }}
+        >
+            <div class="TripTitleText">Update your personal Information</div>
+          <img class="Trip-bg" src="personal.jpg" />
+        </div>   
+    
       {this.state.showMessage ? this.state.error === 'updated successfully' ? (
                 <label id="signSuccessMessage">{this.state.error}</label>
               ) : <label id="signErrorMessage">{this.state.error}</label> : (
@@ -191,6 +202,7 @@ class UpdateUser extends React.Component {
            </Grid>
 
             </Grid>
+            <Grid>
               <Button
               type = "submit"
               variant="contained"
@@ -198,8 +210,18 @@ class UpdateUser extends React.Component {
               sx={{margin:"auto", mt: 3, mb: 2 ,backgroundColor:"#ee0000"}}
             
             >
-              Update Data
+              Update 
+            </Button> 
+            <Button
+              variant="contained"
+              onClick = {this.onCancel}
+              
+              sx={{margin:"auto", mt: 3, mb: 2,ml:2 ,backgroundColor:"#ee0000"}}
+            
+            >
+              Cancel
             </Button>
+            </Grid>
 
           
               

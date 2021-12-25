@@ -30,13 +30,12 @@ const Profile =({
 })=>
     <form onSubmit={onSubmit} style={{marginBottom:"15px"}}>
           <img for="photo-upload" src={src} style={{width:"auto",height:"150px" ,borderRadius: "50%" , borderColor:"rgb(0,0,0)"}}/>
-        
-      <Button type="submit" className="edit" 
-              variant="contained"
-              sx={{ mt: 3, mb: 2 ,backgroundColor:"#ee0000"}}>Edit Profile Picture</Button>
+          <input  type="image" src="edit.png" border="Specify Image Border" style={{height:"60px",width:"65px" , position:"relative", top:-150,
+        right: -100 ,  background: "transparent",
+        border: "none"}} onClick={onSubmit}></input>
     </form>
      
-      
+       
 const Edit =({
   onSubmit,
   children,
@@ -132,13 +131,21 @@ class User extends Component {
     if(this.state.user)
     return (
 <>
+<div
+          className="TripTitleDiv"
+          style={{
+            height: "130px",
+            marginBottom: "-20px",
+            paddingBottom: "50px",
+          }}
+        >
+            <div class="TripTitleText">Personal Information</div>
+          <img class="Trip-bg" src="personal.jpg" />
+                
+         
+        </div>   
           <br></br>
-          <div className="profile-container">
-          <h2 style={{
-              marginBottom : "20px",
-              marginTop: "20px"
-          }}>Personal Information </h2>
-          <br></br>
+    
           {(active != 'edit')?(
             <Edit onSubmit={this.handleSubmit}>
               <ImgUpload onChange={this.photoUpload} src={imagePreviewUrl}/>
@@ -155,7 +162,7 @@ class User extends Component {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: -10,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'left',
@@ -163,6 +170,11 @@ class User extends Component {
         >
           
           <Box component="form" sx={{ mt: 3 }}>
+       
+          <input  type="image" src="update.png" border="Specify Image Border" style={{height:"60px",width:"65px" , position:"relative", top:10,
+        left: -220 ,  background: "transparent",
+        border: "none"}} onClick={this.updateData}></input>
+   
             <Grid container spacing={2}>
               <Grid item xs={10} sm={6}>
                 <TextField
@@ -261,16 +273,7 @@ class User extends Component {
               Change Password
             </Button>
 
-            <Button
-          
-          sx={{padding:"5px 5px", mt: 3, mb: 2 ,ml:"10px",backgroundColor:"#ee0000"}}
-          variant="contained"
-          onClick = {this.updateData}
-        >
-          Update my data 
-        </Button>
-        </Grid>
-        <Grid>
+
 
             {this.state.user.isAdmin?<></>:
           
@@ -285,10 +288,6 @@ class User extends Component {
           Show my reservations
         </Button>          
           }
-
-
-
-
         </Grid>
 
         
@@ -305,7 +304,6 @@ class User extends Component {
         </Box>
       </Container>
     </ThemeProvider>
-    </div>
   
     </>
   );
