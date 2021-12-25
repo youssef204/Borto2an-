@@ -125,38 +125,61 @@ class FlightSeatsSelection extends React.Component {
             <div className="seatTitleText">Choose your seats</div>
             <img class="seat-bg" src="seats.jpg" width="700px" height="50px" />
           </div>
-          <div className="d-flex flex-row" id="seatsBackground">
-            <div className="seatElementText">
-              <h1>
-                Departure <br />
-                Flight
-              </h1>
+          {/* ------------------------------------------------- */}
+          <div
+            className="d-flex flex-row"
+            style={{
+              width: "100%",
+              justifyContent: "space-around",
+              paddingBottom: "100px",
+            }}
+          >
+            <div className="shadow p-3 m-3 bg-white rounded flex-Container-Row">
+              <div className="seatElementText">
+                <label
+                  style={{
+                    font: "35px Montserrat",
+                    paddingTop: "50px",
+                    color: "#ff416c",
+                  }}
+                >
+                  Departure Flight
+                </label>
+              </div>
+              <div className="seatElement">
+                <SeatSelection
+                  {...departure}
+                  onUpdateSeats={(seats) => {
+                    this.updateSeats("departureSeats", seats);
+                  }}
+                  reservation={this.state.departureReservation}
+                />
+              </div>
             </div>
-            <div className="seatElement">
-              <SeatSelection
-                {...departure}
-                onUpdateSeats={(seats) => {
-                  this.updateSeats("departureSeats", seats);
-                }}
-                reservation={this.state.departureReservation}
-              />
-            </div>
-            <div className="seatElementText">
-              <h1>
-                Arrival
-                <br /> Flight
-              </h1>
-            </div>
-            <div className="seatElement">
-              <SeatSelection
-                {...arrival}
-                onUpdateSeats={(seats) => {
-                  this.updateSeats("arrivalSeats", seats);
-                }}
-                reservation={this.state.arrivalReservation}
-              />
+            <div className="shadow p-3 m-3 bg-white rounded flex-Container-Row">
+              <div className="seatElementText">
+                <label
+                  style={{
+                    font: "35px Montserrat",
+                    paddingTop: "50px",
+                    color: "#ff416c",
+                  }}
+                >
+                  Arrival Flight
+                </label>
+              </div>
+              <div className="seatElement">
+                <SeatSelection
+                  {...arrival}
+                  onUpdateSeats={(seats) => {
+                    this.updateSeats("arrivalSeats", seats);
+                  }}
+                  reservation={this.state.arrivalReservation}
+                />
+              </div>
             </div>
           </div>
+          {/* ------------------------------------------ */}
           <div id="seatButton" className="seat-wrap">
             {/* <img class="seat-bg" src="seats.jpg" width="700px" height="50px" /> */}
             <div style={{ marginLeft: "70%", marginTop: "20px" }}>
