@@ -69,9 +69,9 @@ Button {
 	transition-duration: 0.4s;
 	cursor: pointer;
 }
-button:hover{
-	background: #ff416c;
-	color: rgb(0, 0, 0);
+Button:hover{
+	background-color: #ff416c;
+	color: rgba(245, 237, 237, 0.897);
 	transition-duration: 300ms;
 }
 

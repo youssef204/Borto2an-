@@ -114,6 +114,17 @@ class ChangePassword extends React.Component {
     //   };
     return (
       <div>
+        <div
+          className="TripTitleDiv"
+          style={{
+            height: "130px",
+            marginBottom: "-20px",
+            paddingBottom: "50px",
+          }}
+        >
+            <div class="TripTitleText">Change your password</div>
+          <img class="Trip-bg" src="personal.jpg" />
+        </div>   
       <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -155,17 +166,19 @@ class ChangePassword extends React.Component {
                 />
               </Grid>
 
+              <Grid>
+
               <Button
               type = "submit"
               variant="contained"
               
-              sx={{margin:"auto", mt: 3, mb: 2 ,backgroundColor:"#ee0000"}}
+              sx={{ml:3, mt: 3, mb: 2 ,backgroundColor:"#ee0000"}}
             
             >
-              Update Password
+              Change Password
             </Button>
 
-           
+           </Grid>
             
             </Grid>
               
