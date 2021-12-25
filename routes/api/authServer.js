@@ -60,6 +60,8 @@ const sendEmail = async (user, subject, body)=>{
  *        description: no refresh token is provided in the request body
  *      '403':
  *        description: refresh token not found in the list of stored refresh tokens, or invalid refresh token
+ *    tags:
+ *      - Authentication Server
  */
 
 auth_Router.post('/refreshToken', (req, res) => {
@@ -80,7 +82,9 @@ auth_Router.post('/refreshToken', (req, res) => {
  *    description: An endpoint to delete a provided refresh token from the list of the stored refresh tokens
  *    responses:
  *      '204':
- *        description:token removed successfully
+ *        description: the refresh token is removed successfully
+ *    tags:
+ *      - Authentication Server
  */
 
 auth_Router.delete('/logout', (req, res) => {
@@ -92,12 +96,14 @@ auth_Router.delete('/logout', (req, res) => {
  * @swagger
  * /api/user/auth/reset:
  *  post:
- *    description: An endpoint to reset a user's password when they have forgotten it. A random alphanumeric string of length 10 is generated and is sent to the user email after being put in the database to replace the old user password.
+ *    description: An endpoint to reset a user's password when they have forgotten it. A random alphanumeric string of length 10 is generated and is sent to the user email after being hashed and put in the database to replace the old user password.
  *    responses:
  *      '200':
- *        description:password updated and email is sent successfully
+ *        description: password is reset and email is sent successfully
  *      '401':
- *        description: user not found in the database
+ *        description: user was not found in database
+ *    tags:
+ *      - Authentication Server
  */
 
 auth_Router.post('/reset', async (req, res)=>{
@@ -121,12 +127,14 @@ auth_Router.post('/reset', async (req, res)=>{
  *  post:
  *    description: An endpoint to allow a user to login. The user data is requested from the database and their password is hashed to be compared with the stored hasehd password.
  *    responses:
- *      '200':
- *        description:login successful. An access token, refresh token, user data, and a true bolean are sent to the requester to finalize the login process.
  *      '404':
  *        description: user not found in the database
  *      '400':
  *        description: wrong password
+ *      '200':
+ *        description: login successful. An access token, refresh token, user data, and a true bolean are sent to the requester to finalize the login process.
+ *    tags:
+ *      - Authentication Server
  */
 
 auth_Router.post("/login", async(req, res) => {
