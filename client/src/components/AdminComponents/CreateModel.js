@@ -85,7 +85,7 @@ class CreateModel extends React.Component {
           }}
         >
           
-          <Box component="form" sx={{ mt: 3 }}>
+          <Box component="form" sx={{ mt: 3 }} noValidate onSubmit={this.onSubmit}>
 
 
                 {/* Model Name:

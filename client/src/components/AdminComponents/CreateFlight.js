@@ -1,7 +1,9 @@
 import React from "react";
 import axios from "axios";
 import DropDown from './ModelsDropDownList';
-import { TextField , Grid} from "@mui/material";
+import { Button , TextField , Grid,Container,ThemeProvider,createTheme,CssBaseline,Box} from "@mui/material";
+
+const theme = createTheme();
 
 class CreateFlight extends React.Component {
     constructor(){
@@ -135,13 +137,35 @@ class CreateFlight extends React.Component {
   };
 
     render() { 
-        return (<>
+        return (
+          <>
         <br></br>
-        <div class="profile-container" >
-        <div class= "ProfileForm-container">
+        <div
+          className="TripTitleDiv"
+          style={{
+            height: "130px",
+            marginBottom: "20px",
+            paddingBottom: "50px",
+          }}
+        >
+            <div class="TripTitleText">Create New Flight </div>
+          <img class="Trip-bg" src="admin.jpg" style={{position:"relative",top:-150}}/>
+          </div>
+              <br></br>
+              <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'left',
+          }}
+        >
+          
+          <Box component="form" sx={{ mt: 3 }} noValidate onSubmit={this.onSubmit}>
 
-              <form  noValidate onSubmit={this.onSubmit}>
-              <h2>Create New Flight </h2>
+
               <br></br>
                 {/* Flight Number:
                 <div>
@@ -157,10 +181,11 @@ class CreateFlight extends React.Component {
                 <Grid item xs={12}>
                   <TextField
                     type='number'
-                    placeholder='Flight Number'
+                    label='Flight Number'
                     name='flightNumber'
                     onChange={this.onChange} 
                     fullWidth
+                    autoFocus
                   />
                  </Grid>
 
@@ -182,10 +207,11 @@ class CreateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                    type='text'
-                   placeholder='Airport'
+                   label='Airport'
                    name='airport'
                    onChange={this.departureOnChange}
                     fullWidth
+                    autoFocus
                   />
                  </Grid>
                  <br/>
@@ -202,10 +228,11 @@ class CreateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                    type='text'
-                   placeholder='Terminal'
+                   label='Terminal'
                    name='terminal'
                    onChange={this.departureOnChange}
                     fullWidth
+                    autoFocus
                   />
                  </Grid>
                  <br/>
@@ -222,10 +249,11 @@ class CreateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                    type='datetime-local'
-                   placeholder='Time'
+                   label='Time'
                    name='time'
                    onChange={this.departureOnChange}
                     fullWidth
+                    autoFocus
                   />
                  </Grid>
                  <br/>
@@ -251,10 +279,11 @@ class CreateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                    type='text'
-                   placeholder='Airport'
+                   label='Airport'
                    name='airport'
                    onChange={this.arrivalOnChange}
                     fullWidth
+                    autoFocus
                   />
                  </Grid>
                  <br/>
@@ -271,10 +300,11 @@ class CreateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                    type='text'
-                   placeholder='Terminal'
+                   label='Terminal'
                    name='terminal'
                    onChange={this.arrivalOnChange}
                     fullWidth
+                    autoFocus
                   />
                  </Grid>
                  <br/>
@@ -291,10 +321,11 @@ class CreateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                    type='datetime-local'
-                   placeholder='Time'
+                   label='Time'
                    name='time'
                    onChange={this.arrivalOnChange}
                     fullWidth
+                    autoFocus
                   />
                  </Grid>
                  <br/>
@@ -317,10 +348,11 @@ class CreateFlight extends React.Component {
                 <Grid item xs={12}>
                   <TextField
                    type='text'
-                   placeholder='Airline'
+                   label='Airline'
                    name='airline'
                    onChange={this.onChange}
                     fullWidth
+                    autoFocus
                   />
                  </Grid>
                  <br/>
@@ -367,10 +399,11 @@ class CreateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                   type='number'
-                  placeholder='Adult Price'
+                  label='Adult Price'
                   name='adultPrice'
                   onChange={this.economyOnChange}
                     fullWidth
+                    autoFocus
                   />
                  </Grid>
                  <br/>
@@ -387,10 +420,11 @@ class CreateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                   type='number'
-                  placeholder='Maximum adult baggage'
+                  label='Maximum adult baggage'
                   name='adultBaggage'
                   onChange={this.economyOnChange}
                     fullWidth
+                    autoFocus
                   />
                  </Grid>
                  <br/>
@@ -407,10 +441,11 @@ class CreateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                   type='number'
-                  placeholder='Child Price'
+                  label='Child Price'
                   name='childPrice'
                   onChange={this.economyOnChange}
                     fullWidth
+                    autoFocus
                   />
                  </Grid>
                  <br/>
@@ -427,10 +462,11 @@ class CreateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                   type='number'
-                  placeholder='Maximum child baggage'
+                  label='Maximum child baggage'
                   name='childBaggage'
                   onChange={this.economyOnChange}
                     fullWidth
+                    autoFocus
                   />
                  </Grid>
                  <br/>
@@ -457,10 +493,11 @@ class CreateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                   type='number'
-                  placeholder='Adult Price'
+                  label='Adult Price'
                   name='adultPrice'
                   onChange={this.businessOnChange}
                     fullWidth
+                    autoFocus
                   />
                  </Grid>
                  <br/>
@@ -477,10 +514,11 @@ class CreateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                   type='number'
-                  placeholder='Maximum adult baggage'
+                  label='Maximum adult baggage'
                   name='adultBaggage'
                   onChange={this.businessOnChange}
                     fullWidth
+                    autoFocus
                   />
                  </Grid>
                  <br/>
@@ -497,10 +535,11 @@ class CreateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                   type='number'
-                  placeholder='Child Price'
+                  label='Child Price'
                   name='childPrice'
                   onChange={this.businessOnChange}
                     fullWidth
+                    autoFocus
                   />
                  </Grid>
                  <br/>
@@ -517,10 +556,11 @@ class CreateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                   type='number'
-                  placeholder='Maximum child baggage'
+                  label='Maximum child baggage'
                   name='childBaggage'
                   onChange={this.businessOnChange}
                     fullWidth
+                    autoFocus
                   />
                  </Grid>
                  <br/>
@@ -546,10 +586,11 @@ class CreateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                   type='number'
-                  placeholder='Adult Price'
+                  label='Adult Price'
                   name='adultPrice'
                   onChange={this.firstOnChange}
                     fullWidth
+                    auto
                   />
                  </Grid>
                  <br/>
@@ -566,10 +607,11 @@ class CreateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                   type='number'
-                  placeholder='Maximum adult baggage'
+                  label='Maximum adult baggage'
                   name='adultBaggage'
                   onChange={this.firstOnChange}
                     fullWidth
+                    autoFocus
                   />
                  </Grid>
                  <br/>
@@ -586,10 +628,11 @@ class CreateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                   type='number'
-                  placeholder='Child Price'
+                  label='Child Price'
                   name='childPrice'
                   onChange={this.firstOnChange}
                     fullWidth
+                    autoFocus
                   />
                  </Grid>
                  <br/>
@@ -606,25 +649,31 @@ class CreateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                     type='number'
-                    placeholder='Maximum child baggage'
+                    label='Maximum child baggage'
                     name='childBaggage'
                     onChange={this.firstOnChange}
                     fullWidth
+                    autoFocus
                   />
                  </Grid>
                  <br/>
                   <hr/>
                   </div>
-
-
-
-
-                <button>
-                  Create
-                </button>
-              </form>
-              </div>
-              </div>
+                  
+                 <Grid>
+              <Button
+              type = "submit"
+              variant="contained"
+              sx={{margin:"auto", mt: 3, mb: 2 ,backgroundColor:"#ee0000"}}
+            
+            >
+              Create Flight 
+            </Button> 
+            </Grid>
+                </Box>
+                </Box>
+      </Container>
+    </ThemeProvider>
               <br></br>
           </>
     );
