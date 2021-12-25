@@ -139,6 +139,11 @@ class ChangePassword extends React.Component {
       <Box component="form" sx={{ mt: 3 }}  noValidate onSubmit={this.onSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
+              {this.state.showMessage ? (
+                <label id="signErrorMessage">{this.state.error}</label>
+              ) : (
+                <br/>
+              )}
                 <TextField
                 type="password"   name = "oldPassword"  onChange={this.onChange}
                   fullWidth
