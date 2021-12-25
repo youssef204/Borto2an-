@@ -658,31 +658,16 @@ class SearchFlights extends React.Component {
                   </RadioGroup>
                 </FormControl>
                 <Stack spacing={5}>
-                  <div>
-                    <label style={{ margin: "10px" }}>No. of Adults*: </label>
-                    <input
-                      style={{ width: "150px", height: "20px" }}
-                      type="number"
-                      max="9"
-                      min="1"
-                      value={this.state.adultNumber}
-                      onInvalid={this.invalid}
-                      onChange={this.onChangeAdult}
-                    />
-                  </div>
-                  <div>
-                    <label style={{ margin: "5.75px" }}>
-                      No. of Children:{" "}
-                    </label>
-                    <input
-                      style={{ width: "150px", height: "20px" }}
-                      type="number"
-                      max="5"
-                      min="0"
-                      value={this.state.childNumber}
-                      onChange={this.onChangeChild}
-                    />
-                  </div>
+                <TextField
+               type="number" style={{width:"200px" , fontSize:"18px"}} value={this.state.adultNumber} name = "adultNumber" onChange={this.onChangeAdult}
+               label="Adult Number*"
+               InputProps={{ inputProps: { min: 1 } }}
+             />
+             <TextField
+               type="number" style={{width:"200px" , fontSize:"18px"}} value={this.state.childNumber} name = "childNumber" onChange={this.onChangeChild}
+               label="Children Number"
+               InputProps={{ inputProps: { min: 0 } }}
+             />
                 </Stack>
                 <Stack spacing={5}>
                   <Button
