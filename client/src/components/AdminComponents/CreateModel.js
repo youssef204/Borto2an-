@@ -1,30 +1,38 @@
 import React from "react";
 import axios from "axios";
-import { Button , TextField , Grid,Container,ThemeProvider,createTheme,CssBaseline,Box} from "@mui/material";
+import {
+  Button,
+  TextField,
+  Grid,
+  Container,
+  ThemeProvider,
+  createTheme,
+  CssBaseline,
+  Box,
+} from "@mui/material";
 
 const theme = createTheme();
 
-
 class CreateModel extends React.Component {
-    constructor(){
-        super();
-        this.state = {
-            name:'',
-            economyRows:0,
-            economyColumns:0,
-            businessRows:0,
-            businessColumns:0,
-            firstClassRows:0,
-            firstClassColumns:0
-
-        }
-    }
-
-    onChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
+  constructor() {
+    super();
+    this.state = {
+      name: "",
+      economyRows: 0,
+      economyColumns: 0,
+      businessRows: 0,
+      businessColumns: 0,
+      firstClassRows: 0,
+      firstClassColumns: 0,
+      message: "",
     };
+  }
 
-    onSubmit = e => {
+  onChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  onSubmit = (e) => {
     e.preventDefault();
 
     const data = {
@@ -34,33 +42,38 @@ class CreateModel extends React.Component {
       businessRows: this.state.businessRows,
       businessColumns: this.state.businessColumns,
       firstClassRows: this.state.firstClassRows,
-      firstClassColumns: this.state.firstClassColumns
-    }; 
+      firstClassColumns: this.state.firstClassColumns,
+    };
     axios
-      .post('http://localhost:8000/api/airplaneModel', data,{
-          headers:{"authorization":"Bearer "+localStorage.getItem("token")}
-        })
-      .then(res => {
-        this.setState({
-            name:'',
-            economyRows:0,
-            economyColumns:0,
-            businessRows:0,
-            businessColumns:0,
-            firstClassRows:0,
-            firstClassColumns:0
-        })
-        this.props.history.push("/all_models");
-        alert("Flight Model created successfully!!");
+      .post("http://localhost:8000/api/airplaneModel", data, {
+        headers: { authorization: "Bearer " + localStorage.getItem("token") },
       })
-      .catch(err => {
-        alert("Enter Valid Data");
-      });      
+      .then((res) => {
+        this.setState({
+          name: "",
+          economyRows: 0,
+          economyColumns: 0,
+          businessRows: 0,
+          businessColumns: 0,
+          firstClassRows: 0,
+          firstClassColumns: 0,
+        });
+        this.setState({
+          message:
+            "Flight Model created successfully you will be redirected shortly",
+        });
+        setTimeout(() => {
+          this.props.history.push("/all_models");
+        }, 1000);
+      })
+      .catch((err) => {
+        this.setState({ message: "Enter Valid Data" });
+      });
   };
 
-    render() { 
-        return (
-        <>
+  render() {
+    return (
+      <>
         <br></br>
         <div
           className="TripTitleDiv"
@@ -70,24 +83,30 @@ class CreateModel extends React.Component {
             paddingBottom: "50px",
           }}
         >
-            <div class="TripTitleText">Create New Flight Model</div>
-          <img class="Trip-bg" src="admin.jpg" style={{position:"relative",top:-150}}/>
-          </div>
-              <br></br>
-              <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'left',
-          }}
-        >
-          
-          <Box component="form" sx={{ mt: 3 }} noValidate onSubmit={this.onSubmit}>
-
-
+          <div class="TripTitleText">Create New Flight Model</div>
+          <img
+            class="Trip-bg"
+            src="admin.jpg"
+            style={{ position: "relative", top: -150 }}
+          />
+        </div>
+        <br></br>
+        <ThemeProvider theme={theme}>
+          <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "left",
+              }}
+            >
+              <Box
+                component="form"
+                sx={{ mt: 3 }}
+                noValidate
+                onSubmit={this.onSubmit}
+              >
                 {/* Model Name:
                 <div>
                   <input
@@ -100,14 +119,14 @@ class CreateModel extends React.Component {
                 </div> */}
                 <Grid item xs={12}>
                   <TextField
-                    type='text'
-                    label='Model Name'
-                    name='name'
+                    type="text"
+                    label="Model Name"
+                    name="name"
                     onChange={this.onChange}
                     fullWidth
                   />
-                 </Grid>
-                 <br/>
+                </Grid>
+                <br />
                 {/* Economy Rows:
                 <div>
                   <input
@@ -119,14 +138,14 @@ class CreateModel extends React.Component {
                 </div> */}
                 <Grid item xs={12}>
                   <TextField
-                    type='number'
-                    name='economyRows'
+                    type="number"
+                    name="economyRows"
                     onChange={this.onChange}
                     label="No. economy rows"
                     fullWidth
                   />
-                 </Grid>
-                 <br/>
+                </Grid>
+                <br />
                 {/* Economy Columns:
                 <div>
                   <input
@@ -138,14 +157,14 @@ class CreateModel extends React.Component {
                 </div> */}
                 <Grid item xs={12}>
                   <TextField
-                    type='number'
-                    name='economyColumns'
+                    type="number"
+                    name="economyColumns"
                     onChange={this.onChange}
                     label="No. economy columns"
                     fullWidth
                   />
-                 </Grid>
-                 <br/>
+                </Grid>
+                <br />
                 {/* Business Rows:
                 <div>
                   <input
@@ -157,15 +176,14 @@ class CreateModel extends React.Component {
                 </div> */}
                 <Grid item xs={12}>
                   <TextField
-                    type='number'
-                    name='businessRows'
+                    type="number"
+                    name="businessRows"
                     onChange={this.onChange}
                     label="No. business rows"
                     fullWidth
-                    
                   />
-                 </Grid>
-                 <br/>
+                </Grid>
+                <br />
                 {/* Business Columns:
                 <div>
                   <input
@@ -177,14 +195,14 @@ class CreateModel extends React.Component {
                 </div> */}
                 <Grid item xs={12}>
                   <TextField
-                    type='number'
-                    name='businessColumns'
+                    type="number"
+                    name="businessColumns"
                     onChange={this.onChange}
                     label="No. business columns"
                     fullWidth
                   />
-                 </Grid>
-                 <br/>
+                </Grid>
+                <br />
                 {/* First Class Rows:
                 <div>
                   <input
@@ -196,14 +214,14 @@ class CreateModel extends React.Component {
                 </div> */}
                 <Grid item xs={12}>
                   <TextField
-                    type='number'
-                    name='firstClassRows'
+                    type="number"
+                    name="firstClassRows"
                     onChange={this.onChange}
                     label="No. first class rows"
                     fullWidth
                   />
-                 </Grid>
-                 <br/>
+                </Grid>
+                <br />
                 {/* First Class Columns:
                 <div>
                   <input
@@ -215,33 +233,45 @@ class CreateModel extends React.Component {
                 </div> */}
                 <Grid item xs={12}>
                   <TextField
-                    type='number'
-                    name='firstClassColumns'
+                    type="number"
+                    name="firstClassColumns"
                     onChange={this.onChange}
                     label="No. first class columns"
                     fullWidth
                   />
-                 </Grid>
-                 <br/>
+                </Grid>
+                <br />
 
-                 <Grid>
-              <Button
-              type = "submit"
-              variant="contained"
-              sx={{margin:"auto", mt: 3, mb: 2 ,backgroundColor:"#ee0000"}}
-            
-            >
-              Create Model 
-            </Button> 
-            </Grid>
-
-                </Box>
-                </Box>
-      </Container>
-    </ThemeProvider>
-          </>
-    );  
-    }
+                <Grid>
+                  <label
+                    style={{
+                      font: "20px Montserrat",
+                      color: "rgba(200,50,50,0.8)",
+                    }}
+                  >
+                    {this.state.message}
+                  </label>
+                  <br />
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    sx={{
+                      margin: "auto",
+                      mt: 3,
+                      mb: 2,
+                      backgroundColor: "#ee0000",
+                    }}
+                  >
+                    Create Model
+                  </Button>
+                </Grid>
+              </Box>
+            </Box>
+          </Container>
+        </ThemeProvider>
+      </>
+    );
+  }
 }
- 
+
 export default CreateModel;
