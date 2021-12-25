@@ -2,7 +2,7 @@ import React from 'react'
 import { Component } from 'react';
 import axios from 'axios';
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button" 
+import Button from "../Button" ;
 // import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -179,14 +179,18 @@ class User extends Component {
                     marginLeft : "600px",
          background: "transparent",
         border: "none"}} onClick={this.updateData}></input>
+        <Stack style={{
+          marginTop : "20px"
+        }}>
                 <Button
-              
-              variant="contained"
-              sx={{padding:"5px 5px", mt: 3, mb: 2  ,backgroundColor:"#ee0000"}}
+                 index={1}
+                 label = "Logout"
+                 width= "70px"
+                 height="40px"
               onClick = {this.logout}
             >
-              Logout
             </Button>
+            </Stack>
             </Stack>
           {(active != 'edit')?(
             <Edit onSubmit={this.handleSubmit}>
@@ -288,21 +292,18 @@ class User extends Component {
 
             </Grid>
 
-            <Grid>
-            <Stack style={{
-              display : "flex",
-              justifyContent : "center",
-              alignItems: "center"
+            <Stack spacing={2} style={{
+             marginBottom : "10px",
+             marginTop : "20px",
+             justifyContent: "center",
+             alignItems : "center"
             }}>
             <Button  
-              variant="contained"
-              inline = {true}  
-              style={{ alignSelf:"center" , justifyContent:"center"}}
-              sx={{display:"inline-block"
-                ,padding:"5px 5px", mt: 3, mb:1, mr:1 ,backgroundColor:"#ee0000"}}
+              index={1}
+              label="Change Password"
+              width="190px"
               onClick = {this.changePassword}
             >
-              Change Password
             </Button>
 
 
@@ -310,18 +311,14 @@ class User extends Component {
             {this.state.user.isAdmin?<></>:
           
           <Button
-          
-          variant="contained"
-          inline = {true}  
-          sx={{
-          padding:"5px 5px", mt: 3, mb:1,backgroundColor:"#ee0000"}}
+          index={1}
+          label="Show my reservations"
           onClick = {this.showReservations}
         >
-          Show my reservations
+
         </Button>          
           }
           </Stack>
-        </Grid>
           </Box>
       </Container>
     </Box>

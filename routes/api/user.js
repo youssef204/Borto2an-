@@ -56,6 +56,23 @@ function isValidUpdate(entry) {
   return true;
 }
 
+/**
+ * @swagger
+ * /api/user/:id:
+ *  get:
+ *    description: An endpoint to get a specific User from the database.
+ *    parameters:
+ *      - in: path
+ *        description: id of the requested User
+ *    responses:
+ *      '200':
+ *        description: the target User is retrieved from the database
+ *      '401':
+ *        description: the requester is not an admin
+ *      '500':
+ *        description: error in the request sent to the database
+ */
+
 user_Router.get("/:id",authenticate, (req, res) => {
   if(!req.user.isAdmin){
     res.sendStatus(401);
@@ -68,12 +85,40 @@ user_Router.get("/:id",authenticate, (req, res) => {
     });
 });
 
+/**
+ * @swagger
+ * /api/user/:
+ *  get:
+ *    description: An endpoint to get a specific User from the database. The user is searched for by the email of the requester.
+ *    responses:
+ *      '200':
+ *        description: the target User is retrieved from the database
+ *      '403':
+ *        description: unauthorized user
+ */
+
 user_Router.get("/",authenticate, async(req, res) => {
   const users = await User.find();
 //  console.log(users);
   console.log(req.user);
   res.json(users.filter(user=>(user.email==req.user.email)));
 });
+
+/**
+ * @swagger
+ * /api/user/:
+ *  post:
+ *    description: An endpoint to create a user in the database. The user JSON is added in the request body. The password is hashed before being stored in the database.
+ *    responses:
+ *      '200':
+ *        description: the target user is added to the database
+ *      '401':
+ *        description: invalid email provided
+ *      '402':
+ *        description: invalid user provided
+ *      '500':
+ *        description: database error
+ */
 
 //create
 user_Router.post("/register", async(req, res) => {
@@ -105,6 +150,21 @@ user_Router.post("/register", async(req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/user/:
+ *  put:
+ *    description: An endpoint to update a user in the database. The request body should contain _id of target user, and an update JSON that specifies which attributes to update.
+ *        
+ *    responses:
+ *      '401':
+ *        description: invalid email in the update JSON
+ *      '200':
+ *        description: the target user is updated in the database
+ *      '400':
+ *        description: error in the request sent to the database
+ */
+
 //update
 user_Router.put("/", authenticate , async (req, res) => {
   const id = req.body._id;
@@ -121,6 +181,23 @@ user_Router.put("/", authenticate , async (req, res) => {
   const updated = await User.findByIdAndUpdate(id, update, {new: true}).catch((err) => res.status(400).send(err));
   res.send(updated);
 });
+
+/**
+ * @swagger
+ * /api/user/password/:
+ *  put:
+ *    description: An endpoint to update a user password in the database. The request body should contain _id of target user, and an update JSON that specifies that the password must be updated. The old user password is compared with the hasehd password in the database. If the passwords match, the old password is updated to the new password.
+ *        
+ *    responses:
+ *      '422':
+ *        description: invalid user _id
+ *      '401':
+ *        description: invalid old password
+ *      '200':
+ *        description: the target user password is updated in the database
+ *      '400':
+ *        description: error in the request sent to the database
+ */
 
 user_Router.put("/password", authenticate , async (req, res) => {
   const id = req.body._id;
@@ -139,6 +216,23 @@ user_Router.put("/password", authenticate , async (req, res) => {
   res.send(updated);
   }
 });
+
+/**
+ * @swagger
+ * /api/user/:id:
+ *  delete:
+ *    description: An endpoint to delete a user from the database.
+ *    parameters:
+ *      - in: path
+ *        description: id of the user to be deleted
+ *    responses:
+ *      '401':
+ *        description: the requester is not as admin, only an admin is allowed to delete a user from the database
+ *      '200':
+ *        description: the target user is deleted from the database
+ *      '404':
+ *        description: error in the request sent to the database
+ */
 
 
 user_Router.delete("/:id",authenticate, async (req, res) => {

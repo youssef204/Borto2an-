@@ -63,7 +63,7 @@ airplaneModel_router.get("/showAllModels",authenticate, (req, res) => {
  * @swagger
  * /api/airplaneModel/:
  *  put:
- *    description: An endpoint to update an airplane model in the database. The request body should contain and _id of target airplane model, and an update JSON that specifies which attributes to update.
+ *    description: An endpoint to update an airplane model in the database. The request body should contain _id of target airplane model, and an update JSON that specifies which attributes to update.
  *        
  *    responses:
  *      '401':
@@ -91,7 +91,7 @@ airplaneModel_router.put("/", authenticate , (req, res) => {
  * @swagger
  * /api/airplaneModel/:id:
  *  delete:
- *    description: An endpoint to delete an airplane model in the database.
+ *    description: An endpoint to delete an airplane model from the database.
  *    parameters:
  *      - in: path
  *        description: id of the airplane model to be deleted
@@ -131,7 +131,7 @@ airplaneModel_router.delete("/:id",authenticate ,  async (req, res) => {
  *        description: id of the requested airplane model
  *    responses:
  *      '200':
- *        description: the target airplane model is updated in the database
+ *        description: the target airplane model is retrieved from the database
  *      '404':
  *        description: error in the request sent to the database
  */
