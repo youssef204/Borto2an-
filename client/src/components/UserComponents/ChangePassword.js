@@ -49,7 +49,9 @@ class ChangePassword extends React.Component {
     newUpdate[name] = value;
     this.setState({ updated: newUpdate });
   };
-
+  onCancel = (e) => {
+    this.props.history.push('/user');
+  };
   onSubmit = (e) => {
     e.preventDefault();
     if(!this.state.updated.oldPassword || !this.state.updated.newPassword || !this.state.updated.newPasswordConfirm){
@@ -187,7 +189,6 @@ class ChangePassword extends React.Component {
                   type="password"   name = "newPassword" onChange={this.onChange}
                   fullWidth
                   label="New Password"
-                  autoFocus
                   required
                 />
               </Grid>
@@ -196,27 +197,39 @@ class ChangePassword extends React.Component {
                   type="password"   name = "newPasswordConfirm" onChange={this.onChange}
                   fullWidth
                   label="Confirm Password"
-                  autoFocus
                   required
                 />
               </Grid>
 
               <Grid>
  
-             <Stack style={{
+             <Stack direction="row" spacing={5} style={{
                marginTop : "15px",
                marginBottom : "15px",
                alignItems : "center",
                justifyContent : "center",
-               marginLeft : "100px"
+               marginLeft : "25px"
              }}>
+              {/* <Stack direction="row" spacing={5} style={{
+              marginTop : "10px",
+              marginBottom : "10px"
+            }}> */}
               <Button
               index={1}
-              label = "Change Password"
+              label = "Change"
               type = "submit"
+              width="150px"
+              height="50px"
               onClick={this.onSubmit}
             >
-              Change Password
+            </Button>
+            <Button
+              index={1} 
+              width="150px"
+              height="50px"
+              onClick={this.onCancel}
+              label = "Cancel"
+            >
             </Button>
             </Stack>
 

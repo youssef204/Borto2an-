@@ -175,7 +175,6 @@ class UpdateUser extends React.Component {
                 type="text"  value={this.state.updated.firstName} name = "firstName" onChange={this.onChange}
                   fullWidth
                   label="First Name"
-                  autoFocus
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -183,7 +182,6 @@ class UpdateUser extends React.Component {
                   type="text"  value={this.state.updated.lastName} name = "lastName" onChange={this.onChange}
                   fullWidth
                   label="Last Name"
-                  autoFocus
                 />
               </Grid>
               <Grid item xs={12}>
@@ -191,7 +189,6 @@ class UpdateUser extends React.Component {
                   type="email"  value={this.state.updated.email}  name = "email" onChange={this.onChange}
                   fullWidth
                   label="Email"
-                  autoFocus
                 />
               </Grid>
 
@@ -200,7 +197,6 @@ class UpdateUser extends React.Component {
                type="number"  value={this.state.updated.passportNumber}  name = "passportNumber" onChange={this.onChange}
                fullWidth
                label="passportNumber"
-               autoFocus
              />
            </Grid>
             
@@ -211,7 +207,6 @@ class UpdateUser extends React.Component {
                type="text"  value={this.state.updated.homeAddress}  name = "homeAddress" onChange={this.onChange}
                fullWidth
                label="Home Address"
-               autoFocus
              />
            </Grid>
 
@@ -220,8 +215,6 @@ class UpdateUser extends React.Component {
                type="number"  value={this.state.updated.telephoneNumber} name = "telephoneNumber" onChange={this.onChange} 
                fullWidth
                label="Mobile Number"
-               autoFocus
-               readonly
              />
            </Grid>
 
@@ -230,8 +223,6 @@ class UpdateUser extends React.Component {
                type="number"  value={this.state.updated.countryCode} name = "countryCode" onChange={this.onChange}
                fullWidth
                label="Country Code"
-               autoFocus
-               readonly
              />
            </Grid>
 
@@ -242,14 +233,16 @@ class UpdateUser extends React.Component {
             }}>
               <Button
               index={1}
-              width="80px"
+              width="150px"
+              hight="100px"
               onClick={this.onSubmit}
               label = "Update"
             >
             </Button> 
             <Button
-             index={1}
-             width="80px"
+             index={1} 
+            width="150px"
+            hight="100px"
              onClick={this.onCancel}
              label = "Cancel"
             >

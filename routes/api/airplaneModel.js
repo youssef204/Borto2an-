@@ -11,14 +11,16 @@ const authenticate = require("./Authentication");
  *    description: An endpoint to search the airplane models in the database
  *    parameters:
  *      - in: query
- *        description: json indication the exact search criteria for airplane models
+ *        description: the exact search criteria for airplane models
  *    responses:
  *      '401':
- *        description: the requester is not as admin
+ *        description: the requester is not an admin
  *      '200':
  *        description: requested airplane models are returned to the requester
  *      '404':
  *        description: error in the request sent to the database
+ *    tags:
+ *      - AirplaneModel
  */
 
 airplaneModel_router.get("/", authenticate , function (req, res, next) {
@@ -46,6 +48,8 @@ airplaneModel_router.get("/", authenticate , function (req, res, next) {
  *        description: all airplane models are returned to the requester
  *      '404':
  *        description: error in the request sent to the database
+ *    tags:
+ *      - AirplaneModel
  */
 
 airplaneModel_router.get("/showAllModels",authenticate, (req, res) => {
@@ -67,11 +71,13 @@ airplaneModel_router.get("/showAllModels",authenticate, (req, res) => {
  *        
  *    responses:
  *      '401':
- *        description: the requester is not as admin
+ *        description: the requester is not an admin
  *      '200':
  *        description: the target airplane model is updated in the database
  *      '400':
  *        description: error in the request sent to the database
+ *    tags:
+ *      - AirplaneModel
  */
 
 airplaneModel_router.put("/", authenticate , (req, res) => {
@@ -102,6 +108,8 @@ airplaneModel_router.put("/", authenticate , (req, res) => {
  *        description: the target airplane model is deleted from the database
  *      '404':
  *        description: error in the request sent to the database
+ *    tags:
+ *      - AirplaneModel
  */
 
 airplaneModel_router.delete("/:id",authenticate ,  async (req, res) => {
@@ -134,6 +142,8 @@ airplaneModel_router.delete("/:id",authenticate ,  async (req, res) => {
  *        description: the target airplane model is retrieved from the database
  *      '404':
  *        description: error in the request sent to the database
+ *    tags:
+ *      - AirplaneModel
  */
 
 
@@ -162,6 +172,8 @@ airplaneModel_router.get("/:id",authenticate ,  async (req, res) => {
  *        description: the requester is not an admin
  *      '404':
  *        description: error in the request sent to the database
+ *    tags:
+ *      - AirplaneModel
  */
 
 airplaneModel_router.post("/",authenticate , async (req, res) => {

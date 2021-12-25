@@ -71,6 +71,8 @@ function isValidUpdate(entry) {
  *        description: the requester is not an admin
  *      '500':
  *        description: error in the request sent to the database
+ *    tags:
+ *      - User
  */
 
 user_Router.get("/:id",authenticate, (req, res) => {
@@ -95,6 +97,9 @@ user_Router.get("/:id",authenticate, (req, res) => {
  *        description: the target User is retrieved from the database
  *      '403':
  *        description: unauthorized user
+ * 
+ *    tags:
+ *      - User
  */
 
 user_Router.get("/",authenticate, async(req, res) => {
@@ -118,6 +123,8 @@ user_Router.get("/",authenticate, async(req, res) => {
  *        description: invalid user provided
  *      '500':
  *        description: database error
+ *    tags:
+ *      - User
  */
 
 //create
@@ -163,6 +170,8 @@ user_Router.post("/register", async(req, res) => {
  *        description: the target user is updated in the database
  *      '400':
  *        description: error in the request sent to the database
+ *    tags:
+ *      - User
  */
 
 //update
@@ -186,7 +195,7 @@ user_Router.put("/", authenticate , async (req, res) => {
  * @swagger
  * /api/user/password/:
  *  put:
- *    description: An endpoint to update a user password in the database. The request body should contain _id of target user, and an update JSON that specifies that the password must be updated. The old user password is compared with the hasehd password in the database. If the passwords match, the old password is updated to the new password.
+ *    description: An endpoint to update a user password in the database. The request body should contain _id of target user, and an update JSON that specifies that the password must be updated. The old user password is compared with the hasehd password in the database. If the passwords match, the old password is updated to the new password hashed.
  *        
  *    responses:
  *      '422':
@@ -197,6 +206,8 @@ user_Router.put("/", authenticate , async (req, res) => {
  *        description: the target user password is updated in the database
  *      '400':
  *        description: error in the request sent to the database
+ *    tags:
+ *      - User
  */
 
 user_Router.put("/password", authenticate , async (req, res) => {
@@ -232,6 +243,8 @@ user_Router.put("/password", authenticate , async (req, res) => {
  *        description: the target user is deleted from the database
  *      '404':
  *        description: error in the request sent to the database
+ *    tags:
+ *      - User
  */
 
 

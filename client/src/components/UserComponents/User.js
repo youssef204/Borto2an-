@@ -301,7 +301,8 @@ class User extends Component {
             <Button  
               index={1}
               label="Change Password"
-              width="190px"
+              width="250px"
+              hight="100px"
               onClick = {this.changePassword}
             >
             </Button>
@@ -313,9 +314,10 @@ class User extends Component {
           <Button
           index={1}
           label="Show my reservations"
+          width="250px"
+          hight="100px"
           onClick = {this.showReservations}
         >
-
         </Button>          
           }
           </Stack>
