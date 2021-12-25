@@ -1,0 +1,308 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Borto2an</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__left">
+    <div class="stackedit__toc">
+      
+<ul>
+<li><a href="#welcome-to-borto2an-airways">Welcome to Borto2an Airways!</a>
+<ul>
+<li><a href="#motivation">Motivation</a></li>
+<li><a href="#build-status">Build Status</a></li>
+<li><a href="#tech-used">Tech Used</a></li>
+<li><a href="#installation">Installation</a>
+<ul>
+<li></li>
+</ul>
+</li>
+<li><a href="#features">Features</a></li>
+<li><a href="#api-reference">API Reference</a></li>
+<li><a href="#credits">Credits</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+  </div>
+  <div class="stackedit__right">
+    <div class="stackedit__html">
+      <h1 id="welcome-to-borto2an-airways">Welcome to Borto2an Airways!</h1>
+<p>Borto2an Airways is a flight reservation website that allows you to travel the world by searching and reserving flights from different airline companies.<br>
+All your flights are now at one place with a couple of clicks away! 😃</p>
+<h2 id="motivation">Motivation</h2>
+<p>This project is done in groups of 5 for the Advanced Computer Lab (ACL) 2021  at the German University in Cairo. It’s the practical extension to the Software Engineering course where we were required to learn the software development lifecycle and follow the agile methodology. We tried to follow the industry best practices as much as we can to get the most out of it.</p>
+<h2 id="build-status">Build Status</h2>
+<p>Borto2an Airways went through 3 sprints, each took approximately 3 weeks. Each sprint was addressing some functional and non-functional requirements. Finally, the project came to an end.<br>
+Borto2an is currently available only on local host. So, stay tuned for our launch! 😃</p>
+<blockquote>
+<p><strong>Note</strong>:<br>
+This project is done for educational purposes only. Please, don’t use your real credit card to pay inside the website.</p>
+</blockquote>
+<h2 id="tech-used">Tech Used</h2>
+<ol>
+<li>MERN Stack (MongoDB, Express JS, React JS and Node JS) for development.</li>
+<li>Git for version control and GitHub for collaboration.</li>
+<li>MUI components in frontend.</li>
+</ol>
+<h2 id="installation">Installation</h2>
+<ol>
+<li>Clone this repo into your computer.</li>
+<li>Go to <strong>Borto2an-</strong> Folder.</li>
+<li>Open your terminal and install backend dependencies using <code>npm install</code>.</li>
+<li>Go to <strong>client</strong> Folder <code>cd /client</code>.</li>
+<li>Install frontend dependencies using <code>npm install</code>.</li>
+<li>Create <strong>.env</strong> file in <strong>Borto2an-</strong> Folder where you will add sensitive keys and variables.</li>
+<li>Run the project using <code>npm run conc</code>.</li>
+</ol>
+<blockquote>
+<p>You must have <a href="https://nodejs.org/en/download/">Node JS</a> installed on your machine. It also comes with NPM which we need to run the project.</p>
+</blockquote>
+<h4 id="required-environment-variables">Required Environment Variables:</h4>
+
+<table>
+<thead>
+<tr>
+<th align="center">Key</th>
+<th align="center">Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">MONGODB_URI</td>
+<td align="center">Mongo DB URI to connect to database</td>
+</tr>
+<tr>
+<td align="center">ACCESS_TOKEN_SECRET</td>
+<td align="center">Secret key for hashing access tokens</td>
+</tr>
+<tr>
+<td align="center">REFRESH_TOKEN_SECRET</td>
+<td align="center">Secret key for hashing refresh tokens</td>
+</tr>
+<tr>
+<td align="center">STRIPE_PRIVATE_KEY</td>
+<td align="center">Stripe key of your account to accept payments</td>
+</tr>
+</tbody>
+</table><p>You can request access to our environment variables <a href="https://drive.google.com/file/d/1Nr_56AMkoa1KdnkHdU9ZLcQEX7WSkwRK/view?usp=sharing">Here</a></p>
+<h2 id="features">Features</h2>
+<p>Here are some of the features in Borto2an Airways:</p>
+<ul>
+<li>Three types of users: Admin - Guest - Registered User.</li>
+<li>Admin can create, search, update, and delete flights.</li>
+<li>Guest/Registered users can search flights by dates, departure, and destinations airports.</li>
+<li>There are Economy, Business, and First class cabins available to choose from, each with different baggage and price.</li>
+<li>Registered user is able to select seats and pay for flights using his credit card.</li>
+<li>Registered user can create, update, and delete his reservations.</li>
+<li>Emails are sent to users with reservation details or updates.</li>
+<li>Secure payment using Stripe API.</li>
+<li>Hashed passwords and secured endpoints using JWT.</li>
+</ul>
+<p>Bonus features:</p>
+<ul>
+<li>If you forgot password, an email will be sent to you to reset it.</li>
+</ul>
+<p>The functional and non-functional requirements for this project can be found <a href="https://docs.google.com/spreadsheets/d/121vfPRgcWcTwmq594tKWsS6iJbgwPBKqQXvL6zHh2SM/edit?usp=sharing">Here</a>.</p>
+<h2 id="api-reference">API Reference</h2>
+<p>The server contains several endpoints, each of them is secured and made only available for specific users.</p>
+<ul>
+<li>For detailed API documentation, download and run the project on your local machine, and then go to <code>http://localhost:8000/api-docs</code></li>
+</ul>
+<h3 id="overview-of-the-available-routes">Overview of the available routes:</h3>
+<h4 id="flight-routes-apiflights">Flight routes <code>/api/flights/</code>:</h4>
+
+<table>
+<thead>
+<tr>
+<th align="center">Endpoint</th>
+<th align="center">Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">GET <code>/</code></td>
+<td align="center">Search flights based on search criteria</td>
+</tr>
+<tr>
+<td align="center">GET <code>/showAllflights</code></td>
+<td align="center">Get all flights</td>
+</tr>
+<tr>
+<td align="center">POST <code>/</code></td>
+<td align="center">Create a new flight</td>
+</tr>
+<tr>
+<td align="center">PUT <code>/</code></td>
+<td align="center">Update an existing flight</td>
+</tr>
+<tr>
+<td align="center">DELETE <code>/:id</code></td>
+<td align="center">Delete flight with given id</td>
+</tr>
+</tbody>
+</table><h4 id="airplane-model-routes-apiairplanemodel">Airplane Model routes <code>/api/airplaneModel/</code>:</h4>
+
+<table>
+<thead>
+<tr>
+<th align="center">Endpoint</th>
+<th align="center">Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">GET <code>/</code></td>
+<td align="center">Get airplane models based on search criteria</td>
+</tr>
+<tr>
+<td align="center">GET <code>/:id</code></td>
+<td align="center">Get airplane model with given id</td>
+</tr>
+<tr>
+<td align="center">GET <code>/showAllModels</code></td>
+<td align="center">Get all airplane models</td>
+</tr>
+<tr>
+<td align="center">POST <code>/</code></td>
+<td align="center">Create a new airplane model</td>
+</tr>
+<tr>
+<td align="center">PUT <code>/</code></td>
+<td align="center">Update an existing airplane model</td>
+</tr>
+<tr>
+<td align="center">DELETE <code>/:id</code></td>
+<td align="center">Delete airplane model with given id</td>
+</tr>
+</tbody>
+</table><h4 id="reservation-routes-apireservations">Reservation routes <code>/api/reservations/</code>:</h4>
+
+<table>
+<thead>
+<tr>
+<th align="center">Endpoint</th>
+<th align="center">Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">GET <code>/</code></td>
+<td align="center">Get all reservations of a user</td>
+</tr>
+<tr>
+<td align="center">GET <code>/sendItinerary/:id</code></td>
+<td align="center">Send details of the reservation with given id to the user’s email</td>
+</tr>
+<tr>
+<td align="center">POST <code>/</code></td>
+<td align="center">Create a new Reservation</td>
+</tr>
+<tr>
+<td align="center">PUT <code>/</code></td>
+<td align="center">Update an existing Reservation</td>
+</tr>
+<tr>
+<td align="center">DELETE <code>/:id</code></td>
+<td align="center">Delete Reservation with given id</td>
+</tr>
+</tbody>
+</table><h4 id="user-routes-apiuser">User routes <code>/api/user/</code>:</h4>
+
+<table>
+<thead>
+<tr>
+<th align="center">Endpoint</th>
+<th align="center">Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">GET <code>/</code></td>
+<td align="center">Get all users</td>
+</tr>
+<tr>
+<td align="center">GET <code>/:id</code></td>
+<td align="center">Get user with given id</td>
+</tr>
+<tr>
+<td align="center">POST <code>/register</code></td>
+<td align="center">Create a new user</td>
+</tr>
+<tr>
+<td align="center">PUT <code>/</code></td>
+<td align="center">Update an existing user’s info</td>
+</tr>
+<tr>
+<td align="center">PUT <code>/password</code></td>
+<td align="center">Update an existing user’s password</td>
+</tr>
+<tr>
+<td align="center">DELETE <code>/:id</code></td>
+<td align="center">Delete user with given id</td>
+</tr>
+</tbody>
+</table><h4 id="authentication-routes-apiuserauth">Authentication routes <code>/api/user/auth</code>:</h4>
+
+<table>
+<thead>
+<tr>
+<th align="center">Endpoint</th>
+<th align="center">Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">POST <code>/login</code></td>
+<td align="center">login user and return his access token</td>
+</tr>
+<tr>
+<td align="center">POST <code>/reset</code></td>
+<td align="center">reset password of a given user</td>
+</tr>
+<tr>
+<td align="center">POST <code>/refreshToken</code></td>
+<td align="center">Refresh the expired access token of a user</td>
+</tr>
+<tr>
+<td align="center">DELETE <code>/logout</code></td>
+<td align="center">logout user with given access token</td>
+</tr>
+</tbody>
+</table><h4 id="payment-routes-apipayment">Payment routes <code>/api/payment/</code>:</h4>
+
+<table>
+<thead>
+<tr>
+<th align="center">Endpoint</th>
+<th align="center">Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">POST <code>/create-session</code></td>
+<td align="center">create a new Stripe payment session for a given reservation</td>
+</tr>
+</tbody>
+</table><h2 id="credits">Credits</h2>
+<p>Borto2an is up and running thanks to the effort of these people.</p>
+<ul>
+<li><a href="https://github.com/PeterFahmi">Peter Fahmi</a></li>
+<li><a href="https://github.com/youssef204">Youssef Amin</a></li>
+<li><a href="https://github.com/mohamedeshiba">Mohamed Eshiba</a></li>
+<li><a href="https://github.com/HeshamMoneer">Hesham Moneer</a></li>
+<li><a href="https://github.com/omarkhair">Omar Khair</a></li>
+</ul>
+
+    </div>
+  </div>
+</body>
+
+</html>
