@@ -1,6 +1,9 @@
 import React from "react";
 import axios from "axios";
-import { TextField , Grid} from "@mui/material";
+import { Button , TextField , Grid,Container,ThemeProvider,createTheme,CssBaseline,Box} from "@mui/material";
+
+const theme = createTheme();
+
 
 class CreateModel extends React.Component {
     constructor(){
@@ -56,12 +59,34 @@ class CreateModel extends React.Component {
   };
 
     render() { 
-        return (<>
+        return (
+        <>
         <br></br>
-        <div className="createFlight-container">
-              <form className=" UpdateForm-container" noValidate onSubmit={this.onSubmit}>
-              <h2>Create New Model </h2>
+        <div
+          className="TripTitleDiv"
+          style={{
+            height: "130px",
+            marginBottom: "20px",
+            paddingBottom: "50px",
+          }}
+        >
+            <div class="TripTitleText">Create New Flight Model</div>
+          <img class="Trip-bg" src="admin.jpg" style={{position:"relative",top:-150}}/>
+          </div>
               <br></br>
+              <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'left',
+          }}
+        >
+          
+          <Box component="form" sx={{ mt: 3 }}>
+
 
                 {/* Model Name:
                 <div>
@@ -76,10 +101,11 @@ class CreateModel extends React.Component {
                 <Grid item xs={12}>
                   <TextField
                     type='text'
-                    placeholder='Model Name'
+                    label='Model Name'
                     name='name'
                     onChange={this.onChange}
                     fullWidth
+                    autoFocus
                   />
                  </Grid>
                  <br/>
@@ -97,8 +123,9 @@ class CreateModel extends React.Component {
                     type='number'
                     name='economyRows'
                     onChange={this.onChange}
-                    placeholder="No. economy rows"
+                    label="No. economy rows"
                     fullWidth
+                    autoFocus
                   />
                  </Grid>
                  <br/>
@@ -116,8 +143,9 @@ class CreateModel extends React.Component {
                     type='number'
                     name='economyColumns'
                     onChange={this.onChange}
-                    placeholder="No. economy columns"
+                    label="No. economy columns"
                     fullWidth
+                    autoFocus
                   />
                  </Grid>
                  <br/>
@@ -135,8 +163,9 @@ class CreateModel extends React.Component {
                     type='number'
                     name='businessRows'
                     onChange={this.onChange}
-                    placeholder="No. business rows"
+                    label="No. business rows"
                     fullWidth
+                    autoFocus
                   />
                  </Grid>
                  <br/>
@@ -154,8 +183,9 @@ class CreateModel extends React.Component {
                     type='number'
                     name='businessColumns'
                     onChange={this.onChange}
-                    placeholder="No. business columns"
+                    label="No. business columns"
                     fullWidth
+                    autoFocus
                   />
                  </Grid>
                  <br/>
@@ -173,8 +203,9 @@ class CreateModel extends React.Component {
                     type='number'
                     name='firstClassRows'
                     onChange={this.onChange}
-                    placeholder="No. first class rows"
+                    label="No. first class rows"
                     fullWidth
+                    autoFocus
                   />
                  </Grid>
                  <br/>
@@ -192,18 +223,28 @@ class CreateModel extends React.Component {
                     type='number'
                     name='firstClassColumns'
                     onChange={this.onChange}
-                    placeholder="No. first class columns"
+                    label="No. first class columns"
                     fullWidth
+                    autoFocus
                   />
                  </Grid>
                  <br/>
 
-                <button>
-                  Create
-                </button>
-              </form>
-              </div>
-              <br></br>
+                 <Grid>
+              <Button
+              type = "submit"
+              variant="contained"
+              sx={{margin:"auto", mt: 3, mb: 2 ,backgroundColor:"#ee0000"}}
+            
+            >
+              Create Model 
+            </Button> 
+            </Grid>
+
+                </Box>
+                </Box>
+      </Container>
+    </ThemeProvider>
           </>
     );
     }
