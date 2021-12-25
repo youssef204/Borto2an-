@@ -98,7 +98,8 @@ class ReservationSummary extends React.Component {
     this.postReservation();
     // console.log(JSON.parse(localStorage.getItem('reservationSummary')));
     // console.log(JSON.parse(localStorage.getItem('EditedReservation')));
-    this.clearStorage();
+    //TODO:  remove comment
+    //this.clearStorage();
   }
 
   clearStorage = () => {
@@ -150,21 +151,21 @@ class ReservationSummary extends React.Component {
             borderLeft={2}
             borderRight={2}
             borderColor="#a9a9a9"
-            sx={{ p: 5 }}
+            sx={{ p: 1 }}
             style={{
               backgroundColor: "rgba(255, 255, 255, 0.4)",
               width: "40%",
             }}
           >
-            <Stack style={{ margin: "2px" }}>
+            <Stack>
               <div
                 style={{
                   display: "flex",
                   justifyContent: "space-around",
                 }}
               >
-                <label style={{ fontSize: "24px", fontWeight: "bold" }}>
-                  THANK YOU FOR CHOOSING US!
+                <label style={{ font: "35px Montserrat" }}>
+                  Thank you for choosing us!
                 </label>
               </div>
             </Stack>
@@ -177,22 +178,20 @@ class ReservationSummary extends React.Component {
               }}
             >
               <div>
-                <Stack style={{ margin: "2px" }}>
+                <Stack>
                   <div
                     style={{
                       display: "flex",
                       justifyContent: "space-around",
-                      marginRight: "20px",
                     }}
                   >
-                    <label style={{ fontSize: "16px", fontWeight: "16" }}>
+                    <label style={{ fontSize: "20px", fontWeight: "16" }}>
                       Departure Flight Details
                     </label>
                   </div>
                 </Stack>
                 <br />
-                <div>
-                  <br />
+                <div style={{ fontSize: "15px" }}>
                   Flight Number: {Reservation.flight1.flightNumber}
                   <br />
                   From Airport: {Reservation.flight1.departure.airport}
@@ -238,97 +237,102 @@ class ReservationSummary extends React.Component {
               </div>
               <hr />
               <div>
-                <Stack style={{ margin: "2px" }}>
+                <Stack>
                   <div
                     style={{
                       display: "flex",
                       justifyContent: "space-around",
                     }}
                   >
-                    <label style={{ fontSize: "16px", fontWeight: "16" }}>
+                    <label style={{ fontSize: "20px", fontWeight: "16" }}>
                       Return Flight Details
                     </label>
                   </div>
                 </Stack>
                 <br />
-                <br />
-                Flight Number: {Reservation.flight2.flightNumber}
-                <br />
-                From Airport: {Reservation.flight2.departure.airport}
-                <br />
-                From Terminal: {Reservation.flight2.departure.terminal}
-                <br />
-                From Time:{" "}
-                {Reservation.flight2.departure.time.substring(0, 10) +
-                  " at " +
-                  Reservation.flight2.departure.time.substring(11, 16)}
-                <br />
-                To Airport: {Reservation.flight2.arrival.airport}
-                <br />
-                To Terminal: {Reservation.flight2.arrival.terminal}
-                <br />
-                To Time:{" "}
-                {Reservation.flight2.arrival.time.substring(0, 10) +
-                  " at " +
-                  Reservation.flight2.arrival.time.substring(11, 16)}
-                <br />
-                Airline: {Reservation.flight2.airline}
-                <br />
-                Has Transit: {Reservation.flight2.hasTransit.toString()}
-                <br />
-                Reserved Seats:{" "}
-                {Reservation.selectedArrSeats
-                  .slice(0, Reservation.selectedArrSeats.length - 1)
-                  .map((entry) => entry + " , ")}{" "}
-                {
-                  Reservation.selectedArrSeats[
-                    Reservation.selectedArrSeats.length - 1
-                  ]
-                }
-                <br />
-                Cabin: {Reservation.Reservation.returnFlight.cabin}
-                <br />
-                Number of Adults:{" "}
-                {Reservation.Reservation.returnFlight.noAdults}
-                <br />
-                Number of Children:{" "}
-                {Reservation.Reservation.returnFlight.noChildren}
-                <br /> <br />
+                <div style={{ fontSize: "15px" }}>
+                  Flight Number: {Reservation.flight2.flightNumber}
+                  <br />
+                  From Airport: {Reservation.flight2.departure.airport}
+                  <br />
+                  From Terminal: {Reservation.flight2.departure.terminal}
+                  <br />
+                  From Time:{" "}
+                  {Reservation.flight2.departure.time.substring(0, 10) +
+                    " at " +
+                    Reservation.flight2.departure.time.substring(11, 16)}
+                  <br />
+                  To Airport: {Reservation.flight2.arrival.airport}
+                  <br />
+                  To Terminal: {Reservation.flight2.arrival.terminal}
+                  <br />
+                  To Time:{" "}
+                  {Reservation.flight2.arrival.time.substring(0, 10) +
+                    " at " +
+                    Reservation.flight2.arrival.time.substring(11, 16)}
+                  <br />
+                  Airline: {Reservation.flight2.airline}
+                  <br />
+                  Has Transit: {Reservation.flight2.hasTransit.toString()}
+                  <br />
+                  Reserved Seats:{" "}
+                  {Reservation.selectedArrSeats
+                    .slice(0, Reservation.selectedArrSeats.length - 1)
+                    .map((entry) => entry + " , ")}{" "}
+                  {
+                    Reservation.selectedArrSeats[
+                      Reservation.selectedArrSeats.length - 1
+                    ]
+                  }
+                  <br />
+                  Cabin: {Reservation.Reservation.returnFlight.cabin}
+                  <br />
+                  Number of Adults:{" "}
+                  {Reservation.Reservation.returnFlight.noAdults}
+                  <br />
+                  Number of Children:{" "}
+                  {Reservation.Reservation.returnFlight.noChildren}
+                </div>
               </div>
             </div>
             <hr />
-            <Stack style={{ margin: "2px" }}>
+            <Stack>
               <div
                 style={{
                   display: "flex",
                   justifyContent: "space-around",
                 }}
               >
-                <label style={{ fontSize: "22px", fontWeight: "bold" }}>
+                <label style={{ font: "30px montserrat" }}>
                   Reservation Price
                 </label>
               </div>
             </Stack>
-            <Stack style={{ margin: "2px" }}>
+            <Stack>
               <div
                 style={{
                   display: "flex",
                   justifyContent: "space-around",
                 }}
               >
-                <label style={{ fontSize: "22px", fontWeight: "bold" }}>
+                <label
+                  style={{
+                    fontSize: "30px",
+                    color: "#107710",
+                  }}
+                >
                   {+Reservation.price1.split(" ")[0] +
                     +Reservation.price2.split(" ")[0]}{" "}
                   L.E
                 </label>
               </div>
             </Stack>
-            <Stack style={{ margin: "2px" }}>
+            <Stack>
               <div
                 style={{
                   display: "flex",
                   justifyContent: "space-around",
-                  marginTop: "30px",
+                  margin: "9px 0",
                 }}
               >
                 <Button
