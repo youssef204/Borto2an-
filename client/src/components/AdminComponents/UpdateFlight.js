@@ -126,6 +126,17 @@ class UpdateFlight extends React.Component {
     return (
       <>
         <br></br>
+        <div className="list " style={{
+  paddingBottom : "100px",
+  width : "50%",
+  marginTop : "50px"
+}}>
+        <div className="settings" style={{
+          justifyContent : "center",
+          alignContent : "center",
+          alignItems : "center"
+        }}>
+
         <div
           className="TripTitleDiv"
           style={{
@@ -134,17 +145,34 @@ class UpdateFlight extends React.Component {
             paddingBottom: "50px",
           }}
         >
-          <div class="TripTitleText">Update Flight Details</div>
-          <img
-            class="Trip-bg"
-            src="admin.jpg"
-            style={{ position: "relative", top: -150 }}
-          />
+           <div class="TripTitleText">Update Flight</div>
+          <img class="Trip-bg" src="admin.jpg" style = {{
+            left : "400px",
+            opacity : "0.7",top:-120
+          }}/>
+          </div>
         </div>
         <br></br>
+        <Box
+                        component="span"
+                        border={2}
+                        borderRadius={4}
+                        borderLeft={1}
+                        borderRight={1}
+                        borderColor="#a9a9a9"
+          sx={{
+            marginBottom:-10,
+            marginTop: -5,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+          style={{
+            backgroundColor: "rgba(255, 255, 255, 1)",
+          }}
+        >
         <ThemeProvider theme={theme}>
           <Container component="main" maxWidth="xs">
-            <CssBaseline />
             <Box
               sx={{
                 display: "flex",
@@ -154,7 +182,7 @@ class UpdateFlight extends React.Component {
             >
               <Box
                 component="form"
-                sx={{ mt: 3 }}
+                sx={{ mt: 5 }}
                 noValidate
                 onSubmit={this.onSubmit}
               >
@@ -626,7 +654,9 @@ class UpdateFlight extends React.Component {
             </Box>
           </Container>
         </ThemeProvider>
+        </Box>
         <br />
+        </div>
       </>
     );
   }
