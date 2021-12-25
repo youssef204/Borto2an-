@@ -1,11 +1,21 @@
 import axios from "axios";
 import React from "react";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
+import { Component } from 'react';
 import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button" 
+import Avatar from '@mui/material/Avatar';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+const theme = createTheme();
+
 class ChangePassword extends React.Component {
   constructor(props) {
     super(props);
@@ -105,50 +115,66 @@ class ChangePassword extends React.Component {
     return (
       <>
       <br></br> 
-      <div class="profile-container" >
-      <form className="ProfileForm-container" action="#" noValidate onSubmit={this.onSubmit}>
-        <h2 style={{
-            marginTop:"50px"
-        }}>Change Your Password </h2>    
-        <br></br>
-        {this.state.showMessage ? this.state.error === 'updated successfully' ? (
-                <label id="signSuccessMessage">{this.state.error}</label>
-              ) : <label id="signErrorMessage">{this.state.error}</label> : (
-                <br/>
-              )}
-        Old Password 
-              <input  className="profile-input" style={{marginBottom:"20px" , width:"80%"}} type="password"   name = "oldPassword"  onChange={this.onChange} />   
-        New Password 
-              <input  className="profile-input" style={{marginBottom:"20px" , width:"80%"}} type="password"   name = "newPassword" onChange={this.onChange} />
-
-        Confirm New Password
-              <input  className="profile-input" style={{marginBottom:"20px" , width:"80%"}} type="password"   name = "newPasswordConfirm" onChange={this.onChange}  />
-        <button>Update Password</button>
-        </form>
-        </div>
-        <br></br>
-        {/* <Dialog
-          open={this.state.open}
-          onClose={handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
+      <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
         >
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-           {!this.state.updated.oldPassword  || !this.state.updated.newPassword  ||
-           this.state.updated.newPasswordConfirm  ? "Please fill in all the fields" : this.state.updated.oldPassword !== this.state.updated.password ?
-              "Old password is not correct" : this.state.updated.newPassword !== this.state.updated.newPasswordConfirm ?
-              "Confirmation Password must match the New Password" : "Password Changed successfully!"}
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <button onClick={(!this.state.updated.oldPassword || !this.state.updated.newPassword ||
-           !this.state.updated.newPasswordConfirm  || this.state.updated.oldPassword !== this.state.updated.password 
-              || this.state.updated.newPassword !== this.state.updated.newPasswordConfirm) ?
-              this.onSubmit : handleClose}>Ok</button>
-          </DialogActions>
-        </Dialog> */}
-        </>
+      <Box component="form" sx={{ mt: 3 }}  noValidate onSubmit={this.onSubmit}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                type="password"   name = "oldPassword"  onChange={this.onChange}
+                  fullWidth
+                  label="Old Password"
+                  autoFocus
+                  required
+                />
+              </Grid>
+              <Grid item xs={12} >
+                <TextField
+                  type="password"   name = "newPassword" onChange={this.onChange}
+                  fullWidth
+                  label="New Password"
+                  autoFocus
+                  required
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  type="password"   name = "newPasswordConfirm" onChange={this.onChange}
+                  fullWidth
+                  label="Confirm Password"
+                  autoFocus
+                  required
+                />
+              </Grid>
+
+              <Button
+              type = "submit"
+              variant="contained"
+              
+              sx={{margin:"auto", mt: 3, mb: 2 ,backgroundColor:"#ee0000"}}
+            
+            >
+              Update Password
+            </Button>
+
+           
+            
+            </Grid>
+              
+          </Box>
+          </Box>
+      </Container>
+    </ThemeProvider>
+    </>
     );
   }
 }

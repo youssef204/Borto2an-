@@ -203,9 +203,23 @@ class TripSummary extends React.Component {
 
     return (
       <div
-      style={{backgroundImage: `url("https://i.pinimg.com/originals/48/7b/c1/487bc14012c5b2ceac9a29d8ed6406dd.jpg")` 
-    }}
-      >
+     // style={{backgroundImage: `url("https://i.pinimg.com/originals/48/7b/c1/487bc14012c5b2ceac9a29d8ed6406dd.jpg")` 
+    //}}
+    >
+        <div className="settings" 
+        style={{
+          height : "130px",
+          marginBottom : "-20px",
+          paddingBottom : "50px"
+        }}>
+          <div class="flightTitleText" >
+           Trip Summary
+          </div>
+          <img class="flight-bg" src="departure.jpg" style={{
+            position:"absolute",
+            height:"300%"
+          }}  />
+        </div>
           <Stack>
             <br />
             <br />
@@ -223,7 +237,7 @@ class TripSummary extends React.Component {
                 borderLeft={2}
                 borderRight={2}
                 borderColor="#a9a9a9"
-                sx={{ p: 1 }}
+                sx={{ p: 3 }}
                 style={{
                   backgroundColor : "rgba(255, 255, 255, 0.4)"
                 }}
@@ -434,7 +448,7 @@ class TripSummary extends React.Component {
                 borderLeft={2}
                 borderRight={2}
                 borderColor="#a9a9a9"
-                sx={{ p: 1 }}
+                sx={{ p: 3 }}
                 style = {{
                   backgroundColor :"rgba(255, 255, 255, 0.4)"
                 }}
@@ -634,14 +648,39 @@ class TripSummary extends React.Component {
   }
                 </div>
               </Box>
+
+
             </div>
             <div
               style={{
                 display: "flex",
                 justifyContent: "space-around",
+                margin: "10px",
+              }}
+            ></div>
+          </Stack>
+          <div
+            style={{
+              width: "100%",
+              height: "85px",
+              backgroundColor: "rgba(20, 20, 20, 0.9)",
+              marginBottom : "-30px"
+            }}
+          >
+            <Stack direction= "row"
+             style={{
+               justifyContent: "space-around",
+             }}>
+                        <div
+              style={{
+                color:"#EEEEEE",
+                display: "flex",
+                justifyContent: "space-around",
+                paddingTop : "15px"
               }}
             >
-                     {!this.state.edited ?
+  
+          {!this.state.edited ?
                   <label
                     style={{
                       fontSize: "22px",
@@ -680,24 +719,8 @@ class TripSummary extends React.Component {
                    (+this.state.price2.split(" ")[0] + +this.state.price1.split(" ")[0])} L.E
                 </label>
   }
-            </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-around",
-                margin: "10px",
-              }}
-            ></div>
-          </Stack>
-          <div
-            style={{
-              width: "100%",
-              height: "85px",
-              backgroundColor: "rgba(20, 20, 20, 0.9)",
-              marginBottom : "-30px"
-            }}
-          >
-            <div style={{ marginLeft: "70%", paddingTop: "25px" }}>
+              </div>
+            <div style={{paddingTop: "25px" }}>
               <Button
                 label= {this.state.edited ? "Update Reservation" : "Place Reservation"}
                 index={1}
@@ -706,6 +729,8 @@ class TripSummary extends React.Component {
                 onClick={handleClickOpen}
               ></Button>
             </div>
+            
+            </Stack>
           </div>
          {//case it is not an edit ----------------------------------------
          }
