@@ -275,7 +275,15 @@ onShowReservations=()=>{
                   }}
                 >
 
-<button  onClick={this.onShowReservations}>Show All Reservations</button>
+<Button
+              variant="contained"
+              onClick = {this.onShowReservations}
+              
+              sx={{margin:"auto", mt: 3, mb: 2 ,backgroundColor:"#ee0000"}}
+            
+            >
+              Show all reservations
+            </Button>
                   {/* <Button
                   width={150}
                   index={2}

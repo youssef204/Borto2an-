@@ -113,8 +113,7 @@ class ChangePassword extends React.Component {
     //     this.setState({ open: false });
     //   };
     return (
-      <>
-      <br></br> 
+      <div>
       <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -174,7 +173,7 @@ class ChangePassword extends React.Component {
           </Box>
       </Container>
     </ThemeProvider>
-    </>
+    </div>
     );
   }
 }

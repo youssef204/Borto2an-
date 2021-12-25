@@ -131,8 +131,8 @@ class User extends Component {
       }
     if(this.state.user)
     return (
-        <>
-        <br></br>
+<>
+          <br></br>
           <h2 style={{
               marginBottom : "20px",
               marginTop: "20px"
@@ -148,6 +148,7 @@ class User extends Component {
               src={imagePreviewUrl} 
               name={name} 
               status={status}/>)}
+
       <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -167,7 +168,9 @@ class User extends Component {
                 type="text"  value={this.state.user.firstName} name = "firstName" onChange={this.onChange}
                   fullWidth
                   label="First Name"
-                  autoFocus
+                  InputProps={{
+                    readOnly: true,
+                  }}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -175,7 +178,10 @@ class User extends Component {
                   type="text"  value={this.state.user.lastName} name = "firstName" onChange={this.onChange}
                   fullWidth
                   label="Last Name"
-                  autoFocus
+                  InputProps={{
+                    readOnly: true,
+                  }}
+                  
                 />
               </Grid>
               <Grid item xs={12}>
@@ -183,7 +189,10 @@ class User extends Component {
                   type="email"  value={this.state.user.email}  name = "email" onChange={this.onChange}
                   fullWidth
                   label="Email"
-                  autoFocus
+                  InputProps={{
+                    readOnly: true,
+                  }}
+                  
                 />
               </Grid>
 
@@ -193,7 +202,9 @@ class User extends Component {
                type="number"  value={this.state.user.passportNumber}  name = "passportNumber" onChange={this.onChange}
                fullWidth
                label="passportNumber"
-               autoFocus
+               InputProps={{
+                readOnly: true,
+              }}
              />
            </Grid>
             
@@ -204,7 +215,9 @@ class User extends Component {
                type="text"  value={this.state.user.homeAddress}  name = "homeAddress" onChange={this.onChange}
                fullWidth
                label="Home Address"
-               autoFocus
+               InputProps={{
+                readOnly: true,
+              }}
              />
            </Grid>
 
@@ -213,8 +226,9 @@ class User extends Component {
                type="number"  value={this.state.user.telephoneNumber} name = "telephoneNumber" onChange={this.onChange} 
                fullWidth
                label="Mobile Number"
-               autoFocus
-               readonly
+               InputProps={{
+                readOnly: true,
+              }}
              />
            </Grid>
 
@@ -223,8 +237,9 @@ class User extends Component {
                type="number"  value={this.state.user.countryCode} name = "countryCode" onChange={this.onChange}
                fullWidth
                label="Country Code"
-               autoFocus
-               readonly
+               InputProps={{
+                readOnly: true,
+              }}
              />
            </Grid>
 
@@ -239,7 +254,7 @@ class User extends Component {
               inline = {true}  
 
               sx={{display:"inline-block"
-                ,padding:"5px 5px", mt: 3, mb: 2,mr:24 ,backgroundColor:"#ee0000"}}
+                ,padding:"5px 5px", mt: 3, mb: 2 ,backgroundColor:"#ee0000"}}
               onClick = {this.changePassword}
             >
               Change Password
@@ -247,7 +262,7 @@ class User extends Component {
 
             <Button
           
-          sx={{padding:"5px 5px", mt: 3, mb: 2,mr:27 ,backgroundColor:"#ee0000"}}
+          sx={{padding:"5px 5px", mt: 3, mb: 2 ,ml:"10px",backgroundColor:"#ee0000"}}
           variant="contained"
           onClick = {this.updateData}
         >
@@ -263,7 +278,7 @@ class User extends Component {
           variant="contained"
           inline = {true}  
           sx={{
-          padding:"5px 5px", mt: 3, mb: 2 ,mr:19,backgroundColor:"#ee0000"}}
+          padding:"5px 5px", mt: 3, mb: 2 ,backgroundColor:"#ee0000"}}
           onClick = {this.showReservations}
         >
           Show my reservations
@@ -279,7 +294,7 @@ class User extends Component {
         <Button
               
               variant="contained"
-              sx={{padding:"5px 5px", mt: 3, mb: 2 ,ml:180 ,backgroundColor:"#ee0000"}}
+              sx={{padding:"5px 5px", mt: 3, mb: 2  ,backgroundColor:"#ee0000"}}
               onClick = {this.logout}
             >
               Logout
@@ -290,6 +305,7 @@ class User extends Component {
       </Container>
     </ThemeProvider>
    
+  
     </>
   );
     

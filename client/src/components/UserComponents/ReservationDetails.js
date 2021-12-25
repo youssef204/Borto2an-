@@ -120,9 +120,11 @@ class ReservationDetails extends React.Component {
     const renderMainButtons = (reservationDeleted) => {
       if (!reservationDeleted) {
         return (<React.Fragment>
-            <button onClick={handleClickOpen}>Delete</button>
-            <button onClick={sendItinerary}>Email Itinerary</button>
-            <button onClick={handleClickOpenUpdate}>Update Reservation</button>
+            <Button onClick={handleClickOpen} variant="contained"
+              
+              sx={{margin:"auto", mt: 3, mb: 2 ,backgroundColor:"#ee0000"}} >Delete</Button>
+            <Button onClick={sendItinerary} variant="contained"  sx={{margin:"auto", mt: 3, mb: 2 ,backgroundColor:"#ee0000"}}  >Email Itinerary</Button>
+            <Button onClick={handleClickOpenUpdate} variant="contained"  sx={{margin:"auto", mt: 3, mb: 2 ,backgroundColor:"#ee0000"}}>Update Reservation</Button>
             </React.Fragment>
         );
       }else{
@@ -140,6 +142,7 @@ class ReservationDetails extends React.Component {
             display: "flex",
             justifyContent: "space-around",
             alignItems: "center",
+            marginTop:"30px"
           }}
         >
           <Box
@@ -204,7 +207,7 @@ class ReservationDetails extends React.Component {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleClose} >Cancel</Button>
             <Button onClick={onClick} autoFocus>
               Delete
             </Button>
