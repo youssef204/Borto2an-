@@ -1,4 +1,3 @@
-import React from "react";
 import axios from "axios";
 
 import Box from "@mui/material/Box";
@@ -6,6 +5,17 @@ import Skeleton from "@mui/material/Skeleton";
 
 import Model from "./Model";
 import { Component } from "react";
+
+
+import * as React from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import "../UserComponents/ReservationsCSS.css";
 
 class AllFlights extends Component {
   constructor(props) {
@@ -58,7 +68,7 @@ class AllFlights extends Component {
     let modellist;
     const models = this.state.models;
     if (!models) {
-      modellist = "there is no flights !";
+      modellist = "there is no flight models !";
     } else {
       modellist = models.map((model) => (
         <Model
@@ -75,44 +85,124 @@ class AllFlights extends Component {
       ));
     }
 
-    const loadBody = (
-      <Box
-        sx={{
-          width: "80%",
-          margin: "auto",
-          marginTop: 5,
-          marginBottom: 5,
-        }}
-      >
-        <Skeleton className="skeleton" />
-        <Skeleton animation="wave" />
-        <Skeleton animation={false} />
-      </Box>
-    );
-    let tableBody =
-      this.state.minimumTime && !this.state.loading ? modellist : loadBody;
+    // const loadBody = (
+    //   <Box
+    //     sx={{
+    //       width: "80%",
+    //       margin: "auto",
+    //       marginTop: 5,
+    //       marginBottom: 5,
+    //     }}
+    //   >
+    //     <Skeleton className="skeleton" />
+    //     <Skeleton animation="wave" />
+    //     <Skeleton animation={false} />
+    //   </Box>
+    // );
+    // let tableBody =
+    //   this.state.minimumTime && !this.state.loading ? modellist : loadBody;
 
-    return (
-      <section>
-        <div class="tbl-header">
-          <table>
-            <th>Name</th>
-            <th>Economy Rows</th>
-            <th>Economy Columns</th>
-            <th>Business Rows</th>
-            <th>Business Columns</th>
-            <th>First Class Rows</th>
-            <th>First Class Columns</th>
-            <th>Delete Flight</th>
-          </table>
-          <div class="tbl-content">
-            <table cellpadding="0" cellspacing="0" border="0">
-              {tableBody}
-            </table>
+    // // return (
+    //   <section>
+    //     <div class="tbl-header">
+    //       <table>
+    //         <th>Name</th>
+    //         <th>Economy Rows</th>
+    //         <th>Economy Columns</th>
+    //         <th>Business Rows</th>
+    //         <th>Business Columns</th>
+    //         <th>First Class Rows</th>
+    //         <th>First Class Columns</th>
+    //         <th>Delete Flight</th>
+    //       </table>
+    //       <div class="tbl-content">
+    //         <table cellpadding="0" cellspacing="0" border="0">
+    //           {tableBody}
+    //         </table>
+    //       </div>
+    //     </div>
+    //   </section>
+    // );
+    if (!this.state.loading && this.state.minimumTime) {
+    if (this.state.models.length != 0) {
+      return (
+        <div style={{ width: "80%", margin: "auto", marginTop: "10px" }}>
+          <div className="reservationTitleDiv">
+            <div class="reservationTitleText">All Flight Models</div>
+            <img class="reservation-bg" src="departure.jpg" style={{
+              height : "380px"
+            }}/>
           </div>
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                <TableCell align="center" style={{ fontWeight: "bold" }}>
+                   Name
+                  </TableCell>
+                  <TableCell align="center" style={{ fontWeight: "bold" }}>
+                  Economy Rows
+                  </TableCell>
+                  <TableCell align="center" style={{ fontWeight: "bold" }}>
+                  Economy Columns &nbsp;
+                  </TableCell>
+                  <TableCell align="center" style={{ fontWeight: "bold" }}>
+                  Business Rows&nbsp;
+                  </TableCell>
+                  <TableCell align="center" style={{ fontWeight: "bold" }}>
+                  Business Columns&nbsp;
+                  </TableCell>
+                  <TableCell align="center" style={{ fontWeight: "bold" }}>
+                  First Class Rows&nbsp;
+                  </TableCell>
+                  <TableCell align="center" style={{ fontWeight: "bold" }}>
+                  First Class Columns&nbsp;
+                  </TableCell>
+                  <TableCell align="center" style={{ fontWeight: "bold" }}>
+                    &nbsp;
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>{modellist}</TableBody>
+            </Table>
+          </TableContainer>
         </div>
-      </section>
+      );
+    }
+    else {
+      return modellist;
+    }
+  } else {
+    return (
+      <div style={{ margin: "auto", width: "80%", marginTop: "10px" }}>
+        <div className="reservationTitleDiv">
+          <div class="reservationTitleText">All Flight Models</div>
+          <img class="reservation-bg" src="departure.jpg" style={{
+              height : "380px"
+            }} />
+        </div>
+        <div
+          style={{
+            backgroundColor: "#ffffff",
+            verticalAlign: "center",
+            paddingTop: "30px",
+          }}
+        >
+          <Box
+            sx={{
+              width: "80%",
+              margin: "auto",
+              minHeight: "100px",
+            }}
+          >
+            <Skeleton className="skeleton" />
+            <Skeleton animation="wave" />
+            <Skeleton animation={false} />
+          </Box>
+        </div>
+      </div>
     );
+          }
   }
 }
 
