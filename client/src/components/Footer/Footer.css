@@ -1,9 +1,8 @@
 .mainFooter {
   position: relative;
   width: 100%;
-  background: linear-gradient(#d0cccc, #ff416c);
-  min-height: 1500px;
-  padding: 20px 50px;
+  background: linear-gradient(#d0cccc, #ffffff);
+  padding: 20px 50px 0 50px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,7 +16,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px 0;
   flex-wrap: wrap;
 }
 
@@ -60,13 +58,13 @@
 }
 
 .menu__link:hover {
-  color: darkgray;
+  color: #fff;
   opacity: 1;
 }
 
 .mainFooter p {
   color: rgba(255, 255, 255, 0.9);
-  margin: 15px 0 10px 0;
+  margin: 15px 0 50px 0;
   font-size: 1rem;
   font-weight: 300;
 }
@@ -127,5 +125,8 @@
   }
 }
 .FooterText {
-  margin-top: 1300px;
+  width: 107%;
+  background-color: #141414ee;
+  margin-top: 50px;
+  padding-top: 100px;
 }
