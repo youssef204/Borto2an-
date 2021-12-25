@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 import { Button , TextField , Grid,Container,ThemeProvider,createTheme,Box} from "@mui/material";
+import MyButton from "../Button"
+
 
 const theme = createTheme();
 
@@ -81,7 +83,7 @@ class CreateModel extends React.Component {
             paddingBottom: "50px",
           }}
         >
-           <div class="TripTitleText">Creat Flight Model</div>
+           <div class="TripTitleText">Create Flight Model</div>
           <img class="Trip-bg" src="admin.jpg" style = {{
             left : "400px",
             opacity : "0.7",top:-120
@@ -257,15 +259,12 @@ class CreateModel extends React.Component {
                  </Grid>
                  <br/>
 
-                 <Grid>
-              <Button
-              type = "submit"
-              variant="contained"
-              sx={{margin:"auto", mt: 3, mb: 2 ,backgroundColor:"#ee0000"}}
-            
-            >
-              Create Model 
-            </Button> 
+                 <Grid style={{padding:10}}>
+              <MyButton
+              index={1}
+              label = "Create Model"
+              onClick={this.onSubmit}
+            />
             </Grid>
 
                 </Box>

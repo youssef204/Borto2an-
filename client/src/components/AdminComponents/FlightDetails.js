@@ -10,6 +10,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { Box, width } from "@mui/system";
 import Stack from "@mui/material/Stack";
 import logo from '../Logo/Logo.png';
+import MyButton from "../Button"
+import  {Grid} from "@mui/material";
 
 class FlightDetails extends React.Component {
   constructor(props) {
@@ -301,15 +303,22 @@ class FlightDetails extends React.Component {
             justifyContent:"space-around",
           }}>
 
-          <Stack direction = "row" style={{
+          <Stack spacing ={5} direction = "row" style={{
             justifyContent:"space-around",
           }}>
-          <Button onClick={handleClickOpen} variant="contained"
-              
-              sx={{margin:"auto", mt: 3, mb: 2 ,backgroundColor:"#ee0000"}} >Delete</Button>
-          <Button onClick={(e) => this.handleClick(e, state)} variant="contained"
-              
-              sx={{margin:"auto", mt: 3, mb: 2 ,backgroundColor:"#ee0000"}} >Update</Button>
+              <MyButton
+              index={1}
+              label = "Delete"
+              onClick={handleClickOpen}
+            />
+
+<MyButton
+              index={1}
+              label = "Update"
+              onClick={(e) => this.handleClick(e, state)}
+            />
+
+          
           </Stack>
           </div>
 
