@@ -11,6 +11,7 @@ import OutlinedTextField from "./OutlinedTextField";
 import Calendar from "./Calendar";
 import Footer from "./Footer/Footer";
 import { Button , TextField , Grid,Container,ThemeProvider,createTheme,CssBaseline,Box} from "@mui/material";
+import MyButton from "./Button"
 
 const theme = createTheme();
 
@@ -737,13 +738,13 @@ class SearchFlights extends React.Component {
              />
                 </Stack>
                 <Stack spacing={5}>
-                  <Button
+                  <MyButton
                     label="Search"
                     index={this.validateInput() ? 1 : 0} //{this.numberOfSelecetedInputs.includes(0) ? 0 : 1}
                     width={70}
                     height={40}
                     onClick={(e) => this.onSubmit(e, this.state)}
-                  ></Button>
+                  ></MyButton>
                 </Stack>
               </Stack>
             </Box>
