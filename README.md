@@ -37,6 +37,7 @@ MONGODB_URI | Mongo DB URI to connect to database
 ACCESS_TOKEN_SECRET | Secret key for hashing access tokens
 REFRESH_TOKEN_SECRET | Secret key for hashing refresh tokens
 STRIPE_PRIVATE_KEY | Stripe key of your account to accept payments
+BORTO_PW | Password of Borto2an email for Node Mailer
 
 You can request access to our environment variables [Here](https://drive.google.com/file/d/1Nr_56AMkoa1KdnkHdU9ZLcQEX7WSkwRK/view?usp=sharing)
 
