@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import SeatSelection from "./SeatSelection";
 import Button from "./Button.js";
 import "./FlightSeatsSelection.css";
+import { Box, width } from "@mui/system";
+import { Stack } from "@mui/material";
 
 class FlightSeatsSelection extends React.Component {
   state = {
@@ -134,7 +136,23 @@ class FlightSeatsSelection extends React.Component {
               paddingBottom: "100px",
             }}
           >
-            <div className="shadow p-3 m-3 bg-white rounded flex-Container-Row">
+            <Box
+              component="span"
+              border={2}
+              borderRadius={7.5}
+              borderLeft={1}
+              borderRight={1}
+              borderColor="#cdcdcd"
+              sx={{ p: 3 }}
+              boxShadow={30}
+              style={{
+                backgroundColor: "rgba(255, 255, 255, 0.8)",
+                height : "70%",
+                width : "40%" , 
+                marginTop : "10px",
+              }}
+            >
+              <Stack direction="row">
               <div className="seatElementText">
                 <label
                   style={{
@@ -155,8 +173,25 @@ class FlightSeatsSelection extends React.Component {
                   reservation={this.state.departureReservation}
                 />
               </div>
-            </div>
-            <div className="shadow p-3 m-3 bg-white rounded flex-Container-Row">
+              </Stack>
+            </Box>
+            <Box
+              component="span"
+              border={2}
+              borderRadius={7.5}
+              borderLeft={1}
+              borderRight={1}
+              borderColor="#cdcdcd"
+              sx={{ p: 3 }}
+              boxShadow={30}
+              style={{
+                backgroundColor: "rgba(255, 255, 255, 0.8)",
+                height : "70%",
+                width : "40%" , 
+                marginTop : "10px",
+              }}
+            >
+            <Stack direction="row">
               <div className="seatElementText">
                 <label
                   style={{
@@ -177,7 +212,8 @@ class FlightSeatsSelection extends React.Component {
                   reservation={this.state.arrivalReservation}
                 />
               </div>
-            </div>
+              </Stack>
+          </Box>
           </div>
           {/* ------------------------------------------ */}
           <div id="seatButton" className="seat-wrap">
@@ -213,5 +249,6 @@ class FlightSeatsSelection extends React.Component {
     );
   }
 }
+ //<div className="shadow p-3 m-3 bg-white rounded flex-Container-Row"> </div>
 
 export default FlightSeatsSelection;
