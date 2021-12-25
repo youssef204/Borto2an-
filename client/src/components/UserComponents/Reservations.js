@@ -43,7 +43,17 @@ class Reservations extends Component {
   render() {
     let reservationList;
     if (this.state.reservations.length == 0) {
-      reservationList = <p>you have no reservations</p>;
+      reservationList = (
+        <label
+          style={{
+            font: "30px Montserrat",
+            margin: "30px",
+            marginLeft: "430px",
+          }}
+        >
+          You have no reservations!
+        </label>
+      );
     } else {
       reservationList = this.state.reservations.map((reservation) => (
         <Reservation Reservation={reservation} />
@@ -87,7 +97,15 @@ class Reservations extends Component {
           </div>
         );
       } else {
-        return reservationList;
+        return (
+          <div style={{ width: "80%", margin: "auto", marginTop: "10px" }}>
+            <div className="reservationTitleDiv">
+              <div class="reservationTitleText">All Reservations</div>
+              <img class="reservation-bg" src="reservation.jpg" />
+            </div>
+            <TableContainer component={Paper}>{reservationList}</TableContainer>
+          </div>
+        );
       }
     } else {
       return (
