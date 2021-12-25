@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import DropDown from './ModelsDropDownList';
+import { TextField , Grid} from "@mui/material";
 
 class UpdateFlight extends React.Component {
   constructor(props) {
@@ -105,10 +106,14 @@ class UpdateFlight extends React.Component {
 
   render() {
     return (
-      <div>
+      <>
+      <div class="profile-container" >
+        <div class= "ProfileForm-container">
 
         <form noValidate onSubmit={this.onSubmit}>
-                Flight Number:
+          <h1>Update flight details</h1><br/>
+          <h5>Enter data only in fields you want to update</h5><br/>
+                {/* Flight Number:
                 <div>
                   <input
                     type='number'
@@ -116,14 +121,24 @@ class UpdateFlight extends React.Component {
                     name='flightNumber'
                     onChange={this.onChange}
                   />
-                </div>
+                </div> */}
+                <Grid item xs={12}>
+                  <TextField
+                   type='number'
+                   placeholder='Flight Number'
+                   name='flightNumber'
+                   onChange={this.onChange}
+                    fullWidth
+                  />
+                 </Grid>
+                 <br/>
 
 
                 <div>
                 <hr/>
                 Departure Details
-                <br/>
-                  Air port:
+                <br/><br/>
+                  {/* Air port:
                   <div>
                     <input
                       type='text'
@@ -131,8 +146,18 @@ class UpdateFlight extends React.Component {
                       name='airport'
                       onChange={this.departureOnChange}
                     />
-                  </div>
-                  Terminal:
+                  </div> */}
+                  <Grid item xs={12}>
+                  <TextField
+                   type='text'
+                   placeholder='Airport'
+                   name='airport'
+                   onChange={this.departureOnChange}
+                    fullWidth
+                  />
+                 </Grid>
+                 <br/>
+                  {/* Terminal:
                   <div>
                     <input
                       type='text'
@@ -140,8 +165,18 @@ class UpdateFlight extends React.Component {
                       name='terminal'
                       onChange={this.departureOnChange}
                     />
-                  </div>
-                  Time:
+                  </div> */}
+                  <Grid item xs={12}>
+                  <TextField
+                   type='text'
+                   placeholder='Terminal'
+                   name='terminal'
+                   onChange={this.departureOnChange}
+                    fullWidth
+                  />
+                 </Grid>
+                 <br/>
+                  {/* Time:
                   <div>
                     <input
                       type='datetime-local'
@@ -149,7 +184,17 @@ class UpdateFlight extends React.Component {
                       name='time'
                       onChange={this.departureOnChange}
                     />
-                  </div>
+                  </div> */}
+                  <Grid item xs={12}>
+                  <TextField
+                   type='datetime-local'
+                   placeholder='Time'
+                   name='time'
+                   onChange={this.departureOnChange}
+                    fullWidth
+                  />
+                 </Grid>
+                 <br/>
 
                   <hr/>
                   </div>
@@ -158,8 +203,8 @@ class UpdateFlight extends React.Component {
 
                 <div>
                 Arrival Details
-                <br/>
-                  Air port:
+                <br/><br/>
+                  {/* Air port:
                   <div>
                     <input
                       type='text'
@@ -167,8 +212,18 @@ class UpdateFlight extends React.Component {
                       name='airport'
                       onChange={this.arrivalOnChange}
                     />
-                  </div>
-                  Terminal:
+                  </div> */}
+                  <Grid item xs={12}>
+                  <TextField
+                   type='text'
+                   placeholder='Airport'
+                   name='airport'
+                   onChange={this.arrivalOnChange}
+                    fullWidth
+                  />
+                 </Grid>
+                 <br/>
+                  {/* Terminal:
                   <div>
                     <input
                       type='text'
@@ -176,8 +231,18 @@ class UpdateFlight extends React.Component {
                       name='terminal'
                       onChange={this.arrivalOnChange}
                     />
-                  </div>
-                  Time:
+                  </div> */}
+                  <Grid item xs={12}>
+                  <TextField
+                   type='text'
+                   placeholder='Terminal'
+                   name='terminal'
+                   onChange={this.arrivalOnChange}
+                    fullWidth
+                  />
+                 </Grid>
+                 <br/>
+                  {/* Time:
                   <div>
                     <input
                       type='datetime-local'
@@ -185,13 +250,23 @@ class UpdateFlight extends React.Component {
                       name='time'
                       onChange={this.arrivalOnChange}
                     />
-                  </div>
+                  </div> */}
+                  <Grid item xs={12}>
+                  <TextField
+                   type='datetime-local'
+                   placeholder='Time'
+                   name='time'
+                   onChange={this.arrivalOnChange}
+                    fullWidth
+                  />
+                 </Grid>
+                 <br/>
 
                   <hr/>
                   </div>
 
 
-                Airline:
+                {/* Airline:
                 <div>
                   <input
                     type='text'
@@ -199,9 +274,19 @@ class UpdateFlight extends React.Component {
                     name='airline'
                     onChange={this.onChange}
                   />
-                </div>
+                </div> */}
+                <Grid item xs={12}>
+                  <TextField
+                   type='text'
+                   placeholder='Airline'
+                   name='airline'
+                   onChange={this.onChange}
+                    fullWidth
+                  />
+                 </Grid>
+                 <br/>
                 <div>
-                    Please check if this flight has a transit 
+                    Has Transit? 
                   <input
                     type='checkbox'
                     onChange={(e) => {
@@ -219,6 +304,7 @@ class UpdateFlight extends React.Component {
                 <div>
 
                   Flight Model:
+                  <br/>
 
                   <DropDown 
                   name="airplaneModelID"
@@ -229,9 +315,9 @@ class UpdateFlight extends React.Component {
 
                 <div>
                 <hr/>
-                Economy Cabin
-                <br/>
-                  Adult Price:
+                Economy Cabin Details
+                <br/><br/>
+                  {/* Adult Price:
                   <div>
                     <input
                       type='number'
@@ -239,8 +325,18 @@ class UpdateFlight extends React.Component {
                       name='adultPrice'
                       onChange={this.economyOnChange}
                     />
-                  </div>
-                  Adult Baggage:
+                  </div> */}
+                  <Grid item xs={12}>
+                  <TextField
+                   type='number'
+                   placeholder='Adult Price'
+                   name='adultPrice'
+                   onChange={this.economyOnChange}
+                    fullWidth
+                  />
+                 </Grid>
+                 <br/>
+                  {/* Adult Baggage:
                   <div>
                     <input
                       type='number'
@@ -248,8 +344,18 @@ class UpdateFlight extends React.Component {
                       name='adultBaggage'
                       onChange={this.economyOnChange}
                     />
-                  </div>
-                  Child Price:
+                  </div> */}
+                  <Grid item xs={12}>
+                  <TextField
+                   type='number'
+                   placeholder='Maximum adult baggage'
+                   name='adultBaggage'
+                   onChange={this.economyOnChange}
+                    fullWidth
+                  />
+                 </Grid>
+                 <br/>
+                  {/* Child Price:
                   <div>
                     <input
                       type='number'
@@ -257,8 +363,18 @@ class UpdateFlight extends React.Component {
                       name='childPrice'
                       onChange={this.economyOnChange}
                     />
-                  </div>
-                  Child Baggage:
+                  </div> */}
+                  <Grid item xs={12}>
+                  <TextField
+                   type='number'
+                   placeholder='Child Price'
+                   name='childPrice'
+                   onChange={this.economyOnChange}
+                    fullWidth
+                  />
+                 </Grid>
+                 <br/>
+                  {/* Child Baggage:
                   <div>
                     <input
                       type='number'
@@ -266,7 +382,17 @@ class UpdateFlight extends React.Component {
                       name='childBaggage'
                       onChange={this.economyOnChange}
                     />
-                  </div>
+                  </div> */}
+                  <Grid item xs={12}>
+                  <TextField
+                   type='number'
+                   placeholder='Maximum child baggage'
+                   name='childBaggage'
+                   onChange={this.economyOnChange}
+                    fullWidth
+                  />
+                 </Grid>
+                 <br/>
                   </div>
 
 
@@ -274,9 +400,9 @@ class UpdateFlight extends React.Component {
 
                   <div>
                 <hr/>
-                Business Cabin
-                <br/>
-                  Adult Price:
+                Business Cabin Details
+                <br/><br/>
+                  {/* Adult Price:
                   <div>
                     <input
                       type='number'
@@ -284,8 +410,18 @@ class UpdateFlight extends React.Component {
                       name='adultPrice'
                       onChange={this.businessOnChange}
                     />
-                  </div>
-                  Adult Baggage:
+                  </div> */}
+                  <Grid item xs={12}>
+                  <TextField
+                   type='number'
+                   placeholder='Adult Price'
+                   name='adultPrice'
+                   onChange={this.businessOnChange}
+                    fullWidth
+                  />
+                 </Grid>
+                 <br/>
+                  {/* Adult Baggage:
                   <div>
                     <input
                       type='number'
@@ -293,8 +429,18 @@ class UpdateFlight extends React.Component {
                       name='adultBaggage'
                       onChange={this.businessOnChange}
                     />
-                  </div>
-                  Child Price:
+                  </div> */}
+                  <Grid item xs={12}>
+                  <TextField
+                   type='number'
+                   placeholder='Maximum adult baggage'
+                   name='adultBaggage'
+                   onChange={this.businessOnChange}
+                    fullWidth
+                  />
+                 </Grid>
+                 <br/>
+                  {/* Child Price:
                   <div>
                     <input
                       type='number'
@@ -302,8 +448,18 @@ class UpdateFlight extends React.Component {
                       name='childPrice'
                       onChange={this.businessOnChange}
                     />
-                  </div>
-                  Child Baggage:
+                  </div> */}
+                  <Grid item xs={12}>
+                  <TextField
+                   type='number'
+                   placeholder='Child Price'
+                   name='childPrice'
+                   onChange={this.businessOnChange}
+                    fullWidth
+                  />
+                 </Grid>
+                 <br/>
+                  {/* Child Baggage:
                   <div>
                     <input
                       type='number'
@@ -311,7 +467,17 @@ class UpdateFlight extends React.Component {
                       name='childBaggage'
                       onChange={this.businessOnChange}
                     />
-                  </div>
+                  </div> */}
+                  <Grid item xs={12}>
+                  <TextField
+                   type='number'
+                   placeholder='Maximum child baggage'
+                   name='childBaggage'
+                   onChange={this.businessOnChange}
+                    fullWidth
+                  />
+                 </Grid>
+                 <br/>
                   </div>
 
 
@@ -319,9 +485,9 @@ class UpdateFlight extends React.Component {
                   
                 <div>
                 <hr/>
-                First Class Cabin
-                <br/>
-                  Adult Price:
+                First Class Cabin Details
+                <br/><br/>
+                  {/* Adult Price:
                   <div>
                     <input
                       type='number'
@@ -329,8 +495,18 @@ class UpdateFlight extends React.Component {
                       name='adultPrice'
                       onChange={this.firstOnChange}
                     />
-                  </div>
-                  Adult Baggage:
+                  </div> */}
+                  <Grid item xs={12}>
+                  <TextField
+                   type='number'
+                   placeholder='Adult Price'
+                   name='adultPrice'
+                   onChange={this.firstOnChange}
+                    fullWidth
+                  />
+                 </Grid>
+                 <br/>
+                  {/* Adult Baggage:
                   <div>
                     <input
                       type='number'
@@ -338,8 +514,18 @@ class UpdateFlight extends React.Component {
                       name='adultBaggage'
                       onChange={this.firstOnChange}
                     />
-                  </div>
-                  Child Price:
+                  </div> */}
+                  <Grid item xs={12}>
+                  <TextField
+                   type='number'
+                   placeholder='Maximum adult baggage'
+                   name='adultBaggage'
+                   onChange={this.firstOnChange}
+                    fullWidth
+                  />
+                 </Grid>
+                 <br/>
+                  {/* Child Price:
                   <div>
                     <input
                       type='number'
@@ -347,8 +533,18 @@ class UpdateFlight extends React.Component {
                       name='childPrice'
                       onChange={this.firstOnChange}
                     />
-                  </div>
-                  Child Baggage:
+                  </div> */}
+                  <Grid item xs={12}>
+                  <TextField
+                   type='number'
+                   placeholder='Child Price'
+                   name='childPrice'
+                   onChange={this.firstOnChange}
+                    fullWidth
+                  />
+                 </Grid>
+                 <br/>
+                  {/* Child Baggage:
                   <div>
                     <input
                       type='number'
@@ -356,7 +552,17 @@ class UpdateFlight extends React.Component {
                       name='childBaggage'
                       onChange={this.firstOnChange}
                     />
-                  </div>
+                  </div> */}
+                  <Grid item xs={12}>
+                  <TextField
+                   type='number'
+                   placeholder='Maximum child baggage'
+                   name='childBaggage'
+                   onChange={this.firstOnChange}
+                    fullWidth
+                  />
+                 </Grid>
+                 <br/>
                   <hr/>
                   </div>
 
@@ -367,7 +573,8 @@ class UpdateFlight extends React.Component {
                   Update
                 </button>
               </form>
-      </div>
+      </div></div>
+      <br/></>
     );
   }
 }

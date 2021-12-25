@@ -11,7 +11,7 @@ import OutlinedTextField from "./OutlinedTextField";
 import Button from "./Button";
 import Calendar from "./Calendar";
 import Box from "@mui/material/Box";
-import { TextField } from "@mui/material";
+import { TextField , Grid} from "@mui/material";
 import Footer from './Footer/Footer'
 
 class SearchFlights extends React.Component {
@@ -400,80 +400,145 @@ class SearchFlights extends React.Component {
               <h2>Search For Flights</h2>
               <br></br>
               <div>
-                <label>Departure Airport: </label>
-                <br />
-                <input
+                
+                {/* <input
                   type="text"
                   placeholder="Departure Airport"
                   name="departure.airport"
                   onChange={this.onChange}
+                /> */}
+
+              <Grid item xs={12}>
+                <TextField
+                  type="text" 
+                  name = "departure.airport" 
+                  placeholder="Departure Airport"
+                  onChange={this.onChange} 
+                  fullWidth
                 />
+              </Grid>
+                
               </div>
 
               <div>
-                <label>Departure Terminal: </label>
-                <br />
-                <input
+                {/* <input
                   type="text"
                   placeholder="Departure Terminal"
                   name="departure.terminal"
                   onChange={this.onChange}
-                />
+                /> */}
+                <br/>
+                <Grid item xs={12}>
+                  <TextField
+                    type="text" 
+                    name = "departure.terminal" 
+                    placeholder="Departure Terminal"
+                    onChange={this.onChange} 
+                    fullWidth
+                  />
+                 </Grid>
               </div>
 
               <div>
-                <label>Arrival Airport: </label>
                 <br />
 
-                <input
+                {/* <input
                   type="text"
                   placeholder="Arrival Airport"
                   name="arrival.airport"
                   onChange={this.onChange}
-                />
+                /> */}
+
+                <Grid item xs={12}>
+                  <TextField
+                    type="text" 
+                    name = "arrival.airport" 
+                    placeholder="Arrival Airport"
+                    onChange={this.onChange} 
+                    fullWidth
+                  />
+                 </Grid>
               </div>
 
               <div>
-                <label>Arrival Terminal: </label>
                 <br />
 
-                <input
+                {/* <input
                   type="text"
                   placeholder="Arrival Terminal"
                   name="arrival.terminal"
                   onChange={this.onChange}
-                />
+                /> */}
+
+                <Grid item xs={12}>
+                  <TextField
+                    type="text" 
+                    name = "arrival.terminal" 
+                    placeholder="Arrival Terminal"
+                    onChange={this.onChange} 
+                    fullWidth
+                  />
+                 </Grid>
+
               </div>
 
               <div>
-                <label>Flight Number: </label>
                 <br />
 
-                <input
+                {/* <input
                   type="number"
                   placeholder="Flight Number"
                   name="flightNumber"
                   onChange={this.onChange}
-                />
+                /> */}
+
+                <Grid item xs={12}>
+                  <TextField
+                    type="number" 
+                    name = "flightNumber" 
+                    placeholder="Flight Number"
+                    onChange={this.onChange} 
+                    fullWidth
+                  />
+                 </Grid>
+
               </div>
 
               <div>
-                <label>Departure Time: </label>
-                <br />
-                <input
+              <br />
+              <label>Departure Time: </label>
+                <br /> <br />
+                {/* <input
                   type="date"
                   name="departure.time"
                   onChange={this.onChange}
-                />
+                /> */}
+                <Grid item xs={12}>
+                  <TextField
+                    type="date" 
+                    name = "departure.time" 
+                    onChange={this.onChange} 
+                    fullWidth
+                  />
+                 </Grid>
               </div>
               <div>
-                <label>Arrival Time: </label>
-                <br />
-                <input
+              <br />
+              <label>Arrival Time: </label>
+                <br /> <br />
+                {/* <input
                   type="date"
                   name="arrival.time"
                   onChange={this.onChange}
-                />
+                /> */}
+                <Grid item xs={12}>
+                  <TextField
+                    type="date" 
+                    name = "arrival.time" 
+                    onChange={this.onChange} 
+                    fullWidth
+                  />
+                 </Grid>
               </div>
               <br></br>
 
