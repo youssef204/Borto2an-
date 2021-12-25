@@ -451,7 +451,7 @@ class SearchFlights extends React.Component {
                     label="Departure Terminal"
                     onChange={this.onChange}
                     fullWidth
-                    auto
+                    
                   />
                 </Grid>
               </div>
@@ -473,7 +473,6 @@ class SearchFlights extends React.Component {
                     label="Arrival Airport"
                     onChange={this.onChange}
                     fullWidth
-                    autoFocus
                   />
                 </Grid>
               </div>
@@ -495,7 +494,7 @@ class SearchFlights extends React.Component {
                     label="Arrival Terminal"
                     onChange={this.onChange}
                     fullWidth
-                    autoFocus
+                    
                   />
                 </Grid>
               </div>
@@ -517,7 +516,6 @@ class SearchFlights extends React.Component {
                     label="Flight Number"
                     onChange={this.onChange}
                     fullWidth
-                    autoFocus
                   />
                 </Grid>
               </div>

@@ -304,8 +304,12 @@ class FlightDetails extends React.Component {
           <Stack direction = "row" style={{
             justifyContent:"space-around",
           }}>
-          <button onClick={handleClickOpen}>Delete</button>
-          <button onClick={(e) => this.handleClick(e, state)}>Update</button>
+          <Button onClick={handleClickOpen} variant="contained"
+              
+              sx={{margin:"auto", mt: 3, mb: 2 ,backgroundColor:"#ee0000"}} >Delete</Button>
+          <Button onClick={(e) => this.handleClick(e, state)} variant="contained"
+              
+              sx={{margin:"auto", mt: 3, mb: 2 ,backgroundColor:"#ee0000"}} >Update</Button>
           </Stack>
           </div>
 

@@ -105,7 +105,6 @@ class CreateModel extends React.Component {
                     name='name'
                     onChange={this.onChange}
                     fullWidth
-                    autoFocus
                   />
                  </Grid>
                  <br/>
@@ -125,7 +124,6 @@ class CreateModel extends React.Component {
                     onChange={this.onChange}
                     label="No. economy rows"
                     fullWidth
-                    autoFocus
                   />
                  </Grid>
                  <br/>
@@ -145,7 +143,6 @@ class CreateModel extends React.Component {
                     onChange={this.onChange}
                     label="No. economy columns"
                     fullWidth
-                    autoFocus
                   />
                  </Grid>
                  <br/>
@@ -165,7 +162,7 @@ class CreateModel extends React.Component {
                     onChange={this.onChange}
                     label="No. business rows"
                     fullWidth
-                    autoFocus
+                    
                   />
                  </Grid>
                  <br/>
@@ -185,7 +182,6 @@ class CreateModel extends React.Component {
                     onChange={this.onChange}
                     label="No. business columns"
                     fullWidth
-                    autoFocus
                   />
                  </Grid>
                  <br/>
@@ -205,7 +201,6 @@ class CreateModel extends React.Component {
                     onChange={this.onChange}
                     label="No. first class rows"
                     fullWidth
-                    autoFocus
                   />
                  </Grid>
                  <br/>
@@ -225,7 +220,6 @@ class CreateModel extends React.Component {
                     onChange={this.onChange}
                     label="No. first class columns"
                     fullWidth
-                    autoFocus
                   />
                  </Grid>
                  <br/>
@@ -246,7 +240,7 @@ class CreateModel extends React.Component {
       </Container>
     </ThemeProvider>
           </>
-    );
+    );  
     }
 }
  

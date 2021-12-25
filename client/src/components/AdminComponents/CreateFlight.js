@@ -185,7 +185,7 @@ class CreateFlight extends React.Component {
                     name='flightNumber'
                     onChange={this.onChange} 
                     fullWidth
-                    autoFocus
+                    
                   />
                  </Grid>
 
@@ -211,7 +211,7 @@ class CreateFlight extends React.Component {
                    name='airport'
                    onChange={this.departureOnChange}
                     fullWidth
-                    autoFocus
+                    
                   />
                  </Grid>
                  <br/>
@@ -232,7 +232,7 @@ class CreateFlight extends React.Component {
                    name='terminal'
                    onChange={this.departureOnChange}
                     fullWidth
-                    autoFocus
+                    
                   />
                  </Grid>
                  <br/>
@@ -242,18 +242,18 @@ class CreateFlight extends React.Component {
                       type='datetime-local'
                       placeholder='Time'
                       name='time'
-                      value={this.state.departure.time}
+                      value={this.state.departure.time
                       onChange={this.departureOnChange}
                     />
                   </div> */}
                   <Grid item xs={12}>
                   <TextField
                    type='datetime-local'
-                   label='Time'
+                   placeholder='Time'
                    name='time'
                    onChange={this.departureOnChange}
                     fullWidth
-                    autoFocus
+                    
                   />
                  </Grid>
                  <br/>
@@ -283,7 +283,6 @@ class CreateFlight extends React.Component {
                    name='airport'
                    onChange={this.arrivalOnChange}
                     fullWidth
-                    autoFocus
                   />
                  </Grid>
                  <br/>
@@ -304,7 +303,7 @@ class CreateFlight extends React.Component {
                    name='terminal'
                    onChange={this.arrivalOnChange}
                     fullWidth
-                    autoFocus
+                    
                   />
                  </Grid>
                  <br/>
@@ -321,11 +320,11 @@ class CreateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                    type='datetime-local'
-                   label='Time'
+                   placeholder='Time'
                    name='time'
                    onChange={this.arrivalOnChange}
                     fullWidth
-                    autoFocus
+                    
                   />
                  </Grid>
                  <br/>
@@ -352,7 +351,7 @@ class CreateFlight extends React.Component {
                    name='airline'
                    onChange={this.onChange}
                     fullWidth
-                    autoFocus
+                    
                   />
                  </Grid>
                  <br/>
@@ -403,7 +402,7 @@ class CreateFlight extends React.Component {
                   name='adultPrice'
                   onChange={this.economyOnChange}
                     fullWidth
-                    autoFocus
+                    
                   />
                  </Grid>
                  <br/>
@@ -424,7 +423,7 @@ class CreateFlight extends React.Component {
                   name='adultBaggage'
                   onChange={this.economyOnChange}
                     fullWidth
-                    autoFocus
+                    
                   />
                  </Grid>
                  <br/>
@@ -445,7 +444,7 @@ class CreateFlight extends React.Component {
                   name='childPrice'
                   onChange={this.economyOnChange}
                     fullWidth
-                    autoFocus
+                    
                   />
                  </Grid>
                  <br/>
@@ -466,7 +465,7 @@ class CreateFlight extends React.Component {
                   name='childBaggage'
                   onChange={this.economyOnChange}
                     fullWidth
-                    autoFocus
+                    
                   />
                  </Grid>
                  <br/>
@@ -497,7 +496,7 @@ class CreateFlight extends React.Component {
                   name='adultPrice'
                   onChange={this.businessOnChange}
                     fullWidth
-                    autoFocus
+                    
                   />
                  </Grid>
                  <br/>
@@ -518,7 +517,7 @@ class CreateFlight extends React.Component {
                   name='adultBaggage'
                   onChange={this.businessOnChange}
                     fullWidth
-                    autoFocus
+                    
                   />
                  </Grid>
                  <br/>
@@ -539,7 +538,7 @@ class CreateFlight extends React.Component {
                   name='childPrice'
                   onChange={this.businessOnChange}
                     fullWidth
-                    autoFocus
+                    
                   />
                  </Grid>
                  <br/>
@@ -560,7 +559,7 @@ class CreateFlight extends React.Component {
                   name='childBaggage'
                   onChange={this.businessOnChange}
                     fullWidth
-                    autoFocus
+                    
                   />
                  </Grid>
                  <br/>
@@ -590,7 +589,7 @@ class CreateFlight extends React.Component {
                   name='adultPrice'
                   onChange={this.firstOnChange}
                     fullWidth
-                    auto
+                    
                   />
                  </Grid>
                  <br/>
@@ -611,7 +610,7 @@ class CreateFlight extends React.Component {
                   name='adultBaggage'
                   onChange={this.firstOnChange}
                     fullWidth
-                    autoFocus
+                    
                   />
                  </Grid>
                  <br/>
@@ -632,7 +631,7 @@ class CreateFlight extends React.Component {
                   name='childPrice'
                   onChange={this.firstOnChange}
                     fullWidth
-                    autoFocus
+                    
                   />
                  </Grid>
                  <br/>
@@ -653,7 +652,7 @@ class CreateFlight extends React.Component {
                     name='childBaggage'
                     onChange={this.firstOnChange}
                     fullWidth
-                    autoFocus
+                    
                   />
                  </Grid>
                  <br/>

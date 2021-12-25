@@ -1,7 +1,10 @@
 import axios from "axios";
 import React from "react";
 import DropDown from './ModelsDropDownList';
-import { TextField , Grid} from "@mui/material";
+
+import { Button , TextField , Grid,Container,ThemeProvider,createTheme,CssBaseline,Box} from "@mui/material";
+
+const theme = createTheme();
 
 class UpdateFlight extends React.Component {
   constructor(props) {
@@ -107,12 +110,33 @@ class UpdateFlight extends React.Component {
   render() {
     return (
       <>
-      <div class="profile-container" >
-        <div class= "ProfileForm-container">
+        <br></br>
+        <div
+          className="TripTitleDiv"
+          style={{
+            height: "130px",
+            marginBottom: "20px",
+            paddingBottom: "50px",
+          }}
+        >
+            <div class="TripTitleText">Update Flight Details</div>
+          <img class="Trip-bg" src="admin.jpg" style={{position:"relative",top:-150}}/>
+          </div>
+              <br></br>
+              <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'left',
+          }}
+        >
+          
+          <Box component="form" sx={{ mt: 3 }} noValidate onSubmit={this.onSubmit}>
 
-        <form noValidate onSubmit={this.onSubmit}>
-          <h1>Update flight details</h1><br/>
-          <h5>Enter data only in fields you want to update</h5><br/>
+
                 {/* Flight Number:
                 <div>
                   <input
@@ -125,7 +149,7 @@ class UpdateFlight extends React.Component {
                 <Grid item xs={12}>
                   <TextField
                    type='number'
-                   placeholder='Flight Number'
+                   label='Flight Number'
                    name='flightNumber'
                    onChange={this.onChange}
                     fullWidth
@@ -150,7 +174,7 @@ class UpdateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                    type='text'
-                   placeholder='Airport'
+                   label='Airport'
                    name='airport'
                    onChange={this.departureOnChange}
                     fullWidth
@@ -169,7 +193,7 @@ class UpdateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                    type='text'
-                   placeholder='Terminal'
+                   label='Terminal'
                    name='terminal'
                    onChange={this.departureOnChange}
                     fullWidth
@@ -216,7 +240,7 @@ class UpdateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                    type='text'
-                   placeholder='Airport'
+                   label='Airport'
                    name='airport'
                    onChange={this.arrivalOnChange}
                     fullWidth
@@ -235,7 +259,7 @@ class UpdateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                    type='text'
-                   placeholder='Terminal'
+                   label='Terminal'
                    name='terminal'
                    onChange={this.arrivalOnChange}
                     fullWidth
@@ -278,7 +302,7 @@ class UpdateFlight extends React.Component {
                 <Grid item xs={12}>
                   <TextField
                    type='text'
-                   placeholder='Airline'
+                   label='Airline'
                    name='airline'
                    onChange={this.onChange}
                     fullWidth
@@ -329,7 +353,7 @@ class UpdateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                    type='number'
-                   placeholder='Adult Price'
+                   label='Adult Price'
                    name='adultPrice'
                    onChange={this.economyOnChange}
                     fullWidth
@@ -348,7 +372,7 @@ class UpdateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                    type='number'
-                   placeholder='Maximum adult baggage'
+                   label='Maximum adult baggage'
                    name='adultBaggage'
                    onChange={this.economyOnChange}
                     fullWidth
@@ -367,7 +391,7 @@ class UpdateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                    type='number'
-                   placeholder='Child Price'
+                   label='Child Price'
                    name='childPrice'
                    onChange={this.economyOnChange}
                     fullWidth
@@ -386,7 +410,7 @@ class UpdateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                    type='number'
-                   placeholder='Maximum child baggage'
+                   label='Maximum child baggage'
                    name='childBaggage'
                    onChange={this.economyOnChange}
                     fullWidth
@@ -414,7 +438,7 @@ class UpdateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                    type='number'
-                   placeholder='Adult Price'
+                   label='Adult Price'
                    name='adultPrice'
                    onChange={this.businessOnChange}
                     fullWidth
@@ -433,7 +457,7 @@ class UpdateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                    type='number'
-                   placeholder='Maximum adult baggage'
+                   label='Maximum adult baggage'
                    name='adultBaggage'
                    onChange={this.businessOnChange}
                     fullWidth
@@ -452,7 +476,7 @@ class UpdateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                    type='number'
-                   placeholder='Child Price'
+                   label='Child Price'
                    name='childPrice'
                    onChange={this.businessOnChange}
                     fullWidth
@@ -471,7 +495,7 @@ class UpdateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                    type='number'
-                   placeholder='Maximum child baggage'
+                   label='Maximum child baggage'
                    name='childBaggage'
                    onChange={this.businessOnChange}
                     fullWidth
@@ -499,7 +523,7 @@ class UpdateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                    type='number'
-                   placeholder='Adult Price'
+                   label='Adult Price'
                    name='adultPrice'
                    onChange={this.firstOnChange}
                     fullWidth
@@ -518,7 +542,7 @@ class UpdateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                    type='number'
-                   placeholder='Maximum adult baggage'
+                   label='Maximum adult baggage'
                    name='adultBaggage'
                    onChange={this.firstOnChange}
                     fullWidth
@@ -537,7 +561,7 @@ class UpdateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                    type='number'
-                   placeholder='Child Price'
+                   label='Child Price'
                    name='childPrice'
                    onChange={this.firstOnChange}
                     fullWidth
@@ -556,7 +580,7 @@ class UpdateFlight extends React.Component {
                   <Grid item xs={12}>
                   <TextField
                    type='number'
-                   placeholder='Maximum child baggage'
+                   label='Maximum child baggage'
                    name='childBaggage'
                    onChange={this.firstOnChange}
                     fullWidth
@@ -569,12 +593,24 @@ class UpdateFlight extends React.Component {
 
 
 
-                <button>
-                  Update
-                </button>
-              </form>
-      </div></div>
-      <br/></>
+                  <Grid>
+              <Button
+              type = "submit"
+              variant="contained"
+              sx={{margin:"auto", mt: 3, mb: 2 ,backgroundColor:"#ee0000"}}
+            
+            >
+              Update Flight  
+            </Button> 
+            </Grid>
+             
+             
+                </Box>
+                </Box>
+      </Container>
+    </ThemeProvider>
+      <br/>
+      </>
     );
   }
 }
