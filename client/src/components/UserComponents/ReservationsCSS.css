@@ -26,3 +26,29 @@
   width: 70%;
   height: 400%;
 }
+
+#seatButton {
+  position: fixed;
+  bottom: 0;
+  height: 100px !important;
+  width: 100% !important;
+  background-color: rgba(20, 20, 20, 0.9);
+  z-index: 10;
+}
+.seat-wrap {
+  overflow: hidden;
+  position: relative;
+  white-space:nowrap
+}
+
+.footerButtonMargin {
+  margin: 0px 5px;
+}
+
+.message {
+  color: rgb(255, 255, 255);
+  font: 22px Montserrat;
+  margin: 40px 0px 0px 40px;
+  position: absolute;
+  z-index: 2;
+}

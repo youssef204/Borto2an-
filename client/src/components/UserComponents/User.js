@@ -133,6 +133,7 @@ class User extends Component {
     return (
 <>
           <br></br>
+          <div className="profile-container">
           <h2 style={{
               marginBottom : "20px",
               marginTop: "20px"
@@ -304,7 +305,7 @@ class User extends Component {
         </Box>
       </Container>
     </ThemeProvider>
-   
+    </div>
   
     </>
   );

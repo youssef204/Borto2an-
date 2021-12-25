@@ -11,8 +11,8 @@ import OutlinedTextField from "./OutlinedTextField";
 import Button from "./Button";
 import Calendar from "./Calendar";
 import Box from "@mui/material/Box";
-import { TextField } from "@mui/material";
-import Footer from './Footer/Footer'
+import { TextField, Grid } from "@mui/material";
+import Footer from "./Footer/Footer";
 
 class SearchFlights extends React.Component {
   constructor() {
@@ -400,80 +400,141 @@ class SearchFlights extends React.Component {
               <h2>Search For Flights</h2>
               <br></br>
               <div>
-                <label>Departure Airport: </label>
-                <br />
-                <input
+                {/* <input
                   type="text"
                   placeholder="Departure Airport"
                   name="departure.airport"
                   onChange={this.onChange}
-                />
+                /> */}
+
+                <Grid item xs={12}>
+                  <TextField
+                    type="text"
+                    name="departure.airport"
+                    placeholder="Departure Airport"
+                    onChange={this.onChange}
+                    fullWidth
+                  />
+                </Grid>
               </div>
 
               <div>
-                <label>Departure Terminal: </label>
-                <br />
-                <input
+                {/* <input
                   type="text"
                   placeholder="Departure Terminal"
                   name="departure.terminal"
                   onChange={this.onChange}
-                />
+                /> */}
+                <br />
+                <Grid item xs={12}>
+                  <TextField
+                    type="text"
+                    name="departure.terminal"
+                    placeholder="Departure Terminal"
+                    onChange={this.onChange}
+                    fullWidth
+                  />
+                </Grid>
               </div>
 
               <div>
-                <label>Arrival Airport: </label>
                 <br />
 
-                <input
+                {/* <input
                   type="text"
                   placeholder="Arrival Airport"
                   name="arrival.airport"
                   onChange={this.onChange}
-                />
+                /> */}
+
+                <Grid item xs={12}>
+                  <TextField
+                    type="text"
+                    name="arrival.airport"
+                    placeholder="Arrival Airport"
+                    onChange={this.onChange}
+                    fullWidth
+                  />
+                </Grid>
               </div>
 
               <div>
-                <label>Arrival Terminal: </label>
                 <br />
 
-                <input
+                {/* <input
                   type="text"
                   placeholder="Arrival Terminal"
                   name="arrival.terminal"
                   onChange={this.onChange}
-                />
+                /> */}
+
+                <Grid item xs={12}>
+                  <TextField
+                    type="text"
+                    name="arrival.terminal"
+                    placeholder="Arrival Terminal"
+                    onChange={this.onChange}
+                    fullWidth
+                  />
+                </Grid>
               </div>
 
               <div>
-                <label>Flight Number: </label>
                 <br />
 
-                <input
+                {/* <input
                   type="number"
                   placeholder="Flight Number"
                   name="flightNumber"
                   onChange={this.onChange}
-                />
+                /> */}
+
+                <Grid item xs={12}>
+                  <TextField
+                    type="number"
+                    name="flightNumber"
+                    placeholder="Flight Number"
+                    onChange={this.onChange}
+                    fullWidth
+                  />
+                </Grid>
               </div>
 
               <div>
-                <label>Departure Time: </label>
                 <br />
-                <input
+                <label>Departure Time: </label>
+                <br /> <br />
+                {/* <input
                   type="date"
                   name="departure.time"
                   onChange={this.onChange}
-                />
+                /> */}
+                <Grid item xs={12}>
+                  <TextField
+                    type="date"
+                    name="departure.time"
+                    onChange={this.onChange}
+                    fullWidth
+                  />
+                </Grid>
               </div>
               <div>
-                <label>Arrival Time: </label>
                 <br />
-                <input
+                <label>Arrival Time: </label>
+                <br /> <br />
+                {/* <input
                   type="date"
                   name="arrival.time"
                   onChange={this.onChange}
-                />
+                /> */}
+                <Grid item xs={12}>
+                  <TextField
+                    type="date"
+                    name="arrival.time"
+                    onChange={this.onChange}
+                    fullWidth
+                  />
+                </Grid>
               </div>
               <br></br>
 
@@ -486,153 +547,156 @@ class SearchFlights extends React.Component {
     } else {
       return (
         <>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100vh",
-            backgroundImage: "url('search.jpg')",
-            backgroundSize: "100% 100%",
-          }}
-        >
-          <Box
-            component="span"
-            style={{ background: "#ffffffe0" }}
-            border={2}
-            borderRadius={10}
-            borderLeft={2}
-            borderRight={2}
-            borderColor="#a9a9a9"
-            sx={{ p: 5 }}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100vh",
+              backgroundImage: "url('search2.png')",
+              backgroundSize: "100% 100%",
+            }}
           >
-            <Stack
-              direction="row"
-              spacing={7}
-              style={{ justifyContent: "center", alignItems: "center" }}
+            <Box
+              component="span"
+              style={{ background: "#ffffffe0" }}
+              border={2}
+              borderRadius={10}
+              borderLeft={2}
+              borderRight={2}
+              borderColor="#a9a9a9"
+              sx={{ p: 5 }}
             >
-              <Stack spacing={5}>
-                <OutlinedTextField
-                  label="From*"
-                  width={200}
-                  fontsize={18}
-                  value={this.state.departure.airport}
-                  onChange={this.onChangeFrom}
-                  disabled={EditedReservation}
-                ></OutlinedTextField>
-                {this.state.departure.airport &&
-                this.state.arrival.airport !== undefined &&
-                this.state.arrival.airport === this.state.departure.airport ? (
-                  <TextField
-                    style={{ width: "200px", fontsize: "18px" }}
-                    onChange={this.onChangeTo}
-                    error
-                    id="outlined-error-helper-text"
-                    label="To*"
-                    defaultValue={this.state.arrival.airport}
-                    helperText="please enter different destinations."
-                  />
-                ) : (
+              <Stack
+                direction="row"
+                spacing={7}
+                style={{ justifyContent: "center", alignItems: "center" }}
+              >
+                <Stack spacing={5}>
                   <OutlinedTextField
-                    label="To*"
+                    label="From*"
                     width={200}
                     fontsize={18}
-                    onChange={this.onChangeTo}
-                    value={this.state.arrival.airport}
+                    value={this.state.departure.airport}
+                    onChange={this.onChangeFrom}
                     disabled={EditedReservation}
-                  />
-                )}
+                  ></OutlinedTextField>
+                  {this.state.departure.airport &&
+                  this.state.arrival.airport !== undefined &&
+                  this.state.arrival.airport ===
+                    this.state.departure.airport ? (
+                    <TextField
+                      style={{ width: "200px", fontsize: "18px" }}
+                      onChange={this.onChangeTo}
+                      error
+                      id="outlined-error-helper-text"
+                      label="To*"
+                      defaultValue={this.state.arrival.airport}
+                      helperText="please enter different destinations."
+                    />
+                  ) : (
+                    <OutlinedTextField
+                      label="To*"
+                      width={200}
+                      fontsize={18}
+                      onChange={this.onChangeTo}
+                      value={this.state.arrival.airport}
+                      disabled={EditedReservation}
+                    />
+                  )}
+                </Stack>
+                <Stack spacing={5}>
+                  <Calendar
+                    onChange={this.onChangeDepTime}
+                    selected={this.state.departure.time}
+                    value={this.state.departure.time}
+                    minDate={Date.now()}
+                    maxDate={
+                      this.state.arrival.time === null
+                        ? {}
+                        : this.state.arrival.time
+                    }
+                    // onError = {this.onErrorDep}
+                    label="Departure Date*"
+                    error={isNaN(this.state.departure.time)}
+                  ></Calendar>
+                  <Calendar
+                    label="Return Date*"
+                    onChange={this.onChangeArrTime}
+                    selected={this.state.arrival.time}
+                    minDate={
+                      this.state.departure.time === undefined
+                        ? Date.now()
+                        : this.state.departure.time
+                    }
+                    value={this.state.arrival.time}
+                    error={isNaN(this.state.arrival.time)}
+                  ></Calendar>
+                </Stack>
+                <FormControl component="fieldset">
+                  <FormLabel component="legend">Choose your Cabin</FormLabel>
+                  <RadioGroup
+                    aria-label="cabin"
+                    name="radio-buttons-group"
+                    onChange={this.onChangeCabin}
+                  >
+                    <FormControlLabel
+                      value="Economy"
+                      control={<Radio />}
+                      label="Economy"
+                    />
+                    <FormControlLabel
+                      value="Business"
+                      control={<Radio />}
+                      label="Business"
+                    />
+                    <FormControlLabel
+                      value="First"
+                      control={<Radio />}
+                      label="First Class"
+                    />
+                  </RadioGroup>
+                </FormControl>
+                <Stack spacing={5}>
+                  <div>
+                    <label style={{ margin: "10px" }}>No. of Adults*: </label>
+                    <input
+                      style={{ width: "150px", height: "20px" }}
+                      type="number"
+                      max="9"
+                      min="1"
+                      value={this.state.adultNumber}
+                      onInvalid={this.invalid}
+                      onChange={this.onChangeAdult}
+                    />
+                  </div>
+                  <div>
+                    <label style={{ margin: "5.75px" }}>
+                      No. of Children:{" "}
+                    </label>
+                    <input
+                      style={{ width: "150px", height: "20px" }}
+                      type="number"
+                      max="5"
+                      min="0"
+                      value={this.state.childNumber}
+                      onChange={this.onChangeChild}
+                    />
+                  </div>
+                </Stack>
+                <Stack spacing={5}>
+                  <Button
+                    label="Search"
+                    index={this.validateInput() ? 1 : 0} //{this.numberOfSelecetedInputs.includes(0) ? 0 : 1}
+                    width={70}
+                    height={40}
+                    onClick={(e) => this.onSubmit(e, this.state)}
+                  ></Button>
+                </Stack>
               </Stack>
-              <Stack spacing={5}>
-                <Calendar
-                  onChange={this.onChangeDepTime}
-                  selected={this.state.departure.time}
-                  value={this.state.departure.time}
-                  minDate={Date.now()}
-                  maxDate={
-                    this.state.arrival.time === null
-                      ? {}
-                      : this.state.arrival.time
-                  }
-                  // onError = {this.onErrorDep}
-                  label="Departure Date*"
-                  error={isNaN(this.state.departure.time)}
-                ></Calendar>
-                <Calendar
-                  label="Return Date*"
-                  onChange={this.onChangeArrTime}
-                  selected={this.state.arrival.time}
-                  minDate={
-                    this.state.departure.time === undefined
-                      ? Date.now()
-                      : this.state.departure.time
-                  }
-                  value={this.state.arrival.time}
-                  error={isNaN(this.state.arrival.time)}
-                ></Calendar>
-              </Stack>
-              <FormControl component="fieldset">
-                <FormLabel component="legend">Choose your Cabin</FormLabel>
-                <RadioGroup
-                  aria-label="cabin"
-                  name="radio-buttons-group"
-                  onChange={this.onChangeCabin}
-                >
-                  <FormControlLabel
-                    value="Economy"
-                    control={<Radio />}
-                    label="Economy"
-                  />
-                  <FormControlLabel
-                    value="Business"
-                    control={<Radio />}
-                    label="Business"
-                  />
-                  <FormControlLabel
-                    value="First"
-                    control={<Radio />}
-                    label="First Class"
-                  />
-                </RadioGroup>
-              </FormControl>
-              <Stack spacing={5}>
-                <div>
-                  <label style={{ margin: "10px" }}>No. of Adults*: </label>
-                  <input
-                    style={{ width: "150px", height: "20px" }}
-                    type="number"
-                    max="9"
-                    min="1"
-                    value={this.state.adultNumber}
-                    onInvalid={this.invalid}
-                    onChange={this.onChangeAdult}
-                  />
-                </div>
-                <div>
-                  <label style={{ margin: "5.75px" }}>No. of Children: </label>
-                  <input
-                    style={{ width: "150px", height: "20px" }}
-                    type="number"
-                    max="5"
-                    min="0"
-                    value={this.state.childNumber}
-                    onChange={this.onChangeChild}
-                  />
-                </div>
-              </Stack>
-              <Stack spacing={5}>
-                <Button
-                  label="Search"
-                  index={this.validateInput() ? 1 : 0} //{this.numberOfSelecetedInputs.includes(0) ? 0 : 1}
-                  width={70}
-                  height={40}
-                  onClick={(e) => this.onSubmit(e, this.state)}
-                ></Button>
-              </Stack>
-            </Stack>
-          </Box>
-        </div>
-        <Footer/>
+            </Box>
+          </div>
+          <Footer />
         </>
       );
     }
