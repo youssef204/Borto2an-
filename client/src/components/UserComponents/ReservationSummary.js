@@ -1,21 +1,22 @@
-import axios from 'axios';
-import React from 'react';
-import { Box } from '@mui/system';
-import { Stack } from '@mui/material';
+import axios from "axios";
+import React from "react";
+import { Box } from "@mui/system";
+import { Stack } from "@mui/material";
 import Button from "../Button";
 
 class ReservationSummary extends React.Component {
-
-    constructor(props) {
+  constructor(props) {
     super(props);
-    if(!localStorage.getItem("reservationSummary") || !localStorage.getItem("flightSelectionData") || !localStorage.getItem("selectedSeats")){
+    if (
+      !localStorage.getItem("reservationSummary") ||
+      !localStorage.getItem("flightSelectionData") ||
+      !localStorage.getItem("selectedSeats")
+    ) {
       //some required item is not found
       this.clearStorage();
       window.location.href = "/";
     }
-    const Reservation = JSON.parse(
-      localStorage.getItem("reservationSummary")
-    );
+    const Reservation = JSON.parse(localStorage.getItem("reservationSummary"));
     const selectedFlights = JSON.parse(
       localStorage.getItem("flightSelectionData")
     );
@@ -27,264 +28,319 @@ class ReservationSummary extends React.Component {
     ).arrivalSeats;
     const flightsWithReservation = {
       ...selectedFlights,
-       Reservation,
-       selectedDepSeats,
-       selectedArrSeats
+      Reservation,
+      selectedDepSeats,
+      selectedArrSeats,
     };
     this.state = {
-      flightsWithReservation
-    }
-    }
-
-postReservation = () => {
-  if (JSON.parse(localStorage.getItem("user"))) {
-    const reservationSummary = JSON.parse(
-      localStorage.getItem("reservationSummary")
-    );
-
-    console.log("reserve summary is ", reservationSummary);
-
-    reservationSummary["userId"] = JSON.parse(
-      localStorage.getItem("user")
-    )._id;
-    const oldReservation = JSON.parse(localStorage.getItem('EditedReservation'));
-    if(oldReservation){
-      //update old reservation
-      axios({
-        method: "put",
-        url: "http://localhost:8000/api/reservations",
-        headers: { authorization: "Bearer " + localStorage.getItem("token") },
-        data: {
-          newReservation: reservationSummary,
-          oldReservation: oldReservation
-        }
-      })
-        .then((res) => {
-          console.log("result is ", res);
-        })
-        .catch((e) => {
-          console.log(e.response);
-        });
-    }else{
-      // create a new reservation
-    axios({
-      method: "post",
-      url: "http://localhost:8000/api/reservations",
-      headers: { authorization: "Bearer " + localStorage.getItem("token") },
-      data: reservationSummary,
-    })
-      .then((res) => {
-        console.log("result is ", res);
-        // window.location.href = "/reservation_summary";
-      })
-      .catch((e) => {
-        console.log(e.response);
-      });
-    }
-  } else window.location.href = "/sign_in";
-}
-componentDidMount(){
-  if(!localStorage.getItem("reservationSummary")||!localStorage.getItem("flightSelectionData")||!localStorage.getItem("selectedSeats")){
-    this.props.history.push("/");
-    return;
+      flightsWithReservation,
+    };
   }
-  this.postReservation();
-  // console.log(JSON.parse(localStorage.getItem('reservationSummary')));
-  // console.log(JSON.parse(localStorage.getItem('EditedReservation')));
-  this.clearStorage();
-}
 
-clearStorage = ()=>{
-  localStorage.removeItem('reservationSummary');
-  localStorage.removeItem('searchResultData');
-  localStorage.removeItem('selectedSeats');
-  localStorage.removeItem('flightSelectionData');
-  localStorage.removeItem('EditedReservation');
-  window.dispatchEvent( new Event('storage') );
-}
+  postReservation = () => {
+    if (JSON.parse(localStorage.getItem("user"))) {
+      const reservationSummary = JSON.parse(
+        localStorage.getItem("reservationSummary")
+      );
 
-onReturnToHome=()=>{
-    this.props.history.push('/');
-}
-    
-onShowReservations=()=>{
-  this.props.history.push("/reservations");
-}
+      console.log("reserve summary is ", reservationSummary);
 
-  render(){
-    if(!localStorage.getItem("reservationSummary")||!localStorage.getItem("flightSelectionData")||!localStorage.getItem("selectedSeats")){
+      reservationSummary["userId"] = JSON.parse(
+        localStorage.getItem("user")
+      )._id;
+      const oldReservation = JSON.parse(
+        localStorage.getItem("EditedReservation")
+      );
+      if (oldReservation) {
+        //update old reservation
+        axios({
+          method: "put",
+          url: "http://localhost:8000/api/reservations",
+          headers: { authorization: "Bearer " + localStorage.getItem("token") },
+          data: {
+            newReservation: reservationSummary,
+            oldReservation: oldReservation,
+          },
+        })
+          .then((res) => {
+            console.log("result is ", res);
+          })
+          .catch((e) => {
+            console.log(e.response);
+          });
+      } else {
+        // create a new reservation
+        axios({
+          method: "post",
+          url: "http://localhost:8000/api/reservations",
+          headers: { authorization: "Bearer " + localStorage.getItem("token") },
+          data: reservationSummary,
+        })
+          .then((res) => {
+            console.log("result is ", res);
+            // window.location.href = "/reservation_summary";
+          })
+          .catch((e) => {
+            console.log(e.response);
+          });
+      }
+    } else window.location.href = "/sign_in";
+  };
+  componentDidMount() {
+    if (
+      !localStorage.getItem("reservationSummary") ||
+      !localStorage.getItem("flightSelectionData") ||
+      !localStorage.getItem("selectedSeats")
+    ) {
       this.props.history.push("/");
-      return <></> ;
+      return;
+    }
+    this.postReservation();
+    // console.log(JSON.parse(localStorage.getItem('reservationSummary')));
+    // console.log(JSON.parse(localStorage.getItem('EditedReservation')));
+    this.clearStorage();
+  }
+
+  clearStorage = () => {
+    localStorage.removeItem("reservationSummary");
+    localStorage.removeItem("searchResultData");
+    localStorage.removeItem("selectedSeats");
+    localStorage.removeItem("flightSelectionData");
+    localStorage.removeItem("EditedReservation");
+    window.dispatchEvent(new Event("storage"));
+  };
+
+  onReturnToHome = () => {
+    this.props.history.push("/");
+  };
+
+  onShowReservations = () => {
+    this.props.history.push("/reservations");
+  };
+
+  render() {
+    if (
+      !localStorage.getItem("reservationSummary") ||
+      !localStorage.getItem("flightSelectionData") ||
+      !localStorage.getItem("selectedSeats")
+    ) {
+      this.props.history.push("/");
+      return <></>;
     }
 
-
-      const Reservation = this.state.flightsWithReservation;
+    const Reservation = this.state.flightsWithReservation;
     return (
       <div
-      style={{backgroundImage: `url("https://i.pinimg.com/originals/48/7b/c1/487bc14012c5b2ceac9a29d8ed6406dd.jpg")` 
-    }}
+        style={{
+          backgroundImage: `url("https://i.pinimg.com/originals/48/7b/c1/487bc14012c5b2ceac9a29d8ed6406dd.jpg")`,
+        }}
       >
-        <br/>
-      <div
+        <br />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            alignItems: "left",
+          }}
+        >
+          <Box
+            component="span"
+            border={2}
+            borderRadius={10}
+            borderLeft={2}
+            borderRight={2}
+            borderColor="#a9a9a9"
+            sx={{ p: 5 }}
             style={{
-              display: "flex",
-              justifyContent: "space-around",
-              alignItems: "left",
+              backgroundColor: "rgba(255, 255, 255, 0.4)",
+              width: "40%",
             }}
           >
-        <Box
-              component="span"
-              border={2}
-              borderRadius={10}
-              borderLeft={2}
-              borderRight={2}
-              borderColor="#a9a9a9"
-              sx={{ p: 5 }}
+            <Stack style={{ margin: "2px" }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-around",
+                }}
+              >
+                <label style={{ fontSize: "24px", fontWeight: "bold" }}>
+                  THANK YOU FOR CHOOSING US!
+                </label>
+              </div>
+            </Stack>
+            <hr />
+            <div
               style={{
-                backgroundColor:  "rgba(255, 255, 255, 0.4)",
-                width : "40%"
+                display: "flex",
+                justifyContent: "space-around",
+                alignItems: "left",
               }}
             >
-              <Stack style={{ margin: "2px" }}>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-around",
-                  }}
-                >
-                  <label style={{ fontSize: "24px" , fontWeight:"bold"}}>
-                      THANK YOU FOR CHOOSING US!
-                  </label>
-                </div>
-              </Stack>
-            <hr/>
-            <div
-            style={{
-              display: "flex",
-              justifyContent: "space-around",
-              alignItems: "left",
-            }}
-          >
-            <div>
-            <Stack style={{ margin: "2px" }}>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-around",
-                    marginRight:"20px"
-                  }}
-                >
-                  <label style={{ fontSize: "16px" , fontWeight:"16"}}>
+              <div>
+                <Stack style={{ margin: "2px" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-around",
+                      marginRight: "20px",
+                    }}
+                  >
+                    <label style={{ fontSize: "16px", fontWeight: "16" }}>
                       Departure Flight Details
-                  </label>
+                    </label>
+                  </div>
+                </Stack>
+                <br />
+                <div>
+                  <br />
+                  Flight Number: {Reservation.flight1.flightNumber}
+                  <br />
+                  From Airport: {Reservation.flight1.departure.airport}
+                  <br />
+                  From Terminal: {Reservation.flight1.departure.terminal}
+                  <br />
+                  From Time:{" "}
+                  {Reservation.flight1.departure.time.substring(0, 10) +
+                    " at " +
+                    Reservation.flight1.departure.time.substring(11, 16)}
+                  <br />
+                  To Airport: {Reservation.flight1.arrival.airport}
+                  <br />
+                  To Terminal: {Reservation.flight1.arrival.terminal}
+                  <br />
+                  To Time:{" "}
+                  {Reservation.flight1.arrival.time.substring(0, 10) +
+                    " at " +
+                    Reservation.flight1.arrival.time.substring(11, 16)}
+                  <br />
+                  Airline: {Reservation.flight1.airline}
+                  <br />
+                  Has Transit: {Reservation.flight1.hasTransit.toString()}
+                  <br />
+                  Reserved Seats:{" "}
+                  {Reservation.selectedDepSeats
+                    .slice(0, Reservation.selectedDepSeats.length - 1)
+                    .map((entry) => entry + " , ")}{" "}
+                  {
+                    Reservation.selectedDepSeats[
+                      Reservation.selectedDepSeats.length - 1
+                    ]
+                  }
+                  <br />
+                  Cabin: {Reservation.Reservation.departureFlight.cabin}
+                  <br />
+                  Number of Adults:{" "}
+                  {Reservation.Reservation.departureFlight.noAdults}
+                  <br />
+                  Number of Children:{" "}
+                  {Reservation.Reservation.departureFlight.noChildren}
                 </div>
-              </Stack>
-            <br/>
-            <div>
-            <br/>Flight Number: {Reservation.flight1.flightNumber}
-            <br/>From Airport: {Reservation.flight1.departure.airport}
-            <br/>From Terminal: {Reservation.flight1.departure.terminal}
-            <br/>From Time: {Reservation.flight1.departure.time.substring(0,10)+" at "+Reservation.flight1.departure.time.substring(11,16)}
-            <br/>To Airport: {Reservation.flight1.arrival.airport}
-            <br/>To Terminal: {Reservation.flight1.arrival.terminal}
-            <br/>To Time: {Reservation.flight1.arrival.time.substring(0,10)+" at "+Reservation.flight1.arrival.time.substring(11,16)}
-            <br/>Airline: {Reservation.flight1.airline}
-            <br/>Has Transit: {Reservation.flight1.hasTransit.toString()}
-            <br/>Reserved Seats: {Reservation.selectedDepSeats
-                      .slice(0, Reservation.selectedDepSeats.length - 1)
-                      .map((entry) => entry + " , ")}{" "}
-                    {
-                      Reservation.selectedDepSeats[
-                        Reservation.selectedDepSeats.length - 1
-                      ]
-                    }
-            <br/>Cabin: {Reservation.Reservation.departureFlight.cabin}
-            <br/>Number of Adults: {Reservation.Reservation.departureFlight.noAdults}
-            <br/>Number of Children: {Reservation.Reservation.departureFlight.noChildren}
-            </div>
-            </div>
-            <hr/>
-            <div>
-            <Stack style={{ margin: "2px" }}>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-around",
-                  }}
-                >
-                  <label style={{ fontSize: "16px" , fontWeight:"16"}}>
+              </div>
+              <hr />
+              <div>
+                <Stack style={{ margin: "2px" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-around",
+                    }}
+                  >
+                    <label style={{ fontSize: "16px", fontWeight: "16" }}>
                       Return Flight Details
-                  </label>
-                </div>
-              </Stack>
-            <br/>
-            <br/>Flight Number: {Reservation.flight2.flightNumber}
-            <br/>From Airport: {Reservation.flight2.departure.airport}
-            <br/>From Terminal: {Reservation.flight2.departure.terminal}
-            <br/>From Time: {Reservation.flight2.departure.time.substring(0,10)+" at "+Reservation.flight2.departure.time.substring(11,16)}
-            <br/>To Airport: {Reservation.flight2.arrival.airport}
-            <br/>To Terminal: {Reservation.flight2.arrival.terminal}
-            <br/>To Time: {Reservation.flight2.arrival.time.substring(0,10)+" at "+Reservation.flight2.arrival.time.substring(11,16)}
-            <br/>Airline: {Reservation.flight2.airline}
-            <br/>Has Transit: {Reservation.flight2.hasTransit.toString()}
-            <br/>Reserved Seats: {Reservation.selectedArrSeats
-                      .slice(0, Reservation.selectedArrSeats.length - 1)
-                      .map((entry) => entry + " , ")}{" "}
-                    {
-                      Reservation.selectedArrSeats[
-                        Reservation.selectedArrSeats.length - 1
-                      ]
-                    }
-            <br/>Cabin: {Reservation.Reservation.returnFlight.cabin}
-            <br/>Number of Adults: {Reservation.Reservation.returnFlight.noAdults}
-            <br/>Number of Children: {Reservation.Reservation.returnFlight.noChildren}
-            <br/> <br/>
+                    </label>
+                  </div>
+                </Stack>
+                <br />
+                <br />
+                Flight Number: {Reservation.flight2.flightNumber}
+                <br />
+                From Airport: {Reservation.flight2.departure.airport}
+                <br />
+                From Terminal: {Reservation.flight2.departure.terminal}
+                <br />
+                From Time:{" "}
+                {Reservation.flight2.departure.time.substring(0, 10) +
+                  " at " +
+                  Reservation.flight2.departure.time.substring(11, 16)}
+                <br />
+                To Airport: {Reservation.flight2.arrival.airport}
+                <br />
+                To Terminal: {Reservation.flight2.arrival.terminal}
+                <br />
+                To Time:{" "}
+                {Reservation.flight2.arrival.time.substring(0, 10) +
+                  " at " +
+                  Reservation.flight2.arrival.time.substring(11, 16)}
+                <br />
+                Airline: {Reservation.flight2.airline}
+                <br />
+                Has Transit: {Reservation.flight2.hasTransit.toString()}
+                <br />
+                Reserved Seats:{" "}
+                {Reservation.selectedArrSeats
+                  .slice(0, Reservation.selectedArrSeats.length - 1)
+                  .map((entry) => entry + " , ")}{" "}
+                {
+                  Reservation.selectedArrSeats[
+                    Reservation.selectedArrSeats.length - 1
+                  ]
+                }
+                <br />
+                Cabin: {Reservation.Reservation.returnFlight.cabin}
+                <br />
+                Number of Adults:{" "}
+                {Reservation.Reservation.returnFlight.noAdults}
+                <br />
+                Number of Children:{" "}
+                {Reservation.Reservation.returnFlight.noChildren}
+                <br /> <br />
+              </div>
             </div>
-            </div>
-            <hr/>
+            <hr />
             <Stack style={{ margin: "2px" }}>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-around"
-                  }}
-                >
-                  <label style={{ fontSize: "22px" , fontWeight:"bold"}}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-around",
+                }}
+              >
+                <label style={{ fontSize: "22px", fontWeight: "bold" }}>
                   Reservation Price
-                  </label>
-                </div>
-              </Stack>
-              <Stack style={{ margin: "2px" }}>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-around"
-                  }}
+                </label>
+              </div>
+            </Stack>
+            <Stack style={{ margin: "2px" }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-around",
+                }}
+              >
+                <label style={{ fontSize: "22px", fontWeight: "bold" }}>
+                  {+Reservation.price1.split(" ")[0] +
+                    +Reservation.price2.split(" ")[0]}{" "}
+                  L.E
+                </label>
+              </div>
+            </Stack>
+            <Stack style={{ margin: "2px" }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-around",
+                  marginTop: "30px",
+                }}
+              >
+                <Button
+                  index="1"
+                  onClick={this.onShowReservations}
+                  width="250px"
+                  height="50px"
+                  label="Show all reservations"
                 >
-                  <label style={{ fontSize: "22px" , fontWeight:"bold"}}>
-                  {+Reservation.price1.split(" ")[0] + +Reservation.price2.split(" ")[0]} L.E
-                  </label>
-                </div>
-              </Stack>
-              <Stack style={{ margin: "2px" }}>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-around",
-                    marginTop:"30px"
-                  }}
-                >
-
-<Button
-              variant="contained"
-              onClick = {this.onShowReservations}
-              
-              sx={{margin:"auto", mt: 3, mb: 2 ,backgroundColor:"#ee0000"}}
-            
-            >
-              Show all reservations
-            </Button>
-                  {/* <Button
+                  Show all reservations
+                </Button>
+                {/* <Button
                   width={150}
                   index={2}
                   label="Return To Home Page"
@@ -299,16 +355,14 @@ onShowReservations=()=>{
                   onClick={this.onReturnToHome}
                   >
                   </Button> */}
-                </div>
-              </Stack>
-            
-        </Box>
+              </div>
+            </Stack>
+          </Box>
         </div>
-        <br/>
-        </div>
+        <br />
+      </div>
     );
   }
-  
 }
 
 export default ReservationSummary;
