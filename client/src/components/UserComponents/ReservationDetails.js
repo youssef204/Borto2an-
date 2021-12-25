@@ -1,6 +1,8 @@
 import axios from "axios";
 import React from "react";
 import Button from "@mui/material/Button";
+import PeterButton from "../Button.js";
+
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -34,14 +36,14 @@ class ReservationDetails extends React.Component {
           headers: { authorization: "Bearer " + localStorage.getItem("token") },
         })
         .then((res) => {
-          this.setState({message:"Reservation was deleted successfully. An email with refund amount has been sent to you",
+          this.setState({message:"Reservation was deleted successfully. An email with refund amount has been sent to you.",
           deleted: true,
           open: false
         });
         })
         .catch((err) => {
           console.log(err);
-          this.setState({message:"Sorry! We were unable to delete your reservation. Try again later"});
+          this.setState({message:"Sorry! We were unable to delete your reservation. Try again later!"});
         });
     };
 
@@ -62,7 +64,7 @@ class ReservationDetails extends React.Component {
         })
         .catch((err) => {
           console.log(err);
-          this.setState({message:"Sorry! We were unable to send you reservation details. Try again later"});
+          this.setState({message:"Sorry! We were unable to send you reservation details. Try again later!"});
         });
     };
 
@@ -119,79 +121,58 @@ class ReservationDetails extends React.Component {
 
     const renderMainButtons = (reservationDeleted) => {
       if (!reservationDeleted) {
-        return (<React.Fragment>
-            <Button onClick={handleClickOpen} variant="contained"
-              
-              sx={{margin:"auto", mt: 3, mb: 2 ,backgroundColor:"#ee0000"}} >Delete</Button>
-            <Button onClick={sendItinerary} variant="contained"  sx={{margin:"auto", mt: 3, mb: 2 ,backgroundColor:"#ee0000"}}  >Email Itinerary</Button>
-            <Button onClick={handleClickOpenUpdate} variant="contained"  sx={{margin:"auto", mt: 3, mb: 2 ,backgroundColor:"#ee0000"}}>Update Reservation</Button>
-            </React.Fragment>
-        );
+        return (
+            <div style={{ marginLeft: "50%", marginTop: "20px" }}>
+              <span className="footerButtonMargin">
+              <PeterButton
+                variant="contained"
+                index="1"
+                onClick={handleClickOpen}
+                width="200px"
+                height="60px"
+                label="Delete"
+              /> </span>
+              <span className="footerButtonMargin">
+              <PeterButton
+                variant="contained"
+                index="1"
+                onClick={sendItinerary}
+                width="200px"
+                height="60px"
+                label="Email Itinerary"
+              /></span>
+              <span className="footerButtonMargin">
+              <PeterButton
+                variant="contained"
+                index="1"
+                onClick={handleClickOpenUpdate}
+                width="200px"
+                height="60px"
+                label="Update"
+              /></span>
+            </div>);
       }else{
         return (
-            <button onClick={()=>{
-              this.props.history.push("/reservations");
-            }}>Back to my reservations</button>);
+            <div style={{ marginLeft: "70%", marginTop: "20px" }}>
+              <span className="footerButtonMargin">
+              <PeterButton
+                variant="contained"
+                index="1"
+                onClick={()=>this.props.history.push("/reservations")}
+                width="250px"
+                height="60px"
+                label="Back to my reservations"
+              /> </span>
+              </div>);
       }
     };
     return (
       <>
       <ReservationDetailsTable Reservation={Reservation}></ReservationDetailsTable>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-around",
-            alignItems: "center",
-            marginTop:"30px"
-          }}
-        >
-          <Box
-            component="span"
-            border={2}
-            borderRadius={10}
-            borderLeft={2}
-            borderRight={2}
-            borderColor="#a9a9a9"
-            sx={{ p: 5 }}
-            style={{
-              backgroundColor: "#ffffff",
-              width: "40%",
-            }}
-          >
-            <Stack style={{ margin: "2px" }}>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-around",
-                }}
-              >
-                <label style={{ fontSize: "22px", fontWeight: "bold" }}>
-                  Reservation Price : {Reservation.price} L.E
-                </label>
-                
-              </div>
-            </Stack>
-
-            <hr />
-            <ReservationCommon Reservation={Reservation}></ReservationCommon>
-            
-            <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
+      <div id="seatButton" className="seat-wrap">
+      <span className="message">{this.state.message}</span>
             {renderMainButtons(this.state.deleted)}
-            </div>
-            <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-            }}>
-            <label style={{ fontSize: "18px", fontWeight: "bold" }}>{this.state.message}</label>
-            </div>
-          </Box>
-        </div>
+      </div>
         <Dialog
           open={this.state.open}
           onClose={handleClose}
@@ -199,11 +180,11 @@ class ReservationDetails extends React.Component {
           aria-describedby="alert-dialog-description"
         >
           <DialogTitle id="alert-dialog-title">
-            {"Do you really want to delete?"}
+            {"Do you really want to delete this reservation?"}
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              This action is irrevertable
+              This action is irrevertable. You will be refunded with the amount paid.
             </DialogContentText>
           </DialogContent>
           <DialogActions>
