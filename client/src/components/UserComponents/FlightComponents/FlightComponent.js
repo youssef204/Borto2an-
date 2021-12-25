@@ -195,12 +195,12 @@ const calculateDuration = (details) => {
   const hours =
     Math.floor((diff % unitmapping.days) / unitmapping.hours) == 0
       ? ""
-      : Math.floor((diff % unitmapping.days) / unitmapping.hours) + " hours ";
+      : Math.floor((diff % unitmapping.days) / unitmapping.hours) + " hrs ";
   const minutes =
     Math.floor((diff % unitmapping.hours) / unitmapping.minutes) == 0
       ? ""
       : Math.floor((diff % unitmapping.hours) / unitmapping.minutes) +
-        " minutes";
+        " mins";
   return days + hours + minutes;
 };
 export { FlightComponent, calculateDuration };
