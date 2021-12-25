@@ -593,15 +593,12 @@ class SearchFlights extends React.Component {
               </div>
               <br></br>
 
-              <Grid>
-              <Button
-              type = "submit"
-              variant="contained"
-              sx={{margin:"auto", mt: 3, mb: 2 ,backgroundColor:"#ee0000"}}
-            
-            >
-              Search 
-            </Button> 
+              <Grid style={{padding:10}}>
+              <MyButton
+              index={1}
+              label = "Search"
+              onClick={(e) => this.onSubmit2(e, this.state)}
+            />
             </Grid>
                     
           </Box>
