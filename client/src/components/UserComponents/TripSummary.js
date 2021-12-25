@@ -248,13 +248,13 @@ class TripSummary extends React.Component {
             <Box
               component="span"
               border={2}
-              borderRadius={10}
-              borderLeft={2}
-              borderRight={2}
-              borderColor="#a9a9a9"
+              borderRadius={7.5}
+              borderLeft={1}
+              borderRight={1}
+              borderColor="#cdcdcd"
               sx={{ p: 3 }}
               style={{
-                backgroundColor: "rgba(255, 255, 255, 0.4)",
+                backgroundColor: "rgba(255, 255, 255, 0.8)",
                 height : "70%"
               }}
             >
@@ -486,13 +486,13 @@ class TripSummary extends React.Component {
             <Box
               component="span"
               border={2}
-              borderRadius={10}
-              borderLeft={2}
-              borderRight={2}
-              borderColor="#a9a9a9"
+              borderRadius={7.5}
+              borderLeft={1}
+              borderRight={1}
+              borderColor="#cdcdcd"
               sx={{ p: 3 }}
               style={{
-                backgroundColor: "rgba(255, 255, 255, 0.4)",
+                backgroundColor: "rgba(255, 255, 255, 0.8)",
               }}
             >
                             <Stack direction="row" spacing={8}

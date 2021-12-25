@@ -144,8 +144,30 @@ class AllFlights extends Component {
             </div>
           );
         }
-        else {
-          return flightlist;
+        {
+          return (<div style={{ margin: "auto", width: "80%", marginTop: "10px" }}>
+          <div className="reservationTitleDiv">
+            <div class="reservationTitleText">Search Flight Result</div>
+            <img class="reservation-bg" src="reservation.jpg" />
+          </div>
+          <div
+            style={{
+              backgroundColor: "#ffffff",
+              verticalAlign: "center",
+              paddingTop: "30px",
+            }}
+          >
+                        <label
+                style={{
+                  margin: "2% 37%",
+                  font: "25px Verdana",
+                  color: "rgba(0,0,0,0.7)",
+                }}
+              >
+                No flights are found
+              </label>
+            </div> 
+            </div>);
         }
       } else {
         return (
