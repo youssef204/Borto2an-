@@ -40,12 +40,14 @@ function storeTimeAsIs(dataTmp) {
  *    description: An endpoint to search the flights in the database
  *    parameters:
  *      - in: query
- *        description: json indication the exact search criteria for flights
+ *        description: the exact search criteria for flights
  *    responses:
  *      '200':
  *        description: the requested flights are sent the requester
  *      '404':
  *        description: error in the request sent to the database
+ *    tags:
+ *      - Flight
  */
 
 flight_router.get("/", function (req, res, next) {
@@ -84,6 +86,8 @@ flight_router.get("/", function (req, res, next) {
  *        description: the requester is not as admin
  *      '400':
  *        description: error in the request sent to the database
+ *    tags:
+ *      - Flight
  */
 
 flight_router.put("/", authenticate,(req, res) => {
@@ -111,6 +115,8 @@ flight_router.put("/", authenticate,(req, res) => {
  *        description: all flights are returned to the requester
  *      '404':
  *        description: error in the request sent to the database
+ *    tags:
+ *      - Flight
  */
 
 //read all flights
@@ -140,6 +146,8 @@ flight_router.get("/showAllflights", authenticate , (req, res) => {
  *        description: the target flight is deleted from the database
  *      '404':
  *        description: error in the request sent to the database
+ *    tags:
+ *      - Flight
  */
 
 //delete flight with given ID
@@ -173,6 +181,8 @@ flight_router.delete("/:id", authenticate , async (req, res) => {
  *        description: the requester is not an admin
  *      '400':
  *        description: error in the request sent to the database
+ *    tags:
+ *      - Flight
  */
 
 flight_router.post("/", authenticate , async (req, res) => {

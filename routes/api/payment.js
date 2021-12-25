@@ -14,6 +14,8 @@ const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
  *        description: Payment session was created successfully. Session URL is in the response.
  *      '500':
  *        description: error in the request sent to the database
+ *    tags:
+ *      - Payment
  */
 
 router.post("/create-session", async (req, res)=>{
