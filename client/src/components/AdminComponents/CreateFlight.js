@@ -11,6 +11,7 @@ import {
   CssBaseline,
   Box,
 } from "@mui/material";
+import MyButton from "../Button"
 
 const theme = createTheme();
 
@@ -701,18 +702,13 @@ class CreateFlight extends React.Component {
                     {this.state.message}
                   </label>
                   <br />
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    sx={{
-                      margin: "auto",
-                      mt: 3,
-                      mb: 2,
-                      backgroundColor: "#ee0000",
-                    }}
-                  >
-                    Create Flight
-                  </Button>
+                  <Grid style={{padding:10}}>
+              <MyButton
+              index={1}
+              label = "Create Flight"
+              onClick={this.onSubmit}
+            />
+            </Grid>
                 </Grid>
               </Box>
             </Box>

@@ -10,6 +10,8 @@ import {
   Box,
 } from "@mui/material";
 
+import MyButton from "../Button"
+
 const theme = createTheme();
 
 class CreateModel extends React.Component {
@@ -287,18 +289,13 @@ class CreateModel extends React.Component {
                         {this.state.message}
                       </label>
                       <br />
-                      <Button
-                        type="submit"
-                        variant="contained"
-                        sx={{
-                          margin: "auto",
-                          mt: 3,
-                          mb: 2,
-                          backgroundColor: "#ee0000",
-                        }}
-                      >
-                        Create Model
-                      </Button>
+                      <Grid style={{padding:10}}>
+                      <MyButton
+              index={1}
+              label = "Create Model"
+              onClick={this.onSubmit}
+            />
+            </Grid>
                     </Grid>
                   </Box>
                 </Box>
