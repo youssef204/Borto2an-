@@ -11,6 +11,12 @@
   color: rgb(230, 230, 230);
   font: 50px Montserrat;
 }
+.reservationSubTitleText {
+  padding-left: 3.5%;
+  /* padding-top: 2%; */
+  color: rgb(230, 230, 230);
+  font: 20px Montserrat;
+}
 .reservation-bg {
   mask-image: linear-gradient(to left, rgba(0, 0, 1, 0.8), rgba(0, 0, 1, 0));
   opacity: 1;
