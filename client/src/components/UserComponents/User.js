@@ -148,6 +148,7 @@ class User extends Component {
               src={imagePreviewUrl} 
               name={name} 
               status={status}/>)}
+
       <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
