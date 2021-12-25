@@ -13,19 +13,27 @@ export default function CardItem(probs) {
     setTitle(probs.title);
   }, [probs]);
   return (
-    <Card sx={{ minWidth: 345, margin: "30px", minHeight: "400px" }}>
-      <CardMedia component="img" height="140" image={image} alt="airplane" />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {title}
-        </Typography>
-        <label style={{ color: "#000" }}>
-          Borto2an is a very good website we need a bonus please Lorem ipsum
-          dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation
-        </label>
-      </CardContent>
-    </Card>
+    <div
+      className="shadow"
+      style={{
+        margin: "30px",
+        border: "1px solid rgba(0,0,0,0.8)",
+      }}
+    >
+      <Card sx={{ minWidth: 345, minHeight: "400px" }}>
+        <CardMedia component="img" height="140" image={image} alt="airplane" />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {title}
+          </Typography>
+          <label style={{ color: "#000" }}>
+            Borto2an is a very good website we need a bonus please Lorem ipsum
+            dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+            veniam, quis nostrud exercitation
+          </label>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
