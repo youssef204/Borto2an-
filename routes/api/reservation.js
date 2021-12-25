@@ -5,6 +5,18 @@ const Reservation = require("../../models/Reservation");
 const authenticate = require("./Authentication");
 const Flight = require("../../models/Flight");
 
+
+/**
+ * @swagger
+ * /api/reservations/:
+ *  get:
+ *    description: An endpoint to get the reservations of the requester user. The user is identified through their access token.
+ *    responses:
+ *      '200':
+ *        description: the user reservations are returned to them
+ *      '404':
+ *        description: error in the request sent to the database
+ */
 //get reservations by access token
 reservation_router.get("/", authenticate , function (req, res, next) {
   const queryObj = {userId: req.user.userId} ; 
@@ -45,6 +57,21 @@ const sendEmail = async (userId, subject, body)=>{
   });
 }
 
+/**
+ * @swagger
+ * /api/reservations/sendItinerary/:id:
+ *  get:
+ *    description: An endpoint to send a reservation itinerary to the user email.
+ *    parameters:
+ *      - in: path
+ *        description: id of the desired reservation. The reservation id is used to identify the requester user email.
+ *    responses:
+ *      '200':
+ *        description: the user reservations are returned to them
+ *      '404':
+ *        description: error in the request sent to the database or erorr in nodemailer
+ */
+
 reservation_router.get("/sendItinerary/:id", authenticate , async (req, res) => {
   try{
   const reservation = await Reservation.findById(req.params.id);
@@ -58,6 +85,21 @@ reservation_router.get("/sendItinerary/:id", authenticate , async (req, res) => 
     res.status(400).send(e);
   }
 });
+
+/**
+ * @swagger
+ * /api/reservations/:id:
+ *  delete:
+ *    description: An endpoint to delete a reservation from the database. The deletion of the reservation deletes the seats that it reserved in a certain flight. A confirmation email is sent aftwards.
+ *    parameters:
+ *      - in: path
+ *        description: id of the reservation to be deleted
+ *    responses:
+ *      '200':
+ *        description: the target resrvation is deleted from the database
+ *      '404':
+ *        description: error in the request sent to the database or in nodemailer
+ */
 
 deleteSeats = (flight, seats, cabinName) =>{
   const cabin = flight[cabinName+'Cabin'];
@@ -108,6 +150,18 @@ validateReservationFlights = (flight, seats, cabinName) =>{
   cabin.takenSeats = cabin.takenSeats.concat(seats);
 }
 
+/**
+ * @swagger
+ * /api/reservations/:
+ *  post:
+ *    description: An endpoint to create a reservation in the database. The reservation JSON is added in the request body. A confirmation email is sent afterwards.
+ *    responses:
+ *      '200':
+ *        description: the reservation is added to the database
+ *      '400':
+ *        description: error in the request sent to the database or in nodemailer
+ */
+
 reservation_router.post("/", authenticate , async (req, res) => {
   try{
     const reservation = req.body;
@@ -144,6 +198,19 @@ async function createReservation(reservation){
     const createdReservation = await Reservation.create(reservation);
     return {createdReservation, departureFlight, returnFlight};
 }
+
+/**
+ * @swagger
+ * /api/reservations/:
+ *  put:
+ *    description: An endpoint to update a reservation in the database. The request body should contain two reservations (the old and the new ones). A confirmation email is sent afterwards.
+ *        
+ *    responses:
+ *      '200':
+ *        description: the target reservation is updated in the database
+ *      '400':
+ *        description: error in the request sent to the database or in nodemailer
+ */
 
 
 reservation_router.put("/", authenticate , async (req, res) => {

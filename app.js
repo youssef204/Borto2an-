@@ -6,10 +6,27 @@ const cors = require("cors"); // connect the node with react
 const dotenv = require("dotenv"); // loads the .env file into the process.env (environment variables)
 const session = require('express-session') ;
 const bcrypt = require('bcrypt');
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUI = require('swagger-ui-express');
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 8000;
+
+const swaggerOptions = {
+  swaggerDefinition: {
+    title: 'Borto2an API',
+    description: "Borto2an API information",
+    contact:{
+      name:"Amazing Developer"
+    },
+    servers:["http://localhost:8000"]
+  },
+  apis:["app.js","./routes/api/*.js"]
+};
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use('/api-docs',swaggerUI.serve,swaggerUI.setup(swaggerDocs));
 
 // Connect to Database
 const MONGODB_URI = process.env.MONGODB_URI;
@@ -32,7 +49,6 @@ app.use(cors());
 // importing routers
 const flight_routes = require("./routes/api/flight");
 app.use("/api/flights/", flight_routes);
-
 
 const airplaneModel_routes = require("./routes/api/airplaneModel");
 app.use("/api/airplaneModel/", airplaneModel_routes);
