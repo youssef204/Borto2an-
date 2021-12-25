@@ -99,7 +99,7 @@ class ReservationSummary extends React.Component {
     // console.log(JSON.parse(localStorage.getItem('reservationSummary')));
     // console.log(JSON.parse(localStorage.getItem('EditedReservation')));
     //TODO:  remove comment
-    //this.clearStorage();
+    this.clearStorage();
   }
 
   clearStorage = () => {

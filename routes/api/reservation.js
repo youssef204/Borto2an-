@@ -16,6 +16,8 @@ const Flight = require("../../models/Flight");
  *        description: the user reservations are returned to them
  *      '404':
  *        description: error in the request sent to the database
+ *    tags:
+ *      - Reservation
  */
 //get reservations by access token
 reservation_router.get("/", authenticate , function (req, res, next) {
@@ -67,9 +69,11 @@ const sendEmail = async (userId, subject, body)=>{
  *        description: id of the desired reservation. The reservation id is used to identify the requester user email.
  *    responses:
  *      '200':
- *        description: the user reservations are returned to them
+ *        description: the itinerary is sent successfully to the user email 
  *      '404':
  *        description: error in the request sent to the database or erorr in nodemailer
+ *    tags:
+ *      - Reservation
  */
 
 reservation_router.get("/sendItinerary/:id", authenticate , async (req, res) => {
@@ -99,6 +103,8 @@ reservation_router.get("/sendItinerary/:id", authenticate , async (req, res) => 
  *        description: the target resrvation is deleted from the database
  *      '404':
  *        description: error in the request sent to the database or in nodemailer
+ *    tags:
+ *      - Reservation
  */
 
 deleteSeats = (flight, seats, cabinName) =>{
@@ -160,6 +166,8 @@ validateReservationFlights = (flight, seats, cabinName) =>{
  *        description: the reservation is added to the database
  *      '400':
  *        description: error in the request sent to the database or in nodemailer
+ *    tags:
+ *      - Reservation
  */
 
 reservation_router.post("/", authenticate , async (req, res) => {
@@ -210,6 +218,8 @@ async function createReservation(reservation){
  *        description: the target reservation is updated in the database
  *      '400':
  *        description: error in the request sent to the database or in nodemailer
+ *    tags:
+ *      - Reservation
  */
 
 

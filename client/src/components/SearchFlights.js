@@ -8,11 +8,12 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Stack from "@mui/material/Stack";
 import OutlinedTextField from "./OutlinedTextField";
-import Button from "./Button";
 import Calendar from "./Calendar";
-import Box from "@mui/material/Box";
-import { TextField, Grid } from "@mui/material";
 import Footer from "./Footer/Footer";
+import { Button , TextField , Grid,Container,ThemeProvider,createTheme,CssBaseline,Box} from "@mui/material";
+import MyButton from "./Button"
+
+const theme = createTheme();
 
 class SearchFlights extends React.Component {
   constructor() {
@@ -391,13 +392,65 @@ class SearchFlights extends React.Component {
       return (
         <>
           <br></br>
-          <div className="profile-container">
-            <form
-              className=" ProfileForm-container"
-              noValidate
-              onSubmit={(e) => this.onSubmit2(e, this.state)}
-            >
-              <h2>Search For Flights</h2>
+
+          <div className="list " style={{
+  paddingBottom : "100px",
+  width : "50%",
+  marginTop : "50px"
+}}>
+        <div className="settings" style={{
+          justifyContent : "center",
+          alignContent : "center",
+          alignItems : "center"
+        }}>
+          
+          <div
+          className="TripTitleDiv"
+          style={{
+            height: "130px",
+            marginBottom: "20px",
+            paddingBottom: "50px",
+          }}
+        >
+            <div class="TripTitleText">Search For Flights</div>
+          <img class="Trip-bg" src="admin.jpg" style = {{
+            left : "400px",
+            opacity : "0.7",top:-120
+          }}/>
+          </div>
+          </div>
+
+          <Box
+                        component="span"
+                        border={2}
+                        borderRadius={4}
+                        borderLeft={1}
+                        borderRight={1}
+                        borderColor="#a9a9a9"
+          sx={{
+            marginBottom:-10,
+            marginTop: -5,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+          style={{
+            backgroundColor: "rgba(255, 255, 255, 1)",
+          }}
+        >
+          <br></br>
+              <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'left',
+          }}
+        >
+          
+          <Box component="form" sx={{ mt: 3 }} noValidate onSubmit={(e) => this.onSubmit2(e, this.state)}>
+
               <br></br>
               <div>
                 {/* <input
@@ -411,7 +464,7 @@ class SearchFlights extends React.Component {
                   <TextField
                     type="text"
                     name="departure.airport"
-                    placeholder="Departure Airport"
+                    label="Departure Airport"
                     onChange={this.onChange}
                     fullWidth
                   />
@@ -430,9 +483,10 @@ class SearchFlights extends React.Component {
                   <TextField
                     type="text"
                     name="departure.terminal"
-                    placeholder="Departure Terminal"
+                    label="Departure Terminal"
                     onChange={this.onChange}
                     fullWidth
+                    
                   />
                 </Grid>
               </div>
@@ -451,7 +505,7 @@ class SearchFlights extends React.Component {
                   <TextField
                     type="text"
                     name="arrival.airport"
-                    placeholder="Arrival Airport"
+                    label="Arrival Airport"
                     onChange={this.onChange}
                     fullWidth
                   />
@@ -472,9 +526,10 @@ class SearchFlights extends React.Component {
                   <TextField
                     type="text"
                     name="arrival.terminal"
-                    placeholder="Arrival Terminal"
+                    label="Arrival Terminal"
                     onChange={this.onChange}
                     fullWidth
+                    
                   />
                 </Grid>
               </div>
@@ -493,7 +548,7 @@ class SearchFlights extends React.Component {
                   <TextField
                     type="number"
                     name="flightNumber"
-                    placeholder="Flight Number"
+                    label="Flight Number"
                     onChange={this.onChange}
                     fullWidth
                   />
@@ -538,10 +593,23 @@ class SearchFlights extends React.Component {
               </div>
               <br></br>
 
-              <button>Search</button>
-            </form>
-          </div>
-          <br></br>
+              <Grid>
+              <Button
+              type = "submit"
+              variant="contained"
+              sx={{margin:"auto", mt: 3, mb: 2 ,backgroundColor:"#ee0000"}}
+            
+            >
+              Search 
+            </Button> 
+            </Grid>
+                    
+          </Box>
+        </Box>
+      </Container>
+    </ThemeProvider>
+    </Box>
+    </div>
         </>
       );
     } else {
@@ -670,13 +738,13 @@ class SearchFlights extends React.Component {
              />
                 </Stack>
                 <Stack spacing={5}>
-                  <Button
+                  <MyButton
                     label="Search"
                     index={this.validateInput() ? 1 : 0} //{this.numberOfSelecetedInputs.includes(0) ? 0 : 1}
                     width={70}
                     height={40}
                     onClick={(e) => this.onSubmit(e, this.state)}
-                  ></Button>
+                  ></MyButton>
                 </Stack>
               </Stack>
             </Box>

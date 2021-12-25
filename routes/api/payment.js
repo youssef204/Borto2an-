@@ -4,6 +4,20 @@ const Flight = require("../../models/Flight");
 const authenticate = require("./Authentication");
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 
+/**
+ * @swagger
+ * /api/payment:
+ *  post:
+ *    description: Create a Stripe payment session for a given reservation. Reservation details is sent in the body of the request. The response contains the payment url where the user will be redirected to. 
+ *    responses:
+ *      '200':
+ *        description: Payment session was created successfully. Session URL is in the response.
+ *      '500':
+ *        description: error in the request sent to the database
+ *    tags:
+ *      - Payment
+ */
+
 router.post("/create-session", async (req, res)=>{
     try{
         const session = await stripe.checkout.sessions.create({

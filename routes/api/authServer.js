@@ -48,6 +48,22 @@ const sendEmail = async (user, subject, body)=>{
   });
 }
 
+/**
+ * @swagger
+ * /api/user/auth/refreshToken:
+ *  post:
+ *    description: An endpoint to generate an access token provided a valid refresh token in the request body.
+ *    responses:
+ *      '200':
+ *        description: the provided token is valid, and an access token is sent to the user
+ *      '401':
+ *        description: no refresh token is provided in the request body
+ *      '403':
+ *        description: refresh token not found in the list of stored refresh tokens, or invalid refresh token
+ *    tags:
+ *      - Authentication Server
+ */
+
 auth_Router.post('/refreshToken', (req, res) => {
   const refreshToken = req.body.token;
   if (refreshToken == null) return res.sendStatus(401);
@@ -59,10 +75,36 @@ auth_Router.post('/refreshToken', (req, res) => {
   })
 })
 
+/**
+ * @swagger
+ * /api/user/auth/logout:
+ *  delete:
+ *    description: An endpoint to delete a provided refresh token from the list of the stored refresh tokens
+ *    responses:
+ *      '204':
+ *        description: the refresh token is removed successfully
+ *    tags:
+ *      - Authentication Server
+ */
+
 auth_Router.delete('/logout', (req, res) => {
-  refreshTokens = refreshTokens.filter(token => token !== req.body.token)
-  res.sendStatus(204)
+  refreshTokens = refreshTokens.filter(token => token !== req.body.token);
+  res.sendStatus(204);
 });
+
+/**
+ * @swagger
+ * /api/user/auth/reset:
+ *  post:
+ *    description: An endpoint to reset a user's password when they have forgotten it. A random alphanumeric string of length 10 is generated and is sent to the user email after being hashed and put in the database to replace the old user password.
+ *    responses:
+ *      '200':
+ *        description: password is reset and email is sent successfully
+ *      '401':
+ *        description: user was not found in database
+ *    tags:
+ *      - Authentication Server
+ */
 
 auth_Router.post('/reset', async (req, res)=>{
   const {email} = req.body;
@@ -79,6 +121,22 @@ auth_Router.post('/reset', async (req, res)=>{
   }
 });
 
+/**
+ * @swagger
+ * /api/user/auth/login:
+ *  post:
+ *    description: An endpoint to allow a user to login. The user data is requested from the database and their password is hashed to be compared with the stored hasehd password.
+ *    responses:
+ *      '404':
+ *        description: user not found in the database
+ *      '400':
+ *        description: wrong password
+ *      '200':
+ *        description: login successful. An access token, refresh token, user data, and a true bolean are sent to the requester to finalize the login process.
+ *    tags:
+ *      - Authentication Server
+ */
+
 auth_Router.post("/login", async(req, res) => {
     const {email,password} = req.body;
     const user = await User.find({email:email});
@@ -89,7 +147,7 @@ auth_Router.post("/login", async(req, res) => {
         const {_id,email,password,isAdmin}=user[0];
         const new_user = {userId:_id,email,password,isAdmin};  
         const token = generateAccessToken(new_user);
-        const refreshToken = jwt.sign(new_user, process.env.REFRESH_TOKEN_SECRET)
+        const refreshToken = jwt.sign(new_user, process.env.REFRESH_TOKEN_SECRET);
         refreshTokens.push(refreshToken);
         res.status(200).json({auth:true , token:token , refreshToken:refreshToken, user:{...user[0]._doc}});
       }

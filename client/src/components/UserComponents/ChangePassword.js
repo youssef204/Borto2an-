@@ -2,9 +2,9 @@ import axios from "axios";
 import React from "react";
 import { Component } from 'react';
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button" 
+import Button from "../Button" 
 import Avatar from '@mui/material/Avatar';
-import CssBaseline from '@mui/material/CssBaseline';
+// import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -49,7 +49,9 @@ class ChangePassword extends React.Component {
     newUpdate[name] = value;
     this.setState({ updated: newUpdate });
   };
-
+  onCancel = (e) => {
+    this.props.history.push('/user');
+  };
   onSubmit = (e) => {
     e.preventDefault();
     if(!this.state.updated.oldPassword || !this.state.updated.newPassword || !this.state.updated.newPasswordConfirm){
@@ -113,7 +115,16 @@ class ChangePassword extends React.Component {
     //     this.setState({ open: false });
     //   };
     return (
-      <div>
+      <div className="list " style={{
+        paddingBottom : "100px",
+        width : "50%",
+        marginTop : "50px"
+      }}>
+              <div className="settings" style={{
+                justifyContent : "center",
+                alignContent : "center",
+                alignItems : "center"
+              }}>
         <div
           className="TripTitleDiv"
           style={{
@@ -123,11 +134,32 @@ class ChangePassword extends React.Component {
           }}
         >
             <div class="TripTitleText">Change your password</div>
-          <img class="Trip-bg" src="personal.jpg" />
-        </div>   
+          <img class="Trip-bg" src="personal.jpg" style = {{
+            left : "420px",
+            opacity : "0.5"
+          }} />
+        </div> 
+        </div> 
+        <Box
+                        component="span"
+                        border={2}
+                        borderRadius={4}
+                        borderLeft={1}
+                        borderRight={1}
+                        borderColor="#a9a9a9"
+          sx={{
+            marginBottom:-10,
+            marginTop: -2,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+          style={{
+            backgroundColor: "rgba(255, 255, 255, 1)",
+          }}
+        > 
       <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
         <Box
           sx={{
             marginTop: 8,
@@ -136,9 +168,14 @@ class ChangePassword extends React.Component {
             alignItems: 'center',
           }}
         >
-      <Box component="form" sx={{ mt: 3 }}  noValidate onSubmit={this.onSubmit}>
+      <Box component="form" sx={{ mt: 3 }}  noValidate>
             <Grid container spacing={2}>
               <Grid item xs={12}>
+              {this.state.showMessage ? (
+                <label id="signErrorMessage">{this.state.error}</label>
+              ) : (
+                <br/>
+              )}
                 <TextField
                 type="password"   name = "oldPassword"  onChange={this.onChange}
                   fullWidth
@@ -152,7 +189,6 @@ class ChangePassword extends React.Component {
                   type="password"   name = "newPassword" onChange={this.onChange}
                   fullWidth
                   label="New Password"
-                  autoFocus
                   required
                 />
               </Grid>
@@ -161,22 +197,41 @@ class ChangePassword extends React.Component {
                   type="password"   name = "newPasswordConfirm" onChange={this.onChange}
                   fullWidth
                   label="Confirm Password"
-                  autoFocus
                   required
                 />
               </Grid>
 
               <Grid>
-
+ 
+             <Stack direction="row" spacing={5} style={{
+               marginTop : "15px",
+               marginBottom : "15px",
+               alignItems : "center",
+               justifyContent : "center",
+               marginLeft : "25px"
+             }}>
+              {/* <Stack direction="row" spacing={5} style={{
+              marginTop : "10px",
+              marginBottom : "10px"
+            }}> */}
               <Button
+              index={1}
+              label = "Change"
               type = "submit"
-              variant="contained"
-              
-              sx={{ml:3, mt: 3, mb: 2 ,backgroundColor:"#ee0000"}}
-            
+              width="150px"
+              height="50px"
+              onClick={this.onSubmit}
             >
-              Change Password
             </Button>
+            <Button
+              index={1} 
+              width="150px"
+              height="50px"
+              onClick={this.onCancel}
+              label = "Cancel"
+            >
+            </Button>
+            </Stack>
 
            </Grid>
             
@@ -186,6 +241,7 @@ class ChangePassword extends React.Component {
           </Box>
       </Container>
     </ThemeProvider>
+    </Box>
     </div>
     );
   }
